@@ -1,49 +1,71 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
-			<a href="https://twitter.com/share" class="twitter-share-button" data-via="sifxtreme" data-count="none" data-hashtags="madpad">Tweet</a>
-			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 			<textarea class="main" placeholder="Enter text here" id="content"></textarea>
 		</div>
 	</div>
 </div>
 
+<button id="send">SEND</button>
+
+<script src="/socket.io/socket.io.js"></script>
 <script type="text/javascript">
-$(document).ready(function(){
-	$(document).delegate('textarea', 'keydown', function(e) {
-		var keyCode = e.keyCode || e.which;
-		if (keyCode == 9) {
-			e.preventDefault();
-			var start = $(this).get(0).selectionStart;
-			var end = $(this).get(0).selectionEnd;
+$(function(){
+	// $(document).delegate('textarea', 'keydown', function(e) {
+	// 	var keyCode = e.keyCode || e.which;
+	// 	if (keyCode == 9) {
+	// 		e.preventDefault();
+	// 		var start = $(this).get(0).selectionStart;
+	// 		var end = $(this).get(0).selectionEnd;
 
-			// set textarea value to: text before caret + tab + text after caret
-			$(this).val($(this).val().substring(0, start)
-									+ "\t"
-									+ $(this).val().substring(end));
+	// 		// set textarea value to: text before caret + tab + text after caret
+	// 		$(this).val($(this).val().substring(0, start)
+	// 								+ "\t"
+	// 								+ $(this).val().substring(end));
 
-			// put caret at right position again
-			$(this).get(0).selectionStart =
-			$(this).get(0).selectionEnd = start + 1;
-		}
-	});
+	// 		// put caret at right position again
+	// 		$(this).get(0).selectionStart =
+	// 		$(this).get(0).selectionEnd = start + 1;
+	// 	}
+	// });
 
-	// check for value in firebase db
-	var myDataRef = new Firebase('https://padder.firebaseio.com/url/{{id}}');
-	myDataRef.on('value', function(snapshot){
-		if(snapshot.val() == null){
-			myDataRef.child('content').set('');
-		}
-		else{
-			$('textarea').val(snapshot.val().content);
-		}
-	})
 
 	// update value
 	$('textarea').keyup(function() {
 		var content = $('#content').val();
-		myDataRef.update({content: content});
+		// console.log("{{id}}");
 	});
+
+  // var iosocket = io.connect();
+  // iosocket.on('connect', function () {
+  //   iosocket.on('message', function(msg) {
+  //       // console.log(msg);
+  //   });
+  // });
+// var socket = io.connect();
+
+var socket = io.connect();
+socket.on('connect', function () {
+	socket.emit('connection', '{{id}}');
+
+ //  // disconnect
+	// socket.on('disconnect', function() {
+	// 	console.log("DISCONNECTED FROM SERVER");
+	// });
+
+	// message
+	socket.on('message', function (data) {
+		console.log("RECEIVE MESSAGE");
+	  $('textarea').val(data);
+	 });
+
+});
+
+$('textarea').keyup(function(event) {
+	var message = $('textarea').val();
+	console.log("SEND MESSAGE: " + message);
+  socket.emit('send', { room: "{{id}}", message: message });
+});
 
 })
 </script>

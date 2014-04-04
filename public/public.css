@@ -1,13 +1,14 @@
+body,h1,h2,h3,h4,h5,h6{
+ font-family: 'Droid Sans Mono', sans-serif;
+}
 body{
 	background: black;
 	width: 95%;
 	margin: auto;
 	color: white;
-	font-family: 'Inconsolata', sans-serif;
-	font-size: 20px;
+	font-size: 16px;
 }
 .main{
-	margin-top: 40px;
 	border-radius: 4px;
 	padding: 15px;
 	width: 100%;
@@ -17,51 +18,4 @@ body{
 	color: #62d9ef;
 	resize: none;
 	overflow: auto;
-}
-.info{
-	margin-top: 50px;
-}
-.main h1{
-	text-align: center;
-	margin-top: 50px;
-	color: #ddd;
-}
-.main p{
-	margin: 25px 100px;
-}
-@media (max-width: 980px){
-	body .main{
-		font-size: 20px;
-	}
-	body textarea{
-		font-size: 30px;
-	}
-	.main p{
-		margin: 10px 10px;
-	}
-	.info{
-		margin-top: 35px;
-	}
-}
-.btn-purple{
-	background-color: #463265;
-	color: #ddd;
-}
-.btn-purple:hover{
-	color: #fff;
-}
-#blog-button{
-	position: absolute;
-	top: 0;
-	left: 0;
-}
-.twitter-share-button{
-	position: absolute;
-	top: 41px;
-	right: 16px;
-}
-.main .twitter-share-button{
-	position: absolute;
-	top: 1px;
-	right: 1px;
 }
