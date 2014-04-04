@@ -17,12 +17,12 @@ var io = require('socket.io').listen(server, {log: false});
  
 io.sockets.on('connection', function (socket) {
 	socket.on('connection', function(room){
-		console.log('JOINING ROOM', room);
+		// console.log('JOINING ROOM', room);
 		socket.join(room); 
 	});
 
   socket.on('send', function(data) {
-    console.log('SENDING MESSAGE TO CLIENT ' + data.message);
+    // console.log('SENDING MESSAGE TO CLIENT ' + data.message);
     socket.broadcast.to(data.room).emit('message', data.message);
   });
 

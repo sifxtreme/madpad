@@ -6,8 +6,6 @@
 	</div>
 </div>
 
-<button id="send">SEND</button>
-
 <script src="/socket.io/socket.io.js"></script>
 <script type="text/javascript">
 $(function(){
@@ -30,19 +28,45 @@ $(function(){
 	// });
 
 
-	// update value
-	$('textarea').keyup(function() {
-		var content = $('#content').val();
-		// console.log("{{id}}");
-	});
+var _to_ascii = {
+  '188': '44',
+  '109': '45',
+  '190': '46',
+  '191': '47',
+  '192': '96',
+  '220': '92',
+  '222': '39',
+  '221': '93',
+  '219': '91',
+  '173': '45',
+  '187': '61', //IE Key codes
+  '186': '59', //IE Key codes
+  '189': '45'  //IE Key codes
+}
 
-  // var iosocket = io.connect();
-  // iosocket.on('connect', function () {
-  //   iosocket.on('message', function(msg) {
-  //       // console.log(msg);
-  //   });
-  // });
-// var socket = io.connect();
+var shiftUps = {
+  "96": "~",
+  "49": "!",
+  "50": "@",
+  "51": "#",
+  "52": "$",
+  "53": "%",
+  "54": "^",
+  "55": "&",
+  "56": "*",
+  "57": "(",
+  "48": ")",
+  "45": "_",
+  "61": "+",
+  "91": "{",
+  "93": "}",
+  "92": "|",
+  "59": ":",
+  "39": "\"",
+  "44": "<",
+  "46": ">",
+  "47": "?"
+};
 
 var socket = io.connect();
 socket.on('connect', function () {
@@ -60,12 +84,39 @@ socket.on('connect', function () {
 	 });
 
 });
-
-$('textarea').keyup(function(event) {
-	var message = $('textarea').val();
-	console.log("SEND MESSAGE: " + message);
-  socket.emit('send', { room: "{{id}}", message: message });
+$('textarea').bind('keypress', function(e){
+	e.preventDefault();
 });
+$('textarea').bind('keyup', function(e) {
+	e.preventDefault();
+	var c = e.which;
+
+	if (_to_ascii.hasOwnProperty(c)) {
+		c = _to_ascii[c];
+	}
+
+	if (!e.shiftKey && (c >= 65 && c <= 90)) {
+		c = String.fromCharCode(c + 32);
+	} else if (e.shiftKey && shiftUps.hasOwnProperty(c)) {
+		c = shiftUps[c];
+	} else {
+		c = String.fromCharCode(c);
+	}
+	// console.log(c);
+	// console.log(this.selectionStart);
+	// console.log(this.selectionEnd);
+	emitter(c);
+});
+// $('textarea').bind('paste', function(event){
+// 	setTimeout(function() {
+// 	  emitter();
+// 	}, 10);
+// });
+
+function emitter(message){
+	// console.log("SEND MESSAGE: " + message);
+  socket.emit('send', { room: "{{id}}", message: message });
+}
 
 })
 </script>
