@@ -17,19 +17,19 @@ var io = require('socket.io').listen(server, {log: false});
  
 
 io.sockets.on('connection', function (socket) {
-    socket.on('send', function (data) {
-        socket.broadcast.to(data.room).emit('message', data.message);
-    });
-    socket.on('connection', function(room){
-        socket.join(room);
-    });
+	socket.on('send', function (data) {
+		socket.broadcast.to(data.room).emit('message', data.message);
+	});
+	socket.on('connection', function(room){
+		socket.join(room);
+	});
 });
 
 
 app.get('/', function(request, response) {
-    response.render('index', {random: randomstring.generate(3)});
+	response.render('index', {random: randomstring.generate(3)});
 });
 app.get('/:id', function(request, response){
-    response.render('pad', {id: request.params.id});
+	response.render('pad', {id: request.params.id});
 });
 

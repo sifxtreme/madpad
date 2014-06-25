@@ -3,9 +3,6 @@ body,h1,h2,h3,h4,h5,h6{
 }
 body{
 	background: black;
-	width: 95%;
-	margin: auto;
-	color: white;
 	font-size: 16px;
 }
 .main{
