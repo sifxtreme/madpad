@@ -6,20 +6,62 @@ $(function(){
 
         iosocket.on('message', function(message) {
             var textbox = $("#box").get(0);
-            var currentValue = $("#box").val();
+            var beforeMessage = $("#box").val();
 
-            var currentLocation = getSelectionInfo(textbox);
+            var beforeLocation = getSelectionInfo(textbox);
+
+            var afterMessage = message;
             
-            $('#box').val(message);
+            $('#box').val(afterMessage);
 
-            textbox.selectionStart = currentLocation.start;
-            textbox.selectionEnd = currentLocation.end;
+            var beforeLength = beforeMessage.length;
+            var afterLength = afterMessage.length;
+
+            // console.log(beforeLength + ', ' + afterLength);
+
+            var offset = 0;
+            if(beforeLength == afterLength){
+                console.log("1");
+                offset = 0;
+            }
+            else{
+                var difference = Math.abs(beforeLength - afterLength);
+                // change is made before the cursor
+                if(beforeLocation.start + 1 == getOffset(beforeMessage.substring(0, beforeLocation.start + 1), afterMessage.substring(0, beforeLocation.start + 1))){
+                    offset = 0;
+                }
+                // change is made before the cursor
+                else{
+                    if(beforeLength <= afterLength){
+                        offset = difference;
+                    }
+                    if(beforeLength > afterLength){
+                        offset = -1*difference;
+                    }
+                }
+                
+            }
+
+            afterStartSelection = beforeLocation.start + offset;
+            afterEndSelection = beforeLocation.end + offset;
+
+            if(afterStartSelection != afterEndSelection){
+                if(beforeMessage.substring(beforeLocation.start, beforeLocation.end) != afterMessage.substring(afterStartSelection, afterEndSelection)){
+                    afterEndSelection = afterStartSelection;
+                }
+            }
+
+            // selection has to equal the same thng from before to after
+
+            textbox.selectionStart = afterStartSelection;
+            textbox.selectionEnd = afterEndSelection;
             textbox.focus();
 
         });
     });
 
     $('#box').on('input propertychange', function() {
+
         var message = $("#box").val();
         iosocket.emit('send', { room: room, message: message });
         // iosocket.send(message);
@@ -36,5 +78,14 @@ $(function(){
         return props;
     };
 
-    function getOffset
+    function getOffset (before, after){
+        compareNum = 0;
+
+        l = Math.min(before.length, after.length);
+        for( i=0; i<l; i++) {
+            if( before.charAt(i) == after.charAt(i)) compareNum++;
+        }
+
+        return compareNum;
+    }
 });
