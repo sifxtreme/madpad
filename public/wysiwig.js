@@ -1,4 +1,6 @@
 $(function(){
+
+	// tab in textarea
 	$(document).delegate('textarea', 'keydown', function(e) {
 		var keyCode = e.keyCode || e.which;
 		if (keyCode == 9) {
@@ -11,4 +13,5 @@ $(function(){
 			$(this).get(0).selectionStart = $(this).get(0).selectionEnd = start + 1;
 		}
 	});
+
 });
