@@ -15,27 +15,33 @@ app.use(express.static('public'));
 
 var io = require('socket.io').listen(server, {log: false});
  
+
 io.sockets.on('connection', function (socket) {
-	socket.on('connection', function(room){
-		// console.log('JOINING ROOM', room);
-		socket.join(room); 
-	});
-
-  socket.on('send', function(data) {
-    // console.log('SENDING MESSAGE TO CLIENT ' + data.message);
-    socket.broadcast.to(data.room).emit('message', data.message);
-  });
-
-  // socket.on('message', function (msg) {
-  //   socket.emit('message', msg);
-  //   socket.broadcast.emit('message', msg);
-  // });
+    socket.on('message', function (msg) {
+        // io.sockets.emit('message', msg);
+        socket.emit('message', msg);
+        socket.broadcast.emit('message', msg);
+    });
 });
+
+// io.sockets.on('connection', function (socket) {
+//  socket.on('connection', function(room){
+//      // console.log('JOINING ROOM', room);
+//      socket.join(room); 
+//  });
+
+//   socket.on('message', function(data) {
+//     // console.log('SENDING MESSAGE TO CLIENT ' + data.message);
+//     socket.broadcast.to(data.room).emit('message', data.message);
+//     socket.emit.to(data.room).emit('message', data.message);
+//   });
+
+// });
 
 app.get('/', function(request, response) {
-  response.render('index', {random: randomstring.generate(3)});
+    response.render('index', {random: randomstring.generate(3)});
 });
 app.get('/:id', function(request, response){
-	response.render('pad', {id: request.params.id});
+    response.render('pad', {id: request.params.id});
 });
 
