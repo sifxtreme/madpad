@@ -1,6 +1,9 @@
 $(function(){
+    var room = window.location.pathname;
     var iosocket = io.connect();
     iosocket.on('connect', function () {
+        iosocket.emit('connection', room);
+
         iosocket.on('message', function(message) {
             var textbox = $("#box").get(0);
             var currentValue = $("#box").val();
@@ -16,10 +19,10 @@ $(function(){
         });
     });
 
-    $('#box').bind('input propertychange', function() {
+    $('#box').on('input propertychange', function() {
         var message = $("#box").val();
-        // iosocket.emit('send', { room: "{{id}}", message: message });
-        iosocket.send(message);
+        iosocket.emit('send', { room: room, message: message });
+        // iosocket.send(message);
     });
 
     function getSelectionInfo (element) {
@@ -32,4 +35,6 @@ $(function(){
         
         return props;
     };
+
+    function getOffset
 });
