@@ -6,10 +6,11 @@ body{
 	font-size: 16px;
 }
 .main{
+	white-space: pre-wrap;
 	border-radius: 4px;
 	padding: 15px;
 	width: 100%;
-	min-height: 400px;
+	height: 400px;
 	border: 1px solid #62d9ef;
 	background: #222222;
 	color: #62d9ef;

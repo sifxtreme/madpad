@@ -17,12 +17,14 @@ var io = require('socket.io').listen(server, {log: false});
  
 
 io.sockets.on('connection', function (socket) {
-	socket.on('send', function (data) {
-		socket.broadcast.to(data.room).emit('message', data.message);
-	});
 	socket.on('connection', function(room){
 		socket.join(room);
 	});
+	socket.on('send', function (data) {
+		console.log(data.message);
+		socket.broadcast.to(data.room).emit('message', data.message);
+	});
+	
 });
 
 

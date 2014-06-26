@@ -6,48 +6,57 @@ $(function(){
 
 		iosocket.on('message', function(afterMessage) {
 			var textbox = $("#box").get(0);
-			var beforeMessage = $("#box").val();
 
-			var beforeLocation = getSelectionInfo(textbox);
-			var beforeLength = beforeMessage.length;
-			var afterLength = afterMessage.length;
+			if(textbox.tagName == "TEXTAREA"){
+				var beforeMessage = $("#box").val();
 
-			var offset = 0;
-			var difference = Math.abs(beforeLength - afterLength);
-			// change is made before the cursor
-			if(beforeLocation.start + 1 == getOffset(beforeMessage.substring(0, beforeLocation.start + 1), afterMessage.substring(0, beforeLocation.start + 1))){
-				offset = 0;
+				var beforeLocation = getSelectionInfo(textbox);
+				var beforeLength = beforeMessage.length;
+				var afterLength = afterMessage.length;
+
+				var offset = 0;
+				var difference = Math.abs(beforeLength - afterLength);
+				// change is made before the cursor
+				if(beforeLocation.start + 1 == getOffset(beforeMessage.substring(0, beforeLocation.start + 1), afterMessage.substring(0, beforeLocation.start + 1))){
+					offset = 0;
+				}
+				// change is made before the cursor
+				else{
+					if(beforeLength <= afterLength){
+						offset = difference;
+					}
+					if(beforeLength > afterLength){
+						offset = -1*difference;
+					}
+				}
+
+				afterStartSelection = beforeLocation.start + offset;
+				afterEndSelection = beforeLocation.end + offset;
+
+				// paste or cut in the middle of text selection (rare case)
+				if(afterStartSelection != afterEndSelection){
+					if(beforeMessage.substring(beforeLocation.start, beforeLocation.end) != afterMessage.substring(afterStartSelection, afterEndSelection)){
+						afterEndSelection = afterStartSelection;
+					}
+				}
+
+				// set selection correctly
+				$('#box').val(afterMessage);
+				textbox.selectionStart = afterStartSelection;
+				textbox.selectionEnd = afterEndSelection;
+				textbox.focus();
 			}
-			// change is made before the cursor
 			else{
-				if(beforeLength <= afterLength){
-					offset = difference;
-				}
-				if(beforeLength > afterLength){
-					offset = -1*difference;
-				}
+				afterMessage = afterMessage.replace(/\</g, "&lt");
+				afterMessage = Autolinker.link(afterMessage);
+				textbox.innerHTML = afterMessage;
+
 			}
-
-			afterStartSelection = beforeLocation.start + offset;
-			afterEndSelection = beforeLocation.end + offset;
-
-			// paste or cut in the middle of text selection (rare case)
-			if(afterStartSelection != afterEndSelection){
-				if(beforeMessage.substring(beforeLocation.start, beforeLocation.end) != afterMessage.substring(afterStartSelection, afterEndSelection)){
-					afterEndSelection = afterStartSelection;
-				}
-			}
-
-			// set selection correctly
-			$('#box').val(afterMessage);
-			textbox.selectionStart = afterStartSelection;
-			textbox.selectionEnd = afterEndSelection;
-			textbox.focus();
 
 		});
 	});
-
-	$('#box').on('input propertychange', function() {
+	
+	$(document).delegate("textarea#box", "input propertychange", function() {
 		var message = $("#box").val();
 		iosocket.emit('send', { room: room, message: message });
 	});
