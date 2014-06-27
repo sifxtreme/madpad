@@ -1,35 +1,40 @@
-var express = require('express');
-var app = express();
+require('coffee-script');
 
-var server = require('http').createServer(app).listen(5000);
+var express = require('express');
+var server = express();
+var redis = require('redis');
+var sharejs = require('share');
 
 var randomstring = require('randomstring');
 
 var hbs = require('hbs');
 
-app.set('view engine', 'html');
-app.engine('html', hbs.__express);
-app.use(express.bodyParser());
 
-app.use(express.static('public'));
-
-var io = require('socket.io').listen(server, {log: false});
- 
-
-io.sockets.on('connection', function (socket) {
-	socket.on('send', function (data) {
-		socket.broadcast.to(data.room).emit('message', data.message);
-	});
-	socket.on('connection', function(room){
-		socket.join(room);
-	});
-});
+server.use(express.static('public'));
+server.use(express.static('views'));
 
 
-app.get('/', function(request, response) {
-	response.render('index', {random: randomstring.generate(3)});
-});
-app.get('/:id', function(request, response){
-	response.render('pad', {id: request.params.id});
-});
+var options = {
+  db: {type: 'redis'},
+  browserChannel: {cors: '*'},
+  auth: function(client, action) {
+    // This auth handler rejects any ops bound for docs starting with 'readonly'.
+    if (action.name === 'submit op' && action.docName.match(/^readonly/)) {
+      action.reject();
+    } else {
+      action.accept();
+    }
+  }
+};
+
+console.log("ShareJS example server v" + sharejs.version);
+console.log("Options: ", options); 
+
+// Attach the sharejs REST and Socket.io interfaces to the server
+sharejs.server.attach(server, options);
+
+server.listen(5000);
+
+
+
 

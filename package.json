@@ -4,9 +4,12 @@
   "version": "0.0.3",
   "dependencies": {
     "express": "3.1.x",
-    "socket.io":  "0.9.x",
-    "hbs":"*",
-    "randomstring":"*"
+    "socket.io": "0.9.x",
+    "hbs": "*",
+    "randomstring": "*",
+    "share": "0.6.3",
+    "coffee-script": "~1.7.1",
+    "redis": "~0.10.3"
   },
   "engines": {
     "node": "0.10.x",
