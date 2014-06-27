@@ -8,8 +8,6 @@ server.set('view engine', 'html');
 server.engine('html', hbs.__express);
 server.use(express.static('public'));
 
-server.use(express.static('public'));
-
 var sharejs = require('share');
 var redis = require('redis');
 var options = {
@@ -36,7 +34,3 @@ server.get('/:id', function(request, response){
 });
 
 server.listen(5000);
-
-
-
-
