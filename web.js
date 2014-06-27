@@ -25,21 +25,15 @@ var options = {
   }
 };
 
-var randomstring = require('randomstring');
-
 server.get('/', function(request, response) {
+  var randomstring = require('randomstring');
   response.render('index', {random: randomstring.generate(3)});
 });
 server.get('/:id', function(request, response){
   response.render('textarea', {id: request.params.id});
+  sharejs.server.attach(server, options);
   // response.render('pad', {id: request.params.id});
 });
-
-console.log("ShareJS example server v" + sharejs.version);
-console.log("Options: ", options); 
-
-// Attach the sharejs REST and Socket.io interfaces to the server
-sharejs.server.attach(server, options);
 
 server.listen(5000);
 

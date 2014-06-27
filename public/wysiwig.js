@@ -14,4 +14,27 @@ $(function(){
 		}
 	});
 
+	// // convert from textarea to non textarea
+	// $("#clickme").click(function(){
+	// 	var isTextArea = false;
+	// 	var swapOut = $(".main").first();
+	// 	if(swapOut.is("textarea")){
+	// 		isTextArea = true;
+	// 	}
+	// 	if(isTextArea){
+	// 		var value = swapOut.val();
+	// 		value = value.replace(/\</g, "&lt");
+	// 		value = Autolinker.link(value);
+	// 		swapOut.after("<div class='main' id='box'>" + value + "</div>");
+	// 		swapOut.remove();
+	// 	}
+	// 	else{
+	// 		var value = swapOut.html();
+	// 		console.log(value);
+	// 		value = jQuery(value).text();
+	// 		swapOut.after("<textarea class='main' id='box'>" + value + "</textarea>");
+	// 		swapOut.remove();
+	// 	}
+	// });
+
 });
