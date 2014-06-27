@@ -2,18 +2,16 @@ require('coffee-script');
 
 var express = require('express');
 var server = express();
-var redis = require('redis');
-var sharejs = require('share');
-
-var randomstring = require('randomstring');
 
 var hbs = require('hbs');
-
+server.set('view engine', 'html');
+server.engine('html', hbs.__express);
+server.use(express.static('public'));
 
 server.use(express.static('public'));
-server.use(express.static('views'));
 
-
+var sharejs = require('share');
+var redis = require('redis');
 var options = {
   db: {type: 'redis'},
   browserChannel: {cors: '*'},
@@ -26,6 +24,16 @@ var options = {
     }
   }
 };
+
+var randomstring = require('randomstring');
+
+server.get('/', function(request, response) {
+  response.render('index', {random: randomstring.generate(3)});
+});
+server.get('/:id', function(request, response){
+  response.render('textarea', {id: request.params.id});
+  // response.render('pad', {id: request.params.id});
+});
 
 console.log("ShareJS example server v" + sharejs.version);
 console.log("Options: ", options); 

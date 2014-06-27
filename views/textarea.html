@@ -1,36 +1,23 @@
-<!DOCTYPE HTML>
-<html>
-	<head>
-		<link href="ace/style.css" rel="stylesheet" type="text/css">
-		<title>Textarea demo - ShareJS</title>
-		<meta charset="utf-8">
-	</head>
-	<body>
-		<textarea id="editor"></textarea>
-		<button>AA</button>
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="/channel/bcsocket.js"></script>
-		<script src="/share/share.uncompressed.js"></script>
-		<script src="/share/textarea.js"></script>
-		<script>
-			var elem = document.getElementById('editor');
+<textarea class="main" id="editor"></textarea>
+<button>CURRENT SNAPSHOT</button>
+<script src="/channel/bcsocket.js"></script>
+<script src="/share/share.uncompressed.js"></script>
+<script src="/share/textarea.js"></script>
+<script>
+var elem = document.getElementById('editor');
 
-			sharejs.open('hello', 'text', function(error, doc) {
-				window.doc = doc;
-				elem.disabled = false;
-				doc.attach_textarea(elem);
+sharejs.open('{{id}}', 'text', function(error, doc) {
+	window.doc = doc;
+	doc.attach_textarea(elem);
 
-			 // Get the contents of the document for some reason:
-			 $('button').on("click", function(){
-				console.log(doc.snapshot);
-			 })
-		    
+	// Get the contents of the document for some reason:
+	$('button').on("click", function(){
+		console.log(doc.snapshot);
+	});
 
-		    doc.on('change', function(op) {
-		        console.log('Version: ' + doc.version);
-		    });
-			});
-		</script>
-	</body>
-</html>
-		
+	doc.on('change', function(op) {
+		console.log('Version: ' + doc.version);
+	});
+});
+</script>
+
