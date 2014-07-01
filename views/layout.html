@@ -2,6 +2,10 @@
 <html>
 <head>
   <meta charset="utf-8">
+<!-- 1. Load platform.js for polyfill support. -->
+  <script src="/components/platform/platform.js"></script>
+  <link rel="import" href="/components/paper-elements/paper-elements.html">
+  <link rel="import" href="/components/paper-button/paper-button.html">
 
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
   <link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
@@ -12,10 +16,26 @@
 
 	<script src="/channel/bcsocket.js"></script>
 	<script src="/share/share.uncompressed.js"></script>
-	<script src="/share/textarea.js"></script>  
+	<script src="/textarea.js"></script>  
+<style type="text/css">/* Style #my-button blue with white text and darker blue ink. */
+#my-button {
+    background: #4285f4;
+    color: #fff;
+}
+
+#my-button:hover {
+    background: #2a56c6;
+}
+
+#my-button::shadow #ripple {
+    color: #2a56c6;
+}</style>
   
 </head>
 <body>
+
+<paper-button label="flat button"></paper-button>
+<paper-button label="raised button" raisedButton></paper-button>
 
   {{{body}}}
 

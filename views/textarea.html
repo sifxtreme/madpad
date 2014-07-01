@@ -1,3 +1,4 @@
+<paper-button lavel="flat button"></paper-button>
 <textarea class="main" id="editor"></textarea>
 <button>CURRENT SNAPSHOT</button>
 <script>
@@ -9,10 +10,11 @@ sharejs.open('{{id}}', 'text', function(error, doc) {
 
 	// Get the contents of the document for some reason:
 	$('button').on("click", function(){
-		console.log(doc.snapshot);
+
 	});
 
 	doc.on('change', function(op) {
+		console.log(op[0]);
 		console.log('Version: ' + doc.version);
 	});
 });
