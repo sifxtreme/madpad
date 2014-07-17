@@ -2,45 +2,32 @@
 <html>
 <head>
   <meta charset="utf-8">
-<!-- 1. Load platform.js for polyfill support. -->
-  <script src="/components/platform/platform.js"></script>
-  <link rel="import" href="/components/paper-elements/paper-elements.html">
-  <link rel="import" href="/components/paper-button/paper-button.html">
-
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
   <link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="/public.css" type="text/css">
-
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-  <script src="/wysiwig.js"></script>
-
+  <script src="/wysiwig.js"></script> 
+  <script src="/js/public.js"></script>
+  <script src="/js/classie.js"></script>
 	<script src="/channel/bcsocket.js"></script>
 	<script src="/share/share.uncompressed.js"></script>
-	<script src="/textarea.js"></script>  
-<style type="text/css">/* Style #my-button blue with white text and darker blue ink. */
-#my-button {
-    background: #4285f4;
-    color: #fff;
-}
+	<script src="/textarea.js"></script>
+  <script src="/retina.js"></script>  
 
-#my-button:hover {
-    background: #2a56c6;
-}
-
-#my-button::shadow #ripple {
-    color: #2a56c6;
-}</style>
   
 </head>
 <body>
 
-<paper-button label="flat button"></paper-button>
-<paper-button label="raised button" raisedButton></paper-button>
+  <div class="header sides minwidth">
+    <div class="logo-container">
+      <a href="#"><img src="/images/header/logo@2x.png"/></a>
+    </div>
+    
+  </div>
 
   {{{body}}}
 
 <script type="text/javascript">
-  $('.main').height($(window).height() - 80);
+  /*$('.main').height($(window).height() - 80);*/
 </script>
 </body>
 </html>

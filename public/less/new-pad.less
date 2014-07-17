@@ -1,0 +1,132 @@
+/*   ---   New Pad Area   --   */
+.new-pad-area{
+	display: block !important;
+	overflow-y: hidden;
+	overflow-x: hidden;
+	position: absolute;
+	top: 70px;
+	left: 220px;
+	bottom: 0;
+	z-index: 15;
+	width: 300px;
+	height: 400px;
+	background-color: @newpad;
+	-webkit-box-shadow: 4px 0px 4px 0px rgba(0, 0, 0, 0.25);
+	-moz-box-shadow:    4px 0px 4px 0px rgba(0, 0, 0, 0.25);
+	box-shadow:         4px 0px 4px 0px rgba(0, 0, 0, 0.25);
+
+	.input-area{
+		padding: 20px 20px;
+		background-color: @f;
+
+		.pad-name{
+
+			.name-input{
+				width: 100%;
+				height: 26px;
+			}
+
+			input{
+				width: 100%;
+				font-size: 14px;
+				outline: none;
+				background-color: transparent;
+				border: none;
+				padding: 0px 10px;
+
+				&::-webkit-input-placeholder {
+				    color:    @9;
+				    font-size: 14px;
+				}
+				&:-moz-placeholder { 
+				    color:    @9;
+				    font-size: 14px;
+				}
+				&::-moz-placeholder { 
+				    color:    @9;
+				    font-size: 14px;
+				}
+				&:-ms-input-placeholder {
+				    color:    @9;
+				    font-size: 14px;
+				}
+			}
+		}
+
+		.green-btn{
+			width: 100%;
+		}
+	} /* Input new pad */
+
+	.pad-options{
+		position: relative;
+
+		.pad-type{
+			width: 100%;
+			text-align: center;
+
+			a{
+				display: block;
+				padding: 20px 0px;
+			}
+
+			.text-pad{
+				width: 50%;
+				float: left;
+			}
+
+			.code-pad{
+				width: 50%;
+				float: right;
+			}
+
+			.active-type{
+				background: @hover;
+				color: @f;
+			}
+
+			.inactive-type{
+				background: @hover-light;
+				color: @d;
+				-webkit-box-shadow: inset 0px -1px 1px 0px rgba(0, 0, 0, 0.25);
+				-moz-box-shadow:    inset 0px -1px 1px 0px rgba(0, 0, 0, 0.25);
+				box-shadow:         inset 0px -1px 1px 0px rgba(0, 0, 0, 0.25);
+			}
+
+		} /* pad type */
+
+		.pad-description{
+			position: absolute;
+			top: 100px;
+			width: 100%;
+			padding: 0px 40px;
+
+			.icon{
+				display: block;
+				width: 40px;
+				margin: 0 auto 20px auto;
+			}
+
+			.type-title{
+				text-align: center;
+				color: @f;
+				font-size: 18px;
+				margin-bottom: 20px;
+			}
+
+			.type-more{
+				text-align: center;
+				color: @d;
+				font-size: 14px;
+				line-height: 20px;
+			}	
+
+		}
+	}
+
+}
+/*   ---   End of New Pad Area   --   */
+
+
+
+

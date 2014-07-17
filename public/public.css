@@ -1,18 +1,560 @@
-body,h1,h2,h3,h4,h5,h6{
- font-family: 'Droid Sans Mono', sans-serif;
+/* Import all of my styles */
+/*   ---   Global Less   --   */
+/*   ---   CSS Reset   --   */
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  box-sizing: border-box;
 }
-body{
-	background: black;
-	font-size: 16px;
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
 }
-.main{
-	border-radius: 4px;
-	padding: 15px;
-	width: 100%;
-	min-height: 400px;
-	border: 1px solid #62d9ef;
-	background: #222222;
-	color: #62d9ef;
-	resize: none;
-	overflow: auto;
+body {
+  line-height: 1;
 }
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+input {
+  padding: 0 0;
+  box-sizing: border-box;
+}
+* {
+  box-sizing: border-box;
+}
+/*   ---   End of CSS Reset   --   */
+/*   ---   Header   --   */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+span,
+input,
+button,
+body,
+textarea {
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 100;
+}
+a:hover {
+  text-decoration: none;
+}
+.header {
+  background: #232c30;
+  height: 70px;
+  width: 100%;
+}
+.header .logo-container {
+  float: left;
+  position: relative;
+  top: 50%;
+}
+.header .logo-container img {
+  width: 124px;
+  position: relative;
+  margin-top: -50%;
+}
+.sides {
+  padding: 0px 20px;
+}
+/*   ---   End of Header   --   */
+.madpad-container {
+  overflow-x: hidden;
+}
+.minwidth {
+  min-width: 1050px;
+}
+.underline {
+  position: relative;
+  height: 6px;
+  border: 2px solid #33bea8;
+  border-top: none;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.green-btn {
+  background-color: #33bea8;
+  outline: none;
+  border: none;
+  color: #ffffff;
+  font-size: 14px;
+  height: 40px;
+  padding: 0px 20px;
+}
+.darken {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #232c30;
+  opacity: 0.8;
+  z-index: 12;
+}
+/*   ---   End of Global Less   --   */
+/*   ---   Side Bar General   --   */
+.left {
+  width: 250px;
+  min-height: 500px;
+  float: left;
+  background-color: #363e44;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  position: relative;
+  left: 0;
+  bottom: 0;
+  z-index: 13;
+}
+.left .offset {
+  height: 50px;
+}
+/*   ---   End of Side Bar General   --   */
+/*   ---   New Pad   --   */
+.new-pad {
+  width: 235px;
+  height: 50px;
+  background-color: #33bea8;
+  position: absolute;
+  z-index: 14;
+}
+.new-pad a {
+  display: block;
+  line-height: 50px;
+  color: #ffffff;
+  padding: 0px 20px;
+  text-decoration: none;
+}
+.new-pad img {
+  width: 20px;
+  position: relative;
+  top: 5px;
+  margin-right: 10px;
+}
+.new-pad-active {
+  -webkit-box-shadow: -3px 3px 4px 0px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: -3px 3px 4px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: -3px 3px 4px 0px rgba(0, 0, 0, 0.25);
+  transition: 1s;
+  -webkit-transition: 1s;
+}
+/*   ---   End of New Pad   --   */
+/*   ---   Pad List   --   */
+.pad-list {
+  margin-bottom: 30px;
+  background-color: #363e44;
+}
+.pad-list ul {
+  background: transparent;
+}
+.pad-list h5 {
+  height: 50px;
+  line-height: 50px;
+  padding: 0px 20px;
+  background-color: #363e44;
+}
+.pad-list a {
+  display: block;
+  height: 50px;
+  line-height: 50px;
+  padding: 0px 20px;
+  color: #9ea5ab;
+  background-color: #363e44;
+  text-decoration: none;
+}
+.pad-list .active {
+  color: #33bea8;
+  background-color: #232c30;
+}
+/*   ---   End of Pad List   --   */
+/*   ---   User/Shared/Public Pads  --   */
+.user-pads h5 {
+  color: #f1cf5d;
+}
+.shared-pads h5 {
+  color: #5dbff1;
+}
+.public-pads h5 {
+  color: #cd7155;
+}
+/*   ---  End of User/Shared/Public Pads  --   */
+/*   ---   Pad Hover Component  --   */
+.pad-hover {
+  background-color: #33bea8;
+}
+.pad-hover a {
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+}
+.pad-hover a:hover,
+.pad-hover a::after {
+  -webkit-transform: translateX(6px);
+  transform: translateX(6px);
+  background-color: #4b555d;
+  color: #ffffff;
+  -webkit-box-shadow: -4px 0px 4px 0px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: -4px 0px 4px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: -4px 0px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.pad-hover a::after {
+  left: 100%;
+  z-index: -2;
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+  pointer-events: auto;
+}
+.pad-hover a:hover::after,
+.pad-hover a:focus::after {
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+}
+/*   ---   End of Pad Hover Component  --   */
+/*   ---   New Pad Hover Component  --   */
+/* General button style (reset) */
+.btn {
+  cursor: pointer;
+  -webkit-transition: all 0.6s;
+  -moz-transition: all 0.6s;
+  transition: all 0.6s;
+  border-radius: 0px;
+}
+.btn:after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  -webkit-transition: all 0.6s;
+  -moz-transition: all 0.6s;
+  transition: all 0.6s;
+}
+/* Button 1e */
+.btn-1e {
+  overflow: hidden;
+}
+.btn-1e:after {
+  width: 100%;
+  height: 0;
+  opacity: 0;
+  left: 50%;
+  top: 50%;
+  background: #3bd9be;
+  -webkit-transform: translateX(-50%) translateY(-50%) rotate(10deg);
+  -moz-transform: translateX(-50%) translateY(-50%) rotate(10deg);
+  -ms-transform: translateX(-50%) translateY(-50%) rotate(10deg);
+  transform: translateX(-50%) translateY(-50%) rotate(10deg);
+}
+.btn-1e:hover,
+.btn-1e:active {
+  color: #0e83cd;
+}
+.btn-1e:hover:after {
+  height: 260%;
+  width: 150%;
+  opacity: 1;
+}
+.btn-1e:active:after {
+  height: 400%;
+  opacity: 1;
+}
+/*   ---   Chat Bar General   --   */
+.right {
+  width: 300px;
+  min-height: 500px;
+  float: right;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  position: relative;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+/*   ---   End of Chat Bar General   --   */
+/*   ---   Main Area General   --   */
+.middle {
+  min-width: 500px;
+  min-height: 500px;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  position: absolute;
+  top: 70px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin-left: 250px;
+  margin-right: 300px;
+}
+.middle .pad-area {
+  width: 100%;
+  position: relative;
+  resize: none;
+  border: 1px solid #dddddd;
+  padding: 20px 20px;
+  font-weight: 100;
+  color: #232c30;
+  font-size: 14px;
+}
+.middle .pad-area::-webkit-input-placeholder {
+  color: #9ea5ab;
+}
+.middle .pad-area:-moz-placeholder {
+  color: #9ea5ab;
+}
+.middle .pad-area::-moz-placeholder {
+  color: #9ea5ab;
+}
+.middle .pad-area:-ms-input-placeholder {
+  color: #9ea5ab;
+}
+.middle .pad-area:focus {
+  outline: none !important;
+  border: 1px solid #ffffff;
+  transition: 0.3s;
+  -webkit-transition: 0.5s;
+  -webkit-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.25);
+}
+.middle .pad-wrapper {
+  background-color: #f9f9f9;
+  padding: 40px 40px;
+  min-height: 500px;
+}
+/*   ---   End of Main Area General   --   */
+/*   ---   Title Area   --   */
+.title {
+  width: 100%;
+  height: 80px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #dddddd;
+  padding: 0px 40px;
+}
+.title .pad-name {
+  float: left;
+}
+.title .pad-name h2 {
+  font-size: 30px;
+  line-height: 80px;
+}
+/*   ---   End of Title Area   --   */
+/*   ---   New Pad Area   --   */
+.new-pad-area {
+  display: block !important;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  position: absolute;
+  top: 70px;
+  left: 220px;
+  bottom: 0;
+  z-index: 15;
+  width: 300px;
+  height: 400px;
+  background-color: #4d555c;
+  -webkit-box-shadow: 4px 0px 4px 0px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 4px 0px 4px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 4px 0px 4px 0px rgba(0, 0, 0, 0.25);
+  /* Input new pad */
+}
+.new-pad-area .input-area {
+  padding: 20px 20px;
+  background-color: #ffffff;
+}
+.new-pad-area .input-area .pad-name .name-input {
+  width: 100%;
+  height: 26px;
+}
+.new-pad-area .input-area .pad-name input {
+  width: 100%;
+  font-size: 14px;
+  outline: none;
+  background-color: transparent;
+  border: none;
+  padding: 0px 10px;
+}
+.new-pad-area .input-area .pad-name input::-webkit-input-placeholder {
+  color: #9ea5ab;
+  font-size: 14px;
+}
+.new-pad-area .input-area .pad-name input:-moz-placeholder {
+  color: #9ea5ab;
+  font-size: 14px;
+}
+.new-pad-area .input-area .pad-name input::-moz-placeholder {
+  color: #9ea5ab;
+  font-size: 14px;
+}
+.new-pad-area .input-area .pad-name input:-ms-input-placeholder {
+  color: #9ea5ab;
+  font-size: 14px;
+}
+.new-pad-area .input-area .green-btn {
+  width: 100%;
+}
+.new-pad-area .pad-options {
+  position: relative;
+  /* pad type */
+}
+.new-pad-area .pad-options .pad-type {
+  width: 100%;
+  text-align: center;
+}
+.new-pad-area .pad-options .pad-type a {
+  display: block;
+  padding: 20px 0px;
+}
+.new-pad-area .pad-options .pad-type .text-pad {
+  width: 50%;
+  float: left;
+}
+.new-pad-area .pad-options .pad-type .code-pad {
+  width: 50%;
+  float: right;
+}
+.new-pad-area .pad-options .pad-type .active-type {
+  background: #4b555d;
+  color: #ffffff;
+}
+.new-pad-area .pad-options .pad-type .inactive-type {
+  background: #636d75;
+  color: #dddddd;
+  -webkit-box-shadow: inset 0px -1px 1px 0px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: inset 0px -1px 1px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: inset 0px -1px 1px 0px rgba(0, 0, 0, 0.25);
+}
+.new-pad-area .pad-options .pad-description {
+  position: absolute;
+  top: 100px;
+  width: 100%;
+  padding: 0px 40px;
+}
+.new-pad-area .pad-options .pad-description .icon {
+  display: block;
+  width: 40px;
+  margin: 0 auto 20px auto;
+}
+.new-pad-area .pad-options .pad-description .type-title {
+  text-align: center;
+  color: #ffffff;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+.new-pad-area .pad-options .pad-description .type-more {
+  text-align: center;
+  color: #dddddd;
+  font-size: 14px;
+  line-height: 20px;
+}
+/*   ---   End of New Pad Area   --   */

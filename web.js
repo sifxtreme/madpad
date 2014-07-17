@@ -9,9 +9,9 @@ server.engine('html', hbs.__express);
 server.use(express.static('public'));
 
 var sharejs = require('share');
-var redis = require('redis');
+// var redis = require('redis');
 var options = {
-  db: {type: 'redis'},
+  db: {type: 'none'},
   browserChannel: {cors: '*'},
   auth: function(client, action) {
     // This auth handler rejects any ops bound for docs starting with 'readonly'.

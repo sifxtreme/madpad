@@ -1,0 +1,123 @@
+/*   ---   Side Bar General   --   */
+.left{
+	width: 250px;
+	min-height: 500px;
+	float: left;
+	background-color: @sidebar;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	position: relative;
+	left: 0;
+	bottom: 0;
+	z-index: 13;
+
+	.offset{
+		height: 50px;
+	}
+
+}
+/*   ---   End of Side Bar General   --   */
+
+
+
+
+/*   ---   New Pad   --   */
+.new-pad{
+	width: 235px;
+	height: 50px;
+	background-color: @green;
+	position: absolute;
+	z-index: 14;
+
+	a{
+		display: block;
+		line-height: 50px;
+		color: @f;
+		padding: 0px 20px;
+		text-decoration: none;
+
+	}
+
+	img{
+		width: 20px;
+		position: relative;
+		top: 5px;
+		margin-right: 10px;
+	}
+}
+
+.new-pad-active{
+	-webkit-box-shadow: -3px 3px 4px 0px rgba(0, 0, 0, 0.25);
+	-moz-box-shadow:    -3px 3px 4px 0px rgba(0, 0, 0, 0.25);
+	box-shadow:         -3px 3px 4px 0px rgba(0, 0, 0, 0.25);
+	transition: 1s;
+	-webkit-transition: 1s;
+}
+/*   ---   End of New Pad   --   */
+
+
+
+
+/*   ---   Pad List   --   */
+.pad-list{
+	margin-bottom: 30px;
+	background-color: @sidebar;
+
+	ul{
+		background: transparent;
+	}
+
+	h5{
+		height: 50px;
+		line-height: 50px;
+		padding: 0px 20px;
+		background-color: @sidebar;
+	}
+
+	a{
+		display: block;
+		height: 50px;
+		line-height: 50px;
+		padding: 0px 20px;
+		color: @9;
+		background-color: @sidebar;
+		text-decoration: none;
+	}
+
+	.active{
+		color: @green;
+		background-color: @dark;
+	}
+
+}
+/*   ---   End of Pad List   --   */
+
+
+
+
+/*   ---   User/Shared/Public Pads  --   */
+.user-pads{
+
+	h5{
+		color: @yellow;
+	}
+}
+
+.shared-pads{
+
+	h5{
+		color: @blue;
+	}
+}
+
+.public-pads{
+
+	h5{
+		color: @red;
+	}
+}
+/*   ---  End of User/Shared/Public Pads  --   */
+
+
+
+
