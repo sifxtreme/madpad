@@ -39,6 +39,7 @@ $( document ).ready(function() {
 			$('.new-pad-area').animate({left:'235px'}, 100); /* move the pad for slide effect */
 			$('#create-input').focus(); /* focus on the new pad input */
 			inputFocus();
+			padType();
 		});
 
 		$(document).mouseup(function (e)
@@ -66,6 +67,24 @@ $( document ).ready(function() {
 		$("input").focusout(function() {
 			$('.underline').css('border', 'none');
 	 		$('.underline').css('border-bottom', '2px solid #ddd');
+		});
+	}
+
+	function padType(){
+
+		$('#text-pad').click(function(){
+			$(this).parent().removeClass('inactive-type');
+			$(this).parent().addClass('active-type');
+			$('#code-pad').addClass('')
+			$('#code-info').hide();
+			$('#text-info').show();
+		}); /* if you click text pad */
+
+		$('#code-pad').click(function(){
+			$(this).parent().removeClass('inactive-type');
+			$(this).parent().addClass('active-type');
+			$('#text-info').hide();
+			$('#code-info').show();
 		});
 	}
 	

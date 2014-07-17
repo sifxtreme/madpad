@@ -506,22 +506,25 @@ a:hover {
 .new-pad-area .pad-options {
   position: relative;
   /* pad type */
+  /* pad descriptions */
 }
 .new-pad-area .pad-options .pad-type {
   width: 100%;
   text-align: center;
 }
-.new-pad-area .pad-options .pad-type a {
+.new-pad-area .pad-options .pad-type p {
   display: block;
   padding: 20px 0px;
 }
 .new-pad-area .pad-options .pad-type .text-pad {
   width: 50%;
   float: left;
+  cursor: pointer;
 }
 .new-pad-area .pad-options .pad-type .code-pad {
   width: 50%;
   float: right;
+  cursor: pointer;
 }
 .new-pad-area .pad-options .pad-type .active-type {
   background: #4b555d;
@@ -556,5 +559,8 @@ a:hover {
   color: #dddddd;
   font-size: 14px;
   line-height: 20px;
+}
+.new-pad-area .pad-options #code-info {
+  display: none;
 }
 /*   ---   End of New Pad Area   --   */
