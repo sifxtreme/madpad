@@ -8,6 +8,9 @@ server.set('view engine', 'html');
 server.engine('html', hbs.__express);
 server.use(express.static('public'));
 
+var server2 = require('http').Server(server);
+var io = require('socket.io').listen(server2, {log:false});
+
 var sharejs = require('share');
 // var redis = require('redis');
 var options = {
@@ -23,6 +26,12 @@ var options = {
   }
 };
 
+io.on('connection', function(socket){
+  socket.on('chat message', function(msg){
+    io.emit('chat message', msg);
+  });
+});
+
 server.get('/', function(request, response) {
   var randomstring = require('randomstring');
   response.render('index', {random: randomstring.generate(3)});
@@ -33,4 +42,4 @@ server.get('/:id', function(request, response){
   // response.render('pad', {id: request.params.id});
 });
 
-server.listen(5000);
+server2.listen(5000);

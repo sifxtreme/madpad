@@ -86,26 +86,22 @@
 
 	<div class="right" style="background-color: #ddd;">
 		<div class="darken"></div>
-		<p>test</p>
+    <ul id="messages"></ul>
+    <form action="">
+      <input id="m" autocomplete="off" /><button>Send</button>
+    </form>
 	</div> <!-- chat -->
 
 </div>
 <script>
-/*var elem = document.getElementById('editor');
-
-sharejs.open('{{id}}', 'text', function(error, doc) {
-	window.doc = doc;
-	doc.attach_textarea(elem);
-
-	// Get the contents of the document for some reason:
-	$('button').on("click", function(){
-
-	});
-
-	doc.on('change', function(op) {
-		console.log(op[0]);
-		console.log('Version: ' + doc.version);
-	});
-});*/
+  var socket = io();
+  $('form').submit(function(){
+    socket.emit('chat message', $('#m').val());
+    $('#m').val('');
+    return false;
+  });
+  socket.on('chat message', function(msg){
+    $('#messages').append($('<li>').text(msg));
+  });
 </script>
 
