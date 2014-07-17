@@ -3,12 +3,126 @@
 	width: 300px;
 	min-height: 500px;
 	float: right;
-	overflow-y: scroll;
-	overflow-x: hidden;
+	background: @ea;
 	position: relative;
 	top: 0;
 	right: 0;
 	bottom: 0;
+	border-left: 1px solid @d;
+
+	.chat-title{
+		border-bottom: 1px solid @d;
+		background: @ea;
+		height: 50px;
+
+		p{
+			text-align: center;
+			color: @7;
+			line-height: 50px;
+		}
+
+	} /* chat title */
+
+	#messages{
+		padding: 10px 10px;
+		overflow-y: scroll;
+		font-size: 12px;
+		font-weight: 300;
+		color: @dark;
+
+		.content{
+			max-width: 194px;
+			min-width: 100px;
+			word-wrap: break-word;
+			background: @f;
+			border-radius: 4px;
+			padding: 10px 10px;
+			margin-bottom: 20px;
+			-webkit-box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.15);
+			-moz-box-shadow:    0px 1px 1px 0px rgba(0, 0, 0, 0.15);
+			box-shadow:         0px 1px 1px 0px rgba(0, 0, 0, 0.15);
+		}
+	}
+
+	.user{
+		width: 100%;
+
+		.avatar{
+			float: right;
+			margin-left: 10px;
+		}
+
+		.content{
+			float: left;
+		}
+
+		.message-area{
+			float: right;
+		}
+	} /* user message styles */
+
+	.other-user{
+		width: 100%;
+
+		.avatar{
+			float: left;
+			margin-right: 10px;
+		}
+
+		.content{
+			float: right;
+		}
+
+		.message-area{
+			float: left;
+		}
+	} /* other user message style */
+
+	.avatar{
+		background: url('/images/chat/melanie.jpg') no-repeat center center;
+		background-size: cover;
+		border-radius: 50%;
+		height: 40px;
+		width: 40px;
+		border: 4px solid @f;
+	}
+
+	.name{
+		font-size: 12px;
+		color: @9;
+		font-weight: bold;
+		margin-top: 10px;
+	}
+
+	.submit-wrapper{
+		width: 299px;
+		height: 79px;
+		position: absolute;
+		bottom: 0;
+	}
+
+	.submit-area{
+		width: 300px;
+		background: @light;
+		padding: 15px 15px;
+		border-top: 1px solid @d;
+
+
+		.message-input{
+			width: 100%;
+			height: 46px;
+			padding: 5px 10px;
+			border: 1px solid @d;
+			font-size: 12px;
+			outline: none;
+			resize: none;
+		}
+
+		button{
+			float: right;
+			margin-top: 10px;
+		}
+	} /* submit area */
 }
 /*   ---   End of Chat Bar General   --   */
 

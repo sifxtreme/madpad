@@ -375,12 +375,110 @@ a:hover {
   width: 300px;
   min-height: 500px;
   float: right;
-  overflow-y: scroll;
-  overflow-x: hidden;
+  background: #eaeaea;
   position: relative;
   top: 0;
   right: 0;
   bottom: 0;
+  border-left: 1px solid #dddddd;
+  /* chat title */
+  /* user message styles */
+  /* other user message style */
+  /* submit area */
+}
+.right .chat-title {
+  border-bottom: 1px solid #dddddd;
+  background: #eaeaea;
+  height: 50px;
+}
+.right .chat-title p {
+  text-align: center;
+  color: #777777;
+  line-height: 50px;
+}
+.right #messages {
+  padding: 10px 10px;
+  overflow-y: scroll;
+  font-size: 12px;
+  font-weight: 300;
+  color: #232c30;
+}
+.right #messages .content {
+  max-width: 194px;
+  min-width: 100px;
+  word-wrap: break-word;
+  background: #ffffff;
+  border-radius: 4px;
+  padding: 10px 10px;
+  margin-bottom: 20px;
+  -webkit-box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.15);
+}
+.right .user {
+  width: 100%;
+}
+.right .user .avatar {
+  float: right;
+  margin-left: 10px;
+}
+.right .user .content {
+  float: left;
+}
+.right .user .message-area {
+  float: right;
+}
+.right .other-user {
+  width: 100%;
+}
+.right .other-user .avatar {
+  float: left;
+  margin-right: 10px;
+}
+.right .other-user .content {
+  float: right;
+}
+.right .other-user .message-area {
+  float: left;
+}
+.right .avatar {
+  background: url('/images/chat/melanie.jpg') no-repeat center center;
+  background-size: cover;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  border: 4px solid #ffffff;
+}
+.right .name {
+  font-size: 12px;
+  color: #9ea5ab;
+  font-weight: bold;
+  margin-top: 10px;
+}
+.right .submit-wrapper {
+  width: 299px;
+  height: 79px;
+  position: absolute;
+  bottom: 0;
+}
+.right .submit-area {
+  width: 300px;
+  background: #f9f9f9;
+  padding: 15px 15px;
+  border-top: 1px solid #dddddd;
+}
+.right .submit-area .message-input {
+  width: 100%;
+  height: 46px;
+  padding: 5px 10px;
+  border: 1px solid #dddddd;
+  font-size: 12px;
+  outline: none;
+  resize: none;
+}
+.right .submit-area button {
+  float: right;
+  margin-top: 10px;
 }
 /*   ---   End of Chat Bar General   --   */
 /*   ---   Main Area General   --   */
@@ -437,7 +535,7 @@ a:hover {
 /*   ---   Title Area   --   */
 .title {
   width: 100%;
-  height: 80px;
+  height: 50px;
   background-color: #ffffff;
   border-bottom: 1px solid #dddddd;
   padding: 0px 40px;
@@ -446,13 +544,12 @@ a:hover {
   float: left;
 }
 .title .pad-name h2 {
-  font-size: 30px;
-  line-height: 80px;
+  font-size: 18px;
+  line-height: 50px;
 }
 /*   ---   End of Title Area   --   */
 /*   ---   New Pad Area   --   */
 .new-pad-area {
-  display: block !important;
   overflow-y: hidden;
   overflow-x: hidden;
   position: absolute;
@@ -510,11 +607,22 @@ a:hover {
 }
 .new-pad-area .pad-options .pad-type {
   width: 100%;
+  height: 56px;
+  background: #636d75;
   text-align: center;
+  color: #dddddd;
+  -webkit-box-shadow: inset 0px -2px 2px 0px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: inset 0px -2px 2px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: inset 0px -2px 2px 0px rgba(0, 0, 0, 0.25);
 }
 .new-pad-area .pad-options .pad-type p {
   display: block;
   padding: 20px 0px;
+}
+.new-pad-area .pad-options .pad-type p:hover {
+  color: #33bea8;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
 }
 .new-pad-area .pad-options .pad-type .text-pad {
   width: 50%;
@@ -527,21 +635,14 @@ a:hover {
   cursor: pointer;
 }
 .new-pad-area .pad-options .pad-type .active-type {
-  background: #4b555d;
-  color: #ffffff;
-}
-.new-pad-area .pad-options .pad-type .inactive-type {
-  background: #636d75;
-  color: #dddddd;
-  -webkit-box-shadow: inset 0px -1px 1px 0px rgba(0, 0, 0, 0.25);
-  -moz-box-shadow: inset 0px -1px 1px 0px rgba(0, 0, 0, 0.25);
-  box-shadow: inset 0px -1px 1px 0px rgba(0, 0, 0, 0.25);
+  background: #4b555d !important;
+  color: #ffffff !important;
 }
 .new-pad-area .pad-options .pad-description {
   position: absolute;
   top: 100px;
   width: 100%;
-  padding: 0px 40px;
+  padding: 0px 30px;
 }
 .new-pad-area .pad-options .pad-description .icon {
   display: block;

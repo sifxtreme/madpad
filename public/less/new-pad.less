@@ -1,6 +1,5 @@
 /*   ---   New Pad Area   --   */
 .new-pad-area{
-	display: block !important;
 	overflow-y: hidden;
 	overflow-x: hidden;
 	position: absolute;
@@ -63,11 +62,24 @@
 
 		.pad-type{
 			width: 100%;
+			height: 56px;
+			background: @hover-light;
 			text-align: center;
+			color: @d;
+			-webkit-box-shadow: inset 0px -2px 2px 0px rgba(0, 0, 0, 0.25);
+			-moz-box-shadow:    inset 0px -2px 2px 0px rgba(0, 0, 0, 0.25);
+			box-shadow:         inset 0px -2px 2px 0px rgba(0, 0, 0, 0.25);
+
 
 			p{
 				display: block;
 				padding: 20px 0px;
+
+				&:hover{
+					color: @green;
+					-webkit-transition: 0.3s;
+					transition: 0.3s;
+				}
 			}
 
 			.text-pad{
@@ -83,16 +95,8 @@
 			}
 
 			.active-type{
-				background: @hover;
-				color: @f;
-			}
-
-			.inactive-type{
-				background: @hover-light;
-				color: @d;
-				-webkit-box-shadow: inset 0px -1px 1px 0px rgba(0, 0, 0, 0.25);
-				-moz-box-shadow:    inset 0px -1px 1px 0px rgba(0, 0, 0, 0.25);
-				box-shadow:         inset 0px -1px 1px 0px rgba(0, 0, 0, 0.25);
+				background: @hover !important;
+				color: @f !important;
 			}
 
 		} /* pad type */
@@ -101,7 +105,7 @@
 			position: absolute;
 			top: 100px;
 			width: 100%;
-			padding: 0px 40px;
+			padding: 0px 30px;
 
 			.icon{
 				display: block;

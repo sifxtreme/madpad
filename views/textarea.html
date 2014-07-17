@@ -1,5 +1,6 @@
 
 <div class="madpad-container minwidth">
+	<div class="darken"></div>
 	<section class="new-pad btn btn-1e">
 		<a href="#"><img src="/images/sidebar/new@2x.png">New Pad</a>
 	</section> <!-- new pad button -->
@@ -53,27 +54,26 @@
 		<div class="pad-options">
 			<div class="pad-type">
 				<div class="text-pad active-type">
-					<p id="text-pad">Text Pad</p>
+					<p class="pad-selector" id="text-pad">Text Pad</p>
 				</div>
-				<div class="code-pad inactive-type">
-					<p id="code-pad">Code Pad</p>
+				<div class="code-pad">
+					<p class="pad-selector" id="code-pad">Code Pad</p>
 				</div>
 			</div> <!-- Tabs for the new pad -->
 			<div class="pad-description" id="text-info">
 				<img src="/images/newpad/text-icon.png" class="icon" />
 				<p class="type-title">Create a new text document</p>
-				<p class="type-more">Your text pad is a fully editable document pad.</p>
+				<p class="type-more">Your text pad is a text editor perfect for notes and content.</p>
 			</div>
 			<div class="pad-description" id="code-info">
 				<img src="/images/newpad/code-icon.png" class="icon" />
 				<p class="type-title">Create a new code document</p>
-				<p class="type-more">Your code pad is a text editor for code.</p>
+				<p class="type-more">Your code pad is a text editor perfect for coding and markup.</p>
 			</div>
 		</div>
 	</div> <!-- create a new pad area -->
 
 	<div class="middle">
-		<div class="darken"></div>
 		<div class="title">
 			<div class="pad-name">
 				<h2>Aprcode1</h2>
@@ -84,12 +84,19 @@
 		</div>
 	</div> <!-- main text area -->
 
-	<div class="right" style="background-color: #ddd;">
-		<div class="darken"></div>
-    <ul id="messages"></ul>
-    <form action="">
-      <input id="m" autocomplete="off" /><button>Send</button>
-    </form>
+	<div class="right">
+			<div class="chat-title">
+				<p>Aprcode1 Chat</p>
+			</div>
+		    <div id="messages"></div>
+
+		    <div class="submit-wrapper">
+			    <div class="submit-area">
+				    <form action="">
+				    	<textarea id="m" autocomplete="off" class="message-input" placeholder="Send a message..."></textarea>
+				    </form>
+			    </div>
+		    </div>
 	</div> <!-- chat -->
 
 </div>
@@ -100,8 +107,14 @@
     $('#m').val('');
     return false;
   });
+  var mine = true;
   socket.on('chat message', function(msg){
-    $('#messages').append($('<li>').text(msg));
+  	if(mine) messageToAppend = "<div class='user'>";
+  	else messageToAppend = "<div class='other-user'>";
+  	messageToAppend += '<div class="message-area"><div class="avatar"></div><div class="content">'+ msg  +'<div class="name">Melanie</div></div></div>';
+  	messageToAppend += '</div>';
+    $('#messages').append(messageToAppend);
+    mine = !mine;
   });
 </script>
 

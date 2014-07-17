@@ -2,17 +2,21 @@ $( document ).ready(function() {
     function window_size() {
 	    var height = $(window).height();										//this is the window height.
 	    var navHeight = $('.header').height();									//this is the height of the nav bar.
-	    var titleHeight = $('.title').height(); 								//the is the title height in the main area.
+	    var titleHeight = $('.title').height();									//the is the title height in the main area.
+	    var submitHeight = $('.submit-wrapper').height();
 	    var paddingMain = 80;													//top and bottom padding of the text area.
 	    var padHeight = height - navHeight - titleHeight - paddingMain; 		//this is the height of the pad.
 	    var sideHeight =  height - navHeight; 									//this is the height of the two side bars.
+	    var chatHeight = sideHeight - titleHeight - submitHeight - 1;
 
 	    sideHeight = parseInt(sideHeight) + 'px';
 	    padHeight = parseInt(padHeight) + 'px';
-	    $(".left").css('height',sideHeight);
+	    $(".left").css('height', sideHeight);
 	    $(".right").css('height', sideHeight);
-	    $(".pad-area").css('height',padHeight);
-	    $(".new-pad-area").css('height',sideHeight);
+	    $(".pad-area").css('height', padHeight);
+	    $(".new-pad-area").css('height', sideHeight);
+	    $('#messages').css('height' , chatHeight);
+	    console.log(chatHeight + " = " + sideHeight + " - " + titleHeight + " - " + submitHeight);
 	}/* Set heights for divs */
 	window_size();
     
@@ -52,6 +56,7 @@ $( document ).ready(function() {
 		        container.hide(); /* hide the new pad area */
 		        $('.new-pad-area').animate({left:'220px'},0); /* move the div back */
 		        $('.darken').hide(); /* hiden darken state */
+		       
 		    }
 		});
 	}
@@ -73,20 +78,27 @@ $( document ).ready(function() {
 	function padType(){
 
 		$('#text-pad').click(function(){
-			$(this).parent().removeClass('inactive-type');
 			$(this).parent().addClass('active-type');
-			$('#code-pad').addClass('')
+			$('#code-pad').parent().removeClass('active-type');
 			$('#code-info').hide();
 			$('#text-info').show();
 		}); /* if you click text pad */
 
 		$('#code-pad').click(function(){
-			$(this).parent().removeClass('inactive-type');
 			$(this).parent().addClass('active-type');
+			$('#text-pad').parent().removeClass('active-type');
 			$('#text-info').hide();
 			$('#code-info').show();
-		});
+		}); /* if you click code pad */
 	}
+
+	$('.message-input').keypress(function(e){
+		if(e.which ==13 && !e.shiftKey){
+			$(this).submit();
+			return false;
+		}
+
+	});
 	
 
 });
