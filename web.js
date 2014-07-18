@@ -27,9 +27,13 @@ var options = {
 };
 
 io.on('connection', function(socket){
-  socket.on('chat message', function(msg){
-    io.emit('chat message', msg);
+  socket.on('room', function(room){
+    socket.join(room);
   });
+  socket.on('chat', function(data){
+    socket.broadcast.to(data.room).emit('newMessage', data.message);
+  });
+  
 });
 
 server.get('/', function(request, response) {
