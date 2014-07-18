@@ -16,21 +16,27 @@ $( document ).ready(function() {
 	    $(".pad-area").css('height', padHeight);
 	    $(".new-pad-area").css('height', sideHeight);
 	    $('#messages').css('height' , chatHeight);
-	    console.log(chatHeight + " = " + sideHeight + " - " + titleHeight + " - " + submitHeight);
 	}/* Set heights for divs */
 	window_size();
     
     $(window).bind('resize', window_size);
     /* Set Side Bar to Window Size */
 
-	$('.left').scroll(function() {
-	    if ($(this).scrollTop() > 0 ) {
-	        $(".new-pad").addClass("new-pad-active");
-	    }
-	    else {
-        	$(".new-pad").removeClass("new-pad-active");
-    	}
-	}); /* Give the drop shadow to the "New Pad" area*/
+	$('img').bind('dragstart', function(){
+		return false; 
+	});
+
+    function newPadShadow(){
+		$('.left').scroll(function() {
+		    if ($(this).scrollTop() > 0 ) {
+		        $(".new-pad").addClass("new-pad-active");
+		    }
+		    else {
+	        	$(".new-pad").removeClass("new-pad-active");
+	    	}
+		}); /* Give the drop shadow to the "New Pad" area*/
+	}
+	newPadShadow();
 
 	function newPad(){
 
@@ -92,14 +98,36 @@ $( document ).ready(function() {
 		}); /* if you click code pad */
 	}
 
-	$('.message-input').keypress(function(e){
-		if(e.which ==13 && !e.shiftKey){
-			$(this).submit();
-			return false;
-		}
+	function sendMessages(){
+		$('.message-input').keypress(function(e){
+			if(e.which ==13 && !e.shiftKey){
+				$(this).submit();
+				return false;
+			}
+		}); /* allows enter to send messages and shift enter to make new line */
+	}
+	sendMessages();
 
-	});
-	
+	function iconSelect(){
+		$('.icons').mousedown(function(){
+			$(this).removeClass('transition');
+			$(this).addClass('icon-mousedown');
+		});
+
+		$(document).mouseup(function(e){
+			$('.icons').addClass('transition');
+			$('.icons').removeClass('icon-mousedown');
+		});
+
+	}
+	iconSelect();
+
+	function iconClick(){
+		$('.icons').click(function(){
+			$(this).addClass('active-icon');
+		});
+	} /* on click of icon and creating active state and deactivating*/
+	iconClick();
 
 });
 

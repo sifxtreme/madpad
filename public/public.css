@@ -158,11 +158,13 @@ a:hover {
   background: #232c30;
   height: 70px;
   width: 100%;
+  z-index: 15;
 }
 .header .logo-container {
   float: left;
   position: relative;
   top: 50%;
+  z-index: 15;
 }
 .header .logo-container img {
   width: 124px;
@@ -415,6 +417,14 @@ a:hover {
   -moz-box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.15);
   box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.15);
 }
+.right #messages .content:hover {
+  background: #f4f6f9;
+  -webkit-box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.3);
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+}
 .right .user {
   width: 100%;
 }
@@ -448,11 +458,13 @@ a:hover {
   height: 40px;
   width: 40px;
   border: 4px solid #ffffff;
+  -webkit-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.15);
 }
 .right .name {
   font-size: 12px;
   color: #9ea5ab;
-  font-weight: bold;
   margin-top: 10px;
 }
 .right .submit-wrapper {
@@ -535,7 +547,7 @@ a:hover {
 /*   ---   Title Area   --   */
 .title {
   width: 100%;
-  height: 50px;
+  height: 100px;
   background-color: #ffffff;
   border-bottom: 1px solid #dddddd;
   padding: 0px 40px;
@@ -544,20 +556,40 @@ a:hover {
   float: left;
 }
 .title .pad-name h2 {
-  font-size: 18px;
-  line-height: 50px;
+  font-size: 24px;
+  line-height: 100px;
 }
 .title .pad-icons {
   float: right;
   position: relative;
-  top: 9px;
+  top: 19px;
+}
+.title .pad-icons .icon-wrapper {
+  position: relative;
 }
 .title .pad-icons img {
   float: left;
-  height: 32px;
-  background: red;
-  padding: 5px 5px;
-  margin: 0px 10px;
+  height: 62px;
+  padding: 20px 20px;
+  margin: 0px 0px;
+  border-radius: 50%;
+}
+.title .pad-icons img:hover {
+  cursor: pointer;
+}
+.title .pad-icons .icon-mousedown {
+  background: rgba(51, 190, 168, 0.25);
+  opacity: 1;
+}
+.title .pad-icons .transition {
+  transition: 1s;
+  -webkit-transition: 1s;
+}
+.title .pad-icons .active-icon {
+  background: #fff !important;
+  -webkit-box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.15);
 }
 /*   ---   End of Title Area   --   */
 /*   ---   New Pad Area   --   */

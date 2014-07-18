@@ -1,6 +1,5 @@
 
 <div class="madpad-container minwidth">
-	<div class="darken"></div>
 	<section class="new-pad btn btn-1e">
 		<a href="#"><img src="/images/sidebar/new@2x.png">New Pad</a>
 	</section> <!-- new pad button -->
@@ -79,9 +78,9 @@
 				<h2>Aprcode1</h2>
 			</div>
 			<div class="pad-icons">
-				<img src="/images/main/eye.png" />
-				<img src="/images/main/options.png" />
-				<img src="/images/main/trash.png" />
+				<img src="/images/main/eye.png" class="icons" draggable='false'/>
+				<img src="/images/main/options.png" class="icons"/>
+				<img src="/images/main/trash.png" class="icons"/>
 			</div>
 		</div>
 		<div class="pad-wrapper">
@@ -111,11 +110,11 @@
   	var whichClass, whichPicture, whichName;
   	if(whoami == "me"){
   		whichClass = 'user';
-  		whichName = "YOU";
+  		whichName = "Melanie";
   	}
   	else{
   		whichClass = 'other-user';
-  		whichName = "OTHER PERSON";
+  		whichName = "Kate";
   	}
 
   	var messageToAppend = "<div class='" + whichClass + "'>";
