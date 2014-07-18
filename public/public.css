@@ -547,6 +547,18 @@ a:hover {
   font-size: 18px;
   line-height: 50px;
 }
+.title .pad-icons {
+  float: right;
+  position: relative;
+  top: 9px;
+}
+.title .pad-icons img {
+  float: left;
+  height: 32px;
+  background: red;
+  padding: 5px 5px;
+  margin: 0px 10px;
+}
 /*   ---   End of Title Area   --   */
 /*   ---   New Pad Area   --   */
 .new-pad-area {
