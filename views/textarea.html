@@ -101,20 +101,42 @@
 
 </div>
 <script>
+
+  function appendChat(whoami, message){
+  	var whichClass, whichPicture, whichName;
+  	if(whoami == "me"){
+  		whichClass = 'user';
+  		whichName = "YOU";
+  	}
+  	else{
+  		whichClass = 'other-user';
+  		whichName = "OTHER PERSON";
+  	}
+
+  	var messageToAppend = "<div class='" + whichClass + "'>";
+  	messageToAppend += '<div class="message-area"><div class="avatar"></div><div class="content">' + message +'<div class="name">' + whichName + '</div></div></div>';
+  	messageToAppend += '</div>';
+
+  	$('#messages').append(messageToAppend);
+  }
+
   var socket = io();
+  var room = '{{id}}';
+	socket.emit('room', room);
+
   $('form').submit(function(){
-    socket.emit('chat message', $('#m').val());
+  	var messageValue = $('#m').val();
+    socket.emit('chat', {'room': room, message: messageValue});
     $('#m').val('');
+    appendChat('me', messageValue);
     return false;
   });
-  var mine = true;
-  socket.on('chat message', function(msg){
-  	if(mine) messageToAppend = "<div class='user'>";
-  	else messageToAppend = "<div class='other-user'>";
-  	messageToAppend += '<div class="message-area"><div class="avatar"></div><div class="content">'+ msg  +'<div class="name">Melanie</div></div></div>';
-  	messageToAppend += '</div>';
-    $('#messages').append(messageToAppend);
-    mine = !mine;
+
+  socket.on('newMessage', function(msg){
+  	appendChat('you', msg);
   });
+
+
+
 </script>
 
