@@ -104,15 +104,16 @@
 
 </div>
 <script>
+	$("#editor").editable({inlineMode: false});
 
-	var auth = "whatever";
-	var options = {authentication: auth}
-	var pad = document.getElementById('editor');
-	var theSharing = sharejs.open('{{id}}', 'text', options, function(error, doc) {
-		pad.value = "";
-		window.doc = doc;
-		window.doc.attach_textarea(pad);
-	});
+	// var auth = "whatever";
+	// var options = {authentication: auth}
+	// var pad = document.getElementById('editor');
+	// var theSharing = sharejs.open('{{id}}', 'text', options, function(error, doc) {
+	// 	pad.value = "";
+	// 	window.doc = doc;
+	// 	window.doc.attach_textarea(pad);
+	// });
 
 	function scrollDown(){
 		$('#messages').stop().animate({
