@@ -1,4 +1,3 @@
-
 <div class="madpad-container minwidth">
 	<section class="new-pad btn btn-1e">
 		<a href="#"><img src="/images/sidebar/new@2x.png">New Pad</a>
@@ -75,7 +74,7 @@
 	<div class="middle">
 		<div class="title">
 			<div class="pad-name">
-				<h2>Aprcode1</h2>
+				<h2>{{id}} Pad</h2>
 			</div>
 			<div class="pad-icons">
 				<img src="/images/main/eye.png" class="icons" draggable='false'/>
@@ -84,13 +83,13 @@
 			</div>
 		</div>
 		<div class="pad-wrapper">
-			<textarea class="pad-area" placeholder="Start typing here!"></textarea>
+			<textarea id="editor" class="pad-area" placeholder="Start typing here!"></textarea>
 		</div>
 	</div> <!-- main text area -->
 
 	<div class="right">
 			<div class="chat-title">
-				<p>Aprcode1 Chat</p>
+				<p>{{id}} Chat</p>
 			</div>
 		    <div id="messages"></div>
 
@@ -106,11 +105,20 @@
 </div>
 <script>
 
+	var auth = "whatever";
+	var options = {authentication: auth}
+	var pad = document.getElementById('editor');
+	var theSharing = sharejs.open('{{id}}', 'text', options, function(error, doc) {
+		pad.value = "";
+		window.doc = doc;
+		window.doc.attach_textarea(pad);
+	});
 
 	function scrollDown(){
-		$('#messages').scrollTop($('#messages')[0].scrollHeight);
+		$('#messages').stop().animate({
+		  scrollTop: $("#messages")[0].scrollHeight
+		}, 800);
 	}
-
 
 	function replaceEmoticons(str){
 		var emoticons = [
@@ -124,7 +132,7 @@
 			{regex: /\(bomb\)/g, image: 'bomb'},
 			{regex: /\(cat\)/g, image: 'cat'},
 			{regex: /\(cheers\)/g, image: 'cheers'},
-			{regex: /:\//g, image: 'confused'},
+			{regex: /:-\//g, image: 'confused'},
 			{regex: /;\(/g, image: 'crying'},
 			{regex: /\(devil\)/g, image: 'devil'},
 			{regex: /\(dog\)/g, image: 'dog'},
@@ -174,11 +182,17 @@
 				'<img style="width: 18px;" src="/images/emoticons/' + emoticons[i].image + '.png"/>');
 		}
 
-
 		return str;
 	}
 
+	function convertLinks(str){
+		return Autolinker.link(str);
+	}
+
 	function appendChat(whoami, message){
+		
+		message = message.replace(/\r\n|\r|\n/g,"<br />");
+		
 		var whichClass, whichPicture, whichName;
 		if(whoami == "me"){
 			whichClass = 'user';
@@ -194,6 +208,7 @@
 		messageToAppend += '</div>';
 
 		messageToAppend=replaceEmoticons(messageToAppend);
+		messageToAppend=convertLinks(messageToAppend);
 		$('#messages').append(messageToAppend);
 		scrollDown();
 		
@@ -205,19 +220,14 @@
 
 	$('form').submit(function(){
 		var messageValue = $('#m').val();
-	socket.emit('chat', {'room': room, message: messageValue});
-	$('#m').val('');
-	appendChat('me', messageValue);
-	return false;
+		socket.emit('chat', {'room': room, message: messageValue});
+		$('#m').val('');
+		appendChat('me', messageValue);
+		return false;
 	});
 
 	socket.on('newMessage', function(msg){
 		appendChat('you', msg);
 	});
 
-
-
-
-
 </script>
-

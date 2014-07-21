@@ -1,16 +1,32 @@
 {
   "name": "MadPad",
-  "description": "Pad Application",
-  "version": "0.0.3",
+  "description": "Easy Access Pad Application",
+  "main": "web.js",
+  "version": "0.0.4",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:sifxtreme/madpad-socket.git"
+  },
+  "keywords": [
+    "onetimepad",
+    "pad",
+    "sharejs",
+    "madpad",
+    "socketio"
+  ],
+  "author": "Asif Ahmed <asif.h.ahmed@gmail.com>",
   "dependencies": {
-    "express": "3.1.x",
-    "socket.io": "1.0.2",
-    "hbs": "*",
-    "randomstring": "*",
+    "express": "~3.1.2",
+    "socket.io": "~1.0.2",
+    "hbs": "~2.7.0",
+    "randomstring": "~1.0.3",
     "share": "0.6.3",
     "coffee-script": "~1.7.1",
     "redis": "~0.10.3",
-    "bower": "~1.3.5"
+    "mongoose": "~3.8.12",
+    "passport": "~0.2.0",
+    "passport-facebook": "~1.0.3",
+    "passport-github": "~0.1.5"
   },
   "engines": {
     "node": "0.10.x",
