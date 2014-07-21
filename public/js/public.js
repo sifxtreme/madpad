@@ -3,11 +3,12 @@ $( document ).ready(function() {
 	    var height = $(window).height();										//this is the window height.
 	    var navHeight = $('.header').height();									//this is the height of the nav bar.
 	    var titleHeight = $('.title').height();									//the is the title height in the main area.
-	    var submitHeight = $('.submit-wrapper').height();
+	    var submitHeight = $('.submit-wrapper').height();						//the is the submit area height in the main area.
+	    var chatTitleHeight = $('.chat-title').height();
 	    var paddingMain = 80;													//top and bottom padding of the text area.
 	    var padHeight = height - navHeight - titleHeight - paddingMain; 		//this is the height of the pad.
 	    var sideHeight =  height - navHeight; 									//this is the height of the two side bars.
-	    var chatHeight = sideHeight - titleHeight - submitHeight - 1;
+	    var chatHeight = sideHeight - chatTitleHeight - submitHeight - 1;
 
 	    sideHeight = parseInt(sideHeight) + 'px';
 	    padHeight = parseInt(padHeight) + 'px';
@@ -122,12 +123,9 @@ $( document ).ready(function() {
 	}
 	iconSelect();
 
-	function iconClick(){
-		$('.icons').click(function(){
-			$(this).addClass('active-icon');
-		});
-	} /* on click of icon and creating active state and deactivating*/
-	iconClick();
+
+	
+
 
 });
 

@@ -133,6 +133,13 @@ input {
 * {
   box-sizing: border-box;
 }
+img {
+  -khtml-user-select: none;
+  -o-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
 /*   ---   End of CSS Reset   --   */
 /*   ---   Header   --   */
 h1,

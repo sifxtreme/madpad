@@ -106,39 +106,116 @@
 </div>
 <script>
 
-  function appendChat(whoami, message){
-  	var whichClass, whichPicture, whichName;
-  	if(whoami == "me"){
-  		whichClass = 'user';
-  		whichName = "Melanie";
-  	}
-  	else{
-  		whichClass = 'other-user';
-  		whichName = "Kate";
-  	}
 
-  	var messageToAppend = "<div class='" + whichClass + "'>";
-  	messageToAppend += '<div class="message-area"><div class="avatar"></div><div class="content">' + message +'<div class="name">' + whichName + '</div></div></div>';
-  	messageToAppend += '</div>';
+	function scrollDown(){
+		$('#messages').scrollTop($('#messages')[0].scrollHeight);
+	}
 
-  	$('#messages').append(messageToAppend);
-  }
 
-  var socket = io();
-  var room = '{{id}}';
+	function replaceEmoticons(str){
+		var emoticons = [
+			{regex: /O:\)/g, image: 'angel'},
+			{regex: />:-\(/g, image: 'angry'},
+			{regex: /\(baseball\)/g, image: 'baseball'},
+			{regex: /\(basketball\)/g, image: 'basketball'},
+			{regex: /\(bear\)/g, image: 'bear'},
+			{regex: /\(beer\)/g, image: 'beer'},
+			{regex: /\^.\^/g, image: 'bigsmile'},
+			{regex: /\(bomb\)/g, image: 'bomb'},
+			{regex: /\(cat\)/g, image: 'cat'},
+			{regex: /\(cheers\)/g, image: 'cheers'},
+			{regex: /:\//g, image: 'confused'},
+			{regex: /;\(/g, image: 'crying'},
+			{regex: /\(devil\)/g, image: 'devil'},
+			{regex: /\(dog\)/g, image: 'dog'},
+			{regex: /\(dragon\)/g, image: 'dragon'},
+			{regex: /:\|/g, image: 'eh'},
+			{regex: /\(elsa\)/g, image: 'elsa'},
+			{regex: /\(fire\)/g, image: 'fire'},
+			{regex: /\(football\)/g, image: 'football'},
+			{regex: /\(frog\)/g, image: 'frog'},
+			{regex: /\(futbol\)/g, image: 'futbol'},
+			{regex: /\(ghost\)/g, image: 'ghost'},
+			{regex: /:\)/g, image: 'happy'},
+			{regex: /<3/g, image: 'heart'},
+			{regex: /\(koala\)/g, image: 'koala'},
+			{regex: /\(lightning\)/g, image: 'lightning'},
+			{regex: /\(monkey\)/g, image: 'monkey'},
+			{regex: /\(octopus\)/g, image: 'octopus'},
+			{regex: /:o/g, image: 'oh'},
+			{regex: /:O/g, image: 'oh'},
+			{regex: /-_-/g, image: 'okay'},
+			{regex: /\(panda\)/g, image: 'panda'},
+			{regex: /\(rabbit\)/g, image: 'rabbit'},
+			{regex: /:D/g, image: 'reallyhappy'},
+			{regex: /\(riceball\)/g, image: 'riceball'},
+			{regex: /\:\(/g, image: 'sad'},
+			{regex: /\(santa\)/g, image: 'santa'},
+			{regex: /\(snow\)/g, image: 'snow'},
+			{regex: /\(snowman\)/g, image: 'snowman'},
+			{regex: /\(stuart\)/g, image: 'stuart'},
+			{regex: /\(sun\)/g, image: 'sun'},
+			{regex: /\(tennis\)/g, image: 'tennis'},
+			{regex: /\(tiger\)/g, image: 'tiger'},
+			{regex: /\(toothless\)/g, image: 'toothless'},
+			{regex: /:p/g, image: 'tongue'},
+			{regex: /:P/g, image: 'tongue'},
+			{regex: /\(tup\)/g, image: 'thumbsup'},
+			{regex: /\(tdown\)/g, image: 'thumbsdown'},
+			{regex: /\(water\)/g, image: 'water'},
+			{regex: /\(whale\)/g, image: 'whale'},
+			{regex: /o.o/g, image: 'what'},
+			{regex: /O.O/g, image: 'what'},
+			{regex: /;\)/g, image: 'wink'},
+		]
+
+		for(var i = 0; i<emoticons.length; i++){
+			str = str.replace(emoticons[i].regex,
+				'<img style="width: 18px;" src="/images/emoticons/' + emoticons[i].image + '.png"/>');
+		}
+
+
+		return str;
+	}
+
+	function appendChat(whoami, message){
+		var whichClass, whichPicture, whichName;
+		if(whoami == "me"){
+			whichClass = 'user';
+			whichName = "Melanie";
+		}
+		else{
+			whichClass = 'other-user';
+			whichName = "Kate";
+		}
+
+		var messageToAppend = "<div class='" + whichClass + "'>";
+		messageToAppend += '<div class="message-area"><div class="avatar"></div><div class="content">' + message +'<div class="name">' + whichName + '</div></div></div>';
+		messageToAppend += '</div>';
+
+		messageToAppend=replaceEmoticons(messageToAppend);
+		$('#messages').append(messageToAppend);
+		scrollDown();
+		
+	}
+
+	var socket = io();
+	var room = '{{id}}';
 	socket.emit('room', room);
 
-  $('form').submit(function(){
-  	var messageValue = $('#m').val();
-    socket.emit('chat', {'room': room, message: messageValue});
-    $('#m').val('');
-    appendChat('me', messageValue);
-    return false;
-  });
+	$('form').submit(function(){
+		var messageValue = $('#m').val();
+	socket.emit('chat', {'room': room, message: messageValue});
+	$('#m').val('');
+	appendChat('me', messageValue);
+	return false;
+	});
 
-  socket.on('newMessage', function(msg){
-  	appendChat('you', msg);
-  });
+	socket.on('newMessage', function(msg){
+		appendChat('you', msg);
+	});
+
+
 
 
 
