@@ -31,7 +31,7 @@ passport.use(new FacebookStrategy(
    clientID: config.facebook.clientID,
    clientSecret: config.facebook.clientSecret,
    callbackURL: config.facebook.callbackURL,
-   profileFields: ['id', 'name','picture.type(normal)', 'emails', 'displayName', 'gender']
+   profileFields: ['id', 'name','picture.type(large)', 'emails', 'displayName', 'gender']
   },
   function(accessToken, refreshToken, profile, done) {
    process.nextTick(function () {
@@ -67,7 +67,7 @@ io.on('connection', function(socket){
     socket.join(room);
   });
   socket.on('chat', function(data){
-    var messageObject = {'name': data.name, 'picture': data.picture, 'message': data.message};
+    var messageObject = {'name': data.name, 'picture': data.picture, 'message': data.message, 'profileId': data.profileId};
     socket.broadcast.to(data.room).emit('newMessage', messageObject);
   });
 });
