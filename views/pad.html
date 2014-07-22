@@ -74,7 +74,8 @@
 	<div class="middle">
 		<div class="title">
 			<div class="pad-name">
-				<h2>{{id}} Pad</h2>
+				<h2>{{id}} Pad</h2><a href="/auth/facebook/">Auth</a>{{user.displayName}}
+				{{user.photos.0.value}}
 			</div>
 			<div class="pad-icons">
 				<img src="/images/main/eye.png" class="icons" draggable='false'/>
@@ -190,27 +191,27 @@
 		return Autolinker.link(str);
 	}
 
-	function appendChat(whoami, message){
+	function appendChat(messageObject){
 		
-		message = message.replace(/\r\n|\r|\n/g,"<br />");
+		var message = messageObject.message.replace(/\r\n|\r|\n/g,"<br />");
 		
 		var whichClass, whichPicture, whichName;
-		if(whoami == "me"){
+		if(messageObject.name == "me"){
 			whichClass = 'user';
-			whichName = "Melanie";
 		}
 		else{
 			whichClass = 'other-user';
-			whichName = "Kate";
 		}
 
 		var messageToAppend = "<div class='" + whichClass + "'>";
-		messageToAppend += '<div class="message-area"><img src="/images/chat/melanie.jpg" class="avatar"/><div class="content">' + message +'<div class="name">' + whichName + '</div></div></div>';
+		messageToAppend += '<div class="message-area"><img src="'+messageObject.picture+'" class="avatar"/><div class="content">' + message +'<div class="name">' + messageObject.name + '</div></div></div>';
 		messageToAppend += '</div>';
 
 		messageToAppend=replaceEmoticons(messageToAppend);
 		messageToAppend=convertLinks(messageToAppend);
+		
 		$('#messages').append(messageToAppend);
+		
 		scrollDown();
 		
 	}
@@ -221,14 +222,16 @@
 
 	$('form').submit(function(){
 		var messageValue = $('#m').val();
-		socket.emit('chat', {'room': room, message: messageValue});
+		var messageObject = {'room': room, 'name': '{{user.displayName}}', 'picture': '{{user.photos.0.value}}', 'message': messageValue};
+		socket.emit('chat', messageObject);
 		$('#m').val('');
-		appendChat('me', messageValue);
+		messageObject.name = "me";
+		appendChat(messageObject);
 		return false;
 	});
 
 	socket.on('newMessage', function(msg){
-		appendChat('you', msg);
+		appendChat(msg);
 	});
 
 </script>
