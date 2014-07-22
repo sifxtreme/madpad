@@ -116,12 +116,12 @@ button {
   line-height: 120%;
 }
 .froala-element.f-basic.f-placeholder:before {
-  left: 10px;
-  right: 10px;
-  top: 10px;
+  left: 20px;
+  right: 20px;
+  top: 20px;
 }
 .froala-element.f-placeholder:before {
-  color: #cccccc;
+  color: #9ea5ab;
   font-style: italic;
   content: attr(data-placeholder);
   position: absolute;

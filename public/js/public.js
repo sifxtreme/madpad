@@ -5,16 +5,20 @@ $( document ).ready(function() {
 	    var titleHeight = $('.title').height();									//the is the title height in the main area.
 	    var submitHeight = $('.submit-wrapper').height();						//the is the submit area height in the main area.
 	    var chatTitleHeight = $('.chat-title').height();
-	    var paddingMain = 80;													//top and bottom padding of the text area.
-	    var padHeight = height - navHeight - titleHeight - paddingMain; 		//this is the height of the pad.
+	    var newPadBtnHeight = $('.new-pad').height();
+	    var editorHeight = $('.froala-editor').height();
+	    var paddingMain = 82;													//top and bottom padding of the text area.
+	    var padHeight = height - navHeight - titleHeight - paddingMain - editorHeight; 		//this is the height of the pad.
 	    var sideHeight =  height - navHeight; 									//this is the height of the two side bars.
 	    var chatHeight = sideHeight - chatTitleHeight - submitHeight - 1;
+	    var padListHeight = sideHeight - newPadBtnHeight;
 
 	    sideHeight = parseInt(sideHeight) + 'px';
 	    padHeight = parseInt(padHeight) + 'px';
-	    $(".left").css('height', sideHeight);
+	    $(".left").css('height' , sideHeight);
+	    $(".all-pads").css('height', padListHeight);
 	    $(".right").css('height', sideHeight);
-	    $(".pad-area").css('height', padHeight);
+	    $(".froala-element").css('height', padHeight);
 	    $(".new-pad-area").css('height', sideHeight);
 	    $('#messages').css('height' , chatHeight);
 	}/* Set heights for divs */
@@ -28,7 +32,7 @@ $( document ).ready(function() {
 	});
 
     function newPadShadow(){
-		$('.left').scroll(function() {
+		$('.all-pads').scroll(function() {
 		    if ($(this).scrollTop() > 0 ) {
 		        $(".new-pad").addClass("new-pad-active");
 		    }
@@ -123,6 +127,17 @@ $( document ).ready(function() {
 	}
 	iconSelect();
 
+	function editorActive(){
+
+		$('.froala-element').focus(function() {
+			$('.froala-box').addClass('editor-active');
+		});
+
+		$('.froala-element').blur(function() {
+			$('.froala-box').removeClass('editor-active');
+		});
+	}
+	editorActive();
 
 	
 
