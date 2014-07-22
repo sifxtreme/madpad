@@ -27,7 +27,7 @@
 				</ul>
 			</section> <!-- shared pads -->
 			<section class="public-pads pad-list pad-hover">
-				<h5>Public Pads</h5>
+<!-- 				<h5>Public Pads</h5>
 				<ul>
 					<a href="#"><li>doge</li></a>
 					<a href="#"><li>reddit</li></a>
@@ -35,7 +35,7 @@
 					<a href="#"><li>facebook</li></a>
 					<a href="#"><li>netflix</li></a>
 					<a href="#"><li>okay</li></a>
-				</ul>
+				</ul> -->
 		</section> <!-- public pads -->
 		</div>
 	</div>
@@ -206,7 +206,7 @@
 		}
 
 		var messageToAppend = "<div class='" + whichClass + "'>";
-		messageToAppend += '<div class="message-area"><img src="'+messageObject.picture+'" class="avatar"/><div class="content">' + message +'<div class="name">' + messageObject.name + '</div></div></div>';
+		messageToAppend += '<div class="message-area"><div "style= background:url("src='+messageObject.picture+') no-repeat center center;" class="avatar"></div><div class="content">' + message +'<div class="name">' + messageObject.name + '</div></div></div>';
 		messageToAppend += '</div>';
 
 		messageToAppend=replaceEmoticons(messageToAppend);
