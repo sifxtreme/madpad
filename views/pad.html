@@ -193,11 +193,15 @@
 		return Autolinker.link(str);
 	}
 
+	function convertLineBreaks(str){
+		return str.replace(/\r\n|\r|\n/g,"<br />");
+	}
+
 	function appendChat(messageObject){
 		
 		var message = messageObject.message.replace(/\r\n|\r|\n/g,"<br />");
 		
-		var whichClass, whichPicture, whichName;
+		var whichClass;
 		if(messageObject.name == "me"){
 			whichClass = 'user';
 		}
@@ -211,7 +215,7 @@
 		var messageToAppend = "<div class='" + whichClass + "'>";
 		messageToAppend += '<div class="message-area">';
 		if(messageObject.profileId == ""){
-			messageToAppend += '<div style="background:'+ messageObject.picture.color +' url(\'/images/chat/letters/'+ messageObject.picture.letter +'.png\') no-repeat center center; background-size: 44px 44px;" class="avatar"></div>';	
+			messageToAppend += '<div style="background:'+ messageObject.picture.color +' url(\'/images/chat/animals/'+ messageObject.picture.animal +'.png\') no-repeat center center; background-size: 44px 44px;" class="avatar"></div>';	
 		}
 		else{
 			messageToAppend += '<div style="background:url(https://graph.facebook.com/' + messageObject.profileId + '/picture?width=150&height=150) no-repeat center center; background-size: 44px 44px" class="avatar"></div>';
@@ -237,12 +241,16 @@
 	var colorArray = ["#be3333", "#be336e", "#be339f", "#ac33be", "#7e33be", "#4d33be", "#334dbe", "#3385be", "#33acbe", "#33beaf", "#33be85", "#33be47", "#78be33", "#9cbe33", "#bcbe33", "#be9f33", "#be7b33", "#be5733"];
 	var color = colorArray[Math.floor(Math.random() * colorArray.length)];
 
+	var animalArray = ["panda", "tiger", "cheetah", "gorilla", "monkey", "robin", "toucan", "elephant", "chimp", "sheep", "rooster", "dog", "cow", "chicken", "rabbit", "pig", "horse", "duck", "parrot", "mouse", "puppy", "cat", "lynx", "hamster", "ferret", "warthog", "wolf", "eagle", "owl", "bear", "hedgehog", "fox", "moose", "squirrel"];
+	var animal = animalArray[Math.floor(Math.random() * animalArray.length)];
+
 	$('form').submit(function(){
 		var messageValue = $('#m').val();
+		if(messageValue == '') return false;
 		var messageObject = {'room': room, 'name': '{{user.displayName}}', 'picture': '{{user.photos.0.value}}', 'message': messageValue, 'profileId': '{{user.id}}'};
 
 		if(messageObject.profileId == ""){
-			messageObject.picture = {'letter': letter, 'color': color};
+			messageObject.picture = {'letter': letter, 'color': color, 'animal': animal};
 		}
 
 		socket.emit('chat', messageObject);
