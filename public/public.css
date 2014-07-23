@@ -165,13 +165,13 @@ a:hover {
   background: #232c30;
   height: 70px;
   width: 100%;
-  z-index: 15;
+  z-index: 1500;
 }
 .header .logo-container {
   float: left;
   position: relative;
   top: 50%;
-  z-index: 15;
+  z-index: 1500;
 }
 .header .logo-container img {
   width: 124px;
@@ -182,6 +182,7 @@ a:hover {
   float: right;
   position: relative;
   top: 17px;
+  z-index: 1500;
 }
 .header .menu-container li {
   float: left;
@@ -202,6 +203,7 @@ a:hover {
   padding: 0px 20px;
 }
 /*   ---   End of Header   --   */
+/*   ---   Random CSS   --   */
 .madpad-container {
   overflow-x: hidden;
 }
@@ -232,8 +234,18 @@ a:hover {
   height: 100%;
   background-color: #232c30;
   opacity: 0.8;
-  z-index: 12;
+  z-index: 1200;
 }
+/*   ---   End of Random CSS   --   */
+/*   ---   Account Modal   --   */
+.account {
+  background-color: rgba(255, 255, 255, 0.9);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 2000;
+}
+/*   ---   End of Account Modal   --   */
 /*   ---   End of Global Less   --   */
 /*   ---   Side Bar General   --   */
 .left {
@@ -245,7 +257,7 @@ a:hover {
   position: relative;
   left: 0;
   bottom: 0;
-  z-index: 13;
+  z-index: 1300;
 }
 .left .offset {
   height: 50px;
@@ -261,7 +273,7 @@ a:hover {
   height: 50px;
   background-color: #33bea8;
   position: absolute;
-  z-index: 14;
+  z-index: 1400;
 }
 .new-pad a {
   display: block;
@@ -561,6 +573,7 @@ a:hover {
 .middle .froala-editor {
   border: none !important;
   border-bottom: 1px solid #dddddd !important;
+  z-index: 10;
 }
 .middle .froala-element {
   border: none !important;
@@ -644,7 +657,7 @@ a:hover {
   top: 70px;
   left: 220px;
   bottom: 0;
-  z-index: 15;
+  z-index: 1500;
   width: 300px;
   height: 400px;
   background-color: #4d555c;
@@ -706,11 +719,6 @@ a:hover {
 .new-pad-area .pad-options .pad-type p {
   display: block;
   padding: 20px 0px;
-}
-.new-pad-area .pad-options .pad-type p:hover {
-  color: #33bea8;
-  -webkit-transition: 0.3s;
-  transition: 0.3s;
 }
 .new-pad-area .pad-options .pad-type .text-pad {
   width: 50%;
