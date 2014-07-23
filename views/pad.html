@@ -205,12 +205,21 @@
 			whichClass = 'other-user';
 		}
 
+		message=replaceEmoticons(message);
+		message=convertLinks(message);
+
 		var messageToAppend = "<div class='" + whichClass + "'>";
-		messageToAppend += '<div class="message-area"><div style="background:url(https://graph.facebook.com/' + messageObject.profileId + '/picture?width=150&height=150) no-repeat center center; background-size: 44px 44px" class="avatar"></div><div class="content">' + message +'<div class="name">' + messageObject.name + '</div></div></div>';
+		messageToAppend += '<div class="message-area">';
+		if(messageObject.profileId == ""){
+			messageToAppend += '<div style="background:'+ messageObject.picture.color +' url(\'/images/chat/letters/'+ messageObject.picture.letter +'.png\') no-repeat center center; background-size: 44px 44px;" class="avatar"></div>';	
+		}
+		else{
+			messageToAppend += '<div style="background:url(https://graph.facebook.com/' + messageObject.profileId + '/picture?width=150&height=150) no-repeat center center; background-size: 44px 44px" class="avatar"></div>';
+		}
+		
+		messageToAppend += '<div class="content">' + message +'<div class="name">' + messageObject.name + '</div></div></div>';
 		messageToAppend += '</div>';
 
-		messageToAppend=replaceEmoticons(messageToAppend);
-		messageToAppend=convertLinks(messageToAppend);
 		
 		$('#messages').append(messageToAppend);
 		
@@ -222,9 +231,20 @@
 	var room = '{{id}}';
 	socket.emit('room', room);
 
+	var letterArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+	var letter = letterArray[Math.floor(Math.random() * letterArray.length)];
+
+	var colorArray = ["#be3333", "#be336e", "#be339f", "#ac33be", "#7e33be", "#4d33be", "#334dbe", "#3385be", "#33acbe", "#33beaf", "#33be85", "#33be47", "#78be33", "#9cbe33", "#bcbe33", "#be9f33", "#be7b33", "#be5733"];
+	var color = colorArray[Math.floor(Math.random() * colorArray.length)];
+
 	$('form').submit(function(){
 		var messageValue = $('#m').val();
 		var messageObject = {'room': room, 'name': '{{user.displayName}}', 'picture': '{{user.photos.0.value}}', 'message': messageValue, 'profileId': '{{user.id}}'};
+
+		if(messageObject.profileId == ""){
+			messageObject.picture = {'letter': letter, 'color': color};
+		}
+
 		socket.emit('chat', messageObject);
 		$('#m').val('');
 		messageObject.name = "me";
