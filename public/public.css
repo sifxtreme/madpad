@@ -178,6 +178,26 @@ a:hover {
   position: relative;
   margin-top: -50%;
 }
+.header .menu-container {
+  float: right;
+  position: relative;
+  top: 17px;
+}
+.header .menu-container li {
+  float: left;
+}
+.header .menu-container a {
+  color: #ffffff;
+  text-decoration: none;
+  display: block;
+  padding: 10px 20px;
+}
+.header .menu-container a:hover {
+  color: #33bea8;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
 .sides {
   padding: 0px 20px;
 }
@@ -400,13 +420,19 @@ a:hover {
 }
 .right .chat-title {
   border-bottom: 1px solid #dddddd;
-  background: #eaeaea;
+  background: #f9f9f9;
   height: 50px;
 }
 .right .chat-title p {
   text-align: center;
-  color: #777777;
+  color: #232c30;
   line-height: 50px;
+  font-size: 18px;
+}
+.right .chat-title p span {
+  color: #4b555d;
+  font-size: 14px;
+  font-weight: bold;
 }
 .right #messages {
   padding: 10px 10px;
@@ -571,6 +597,11 @@ a:hover {
 .title .pad-name h2 {
   font-size: 24px;
   line-height: 100px;
+}
+.title .pad-name h2 span {
+  color: #4b555d;
+  font-size: 18px;
+  font-weight: bold;
 }
 .title .pad-icons {
   float: right;

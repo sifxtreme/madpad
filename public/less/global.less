@@ -98,6 +98,30 @@ a{
     		margin-top: -50%;
     	}
     }
+
+    .menu-container{
+        float: right;
+        position: relative;
+        top: 17px;
+
+        li{
+            float: left;
+        }
+
+        a{
+            color: @f;
+            text-decoration: none;
+            display: block;
+            padding: 10px 20px;
+
+            &:hover{
+                color: @green;
+                -webkit-transition: all 0.3s;
+                -moz-transition: all 0.3s;
+                transition: all 0.3s;
+            }
+        }
+    }
 }
 
 .sides{
