@@ -67,7 +67,7 @@ $( document ).ready(function() {
 		        container.hide(); /* hide the new pad area */
 		        $('.new-pad-area').animate({left:'220px'},0); /* move the div back */
 		        $('.darken').hide(); /* hiden darken state */
-		        $('.status').slideUp();
+		        $('.status').stop().slideUp();
 		       
 		    }
 		});
