@@ -155,8 +155,8 @@ input,
 button,
 body,
 textarea {
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-weight: 100;
+  font-family: "Roboto", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 300;
 }
 a:hover {
   text-decoration: none;
@@ -192,6 +192,7 @@ a:hover {
   text-decoration: none;
   display: block;
   padding: 10px 20px;
+  outline: 0;
 }
 .header .menu-container a:hover {
   color: #33bea8;
@@ -239,13 +240,95 @@ a:hover {
 /*   ---   End of Random CSS   --   */
 /*   ---   Account Modal   --   */
 .account {
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.98);
   width: 100%;
   height: 100%;
   position: absolute;
   z-index: 2000;
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+}
+.account .modal-close {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  cursor: pointer;
+}
+.account .modal-close img {
+  width: 49px;
+  padding: 10px 10px;
+}
+.account .modal-content {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  text-align: center;
+}
+.account .modal-content h6 {
+  font-size: 48px;
+  color: #636d75;
+  margin-bottom: 30px;
+}
+.account .modal-content p {
+  font-size: 14px;
+  color: #777777;
+  margin-bottom: 30px;
+}
+.account .modal-content p a {
+  color: #5dbff1;
+  text-decoration: none;
+}
+.account .social-icons {
+  width: 360px;
+  height: 170px;
+  margin: 0 auto;
+}
+.account .social-icons a {
+  display: block;
+}
+.account .social-icons img {
+  width: 170px;
+}
+.account .social-icons img:hover {
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.75);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.75);
+  box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.75);
+}
+.account .social-icons .facebook-icon {
+  float: left;
+}
+.account .social-icons .github-icon {
+  float: right;
+}
+.account .social-type {
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+  margin-top: 30px;
+  text-align: center;
+}
+.account .social-type p {
+  color: #dddddd;
+  font-size: 24px;
 }
 /*   ---   End of Account Modal   --   */
+/*   ---   Status CSS   --   */
+.status {
+  position: absolute;
+  width: 100%;
+  height: 70px;
+  background: rgba(93, 191, 241, 0.95);
+  text-align: center;
+  z-index: 2000;
+  display: none;
+}
+.status p {
+  color: #ffffff;
+  line-height: 70px;
+  font-size: 18px;
+}
+/*   ---   End of Status CSS   --   */
 /*   ---   End of Global Less   --   */
 /*   ---   Side Bar General   --   */
 .left {
@@ -562,7 +645,7 @@ a:hover {
 .middle .editor-active {
   border: 1px solid #ffffff;
   transition: 0.3s;
-  -webkit-transition: 0.5s;
+  -webkit-transition: 0.3s;
   -webkit-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.15);
   -moz-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.15);
   box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.15);

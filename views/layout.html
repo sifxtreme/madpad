@@ -8,7 +8,7 @@
   <link href="/froala/css/font-awesome.min.css" rel="stylesheet" type="text/css">
   <link href="/froala/css/froala_editor.css" rel="stylesheet" type="text/css">
   <link href="/froala/css/froala_reset.min.css" rel="stylesheet" type="text/css">
-  
+  <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700' rel='stylesheet' type='text/css'>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script src="/wysiwig.js"></script> 
   <script src="/js/public.js"></script>
@@ -42,20 +42,68 @@
 <body>
 
   <div class="darken"></div>
-  <!-- <div class="account">
-    test
-  </div> -->
-  <div class="header sides minwidth">
-    <div class="logo-container">
-      <a href="#"><img src="/images/header/logo@2x.png"/></a>
-    </div>
-    <div class="menu-container">
-      <ul>
-        <li><a href="#">Log in</a></li>
-        <li><a href="#">Sign Up</a></li>
-      </ul>
-    </div>
+
+  <div class="status new-pad-status">
+    <p>Want a new pad? You got it!</p>
   </div>
+
+  <div class="account login">
+    <section class="modal-close">
+        <img src="/images/account/cross.png" />
+    </section>
+    <section class="modal-content" id="login-content">
+        <div class="text">
+            <h6>Log In</h6>
+            <p>Use Facebook or Github to sign in.  Don't have an account? <a href="#" class="signup-button">Sign up</a>.</p>
+        </div>
+        <div class="social-icons">
+            <div class="facebook">
+                <a href="/auth/facebook"><img src="/images/account/facebook.png" class="facebook-icon"/></a>
+            </div>
+            <div class="github">
+                <a href="#"><img src="/images/account/github.png" class="github-icon"/></a>
+            </div>
+        </div>
+        <div class="social-type">
+            <p id="social-message"></p>
+        </div>
+    </section>  
+  </div> <!-- Log in modal -->
+
+  <div class="account signup">
+    <section class="modal-close">
+        <img src="/images/account/cross.png" />
+    </section>
+    <section class="modal-content" id="signup-content">
+        <div class="text">
+            <h6>Sign Up</h6>
+            <p>Sign up instantly with Facebook or Github.  Already have an account? <a href="#" class="login-button">Login</a>.</p>
+        </div>
+        <div class="social-icons">
+            <div class="facebook">
+                <a href="/auth/facebook"><img src="/images/account/facebook.png" class="facebook-icon"/></a>
+            </div>
+            <div class="github">
+                <a href="#"><img src="/images/account/github.png" class="github-icon"/></a>
+            </div>
+        </div>
+        <div class="social-type">
+            <p id="social-message"></p>
+        </div>
+    </section>  
+  </div> <!-- Sign Up Modal -->
+
+  <div class="header sides minwidth">
+      <div class="logo-container">
+          <a href="#"><img src="/images/header/logo@2x.png"/></a>
+      </div>
+      <div class="menu-container">
+          <ul>
+            <li><a href="#" class="login-button">Log in</a></li>
+            <li><a href="#" class="signup-button">Sign Up</a></li>
+          </ul>
+      </div>
+  </div> <!-- Header -->
 
 
 

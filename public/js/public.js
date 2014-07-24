@@ -13,8 +13,8 @@ $( document ).ready(function() {
 	    var chatHeight = sideHeight - chatTitleHeight - submitHeight - 1;
 	    var padListHeight = sideHeight - newPadBtnHeight;
 
-	    sideHeight = parseInt(sideHeight) + 'px';
-	    padHeight = parseInt(padHeight) + 'px';
+	    // sideHeight = parseInt(sideHeight) + 'px';
+	    // padHeight = parseInt(padHeight) + 'px';
 	    $(".left").css('height' , sideHeight);
 	    $(".all-pads").css('height', padListHeight);
 	    $(".right").css('height', sideHeight);
@@ -67,6 +67,7 @@ $( document ).ready(function() {
 		        container.hide(); /* hide the new pad area */
 		        $('.new-pad-area').animate({left:'220px'},0); /* move the div back */
 		        $('.darken').hide(); /* hiden darken state */
+		        $('.status').slideUp();
 		       
 		    }
 		});
@@ -140,6 +141,89 @@ $( document ).ready(function() {
 	editorActive();
 
 	
+	function modalAccount(){
+
+		var loginHeight = $('#login-content').height()/2;
+		var loginWidth = $('#login-content').width()/2;
+		var signupHeight = $('#signup-content').height()/2;
+		var signupWidth = $('#signup-content').width()/2;
+
+		$('#login-content').css('margin-top' , -loginHeight);
+		$('#login-content').css('margin-left', -loginWidth);
+		$('#signup-content').css('margin-top' , -signupHeight);
+		$('#signup-content').css('margin-left', -signupWidth);
+	}
+	modalAccount();
+
+
+	function socialType(){
+
+		$('.facebook-icon').mouseenter(function(){
+			$('#social-message').html('with Facebook');
+		});
+		$('.facebook-icon').mouseleave(function(){
+			$('#social-message').html('');
+		});
+		// facebook login
+
+		$('.github-icon').mouseenter(function(){
+			$('#social-message').html('with Github');
+		});
+		$('.github-icon').mouseleave(function(){
+			$('#social-message').html('');
+		});
+		// github login
+	}
+	socialType();
+
+	function openLogin(){
+		$('.login-button').click(function(){
+			$('.signup').hide();
+			$('.login').show();
+		});
+		closeModal();
+	}
+	openLogin();
+
+	function openSignUp(){
+		$('.signup-button').click(function(){
+			$('.login').hide();
+			$('.signup').show();
+		});
+		closeModal();
+	}
+	openSignUp();
+
+	function closeModal(){
+		$('.account').hide();
+		$('.modal-close').click(function(){
+			$(this).parent().hide();
+		});
+	}
+
+	$(document).keyup(function(e){
+		if(e.keyCode == 27){
+			closeModal();
+		}
+	});
+
+	function newPadStatus(){
+
+		$('.new-pad').click(function(){
+			$('.new-pad-status').stop().slideDown();
+			setTimeout('$(".new-pad-status").stop().slideUp()', 2500);
+
+
+		});
+
+		// setTimeout('$(".new-pad-status").slideUp()', 3000);
+		// console.log('slideup');
+		// $('.new-pad-status').hide();
+		
+
+	}
+	newPadStatus();
+
 
 
 });
