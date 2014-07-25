@@ -86,8 +86,9 @@
 			</div>
 		</div>
 		<div class="pad-wrapper">
-			<textarea id="editor" class="pad-area" placeholder="Start typing here!"></textarea>
+			<div id="editor" class="pad-area" placeholder="Start typing here!"></div>
 		</div>
+		<textarea class="main" style="display:none;" id="pusherContentEditable"></textarea>
 	</div> <!-- main text area -->
 
 	<div class="right">
@@ -107,16 +108,18 @@
 
 </div>
 <script>
-	$("#editor").editable({inlineMode: false});
+$(function(){
+	console.log('ID: ' + '{{id}}');
+	var pad = document.getElementById('pusherContentEditable');
 
-	// var auth = "whatever";
-	// var options = {authentication: auth}
-	// var pad = document.getElementById('editor');
-	// var theSharing = sharejs.open('{{id}}', 'text', options, function(error, doc) {
-	// 	pad.value = "";
-	// 	window.doc = doc;
-	// 	window.doc.attach_textarea(pad);
-	// });
+	var theSharing = sharejs.open('{{id}}', 'text', function(error, doc) {
+		window.doc = doc;
+		window.doc.attach_editable(pad);
+	});
+
+});
+</script>
+<script>
 
 	function scrollDown(){
 		$('#messages').stop().animate({
@@ -127,6 +130,8 @@
 	function replaceEmoticons(str){
 		var emoticons = [
 			{regex: /O:\)/g, image: 'angel'},
+			{regex: /O:-\)/g, image: 'angel'},
+			{regex: />:\(/g, image: 'angry'},
 			{regex: />:-\(/g, image: 'angry'},
 			{regex: /\(baseball\)/g, image: 'baseball'},
 			{regex: /\(basketball\)/g, image: 'basketball'},
@@ -138,9 +143,12 @@
 			{regex: /\(cheers\)/g, image: 'cheers'},
 			{regex: /:-\//g, image: 'confused'},
 			{regex: /;\(/g, image: 'crying'},
+			{regex: /;-\(/g, image: 'crying'},
 			{regex: /\(devil\)/g, image: 'devil'},
 			{regex: /\(dog\)/g, image: 'dog'},
 			{regex: /\(dragon\)/g, image: 'dragon'},
+			{regex: /X-D/g, image: 'ecstatic'},
+			{regex: /XD/g, image: 'ecstatic'},
 			{regex: /:\|/g, image: 'eh'},
 			{regex: /\(elsa\)/g, image: 'elsa'},
 			{regex: /\(fire\)/g, image: 'fire'},
@@ -148,20 +156,30 @@
 			{regex: /\(frog\)/g, image: 'frog'},
 			{regex: /\(futbol\)/g, image: 'futbol'},
 			{regex: /\(ghost\)/g, image: 'ghost'},
+			{regex: /8-\)/g, image: 'glasses'},
+			{regex: /8\)/g, image: 'glasses'},
 			{regex: /:\)/g, image: 'happy'},
+			{regex: /:-\)/g, image: 'happy'},
 			{regex: /<3/g, image: 'heart'},
+			{regex: /:-\*/g, image: 'kiss'},
+			{regex: /:\*/g, image: 'kiss'},
 			{regex: /\(koala\)/g, image: 'koala'},
 			{regex: /\(lightning\)/g, image: 'lightning'},
 			{regex: /\(monkey\)/g, image: 'monkey'},
 			{regex: /\(octopus\)/g, image: 'octopus'},
 			{regex: /:o/g, image: 'oh'},
 			{regex: /:O/g, image: 'oh'},
+			{regex: /:-o/g, image: 'oh'},
+			{regex: /:-O/g, image: 'oh'},
 			{regex: /-_-/g, image: 'okay'},
 			{regex: /\(panda\)/g, image: 'panda'},
+			{regex: /\(poop\)/g, image: 'poop'},
 			{regex: /\(rabbit\)/g, image: 'rabbit'},
 			{regex: /:D/g, image: 'reallyhappy'},
+			{regex: /:-D/g, image: 'reallyhappy'},
 			{regex: /\(riceball\)/g, image: 'riceball'},
 			{regex: /\:\(/g, image: 'sad'},
+			{regex: /\:-\(/g, image: 'sad'},
 			{regex: /\(santa\)/g, image: 'santa'},
 			{regex: /\(snow\)/g, image: 'snow'},
 			{regex: /\(snowman\)/g, image: 'snowman'},
@@ -172,6 +190,12 @@
 			{regex: /\(toothless\)/g, image: 'toothless'},
 			{regex: /:p/g, image: 'tongue'},
 			{regex: /:P/g, image: 'tongue'},
+			{regex: /:-p/g, image: 'tongue'},
+			{regex: /:-P/g, image: 'tongue'},
+			{regex: /\;p/g, image: 'tongue-wink'},
+			{regex: /\;P/g, image: 'tongue-wink'},
+			{regex: /\;-p/g, image: 'tongue-wink'},
+			{regex: /\;-P/g, image: 'tongue-wink'},
 			{regex: /\(tup\)/g, image: 'thumbsup'},
 			{regex: /\(tdown\)/g, image: 'thumbsdown'},
 			{regex: /\(water\)/g, image: 'water'},
@@ -179,6 +203,10 @@
 			{regex: /o.o/g, image: 'what'},
 			{regex: /O.O/g, image: 'what'},
 			{regex: /;\)/g, image: 'wink'},
+			{regex: /;-\)/g, image: 'wink'},
+			{regex: /\(seenoevil\)/g, image: 'seenoevil'},
+			{regex: /\(hearnoevil\)/g, image: 'hearnoevil'},
+			{regex: /\(speaknoevil\)/g, image: 'speakoevil'},
 		]
 
 		for(var i = 0; i<emoticons.length; i++){

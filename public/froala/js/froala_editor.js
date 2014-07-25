@@ -68,7 +68,7 @@ if ("undefined" == typeof jQuery) throw new Error("Froala requires jQuery");
         toolbarFixed: !0,
         trackScroll: !1,
         unlinkButton: !0,
-        typingTimer: 200,
+        typingTimer: 1,
         width: "auto",
         zIndex: 1e3
     }, b.prototype.destroy = function () {
@@ -238,7 +238,7 @@ if ("undefined" == typeof jQuery) throw new Error("Froala requires jQuery");
     }, b.prototype.initElementStyle = function () {
         this.editableDisabled || this.$element.attr("contenteditable", !0);
         var a = "froala-element " + this.options.editorClass;
-        this.browser.msie && b.getIEversion() < 9 && (a += " ie8"), this.$element.css("outline", 0), this.browser.msie || (a += " not-msie"), this.$element.addClass(a)
+        this.browser.msie && b.getIEversion() < 9 && (a += " ie8"), this.$element.css("outline", 0), this.browser.msie || (a += " not-msie"), this.$element.addClass(a), this.$element.attr("id", "realEditor")
     }, b.prototype.initUndoRedo = function () {
         (this.isEnabled("undo") || this.isEnabled("redo")) && (this.undoStack = [], this.undoIndex = 0, this.saveUndoStep()), this.disableBrowserUndo()
     }, b.prototype.enableTyping = function () {
