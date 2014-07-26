@@ -91,23 +91,25 @@ io.on('connection', function(socket){
 
 app.get('/auth/facebook',
 passport.authenticate('facebook', { scope: ['email']}),
-  function(req, res){
+function(req, res){
+  req.logout();
 });
 
 app.get('/auth/facebook/callback',
 passport.authenticate('facebook', { failureRedirect: '/' }),
 function(req, res) {
- res.redirect('/x');
+  res.redirect('/x');
 });
 
 app.get('/auth/github',
 passport.authenticate('github'),
 function(req, res){
+  req.logout();
 });
 app.get('/auth/github/callback',
 passport.authenticate('github', { failureRedirect: '/' }),
 function(req, res) {
- res.redirect('/x');
+  res.redirect('/x');
 });
 
 app.get('/logout', function(req, res){
@@ -120,6 +122,7 @@ app.get('/', function(request, response) {
   sharejs.server.attach(app, options);
 });
 app.get('/:id', function(request, response){
+  console.log(request.user);
   if(request.user && request.user.hasOwnProperty('_raw')){
     var rawData = request.user._raw;
     var raw = JSON.parse(rawData);
