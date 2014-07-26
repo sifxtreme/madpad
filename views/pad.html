@@ -246,7 +246,7 @@ $(function(){
 			messageToAppend += '<div style="background:'+ messageObject.picture.color +' url(\'/images/chat/animals/'+ messageObject.picture.animal +'.png\') no-repeat center center; background-size: 44px 44px;" class="avatar"></div>';	
 		}
 		else{
-			messageToAppend += '<div style="background:url(https://graph.facebook.com/' + messageObject.profileId + '/picture?width=150&height=150) no-repeat center center; background-size: 44px 44px" class="avatar"></div>';
+			messageToAppend += '<div style="background:url('+ messageObject.picture +') no-repeat center center; background-size: 44px 44px" class="avatar"></div>';
 		}
 		
 		messageToAppend += '<div class="content">' + message +'<div class="name">' + messageObject.name + '</div></div></div>';
@@ -275,7 +275,19 @@ $(function(){
 	$('form').submit(function(){
 		var messageValue = $('#m').val();
 		if(messageValue == '') return false;
-		var messageObject = {'room': room, 'name': '{{user.displayName}}', 'picture': '{{user.photos.0.value}}', 'message': messageValue, 'profileId': '{{user.id}}'};
+		var imageUrl = "";
+		var userId = "";
+
+		if('{{user.provider}}' == 'github'){
+			userId = '{{user.id}}';
+			imageUrl = '{{user.photoURL}}';
+		}
+		else if('{{user.provider}}' == 'facebook'){
+			userId = '{{user.id}}';
+			imageUrl = 'https://graph.facebook.com/' + userId + '/picture?width=150&height=150';
+		}
+		var messageObject = {'room': room, 'name': '{{user.displayName}}', 'picture': imageUrl, 'message': messageValue, 'profileId': userId};
+		console.log(messageObject);
 
 		if(messageObject.profileId == ""){
 			messageObject.picture = {'letter': letter, 'color': color, 'animal': animal};

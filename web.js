@@ -40,6 +40,19 @@ passport.use(new FacebookStrategy(
   }
 ));
 
+passport.use(new GithubStrategy({
+ clientID: config.github.clientID,
+ clientSecret: config.github.clientSecret,
+ callbackURL: config.github.callbackURL,
+ profileFields: ['id', 'name','picture.type(large)', 'emails', 'displayName', 'gender']
+},
+function(accessToken, refreshToken, profile, done) {
+ process.nextTick(function () {
+   return done(null, profile);
+ });
+}
+));
+
 app.use(express.cookieParser());
 app.use(express.bodyParser());
 app.use(express.methodOverride());
@@ -87,6 +100,16 @@ function(req, res) {
  res.redirect('/x');
 });
 
+app.get('/auth/github',
+passport.authenticate('github'),
+function(req, res){
+});
+app.get('/auth/github/callback',
+passport.authenticate('github', { failureRedirect: '/' }),
+function(req, res) {
+ res.redirect('/x');
+});
+
 app.get('/logout', function(req, res){
   req.logout();
   res.redirect('/');
@@ -97,7 +120,11 @@ app.get('/', function(request, response) {
   sharejs.server.attach(app, options);
 });
 app.get('/:id', function(request, response){
-  console.log(request.user);
+  if(request.user && request.user.hasOwnProperty('_raw')){
+    var rawData = request.user._raw;
+    var raw = JSON.parse(rawData);
+    request.user.photoURL = raw.avatar_url;
+  }
   response.render('pad', {id: request.params.id, user: request.user});
   sharejs.server.attach(app, options);
 });
