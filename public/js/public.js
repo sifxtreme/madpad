@@ -1,5 +1,5 @@
 $( document ).ready(function() {
-    function window_size() {
+    window_size = function() {
 	    var height = $(window).height();										//this is the window height.
 	    var navHeight = $('.header').height();									//this is the height of the nav bar.
 	    var titleHeight = $('.title').height();									//the is the title height in the main area.
@@ -22,6 +22,7 @@ $( document ).ready(function() {
 	    $(".new-pad-area").css('height', sideHeight);
 	    $('#messages').css('height' , chatHeight);
 	}/* Set heights for divs */
+	// window[window_size]();
 	window_size();
     
     $(window).bind('resize', window_size);

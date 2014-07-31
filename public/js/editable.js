@@ -244,6 +244,7 @@
         
       },
     });
+    window_size();
 
     // $("#realEditor").on("input", function(){
     //   var newText = $("#editor").editable("getHTML");
