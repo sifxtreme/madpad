@@ -7,6 +7,8 @@ var User = require('./models/user.js');
 var passport = require('passport');
 var auth = require('./authentication.js');
 
+var sessions = require("client-sessions");
+
 var app = express(); 
 app.configure(function(){
   app.set('view engine', 'html');
@@ -15,7 +17,14 @@ app.configure(function(){
   app.use(express.cookieParser());
   app.use(express.bodyParser());
   app.use(express.methodOverride());
-  app.use(express.session({ secret: 'my_sprecious' }));
+
+const clientSessions = require("client-sessions");
+app.use(clientSessions({
+  secret: 'blargadeeblargblarg', // should be a large unguessable string
+  duration: 3 * 60 * 60 * 1000, // how long the session will stay valid in ms
+  activeDuration: 5 * 60 * 1000 // if expiresIn < activeDuration, the session will be extended by activeDuration milliseconds
+}));
+
   app.use(passport.initialize());
   app.use(passport.session());
   app.use(app.router);
@@ -77,7 +86,7 @@ app.get('/auth/facebook',
 app.get('/auth/facebook/callback', 
   passport.authenticate('facebook', { failureRedirect: '/' }),
   function(req, res) {
-    req.session.test = "QWE";
+    req.session_state.user = req.user;
     res.redirect('/');
   });
 
@@ -91,18 +100,18 @@ app.get('/auth/github/callback',
     res.redirect('/');
   });
 app.get('/logout', function(req, res){
+  req.session_state.reset();
   req.logout();
   res.redirect('/');
 });
 
 app.get('/', function(req, res) {
   sharejs.server.attach(app, options);
-  console.log(req.session.test);
-  res.render('pad', {id: "home", user: req.session.passport.user});
+  res.render('pad', {id: "home", user: req.session_state.user });
 });
 app.get('/:id', function(req, res){
   sharejs.server.attach(app, options);
-  res.render('pad', {id: req.params.id, user: req.session.passport.user});
+  res.render('pad', {id: req.params.id, user: req.session_state.user });
 });
 
 

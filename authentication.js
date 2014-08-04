@@ -64,7 +64,8 @@ function(accessToken, refreshToken, profile, done) {
 						facebookId: profileID,
 						facebookName: displayName,
 						facebookPicture: pictureURL,
-						email: email
+						email: email,
+						created: Date.now()
 					});
 					newUser.save(function(err){
 						if(err){
@@ -91,7 +92,73 @@ passport.use(new GithubStrategy({
  profileFields: ['id', 'name','picture.type(large)', 'emails', 'displayName', 'gender']
 },
 function(accessToken, refreshToken, profile, done) {
-	console.log(profile);
-	done(null, profile);
+	var profileID = profile.id;
+	var displayName = profile.displayName;
+	var pictureURL = 'https://avatars.githubusercontent.com/u/' + profileID + '?s=150'
+	var email = profile.emails[0].value
+
+	User.findOne({ facebookID: profileID }, function(err, user){
+
+		if(err) {
+			console.log(err);
+		}
+		// user found
+		if(!err && user != null){
+			user.email = email;
+			user.githubName = displayName;
+			user.githubPicture = pictureURL;
+			user.save(function(err){
+				if(err){
+					console.log(err);
+				}
+				else{
+					done(null, user);
+				}
+			});
+		}
+		// user not found
+		else{
+
+			User.findOne({ email: email }, function(err, emailUser){
+				if(err) {
+					console.log(err);
+				}
+				// user found
+				if(!err && emailUser != null){
+					emailUser.githubID = profileID;
+					emailUser.githubName = displayName;
+					emailUser.githubPicture = pictureURL;
+					emailUser.save(function(err){
+						if(err){
+							console.log(err);
+						}
+						else{
+							done(null, emailUser);
+						}
+					});
+				}
+				// new user
+				else{
+					var newUser = new User({
+						githubId: profileID,
+						githubName: displayName,
+						githubPicture: pictureURL,
+						email: email,
+						created: Date.now()
+					});
+					newUser.save(function(err){
+						if(err){
+							console.log(err);
+						}
+						else{
+							done(null, newUser);
+						}
+					})
+				}
+			});
+
+		}
+
+	});
 }
 ));
