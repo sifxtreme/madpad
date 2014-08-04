@@ -114,7 +114,7 @@ $(function(){
 
 	var theSharing = sharejs.open('{{id}}', 'text', function(error, doc) {
 		window.doc = doc;
-		window.doc.attach_editable(pad);
+		doc.attach_editable(pad);
 	});
 
 });
@@ -278,15 +278,17 @@ $(function(){
 		var imageUrl = "";
 		var userId = "";
 
-		if('{{user.provider}}' == 'github'){
-			userId = '{{user.id}}';
-			imageUrl = '{{user.photoURL}}';
+		if('{{user.facebookID}}'){
+			name = '{{user.facebookName}}';
+			userId = '{{user.facebookID}}';
+			imageUrl = '{{user.facebookPicture}}';
 		}
-		else if('{{user.provider}}' == 'facebook'){
-			userId = '{{user.id}}';
-			imageUrl = 'https://graph.facebook.com/' + userId + '/picture?width=150&height=150';
+		else if('{{user.githubID}}'){
+			name = '{{user.githubName}}';
+			userId = '{{user.githubID}}';
+			imageUrl = '{{user.githubPicture}}';
 		}
-		var messageObject = {'room': room, 'name': '{{user.displayName}}', 'picture': imageUrl, 'message': messageValue, 'profileId': userId};
+		var messageObject = {'room': room, 'name': name, 'picture': imageUrl, 'message': messageValue, 'profileId': userId};
 
 		if(messageObject.profileId == ""){
 			messageObject.picture = {'letter': letter, 'color': color, 'animal': animal};

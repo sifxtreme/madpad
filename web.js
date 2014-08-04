@@ -1,65 +1,46 @@
-require('coffee-script');
-
+// dependencies
+var coffee = require('coffee-script');
 var express = require('express');
-var app = express(); 
-
 var hbs = require('hbs');
-hbs.registerPartials(__dirname + '/views/partials');
-app.set('view engine', 'html');
-app.engine('html', hbs.__express);
-app.use(express.static('public'));
+var mongoose = require('mongoose');
+var User = require('./models/user.js');
+var passport = require('passport');
+var auth = require('./authentication.js');
+
+var app = express(); 
+app.configure(function(){
+  app.set('view engine', 'html');
+  app.engine('html', hbs.__express);
+  app.use(express.static('public'));
+  app.use(express.cookieParser());
+  app.use(express.bodyParser());
+  app.use(express.methodOverride());
+  app.use(express.session({ secret: 'my_sprecious' }));
+  app.use(passport.initialize());
+  app.use(passport.session());
+  app.use(app.router);
+});
 
 var server = require('http').Server(app);
 var io = require('socket.io').listen(server, {log:false});
 
-var config = require('./oauth.js');
-var passport = require('passport');
-var FacebookStrategy = require('passport-facebook').Strategy;
-var GithubStrategy = require('passport-github').Strategy;
+// connect to the database
+mongoose.connect('mongodb://localhost/madpad');
 
-// serialize and deserialize
+// seralize and deseralize
 passport.serializeUser(function(user, done) {
+  // console.log('serializeUser: ' + user._id)
   done(null, user);
 });
-passport.deserializeUser(function(obj, done) {
-  done(null, obj);
+passport.deserializeUser(function(id, done) {
+  done(null, id);
+  // User.findById(id, function(err, user){
+  //   console.log("trying to find user");
+  //   // console.log(user);
+  //   if(!err) done(null, user);
+  //   else done(err, null);
+  // })
 });
-
-// config
-passport.use(new FacebookStrategy(
-  {
-   clientID: config.facebook.clientID,
-   clientSecret: config.facebook.clientSecret,
-   callbackURL: config.facebook.callbackURL,
-   profileFields: ['id', 'name','picture.type(large)', 'emails', 'displayName', 'gender']
-  },
-  function(accessToken, refreshToken, profile, done) {
-   process.nextTick(function () {
-     return done(null, profile);
-   });
-  }
-));
-
-passport.use(new GithubStrategy({
- clientID: config.github.clientID,
- clientSecret: config.github.clientSecret,
- callbackURL: config.github.callbackURL,
- profileFields: ['id', 'name','picture.type(large)', 'emails', 'displayName', 'gender']
-},
-function(accessToken, refreshToken, profile, done) {
- process.nextTick(function () {
-   return done(null, profile);
- });
-}
-));
-
-app.use(express.cookieParser());
-app.use(express.bodyParser());
-app.use(express.methodOverride());
-app.use(express.session({ secret: 'my_precious' }));
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(app.router);
 
 var sharejs = require('share');
 var redis = require('redis');
@@ -90,59 +71,42 @@ io.on('connection', function(socket){
 // ROUTES
 
 app.get('/auth/facebook',
-passport.authenticate('facebook', { scope: ['email']}),
-function(req, res){
-  req.logout();
-});
-
-app.get('/auth/facebook/callback',
-passport.authenticate('facebook', { failureRedirect: '/' }),
-function(req, res) {
-  res.redirect('/x');
-});
+  passport.authenticate('facebook'),
+  function(req, res){
+  });
+app.get('/auth/facebook/callback', 
+  passport.authenticate('facebook', { failureRedirect: '/' }),
+  function(req, res) {
+    req.session.test = "QWE";
+    res.redirect('/');
+  });
 
 app.get('/auth/github',
-passport.authenticate('github'),
-function(req, res){
-  req.logout();
-});
-app.get('/auth/github/callback',
-passport.authenticate('github', { failureRedirect: '/' }),
-function(req, res) {
-  res.redirect('/x');
-});
-
+  passport.authenticate('github'),
+  function(req, res){
+  });
+app.get('/auth/github/callback', 
+  passport.authenticate('github', { failureRedirect: '/' }),
+  function(req, res) {
+    res.redirect('/');
+  });
 app.get('/logout', function(req, res){
   req.logout();
   res.redirect('/');
 });
 
-app.get('/', function(request, response) {
-  response.render('pad', {id: request.params.id});
+app.get('/', function(req, res) {
   sharejs.server.attach(app, options);
+  console.log(req.session.test);
+  res.render('pad', {id: "home", user: req.session.passport.user});
 });
-app.get('/:id', function(request, response){
-  console.log(request.user);
-  if(request.user && request.user.hasOwnProperty('_raw')){
-    var rawData = request.user._raw;
-    var raw = JSON.parse(rawData);
-    request.user.photoURL = raw.avatar_url;
-  }
-  response.render('pad', {id: request.params.id, user: request.user});
+app.get('/:id', function(req, res){
   sharejs.server.attach(app, options);
+  res.render('pad', {id: req.params.id, user: req.session.passport.user});
 });
 
 
-
-
-
+// port
 server.listen(5000);
 
-// test authentication
-function ensureAuthenticated(req, res, next) {
-if (req.isAuthenticated()) { return next(); }
-else {
-  console.log("FAILURE");
-  res.redirect('/fail')
-}
-}
+module.exports = app
