@@ -87,7 +87,8 @@ app.get('/auth/facebook/callback',
   passport.authenticate('facebook', { failureRedirect: '/' }),
   function(req, res) {
     req.session_state.user = req.user;
-    res.redirect('/');
+    if(req.user.username) res.redirect('/' + req.user.username);
+    res.redirect('/account');
   });
 
 app.get('/auth/github',
@@ -97,12 +98,18 @@ app.get('/auth/github',
 app.get('/auth/github/callback', 
   passport.authenticate('github', { failureRedirect: '/' }),
   function(req, res) {
-    res.redirect('/');
+    req.session_state.user = req.user;
+    if(req.user.username) res.redirect('/' + req.user.username);
+    res.redirect('/account');
   });
 app.get('/logout', function(req, res){
   req.session_state.reset();
   req.logout();
   res.redirect('/');
+});
+
+app.get('/account', function(req, res){
+  res.render('account');
 });
 
 app.get('/', function(req, res) {

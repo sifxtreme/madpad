@@ -5,9 +5,12 @@ var User = mongoose.model('User', {
 	facebookID: Number,
 	facebookName: String,
 	facebookPicture: String,
+	facebookDate: Date,
 	githubID: Number,
 	githubName: String,
 	githubPicture: String,
+	githubDate: Date,
+	username: String,
 	pads: Array,
 	created: Date
 });

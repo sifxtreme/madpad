@@ -120,6 +120,9 @@ $(function(){
 });
 </script>
 <script>
+	var d = '{{user.facebookDate}}';
+	var b = new Date(d)
+			console.log(b);
 
 	function scrollDown(){
 		$('#messages').stop().animate({
@@ -277,16 +280,39 @@ $(function(){
 		if(messageValue == '') return false;
 		var imageUrl = "";
 		var userId = "";
+		var facebookID = '{{user.facebookID}}';
+		var githubID = '{{user.githubID}}';
 
-		if('{{user.facebookID}}'){
+		var facebookAuth = false;
+		var githubAuth = false;
+
+		if(facebookID && githubID){
+			var facebookDate = new Date('{{user.facebookDate}}');
+			var githubDate = new Date('{{user.githubDate}}');
+			console.log(githubID);
+			if(facebookDate > githubDate){
+				facebookAuth = true;
+			}
+			else{
+				githubAuth = true;
+			}
+
+		}
+		else if(facebookID){
+			facebookAuth = true;
+		}
+		else if(githubID){
+			githubAuth = true;
+		}
+		if(facebookAuth){
+			userId = facebookID;
 			name = '{{user.facebookName}}';
-			userId = '{{user.facebookID}}';
 			imageUrl = '{{user.facebookPicture}}';
 		}
-		else if('{{user.githubID}}'){
+		if(githubAuth){
+			userId = githubID;
 			name = '{{user.githubName}}';
-			userId = '{{user.githubID}}';
-			imageUrl = '{{user.githubPicture}}';
+			imageUrl = '{{user.githubPicture}}';			
 		}
 		var messageObject = {'room': room, 'name': name, 'picture': imageUrl, 'message': messageValue, 'profileId': userId};
 

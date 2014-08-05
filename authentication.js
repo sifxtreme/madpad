@@ -28,6 +28,7 @@ function(accessToken, refreshToken, profile, done) {
 			user.email = email;
 			user.facebookName = displayName;
 			user.facebookPicture = pictureURL;
+			user.facebookDate = Date.now();
 			user.save(function(err){
 				if(err){
 					console.log(err);
@@ -49,6 +50,7 @@ function(accessToken, refreshToken, profile, done) {
 					emailUser.facebookID = profileID;
 					emailUser.facebookName = displayName;
 					emailUser.facebookPicture = pictureURL;
+					emailUser.facebookDate = Date.now();
 					emailUser.save(function(err){
 						if(err){
 							console.log(err);
@@ -64,8 +66,8 @@ function(accessToken, refreshToken, profile, done) {
 						facebookId: profileID,
 						facebookName: displayName,
 						facebookPicture: pictureURL,
-						email: email,
-						created: Date.now()
+						facebookDate: Date.now(),
+						email: email
 					});
 					newUser.save(function(err){
 						if(err){
@@ -107,6 +109,7 @@ function(accessToken, refreshToken, profile, done) {
 			user.email = email;
 			user.githubName = displayName;
 			user.githubPicture = pictureURL;
+			user.githubDate = Date.now();
 			user.save(function(err){
 				if(err){
 					console.log(err);
@@ -128,6 +131,7 @@ function(accessToken, refreshToken, profile, done) {
 					emailUser.githubID = profileID;
 					emailUser.githubName = displayName;
 					emailUser.githubPicture = pictureURL;
+					emailUser.githubDate = Date.now();
 					emailUser.save(function(err){
 						if(err){
 							console.log(err);
@@ -143,8 +147,8 @@ function(accessToken, refreshToken, profile, done) {
 						githubId: profileID,
 						githubName: displayName,
 						githubPicture: pictureURL,
-						email: email,
-						created: Date.now()
+						githubDate: Date.now(),
+						email: email
 					});
 					newUser.save(function(err){
 						if(err){
