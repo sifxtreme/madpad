@@ -738,12 +738,35 @@ a:hover {
 #editor-code {
   background: #ffffff;
   position: relative;
+  border: 1px solid #dddddd;
+  font-size: 12px;
+  line-height: 18px;
 }
 #editor-code .ace_sb {
   overflow-y: auto;
 }
 #editor-code .ace_scroller {
   overflow-x: auto;
+}
+#editor-code .ace_gutter-cell {
+  padding: 0px 20px;
+  text-align: center;
+}
+#editor-code .ace_fold {
+  background-image: url("/images/main/dots.png");
+  background-size: 19px 7px;
+  border: none;
+}
+#editor-code .ace_error {
+  background-image: url("/images/main/error.png");
+  background-size: 8px 8px;
+  background-position: 8px center;
+}
+#editor-code .ace_gutter-cell.ace_info {
+  background-image: none;
+}
+#editor-code .ace_line span {
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace !important;
 }
 /*   ---   End of Code Editor Area   --   */
 /*   ---   Title Area   --   */

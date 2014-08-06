@@ -24,6 +24,7 @@ $( window ).load(function() {
 	    $(".new-pad-area").css('height', sideHeight);
 	    $('#messages').css('height' , chatHeight);
 	    $('.signup-step-wrapper').css('height' , signupStepHeight);
+	
 	}/* Set heights for divs */
 	// window[window_size]();
 	window_size();

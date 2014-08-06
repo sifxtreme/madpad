@@ -107,7 +107,8 @@
 
 </div>
 <script>
-$(function(){
+$(window).load(function(){
+
 	console.log('ID: ' + '{{id}}');
 
 	editor = ace.edit("editor-code");
@@ -118,8 +119,8 @@ $(function(){
 	sharejs.open('hello', 'text', function(error, doc) {
 		doc.attach_ace(editor);
 	});
-
 });
+
 </script>
 <script>
 	var d = '{{user.facebookDate}}';

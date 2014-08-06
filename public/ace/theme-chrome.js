@@ -3,8 +3,8 @@ define("ace/theme/chrome",["require","exports","module","ace/lib/dom"], function
 exports.isDark = false;
 exports.cssClass = "ace-chrome";
 exports.cssText = ".ace-chrome .ace_gutter {\
-background: #ebebeb;\
-color: #333;\
+background: #f8f8f8;\
+color: #9ea5ab;\
 overflow : hidden;\
 }\
 .ace-chrome .ace_print-margin {\
@@ -31,7 +31,8 @@ color: rgb(88, 92, 246);\
 color: rgb(6, 150, 14);\
 }\
 .ace-chrome .ace_invalid {\
-background-color: rgb(153, 0, 0);\
+background-color: #ffe3e3;\
+border-color: #ffe3e3;\
 color: white;\
 }\
 .ace-chrome .ace_fold {\
@@ -73,7 +74,7 @@ color: rgb(49, 132, 149);\
 color: rgb(104, 104, 91);\
 }\
 .ace-chrome .ace_entity.ace_name.ace_function {\
-color: #0000A2;\
+color: #3f709e;\
 }\
 .ace-chrome .ace_heading {\
 color: rgb(12, 7, 255);\
@@ -95,10 +96,10 @@ margin: -1px 0 0 -1px;\
 border: 1px solid rgb(192, 192, 192);\
 }\
 .ace-chrome .ace_marker-layer .ace_active-line {\
-background: rgba(0, 0, 0, 0.07);\
+background: rgba(0, 0, 0, 0.015);\
 }\
 .ace-chrome .ace_gutter-active-line {\
-background-color : #dcdcdc;\
+background-color : #eaeaea;\
 }\
 .ace-chrome .ace_marker-layer .ace_selected-word {\
 background: rgb(250, 250, 255);\
@@ -107,16 +108,16 @@ border: 1px solid rgb(200, 200, 250);\
 .ace-chrome .ace_storage,\
 .ace-chrome .ace_keyword,\
 .ace-chrome .ace_meta.ace_tag {\
-color: rgb(147, 15, 128);\
+color: #609fda;\
 }\
 .ace-chrome .ace_string.ace_regex {\
-color: rgb(255, 0, 0)\
+color: rgb(211, 73, 81)\
 }\
 .ace-chrome .ace_string {\
-color: #1A1AA6;\
+color: #d34951;\
 }\
 .ace-chrome .ace_entity.ace_other.ace_attribute-name {\
-color: #994409;\
+color: #3f709e;\
 }\
 .ace-chrome .ace_indent-guide {\
 background: url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==\") right repeat-y;\
