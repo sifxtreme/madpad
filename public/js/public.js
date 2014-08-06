@@ -20,6 +20,7 @@ $( window ).load(function() {
 	    $(".all-pads").css('height', padListHeight);
 	    $(".right").css('height', sideHeight);
 	    $(".froala-element").css('height', padHeight);
+	    $('#editor-code').css('height' , padHeight);
 	    $(".new-pad-area").css('height', sideHeight);
 	    $('#messages').css('height' , chatHeight);
 	    $('.signup-step-wrapper').css('height' , signupStepHeight);
@@ -150,8 +151,6 @@ $( window ).load(function() {
 		var loginWidth = $('#login-content').width()/2;
 		var signupHeight = $('#signup-content').height()/2;
 		var signupWidth = $('#signup-content').width()/2;
-		console.log(loginWidth);
-		console.log(signupWidth);
 		$('#login-content').css('margin-top' , -loginHeight);
 		$('#login-content').css('margin-left', -loginWidth);
 		$('#signup-content').css('margin-top' , -signupHeight);
