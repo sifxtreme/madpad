@@ -150,7 +150,8 @@ $( document ).ready(function() {
 		var loginWidth = $('#login-content').width()/2;
 		var signupHeight = $('#signup-content').height()/2;
 		var signupWidth = $('#signup-content').width()/2;
-
+		console.log(loginWidth);
+		console.log(signupWidth);
 		$('#login-content').css('margin-top' , -loginHeight);
 		$('#login-content').css('margin-left', -loginWidth);
 		$('#signup-content').css('margin-top' , -signupHeight);
