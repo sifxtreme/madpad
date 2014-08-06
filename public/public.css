@@ -251,6 +251,7 @@ a:hover {
   z-index: 2000;
   transition: 0.3s;
   -webkit-transition: 0.3s;
+  display: none;
 }
 .account .modal-close {
   position: absolute;
@@ -733,6 +734,18 @@ a:hover {
   color: #9ea5ab;
 }
 /*   ---   End of Main Area General   --   */
+/*   ---   Code Editor Area   --   */
+#editor-code {
+  background: #ffffff;
+  position: relative;
+}
+#editor-code .ace_sb {
+  overflow-y: auto;
+}
+#editor-code .ace_scroller {
+  overflow-x: auto;
+}
+/*   ---   End of Code Editor Area   --   */
 /*   ---   Title Area   --   */
 .title {
   width: 100%;
@@ -801,6 +814,7 @@ a:hover {
   -webkit-box-shadow: 4px 0px 4px 0px rgba(0, 0, 0, 0.25);
   -moz-box-shadow: 4px 0px 4px 0px rgba(0, 0, 0, 0.25);
   box-shadow: 4px 0px 4px 0px rgba(0, 0, 0, 0.25);
+  display: none;
   /* Input new pad */
 }
 .new-pad-area .input-area {

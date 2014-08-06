@@ -85,8 +85,8 @@
 				<img src="/images/main/trash.png" class="icons"/>
 			</div>
 		</div>
-		<div class="pad-wrapper" style="position: relative;">
-			<div id="editor-code" class="pad-area" style="background:white; margin: 0; position: absolute; top: 30px; bottom: 0; left: 0; right: 0;"></div>
+		<div class="pad-wrapper">
+			<div id="editor-code" class="pad-area"></div>
 		</div>
 	</div> <!-- main text area -->
 
@@ -111,6 +111,7 @@ $(function(){
 	console.log('ID: ' + '{{id}}');
 
 	var editor = ace.edit("editor-code");
+	editor.setShowPrintMargin(false);
 
 	sharejs.open('hello', 'text', function(error, doc) {
 		doc.attach_ace(editor);
