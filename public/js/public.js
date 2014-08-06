@@ -1,4 +1,4 @@
-$( document ).ready(function() {
+$( window ).load(function() {
     window_size = function() {
 	    var height = $(window).height();										//this is the window height.
 	    var navHeight = $('.header').height();									//this is the height of the nav bar.

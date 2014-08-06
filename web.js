@@ -88,7 +88,7 @@ app.get('/auth/facebook/callback',
   function(req, res) {
     req.session_state.user = req.user;
     if(req.user.username) res.redirect('/' + req.user.username);
-    res.redirect('/account');
+    else res.redirect('/account');
   });
 
 app.get('/auth/github',
@@ -100,7 +100,7 @@ app.get('/auth/github/callback',
   function(req, res) {
     req.session_state.user = req.user;
     if(req.user.username) res.redirect('/' + req.user.username);
-    res.redirect('/account');
+    else res.redirect('/account');
   });
 app.get('/logout', function(req, res){
   req.session_state.reset();
@@ -112,9 +112,18 @@ app.get('/account', function(req, res){
   res.render('account');
 });
 
+app.post('/account', function(req, res){
+  console.log(req.body);
+  res.render('account');
+});
+
 app.get('/', function(req, res) {
   sharejs.server.attach(app, options);
   res.render('pad', {id: "home", user: req.session_state.user });
+});
+app.get('/code', function(req, res){
+  sharejs.server.attach(app, options);
+  res.render('code', {id: req.params.id, user: req.session_state.user });
 });
 app.get('/:id', function(req, res){
   sharejs.server.attach(app, options);

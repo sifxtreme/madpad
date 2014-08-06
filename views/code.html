@@ -1,0 +1,333 @@
+<div class="madpad-container minwidth">
+	<section class="new-pad btn btn-1e">
+		<a href="#"><img src="/images/sidebar/new@2x.png">New Pad</a>
+	</section> <!-- new pad button -->
+	<div class="left">
+		<div class="offset"></div>
+		<div class="all-pads">
+			<section class="user-pads pad-list pad-hover">
+				<h5>Adventjex</h5>
+				<ul>
+					<a href="#"><li>iOS</li></a>
+					<a href="#"><li>Nodejs</li></a>
+					<a href="#"><li>Sanjose</li></a>
+					<a href="#"><li>Gameofthrones</li></a>
+					<a href="#" class="active"><li>Aprcode1</li></a>
+					<a href="#"><li>test</li></a>
+				</ul>
+			</section> <!-- user's pads -->
+			<section class="shared-pads pad-list pad-hover">
+<!-- 				<h5>Shared Pads</h5>
+				<ul>
+					<a href="#"><li>apr</li></a>
+					<a href="#"><li>wedding</li></a>
+					<a href="#"><li>designux</li></a>
+					<a href="#"><li>hiking</li></a>
+					<a href="#"><li>feast</li></a>
+				</ul> -->
+			</section> <!-- shared pads -->
+			<section class="public-pads pad-list pad-hover">
+<!-- 				<h5>Public Pads</h5>
+				<ul>
+					<a href="#"><li>doge</li></a>
+					<a href="#"><li>reddit</li></a>
+					<a href="#"><li>bitcoins</li></a>
+					<a href="#"><li>facebook</li></a>
+					<a href="#"><li>netflix</li></a>
+					<a href="#"><li>okay</li></a>
+				</ul> -->
+		</section> <!-- public pads -->
+		</div>
+	</div>
+
+	<div class="new-pad-area">
+		<div class="input-area">
+			<div class="pad-name">
+				<div class="name-input">
+					<input type="text" placeholder="Enter pad name here..." id="create-input" class="input" />
+					<div class="underline"></div>
+				</div> <!-- place to enter new pad's name -->
+			</div>
+			<br/>
+			<button class="green-btn">CREATE PAD</button>
+		</div> <!--  white area of creating a new pad -->
+		<div class="pad-options">
+			<div class="pad-type">
+				<div class="text-pad active-type">
+					<p class="pad-selector" id="text-pad">Text Pad</p>
+				</div>
+				<div class="code-pad">
+					<p class="pad-selector" id="code-pad">Code Pad</p>
+				</div>
+			</div> <!-- Tabs for the new pad -->
+			<div class="pad-description" id="text-info">
+				<img src="/images/newpad/text-icon.png" class="icon" />
+				<p class="type-title">Create a new text document</p>
+				<p class="type-more">Your text pad is a text editor perfect for notes and content.</p>
+			</div>
+			<div class="pad-description" id="code-info">
+				<img src="/images/newpad/code-icon.png" class="icon" />
+				<p class="type-title">Create a new code document</p>
+				<p class="type-more">Your code pad is a text editor perfect for coding and markup.</p>
+			</div>
+		</div>
+	</div> <!-- create a new pad area -->
+
+	<div class="middle">
+		<div class="title">
+			<div class="pad-name">
+				<h2>{{id}} <span>pad</span></h2>
+				<!-- <a href="/auth/facebook/">Auth</a> -->
+			</div>
+			<div class="pad-icons">
+				<img src="/images/main/eye.png" class="icons" draggable='false'/>
+				<img src="/images/main/options.png" class="icons"/>
+				<img src="/images/main/trash.png" class="icons"/>
+			</div>
+		</div>
+		<div class="pad-wrapper" style="position: relative;">
+			<div id="editor-code" class="pad-area" style="background:white; margin: 0; position: absolute; top: 30px; bottom: 0; left: 0; right: 0;"></div>
+		</div>
+	</div> <!-- main text area -->
+
+	<div class="right">
+			<div class="chat-title">
+				<p><span>chat</span></p>
+			</div>
+		    <div id="messages"></div>
+
+		    <div class="submit-wrapper">
+			    <div class="submit-area">
+				    <form action="">
+				    	<textarea id="m" autocomplete="off" class="message-input" placeholder="Send a message..."></textarea>
+				    </form>
+			    </div>
+		    </div>
+	</div> <!-- chat -->
+
+</div>
+<script>
+$(function(){
+	console.log('ID: ' + '{{id}}');
+
+	var editor = ace.edit("editor-code");
+
+	sharejs.open('hello', 'text', function(error, doc) {
+		doc.attach_ace(editor);
+	});
+
+});
+</script>
+<script>
+	var d = '{{user.facebookDate}}';
+	var b = new Date(d)
+			console.log(b);
+
+	function scrollDown(){
+		$('#messages').stop().animate({
+		  scrollTop: $("#messages")[0].scrollHeight
+		}, 800);
+	}
+
+	function replaceEmoticons(str){
+		var emoticons = [
+			{regex: /O:\)/g, image: 'angel'},
+			{regex: /O:-\)/g, image: 'angel'},
+			{regex: />:\(/g, image: 'angry'},
+			{regex: />:-\(/g, image: 'angry'},
+			{regex: /\(baseball\)/g, image: 'baseball'},
+			{regex: /\(basketball\)/g, image: 'basketball'},
+			{regex: /\(bear\)/g, image: 'bear'},
+			{regex: /\(beer\)/g, image: 'beer'},
+			{regex: /\^.\^/g, image: 'bigsmile'},
+			{regex: /\(bomb\)/g, image: 'bomb'},
+			{regex: /\(cat\)/g, image: 'cat'},
+			{regex: /\(cheers\)/g, image: 'cheers'},
+			{regex: /:-\//g, image: 'confused'},
+			{regex: /;\(/g, image: 'crying'},
+			{regex: /;-\(/g, image: 'crying'},
+			{regex: /\(devil\)/g, image: 'devil'},
+			{regex: /\(dog\)/g, image: 'dog'},
+			{regex: /\(dragon\)/g, image: 'dragon'},
+			{regex: /X-D/g, image: 'ecstatic'},
+			{regex: /XD/g, image: 'ecstatic'},
+			{regex: /:\|/g, image: 'eh'},
+			{regex: /\(elsa\)/g, image: 'elsa'},
+			{regex: /\(fire\)/g, image: 'fire'},
+			{regex: /\(football\)/g, image: 'football'},
+			{regex: /\(frog\)/g, image: 'frog'},
+			{regex: /\(futbol\)/g, image: 'futbol'},
+			{regex: /\(ghost\)/g, image: 'ghost'},
+			{regex: /8-\)/g, image: 'glasses'},
+			{regex: /8\)/g, image: 'glasses'},
+			{regex: /:\)/g, image: 'happy'},
+			{regex: /:-\)/g, image: 'happy'},
+			{regex: /<3/g, image: 'heart'},
+			{regex: /:-\*/g, image: 'kiss'},
+			{regex: /:\*/g, image: 'kiss'},
+			{regex: /\(koala\)/g, image: 'koala'},
+			{regex: /\(lightning\)/g, image: 'lightning'},
+			{regex: /\(monkey\)/g, image: 'monkey'},
+			{regex: /\(octopus\)/g, image: 'octopus'},
+			{regex: /:o/g, image: 'oh'},
+			{regex: /:O/g, image: 'oh'},
+			{regex: /:-o/g, image: 'oh'},
+			{regex: /:-O/g, image: 'oh'},
+			{regex: /-_-/g, image: 'okay'},
+			{regex: /\(panda\)/g, image: 'panda'},
+			{regex: /\(poop\)/g, image: 'poop'},
+			{regex: /\(rabbit\)/g, image: 'rabbit'},
+			{regex: /:D/g, image: 'reallyhappy'},
+			{regex: /:-D/g, image: 'reallyhappy'},
+			{regex: /\(riceball\)/g, image: 'riceball'},
+			{regex: /\:\(/g, image: 'sad'},
+			{regex: /\:-\(/g, image: 'sad'},
+			{regex: /\(santa\)/g, image: 'santa'},
+			{regex: /\(snow\)/g, image: 'snow'},
+			{regex: /\(snowman\)/g, image: 'snowman'},
+			{regex: /\(stuart\)/g, image: 'stuart'},
+			{regex: /\(sun\)/g, image: 'sun'},
+			{regex: /\(tennis\)/g, image: 'tennis'},
+			{regex: /\(tiger\)/g, image: 'tiger'},
+			{regex: /\(toothless\)/g, image: 'toothless'},
+			{regex: /:p/g, image: 'tongue'},
+			{regex: /:P/g, image: 'tongue'},
+			{regex: /:-p/g, image: 'tongue'},
+			{regex: /:-P/g, image: 'tongue'},
+			{regex: /\;p/g, image: 'tongue-wink'},
+			{regex: /\;P/g, image: 'tongue-wink'},
+			{regex: /\;-p/g, image: 'tongue-wink'},
+			{regex: /\;-P/g, image: 'tongue-wink'},
+			{regex: /\(tup\)/g, image: 'thumbsup'},
+			{regex: /\(tdown\)/g, image: 'thumbsdown'},
+			{regex: /\(water\)/g, image: 'water'},
+			{regex: /\(whale\)/g, image: 'whale'},
+			{regex: /o\.o/g, image: 'what'},
+			{regex: /O\.O/g, image: 'what'},
+			{regex: /;\)/g, image: 'wink'},
+			{regex: /;-\)/g, image: 'wink'},
+			{regex: /\(seenoevil\)/g, image: 'seenoevil'},
+			{regex: /\(hearnoevil\)/g, image: 'hearnoevil'},
+			{regex: /\(speaknoevil\)/g, image: 'speakoevil'},
+		]
+
+		for(var i = 0; i<emoticons.length; i++){
+			str = str.replace(emoticons[i].regex,
+				'<img style="width: 18px;" src="/images/emoticons/' + emoticons[i].image + '.png"/>');
+		}
+
+		return str;
+	}
+
+	function convertLinks(str){
+		return Autolinker.link(str);
+	}
+
+	function convertLineBreaks(str){
+		return str.replace(/\r\n|\r|\n/g,"<br />");
+	}
+
+	function appendChat(messageObject){
+		
+		var message = messageObject.message.replace(/\r\n|\r|\n/g,"<br />");
+		
+		var whichClass;
+		if(messageObject.name == "me"){
+			whichClass = 'user';
+		}
+		else{
+			whichClass = 'other-user';
+		}
+
+		message=replaceEmoticons(message);
+		message=convertLinks(message);
+
+		var messageToAppend = "<div class='" + whichClass + "'>";
+		messageToAppend += '<div class="message-area">';
+		if(messageObject.profileId == ""){
+			messageToAppend += '<div style="background:'+ messageObject.picture.color +' url(\'/images/chat/animals/'+ messageObject.picture.animal +'.png\') no-repeat center center; background-size: 44px 44px;" class="avatar"></div>';	
+		}
+		else{
+			messageToAppend += '<div style="background:url('+ messageObject.picture +') no-repeat center center; background-size: 44px 44px" class="avatar"></div>';
+		}
+		
+		messageToAppend += '<div class="content">' + message +'<div class="name">' + messageObject.name + '</div></div></div>';
+		messageToAppend += '</div>';
+
+		
+		$('#messages').append(messageToAppend);
+		
+		scrollDown();
+		
+	}
+
+	var socket = io();
+	var room = '{{id}}';
+	socket.emit('room', room);
+
+	var letterArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+	var letter = letterArray[Math.floor(Math.random() * letterArray.length)];
+
+	var colorArray = ["#be3333", "#be336e", "#be339f", "#ac33be", "#7e33be", "#4d33be", "#334dbe", "#3385be", "#33acbe", "#33beaf", "#33be85", "#33be47", "#78be33", "#9cbe33", "#bcbe33", "#be9f33", "#be7b33", "#be5733"];
+	var color = colorArray[Math.floor(Math.random() * colorArray.length)];
+
+	var animalArray = ["panda", "tiger", "cheetah", "gorilla", "monkey", "robin", "toucan", "elephant", "chimp", "sheep", "rooster", "dog", "cow", "chicken", "rabbit", "pig", "horse", "duck", "parrot", "mouse", "puppy", "cat", "lynx", "hamster", "ferret", "warthog", "wolf", "eagle", "owl", "bear", "hedgehog", "fox", "moose", "squirrel"];
+	var animal = animalArray[Math.floor(Math.random() * animalArray.length)];
+
+	$('form').submit(function(){
+		var messageValue = $('#m').val();
+		if(messageValue == '') return false;
+		var imageUrl = "";
+		var userId = "";
+		var facebookID = '{{user.facebookID}}';
+		var githubID = '{{user.githubID}}';
+
+		var facebookAuth = false;
+		var githubAuth = false;
+
+		if(facebookID && githubID){
+			var facebookDate = new Date('{{user.facebookDate}}');
+			var githubDate = new Date('{{user.githubDate}}');
+			console.log(githubID);
+			if(facebookDate > githubDate){
+				facebookAuth = true;
+			}
+			else{
+				githubAuth = true;
+			}
+
+		}
+		else if(facebookID){
+			facebookAuth = true;
+		}
+		else if(githubID){
+			githubAuth = true;
+		}
+		if(facebookAuth){
+			userId = facebookID;
+			name = '{{user.facebookName}}';
+			imageUrl = '{{user.facebookPicture}}';
+		}
+		if(githubAuth){
+			userId = githubID;
+			name = '{{user.githubName}}';
+			imageUrl = '{{user.githubPicture}}';			
+		}
+		var messageObject = {'room': room, 'name': name, 'picture': imageUrl, 'message': messageValue, 'profileId': userId};
+
+		if(messageObject.profileId == ""){
+			messageObject.picture = {'letter': letter, 'color': color, 'animal': animal};
+		}
+
+		socket.emit('chat', messageObject);
+		$('#m').val('');
+		messageObject.name = "me";
+		appendChat(messageObject);
+		return false;
+	});
+
+	socket.on('newMessage', function(msg){
+		appendChat(msg);
+	});
+
+</script>
