@@ -104,8 +104,12 @@ nav,
 section {
   display: block;
 }
+html {
+  height: 100%;
+}
 body {
   line-height: 1;
+  height: 100%;
 }
 ol,
 ul {
@@ -329,6 +333,56 @@ a:hover {
   font-size: 18px;
 }
 /*   ---   End of Status CSS   --   */
+/*   ---   Choose Username CSS   --   */
+.signup-step-wrapper {
+  height: 100%;
+  background: #f9f9f9;
+}
+.signup-step-wrapper .fb-signup-img {
+  display: block;
+  width: 100px;
+  border-radius: 50%;
+  border: 4px solid #ffffff;
+  margin: 0 auto 40px auto;
+  -webkit-box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.1);
+}
+.signup-step-wrapper .username-wrapper {
+  position: relative;
+  top: 150px;
+  left: 50%;
+  margin-left: -300px;
+  width: 600px;
+}
+.signup-step-wrapper .username-wrapper h1 {
+  font-size: 40px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+.signup-step-wrapper .username-wrapper .username-form {
+  width: 300px;
+  margin: 0 auto;
+}
+.signup-step-wrapper .username-wrapper .username-input {
+  width: 100%;
+  height: 50px;
+  padding: 10px 10px;
+  background: #ffffff;
+  font-size: 16px;
+  border: 1px solid #dddddd;
+  margin-bottom: 20px;
+}
+.signup-step-wrapper .username-wrapper .username-submit {
+  width: 100%;
+  height: 50px;
+  padding: 10px 10px;
+  background: #33bea8;
+  font-size: 16px;
+  color: #ffffff;
+  border: none;
+}
+/*   ---   End of Choose Username CSS   --   */
 /*   ---   End of Global Less   --   */
 /*   ---   Side Bar General   --   */
 .left {

@@ -7,6 +7,7 @@ $( document ).ready(function() {
 	    var chatTitleHeight = $('.chat-title').height();
 	    var newPadBtnHeight = $('.new-pad').height();
 	    var editorHeight = $('.froala-editor').height();
+	    var signupStepHeight = $(window).height() - navHeight;
 	    var paddingMain = 82;													//top and bottom padding of the text area.
 	    var padHeight = height - navHeight - titleHeight - paddingMain - editorHeight; 		//this is the height of the pad.
 	    var sideHeight =  height - navHeight; 									//this is the height of the two side bars.
@@ -21,6 +22,7 @@ $( document ).ready(function() {
 	    $(".froala-element").css('height', padHeight);
 	    $(".new-pad-area").css('height', sideHeight);
 	    $('#messages').css('height' , chatHeight);
+	    $('.signup-step-wrapper').css('height' , signupStepHeight);
 	}/* Set heights for divs */
 	// window[window_size]();
 	window_size();
@@ -210,17 +212,10 @@ $( document ).ready(function() {
 
 	function newPadStatus(){
 
-		$('.new-pad').click(function(){
-			$('.new-pad-status').stop().slideDown();
-			setTimeout('$(".new-pad-status").stop().slideUp()', 2500);
-
-
-		});
-
-		// setTimeout('$(".new-pad-status").slideUp()', 3000);
-		// console.log('slideup');
-		// $('.new-pad-status').hide();
-		
+		// $('.new-pad').click(function(){
+		// 	$('.new-pad-status').stop().slideDown();
+		// 	setTimeout('$(".new-pad-status").stop().slideUp()', 2500);
+		// });
 
 	}
 	newPadStatus();
