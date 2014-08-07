@@ -1,4 +1,5 @@
 $( window ).load(function() {
+
     window_size = function() {
 	    var height = $(window).height();										//this is the window height.
 	    var navHeight = $('.header').height();									//this is the height of the nav bar.
@@ -235,6 +236,41 @@ $( window ).load(function() {
 
 	}
 	chatToggle();
+
+
+	function settingsToggle(){
+
+		selectSetting();
+
+		$('.settings').click(function(){
+			$('.sharing-settings').show();
+		});
+
+
+	}
+	settingsToggle();
+
+
+	function selectSetting(){
+
+		$('#private-setting').click(function(){
+			$(this).children('.radio').removeClass('radio-off').addClass('radio-on');
+			$('#shared-setting').children('.radio').removeClass('radio-on').addClass('radio-off');
+			$('#public-setting').children('.radio').removeClass('radio-on').addClass('radio-off');
+		});
+
+		$('#shared-setting').click(function(){
+			$(this).children('.radio').removeClass('radio-off').addClass('radio-on');
+			$('#private-setting').children('.radio').removeClass('radio-on').addClass('radio-off');
+			$('#public-setting').children('.radio').removeClass('radio-on').addClass('radio-off');
+		});
+
+		$('#public-setting').click(function(){
+			$(this).children('.radio').removeClass('radio-off').addClass('radio-on');
+			$('#private-setting').children('.radio').removeClass('radio-on').addClass('radio-off');
+			$('#shared-setting').children('.radio').removeClass('radio-on').addClass('radio-off');
+		});
+	}
 
 
 });
