@@ -240,6 +240,7 @@ a:hover {
   background-color: #232c30;
   opacity: 0.8;
   z-index: 1200;
+  display: none;
 }
 /*   ---   End of Random CSS   --   */
 /*   ---   Account Modal   --   */
@@ -332,6 +333,14 @@ a:hover {
   color: #ffffff;
   line-height: 70px;
   font-size: 18px;
+}
+#login-content {
+  margin-top: -161px;
+  margin-left: -204.5px;
+}
+#signup-content {
+  margin-top: -161px;
+  margin-left: -231.5px;
 }
 /*   ---   End of Status CSS   --   */
 /*   ---   Choose Username CSS   --   */

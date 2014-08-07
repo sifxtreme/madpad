@@ -147,18 +147,19 @@ $( window ).load(function() {
 	editorActive();
 
 	
-	function modalAccount(){
+	// function modalAccount(){
 
-		var loginHeight = $('#login-content').height()/2;
-		var loginWidth = $('#login-content').width()/2;
-		var signupHeight = $('#signup-content').height()/2;
-		var signupWidth = $('#signup-content').width()/2;
-		$('#login-content').css('margin-top' , -loginHeight);
-		$('#login-content').css('margin-left', -loginWidth);
-		$('#signup-content').css('margin-top' , -signupHeight);
-		$('#signup-content').css('margin-left', -signupWidth);
-	}
-	modalAccount();
+	// 	var loginHeight = $('#login-content').height()/2;
+	// 	var loginWidth = $('#login-content').width()/2;
+	// 	var signupHeight = $('#signup-content').height()/2;
+	// 	var signupWidth = $('#signup-content').width()/2;
+
+	// 	$('#login-content').css('margin-top' , -loginHeight);
+	// 	$('#login-content').css('margin-left', -loginWidth);
+	// 	$('#signup-content').css('margin-top' , -signupHeight);
+	// 	$('#signup-content').css('margin-left', -signupWidth);
+	// }
+	// modalAccount();
 
 
 	function socialType(){
