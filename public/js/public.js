@@ -210,6 +210,7 @@ $( window ).load(function() {
 	$(document).keyup(function(e){
 		if(e.keyCode == 27){
 			closeModal();
+			$('.sharing-settings').hide();
 		}
 	});
 
@@ -243,7 +244,7 @@ $( window ).load(function() {
 
 		selectSetting();
 
-		$('.settings').click(function(){
+		$('.pad-settings').click(function(){
 			$('.sharing-settings').show();
 		});
 
