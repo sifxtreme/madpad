@@ -109,16 +109,19 @@
 <script>
 $(window).load(function(){
 
-	console.log('ID: ' + '{{id}}');
+	var padName = "code_" + "{{id}}";
 
-	editor = ace.edit("editor-code");
+	var editor = ace.edit("editor-code");
 	editor.session.setMode("ace/mode/html");
 	editor.setTheme("ace/theme/chrome");
 	editor.setShowPrintMargin(false);
 
-	sharejs.open('hello', 'text', function(error, doc) {
-		doc.attach_ace(editor);
+	sharejs.open(padName, 'text', function(error, doc) {
+		doc.attach_ace(editor);	
+		setTimeout(function(){editor.gotoLine(1)}, 1);
 	});
+
+
 });
 
 </script>
