@@ -121,6 +121,9 @@ app.get('/', function(req, res) {
   sharejs.server.attach(app, options);
   res.render('pad', {id: "home", user: req.session_state.user });
 });
+app.get('/colors', function(req, res){
+  res.render('colors');
+});
 app.get('/code', function(req, res){
   sharejs.server.attach(app, options);
   res.render('code', {id: req.params.id, user: req.session_state.user });

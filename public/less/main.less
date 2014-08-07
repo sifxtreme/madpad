@@ -58,6 +58,10 @@
 		}
 	}
 }
+
+.no-chat-fix{
+	margin-right: 0px;
+}
 /*   ---   End of Main Area General   --   */
 
 
@@ -132,6 +136,7 @@
 
 	.pad-name{
 		float: left;
+		height: 100px;
 
 		h2{
 			font-size: 24px;
@@ -143,45 +148,58 @@
 				font-weight: bold;
 			}
 		}
-	}
+	} /* pad name css */
 
-	.pad-icons{
+	.title-options{
 		float: right;
+		height: 42px;
 		position: relative;
-		top: 19px;
+		top: 29px;
 
-		.icon-wrapper{
-			position: relative;
-		}
-
-		img{
+		.icon{
+			width: 45px;
+			height: 42px;
+			padding: 10px 10px;
+			background-size: 25px 22px;
+			background-position: center center;
+			background-repeat: no-repeat;
 			float: left;
-			height: 62px;
-			padding: 20px 20px;
-			margin: 0px 0px;
-			border-radius: 50%;
+			border: 1px solid transparent;
 
 			&:hover{
+				border: 1px solid @d;
+				background-color: @light;
 				cursor: pointer;
+				transition: 1s;
+				-webkit-transition: 1s;
+
 			}
 		}
 
-		.icon-mousedown{
-			background: rgba(51, 190, 168, 0.25);
-			opacity: 1;
+		.private-icon{
+			background-image: url('/images/main/private-icon.png');
 		}
 
-		.transition{
-			transition: 1s;
-			-webkit-transition: 1s;
+		.shared-icon{
+			background-image: url('/images/main/shared-icon.png');
 		}
 
-		.active-icon{
-			background: #fff !important;
-			-webkit-box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.15);
-			-moz-box-shadow:    0px 1px 4px 0px rgba(0, 0, 0, 0.15);
-			box-shadow:         0px 1px 4px 0px rgba(0, 0, 0, 0.15);
+		.public-icon{
+			background-image: url('/images/main/public-icon.png');
 		}
+
+		.chaton-icon{
+			background-image: url('/images/main/chaton-icon.png');
+		}
+
+		.chatoff-icon{
+			background-image: url('/images/main/chatoff-icon.png');
+		}
+
+		.trash-icon{
+			background-image: url('/images/main/trash-icon.png');
+		}
+
 
 	}
 

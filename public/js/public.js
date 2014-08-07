@@ -119,19 +119,19 @@ $( window ).load(function() {
 	}
 	sendMessages();
 
-	function iconSelect(){
-		$('.icons').mousedown(function(){
-			$(this).removeClass('transition');
-			$(this).addClass('icon-mousedown');
-		});
+	// function iconSelect(){
+	// 	$('.icons').mousedown(function(){
+	// 		$(this).removeClass('transition');
+	// 		$(this).addClass('icon-mousedown');
+	// 	});
 
-		$(document).mouseup(function(e){
-			$('.icons').addClass('transition');
-			$('.icons').removeClass('icon-mousedown');
-		});
+	// 	$(document).mouseup(function(e){
+	// 		$('.icons').addClass('transition');
+	// 		$('.icons').removeClass('icon-mousedown');
+	// 	});
 
-	}
-	iconSelect();
+	// }
+	// iconSelect();
 
 	function editorActive(){
 
@@ -221,6 +221,20 @@ $( window ).load(function() {
 	}
 	newPadStatus();
 
+	function chatToggle(){
+		$("body").delegate(".chaton-icon", "click", function(){
+			$(this).removeClass('chaton-icon').addClass('chatoff-icon');
+			$('.middle').addClass('no-chat-fix');
+			$('.right').hide();
+		});
+		$("body").delegate(".chatoff-icon", "click", function(){
+			$(this).removeClass('chatoff-icon').addClass('chaton-icon');
+			$('.middle').removeClass('no-chat-fix');
+			$('.right').show();
+		});
+
+	}
+	chatToggle();
 
 
 });
