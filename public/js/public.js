@@ -313,8 +313,9 @@ $( window ).load(function() {
 	}
 	deleteToggle();
 
-});
 
+
+});
 
 
 
