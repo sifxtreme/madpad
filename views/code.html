@@ -110,8 +110,9 @@
 $(window).load(function(){
 
 	var padName = "code_" + "{{id}}";
+	console.log(padName);
 
-	var editor = ace.edit("editor-code");
+	editor = ace.edit("editor-code");
 	editor.session.setMode("ace/mode/html");
 	editor.setTheme("ace/theme/chrome");
 	editor.setShowPrintMargin(false);
@@ -126,9 +127,6 @@ $(window).load(function(){
 
 </script>
 <script>
-	var d = '{{user.facebookDate}}';
-	var b = new Date(d)
-			console.log(b);
 
 	function scrollDown(){
 		$('#messages').stop().animate({
@@ -235,8 +233,7 @@ $(window).load(function(){
 	}
 
 	function appendChat(messageObject){
-		
-		var message = messageObject.message.replace(/\r\n|\r|\n/g,"<br />");
+		var message = convertLineBreaks(messageObject.message);
 		
 		var whichClass;
 		if(messageObject.name == "me"){
@@ -246,11 +243,10 @@ $(window).load(function(){
 			whichClass = 'other-user';
 		}
 
-		message=replaceEmoticons(message);
-		message=convertLinks(message);
+		message = replaceEmoticons(message);
+		message = convertLinks(message);
 
-		var messageToAppend = "<div class='" + whichClass + "'>";
-		messageToAppend += '<div class="message-area">';
+		var messageToAppend = "<div class='" + whichClass + "'><div class='message-area'>";
 		if(messageObject.profileId == ""){
 			messageToAppend += '<div style="background:'+ messageObject.picture.color +' url(\'/images/chat/animals/'+ messageObject.picture.animal +'.png\') no-repeat center center; background-size: 44px 44px;" class="avatar"></div>';	
 		}
@@ -258,9 +254,7 @@ $(window).load(function(){
 			messageToAppend += '<div style="background:url('+ messageObject.picture +') no-repeat center center; background-size: 44px 44px" class="avatar"></div>';
 		}
 		
-		messageToAppend += '<div class="content">' + message +'<div class="name">' + messageObject.name + '</div></div></div>';
-		messageToAppend += '</div>';
-
+		messageToAppend += '<div class="content">' + message +'<div class="name">' + messageObject.name + '</div></div></div></div>';
 		
 		$('#messages').append(messageToAppend);
 		
