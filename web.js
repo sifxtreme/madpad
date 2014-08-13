@@ -4,6 +4,7 @@ var express = require('express');
 var hbs = require('hbs');
 var mongoose = require('mongoose');
 var User = require('./models/user.js');
+var Pad = require('./models/pad.js');
 var passport = require('passport');
 var auth = require('./authentication.js');
 
@@ -57,9 +58,45 @@ var options = {
   db: {type: 'redis'},
   browserChannel: {cors: '*'},
   auth: function(client, action) {
-    action.accept();
+    var docName = action.docName;
+    var padInfo = Pad.findOne(
+      {'name': docName},
+      function(err, obj){
+        if(!obj){
+          action.accept();          
+          console.log("PAD NOT FOUND IN DB");
+        }
+        else{
+          var writeAccess = obj.writeAccess;
+          var readAccess = obj.readAccess;
+
+          if(action.name == 'connect'){
+            action.accept();
+          }
+          else{
+            if(writeAccess){
+              action.accept();
+            }
+            else{
+              if(readAccess){
+                if(action.name == "get snapshot" || action.name == "open" || action.name == "get ops"){
+                  action.accept();
+                }
+                else{
+                  action.reject();
+                }
+              }
+              else{
+                action.reject();
+              }
+            }
+          }
+        }
+      });
   }
 };
+
+
 
 /* ***************************************************************************** */
 
@@ -111,26 +148,29 @@ app.get('/logout', function(req, res){
 app.get('/account', function(req, res){
   res.render('account');
 });
-
 app.post('/account', function(req, res){
   console.log(req.body);
   res.render('account');
 });
 
-app.get('/', function(req, res) {
-  sharejs.server.attach(app, options);
-  res.render('pad', {id: "home", user: req.session_state.user });
-});
-app.get('/colors', function(req, res){
-  res.render('colors');
-});
-app.get('/code', function(req, res){
+app.get('/c/:id', function(req, res){
   sharejs.server.attach(app, options);
   res.render('code', {id: req.params.id, user: req.session_state.user });
 });
-app.get('/:id', function(req, res){
+
+app.get('/t/:id', function(req, res){
   sharejs.server.attach(app, options);
   res.render('pad', {id: req.params.id, user: req.session_state.user });
+});
+
+app.get('/', function(req, res) {
+  sharejs.server.attach(app, options);
+  res.render('index');
+});
+
+
+app.get('/colors', function(req, res){
+  res.render('colors');
 });
 
 
