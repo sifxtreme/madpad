@@ -165,18 +165,18 @@ $( window ).load(function() {
 	function socialType(){
 
 		$('.facebook-icon').mouseenter(function(){
-			$('#social-message').html('with Facebook');
+			$('.social-message').html('with Facebook');
 		});
 		$('.facebook-icon').mouseleave(function(){
-			$('#social-message').html('');
+			$('.social-message').html('');
 		});
 		// facebook login
 
 		$('.github-icon').mouseenter(function(){
-			$('#social-message').html('with Github');
+			$('.social-message').html('with Github');
 		});
 		$('.github-icon').mouseleave(function(){
-			$('#social-message').html('');
+			$('.social-message').html('');
 		});
 		// github login
 	}
@@ -211,6 +211,9 @@ $( window ).load(function() {
 		if(e.keyCode == 27){
 			closeModal();
 			$('.sharing-settings').hide();
+			$(".new-pad-area").hide();
+			$('.darken').hide();
+
 		}
 	});
 
@@ -248,6 +251,14 @@ $( window ).load(function() {
 			$('.sharing-settings').show();
 		});
 
+		$('#save-settings').click(function(){
+			$('.sharing-settings').hide();
+		});
+
+		$('#cancel-settings').click(function(){
+			$('.sharing-settings').hide();
+		});
+
 
 	}
 	settingsToggle();
@@ -274,6 +285,33 @@ $( window ).load(function() {
 		});
 	}
 
+	function iconHover(){
+
+		$('.icon').click(function(){
+			$(this).css('background-color' , "#FFFFFF");
+		});
+	}
+	iconHover();
+
+	function deleteToggle(){
+
+		selectSetting();
+
+		$('.trash-icon').click(function(){
+			$('.delete-confirmation').show();
+		});
+
+		$('#confirm-delete').click(function(){
+			$('.delete-confirmation').hide();
+		});
+
+		$('#cancel-delete').click(function(){
+			$('.delete-confirmation').hide();
+		});
+
+
+	}
+	deleteToggle();
 
 });
 

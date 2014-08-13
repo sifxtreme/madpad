@@ -75,7 +75,7 @@
             </div>
         </div>
         <div class="social-type">
-            <p id="social-message"></p>
+            <p class="social-message"></p>
         </div>
     </section>  
   </div> <!-- Log in modal -->
@@ -94,11 +94,11 @@
                 <a href="/auth/facebook"><img src="/images/account/facebook.png" class="facebook-icon"/></a>
             </div>
             <div class="github">
-                <a href="#"><img src="/images/account/github.png" class="github-icon"/></a>
+                <a href="/auth/github"><img src="/images/account/github.png" class="github-icon"/></a>
             </div>
         </div>
         <div class="social-type">
-            <p id="social-message"></p>
+            <p class="social-message"></p>
         </div>
     </section>  
   </div> <!-- Sign Up Modal -->
@@ -106,7 +106,7 @@
   <div class="sharing-settings">
       <div class="modal-container">
          <div class="modal-title">
-              <h6>Pad Sharing</h6>  
+              <h6>Share Settings</h6>  
          </div>
          <div class="list-settings">
               <div class="settings" id="private-setting">
@@ -122,8 +122,8 @@
                   <div class="radio-off radio"></div>
                   <img src="/images/main/shared-network.png" class="setting-icons"/>
                   <div class="setting-text">
-                      <p class="large">Shared with specific people</p>
-                      <p class="small">Only specific people can access this pad. Login required.</p>
+                      <p class="large">Viewable with link</p>
+                      <p class="small">Anyone with this pad's link can view it (they cannot edit it).</p>
                   </div>
               </div> <!-- Shared Setting -->
 
@@ -131,12 +131,28 @@
                   <div class="radio-off radio"></div>
                   <img src="/images/main/public-world.png" class="setting-icons"/>
                   <div class="setting-text">
-                      <p class="large">Public on your account</p>
-                      <p class="small">Anyone with this pad's link can access it. No login required.</p>
+                      <p class="large">Editable by the public</p>
+                      <p class="small">Anyone with this pad's link can view and edit.</p>
                   </div>
               </div> <!-- Shared Setting -->
          </div>
+         <div class="modal-confirm">
+              <button class="green-btn" id="save-settings">Save Setting</button>
+              <button class="cancel-btn" id="cancel-settings">Cancel</button>
+         </div>
       </div>
+  </div> <!-- Settings Modal -->
+
+  <div class="delete-confirmation">
+    <div class="modal-container">
+       <div class="modal-title">
+            <h6>Are you sure you want to delete this pad?</h6>  
+       </div>
+       <div class="modal-confirm">
+            <button class="red-btn" id="confirm-delete">Delete</button>
+            <button class="cancel-btn" id="cancel-delete">Cancel</button>
+       </div>
+    </div>
   </div> <!-- Sign Up Modal -->
 
   <div class="header sides minwidth">
