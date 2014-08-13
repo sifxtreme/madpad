@@ -900,7 +900,8 @@ a:hover {
   position: absolute;
   left: 50%;
   margin-left: -225px;
-  top: 20%;
+  top: 40%;
+  margin-top: -190px;
   width: 550px;
   padding: 40px 40px;
   border: 1px solid #eaeaea;
@@ -917,6 +918,11 @@ a:hover {
 }
 .sharing-settings .modal-confirm {
   margin-top: 40px;
+}
+.sharing-settings .modal-confirm button {
+  margin-right: 20px;
+  margin-left: 0px;
+  float: left;
 }
 .sharing-settings .list-settings .radio {
   width: 14px;
@@ -983,9 +989,10 @@ a:hover {
   position: absolute;
   left: 50%;
   margin-left: -225px;
-  top: 20%;
+  top: 40%;
+  margin-top: -110px;
   width: 550px;
-  padding: 40px 40px;
+  padding: 60px 60px;
   border: 1px solid #eaeaea;
   -webkit-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
   -moz-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
@@ -1001,6 +1008,13 @@ a:hover {
 }
 .delete-confirmation .modal-confirm {
   margin-top: 40px;
+  display: block;
+  text-align: center;
+  font-size: 0;
+}
+.delete-confirmation .modal-confirm button {
+  margin-right: 20px;
+  margin-left: 0px;
 }
 /*   ---    End of Pad Sharing Settings  --   */
 /*   ---   New Pad Area   --   */
