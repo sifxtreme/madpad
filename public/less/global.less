@@ -232,6 +232,23 @@ a{
     z-index: 1200;
     display: none;
 }
+
+.overlay-close{
+    visibility: hidden;
+    opacity: 0;
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+}
+
+.overlay-open{
+    visibility: visible;
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);    
+    -webkit-transition: -webkit-transform 0.4s, opacity 0.4s;
+    transition: transform 0.4s, opacity 0.4s;
+}
+
 /*   ---   End of Random CSS   --   */
 
 
@@ -245,10 +262,6 @@ a{
     height: 100%;
     position: absolute;
     z-index: 2000;
-    transition: 0.3s;
-    -webkit-transition: 0.3s;
-    display: none;
-
 
     .modal-close{
         position: absolute;

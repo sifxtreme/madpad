@@ -120,20 +120,6 @@ $( window ).load(function() {
 	}
 	sendMessages();
 
-	// function iconSelect(){
-	// 	$('.icons').mousedown(function(){
-	// 		$(this).removeClass('transition');
-	// 		$(this).addClass('icon-mousedown');
-	// 	});
-
-	// 	$(document).mouseup(function(e){
-	// 		$('.icons').addClass('transition');
-	// 		$('.icons').removeClass('icon-mousedown');
-	// 	});
-
-	// }
-	// iconSelect();
-
 	function editorActive(){
 
 		$('.froala-element').focus(function() {
@@ -145,22 +131,6 @@ $( window ).load(function() {
 		});
 	}
 	editorActive();
-
-	
-	// function modalAccount(){
-
-	// 	var loginHeight = $('#login-content').height()/2;
-	// 	var loginWidth = $('#login-content').width()/2;
-	// 	var signupHeight = $('#signup-content').height()/2;
-	// 	var signupWidth = $('#signup-content').width()/2;
-
-	// 	$('#login-content').css('margin-top' , -loginHeight);
-	// 	$('#login-content').css('margin-left', -loginWidth);
-	// 	$('#signup-content').css('margin-top' , -signupHeight);
-	// 	$('#signup-content').css('margin-left', -signupWidth);
-	// }
-	// modalAccount();
-
 
 	function socialType(){
 
@@ -182,50 +152,77 @@ $( window ).load(function() {
 	}
 	socialType();
 
-	function openLogin(){
+	// function openLogin(){
+	// 	$('.login-button').click(function(){
+	// 		$('.signup').hide();
+	// 		$('.login').show();
+	// 	});
+	// 	closeModal();
+	// }
+	// openLogin();
+
+	// function openSignUp(){
+	// 	$('.signup-button').click(function(){
+	// 		$('.login').hide();
+	// 		$('.signup').show();
+	// 	});
+	// 	closeModal();
+	// }
+	// openSignUp();
+
+	// function closeModal(){
+	// 	$('.account').hide();
+	// 	$('.modal-close').click(function(){
+	// 		$(this).parent().hide();
+	// 	});
+	// }
+	function loginToggle(){
+
 		$('.login-button').click(function(){
-			$('.signup').hide();
-			$('.login').show();
+			showOverlay('.login');
 		});
-		closeModal();
-	}
-	openLogin();
 
-	function openSignUp(){
+		$('#signup-link').click(function(){
+			hideOverlay('.login');
+			showOverlay('.signup');
+		});
+
+	}
+	loginToggle();
+
+	function signUpToggle(){
+
 		$('.signup-button').click(function(){
-			$('.login').hide();
-			$('.signup').show();
+			hideOverlay('.login');
+			showOverlay('.signup');
 		});
-		closeModal();
-	}
-	openSignUp();
 
-	function closeModal(){
-		$('.account').hide();
-		$('.modal-close').click(function(){
-			$(this).parent().hide();
+		$('#login-link').click(function(){
+			hideOverlay('.signup');
+			showOverlay('.login');
 		});
 	}
+	signUpToggle()
+
+	function closeAccount(){
+
+		$('.modal-close').click(function(){
+			hideOverlay('.account');
+		});
+	}
+	closeAccount();
+
 
 	$(document).keyup(function(e){
 		if(e.keyCode == 27){
-			closeModal();
-			$('.sharing-settings').hide();
+			hideOverlay('.delete-confirmation');
+			hideOverlay('.sharing-settings');
+			hideOverlay('.account');
 			$(".new-pad-area").hide();
 			$('.darken').hide();
 
 		}
 	});
-
-	function newPadStatus(){
-
-		// $('.new-pad').click(function(){
-		// 	$('.new-pad-status').stop().slideDown();
-		// 	setTimeout('$(".new-pad-status").stop().slideUp()', 2500);
-		// });
-
-	}
-	newPadStatus();
 
 	function chatToggle(){
 		$("body").delegate(".chaton-icon", "click", function(){
@@ -242,78 +239,98 @@ $( window ).load(function() {
 	}
 	chatToggle();
 
+	function iconHover(){
+
+		$('.title-options').children('.icon').mouseenter(function(){
+			$(this).css('background-color' , '#f4f6f9');
+		});
+
+		$('.title-options').children('.icon').mouseleave(function(){
+			$(this).css('background-color' , 'transparent');
+		});
+
+		$('.title-options').children('.icon').click(function(){
+			$(this).css('background-color' , 'transparent')
+		});
+	}
+	iconHover();
+
+	function selectSetting(){
+
+		function radioOn(element){
+			$(element).children('.radio').removeClass('radio-off').addClass('radio-on');
+		}
+
+		function radioOff(element){
+			$(element).children('.radio').removeClass('radio-on').addClass('radio-off');
+		}
+
+
+		$('#private-setting').click(function(){
+			radioOn(this);
+			radioOff('#shared-setting');
+			radioOff('#public-setting');
+		});
+
+		$('#shared-setting').click(function(){
+			radioOn(this);
+			radioOff('#private-setting');
+			radioOff('#public-setting');
+		});
+
+		$('#public-setting').click(function(){
+			radioOn(this);
+			radioOff('#private-setting');
+			radioOff('#shared-setting');
+		});
+	}
 
 	function settingsToggle(){
 
 		selectSetting();
 
 		$('.pad-settings').click(function(){
-			$('.sharing-settings').show();
+			showOverlay('.sharing-settings');
 		});
 
 		$('#save-settings').click(function(){
-			$('.sharing-settings').hide();
+			hideOverlay('.sharing-settings');
 		});
 
 		$('#cancel-settings').click(function(){
-			$('.sharing-settings').hide();
+			hideOverlay('.sharing-settings');
 		});
-
 
 	}
 	settingsToggle();
 
 
-	function selectSetting(){
-
-		$('#private-setting').click(function(){
-			$(this).children('.radio').removeClass('radio-off').addClass('radio-on');
-			$('#shared-setting').children('.radio').removeClass('radio-on').addClass('radio-off');
-			$('#public-setting').children('.radio').removeClass('radio-on').addClass('radio-off');
-		});
-
-		$('#shared-setting').click(function(){
-			$(this).children('.radio').removeClass('radio-off').addClass('radio-on');
-			$('#private-setting').children('.radio').removeClass('radio-on').addClass('radio-off');
-			$('#public-setting').children('.radio').removeClass('radio-on').addClass('radio-off');
-		});
-
-		$('#public-setting').click(function(){
-			$(this).children('.radio').removeClass('radio-off').addClass('radio-on');
-			$('#private-setting').children('.radio').removeClass('radio-on').addClass('radio-off');
-			$('#shared-setting').children('.radio').removeClass('radio-on').addClass('radio-off');
-		});
-	}
-
-	function iconHover(){
-
-		$('.icon').click(function(){
-			$(this).css('background-color' , "#FFFFFF");
-		});
-	}
-	iconHover();
-
 	function deleteToggle(){
-
-		selectSetting();
-
 		$('.trash-icon').click(function(){
-			$('.delete-confirmation').show();
+			showOverlay('.delete-confirmation');
 		});
 
 		$('#confirm-delete').click(function(){
-			$('.delete-confirmation').hide();
+			hideOverlay('.delete-confirmation');
 		});
 
 		$('#cancel-delete').click(function(){
-			$('.delete-confirmation').hide();
+			hideOverlay('.delete-confirmation');
 		});
-
-
-	}
+	};
 	deleteToggle();
 
 
+	function hideOverlay(element){
+		$(element).removeClass('overlay-open');
+		$(element).addClass('overlay-close');
+	}
+
+	function showOverlay(element){
+		$(element).removeClass('overlay-close');
+		$(element).addClass('overlay-open');
+	}
+	//Open and Close Overlays
 
 });
 

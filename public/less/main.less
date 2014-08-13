@@ -28,12 +28,12 @@
 	}
 
 	.froala-box{
-		border: 1px solid @d !important;
+		border: 1px solid @ea !important;
 	}
 
 	.froala-editor{
 		border: none !important;
-		border-bottom: 1px solid @d !important;
+		border-bottom: 1px solid @ea !important;
 		z-index: 10;
 	}
 
@@ -131,7 +131,7 @@
 	width: 100%;
 	height: 100px;
 	background-color: @f;
-	border-bottom: 1px solid @d;
+	border-bottom: 1px solid @ea;
 	padding: 0px 40px;
 
 	.pad-name{
@@ -143,9 +143,9 @@
 			line-height: 100px;
 
 			span{
-				color: @hover;
-				font-size: 18px;
-				font-weight: bold;
+				color: @ea;
+				font-size: 24px;
+				margin-left: 20px;
 			}
 		}
 	} /* pad name css */
@@ -160,6 +160,7 @@
 			width: 45px;
 			height: 42px;
 			padding: 10px 10px;
+			background-color: @f;
 			background-size: 25px 22px;
 			background-position: center center;
 			background-repeat: no-repeat;
@@ -172,13 +173,11 @@
 
 			&:hover{
 
-				background-color: @message;
-				cursor: pointer;
-				transition: 1s;
-				-webkit-transition: 1s;
+				// background-color: @message;
 
 			}
 		}
+
 
 		.private-icon{
 			background-image: url('/images/main/private-icon.png');
@@ -220,8 +219,6 @@
     height: 100%;
     position: absolute;
     z-index: 2000;
-    display: none;
-
 
     .modal-container{
     	position: absolute;
@@ -336,7 +333,6 @@
     height: 100%;
     position: absolute;
     z-index: 2000;
-    display: none;
 
 
     .modal-container{
@@ -374,7 +370,6 @@
     		margin-left: 0px;
     	}
     }
-
 }
 
 /*   ---    End of Pad Sharing Settings  --   */
