@@ -21,7 +21,7 @@ app.configure(function(){
 
 const clientSessions = require("client-sessions");
 app.use(clientSessions({
-  secret: 'blargadeeblargblarg', // should be a large unguessable string
+  secret: 'HZEYAZ2gEFb9nJinTAjjspD9cp4OKD5mkSIDEGSN', // should be a large unguessable string
   duration: 3 * 60 * 60 * 1000, // how long the session will stay valid in ms
   activeDuration: 5 * 60 * 1000 // if expiresIn < activeDuration, the session will be extended by activeDuration milliseconds
 }));
@@ -146,11 +146,63 @@ app.get('/logout', function(req, res){
 });
 
 app.get('/account', function(req, res){
-  res.render('account');
+  if(req.session_state.user.username){
+    console.log("there is already a username");
+    res.redirect("/u/"+req.session_state.user.username + "/home");
+  }
+  else{
+    var userData = getSocialAccount(req.session_state.user);
+    res.render('account', {user: userData});
+  }
+  
+  
 });
 app.post('/account', function(req, res){
-  console.log(req.body);
-  res.render('account');
+  if(req.session_state.user.username){
+    res.redirect("/u/" + req.session_state.user.username + "/home");
+  }
+  else {
+    var userData = getSocialAccount(req.session_state.user);
+
+    var username = req.body.username;
+    var userError = validateUsername(username);
+
+    if(userError && userError.error){
+      res.render('account', {user: userData, error: userError.error, previousValue: username});
+    }
+    else{
+    
+      User.findOne({ username: username }, function(err, user){
+        if(err){
+          res.render('account', {user: userData, error: "Database error", previousValue: username});
+        }
+        else{
+
+          if(user){
+            console.log("ERROR 2");
+            res.render('account', {user: userData, error: "User already exists", previousValue: username});
+          }
+
+          else{
+            User.findByIdAndUpdate(userData.realID, { username: username }, options, function(err){
+              if(err){
+                console.log("SAVE USER ERROR AFTER SCREENNAME ENTER");
+                console.log(err);
+                res.render('account', {user: userData, error: "Error saving to DB", previousValue: username});
+              }
+              else{
+                res.redirect("/u/" + username + "/home");
+              }
+            });
+          }
+
+        }
+
+      });
+    }
+
+  }
+  
 });
 
 app.get('/c/:id', function(req, res){
@@ -169,9 +221,63 @@ app.get('/', function(req, res) {
 });
 
 
+app.get('/u/:username/:id', function(req, res){
+  sharejs.server.attach(app, options);
+  res.render('pad', { id: req.params.id, user: req.session_state.user, username: req.params.username });
+});
+
+
 app.get('/colors', function(req, res){
   res.render('colors');
 });
+
+function validateUsername(name){
+  if(name == ""){
+    return {error: "Must select username!"}
+  }
+  else if(/[^a-zA-Z0-9]/.test(name)){
+    return {error: "Must only contain alphanumeric characters in username"}
+  }
+  else{
+    return;
+  }
+}
+
+function getSocialAccount(user){
+  var userID, userName, userPicture,
+    facebookAuth = false,
+    githubAuth = false;
+
+  if(user.facebookID && user.githubID){
+    var facebookDate = new Date(user.facebookDate);
+    var githubDate = new Date(user.githubDate);
+    if(facebookDate > githubDate){
+      facebookAuth = true;
+    }
+    else{
+      githubAuth = true;
+    }
+  }
+  else if(user.facebookID){
+    facebookAuth = true;
+  }
+  else if(user.githubID){
+    githubAuth = true;
+  }
+
+  if(facebookAuth){
+    userID = user.facebookID;
+    userName = user.facebookName;
+    userPicture = user.facebookPicture;
+  }
+  if(githubAuth){
+    userID = user.githubID;
+    userName = user.githubName;
+    userPicture = user.githubPicture;
+  }
+
+  return {realID: user._id, id: userID, name: userName, picture: userPicture};
+}
 
 
 // port

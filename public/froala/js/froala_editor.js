@@ -71,6 +71,9 @@ if ("undefined" == typeof jQuery) throw new Error("Froala requires jQuery");
         typingTimer: 1,
         width: "auto",
         zIndex: 1e3
+    }, b.prototype.uneditable = function() {
+        console.log("made uneditable");
+        this.$element.attr("contenteditable", 0);
     }, b.prototype.destroy = function () {
         this.sync(), this.isHTML && this.html(), this.$bttn_wrapper && (this.$bttn_wrapper.html("").remove(), this.$bttn_wrapper.html("").removeData()), this.$editor && (this.$editor.html("").remove(), this.$editor.html("").removeData()), this.$element.blur(), this.$image_editor && (this.$image_editor.html("").remove(), this.$image_editor.removeData()), this.$image_wrapper && (this.$image_wrapper.html("").remove(), this.$image_wrapper.removeData()), this.$link_wrapper && (this.$link_wrapper.html("").remove(), this.$link_wrapper.removeData()), this.$video_wrapper && (this.$video_wrapper.html("").remove(), this.$video_wrapper.removeData()), this.$popup_editor && (this.$popup_editor.html("").remove(), this.$popup_editor.removeData()), this.$overlay && (this.$overlay.html("").remove(), this.$overlay.removeData()), this.$image_modal && (this.hideMediaManager(), this.$image_modal.html("").remove(), this.$image_modal.removeData()), this.isLink ? this.$element.removeData("fa.editable") : (this.$element.replaceWith(this.getHTML()), this.$box && (this.$box.removeClass("froala-box"), this.$box.find(".html-switch").remove(), this.$box.removeData("fa.editable"), clearTimeout(this.typingTimer))), clearTimeout(this.ajaxInterval), clearTimeout(this.typingTimer), this.$element.off("mousedown mouseup click keydown keyup focus keypress touchstart touchend touch drop"), this.$element.off("mousedown mouseup click keydown keyup focus keypress touchstart touchend touch drop", "**"), a(window).off("mouseup." + this._id), a(window).off("keydown." + this._id), a(window).off("keyup." + this._id), a(window).off("hide." + this._id), a(window).off("scroll." + this._id), a(document).off("selectionchange." + this._id), void 0 !== this.$upload_frame && this.$upload_frame.remove(), this.$textarea && (this.$box.remove(), this.$textarea.removeData("fa.editable"), this.$textarea.show())
     }, b.prototype.callback = function (b, c, d) {
@@ -1554,7 +1557,9 @@ if ("undefined" == typeof jQuery) throw new Error("Froala requires jQuery");
     }, $.Editable.prototype.hideImageEditorPopup = function () {
         this.$image_editor && this.$image_editor.hide()
     }, $.Editable.prototype.showImageEditorPopup = function () {
-        this.$image_editor && this.$image_editor.show(), this.options.imageMove || this.$element.attr("contenteditable", !1)
+        if(this.$element.attr("contenteditable") != 0){
+            this.$image_editor && this.$image_editor.show(), this.options.imageMove || this.$element.attr("contenteditable", !1)
+        }
     }, $.Editable.prototype.showImageWrapper = function () {
         this.$image_wrapper && this.$image_wrapper.show()
     }, $.Editable.prototype.hideImageWrapper = function (a) {
@@ -1636,6 +1641,7 @@ if ("undefined" == typeof jQuery) throw new Error("Froala requires jQuery");
             }, this))
         } else a.parent().removeClass("f-img-deleting"), this.callback("imageDeleteError", ["Missing imageDeleteURL option."], !1)
     }, $.Editable.prototype.imageHandle = function () {
+        if(this.$element.attr("contenteditable") != 0){
         var a = this,
             b = $("<span>").addClass("f-img-handle").on({
                 movestart: function (b) {
@@ -1654,6 +1660,7 @@ if ("undefined" == typeof jQuery) throw new Error("Froala requires jQuery");
                 }
             });
         return b
+        }
     }, $.Editable.prototype.disableImageResize = function () {
         if (this.browser.mozilla) try {
             document.execCommand("enableObjectResizing", !1, !1), document.execCommand("enableInlineTableEditing", !1, !1)
@@ -1661,6 +1668,7 @@ if ("undefined" == typeof jQuery) throw new Error("Froala requires jQuery");
     }, $.Editable.prototype.isResizing = function () {
         return this.$element.attr("data-resize")
     }, $.Editable.prototype.initImageResizer = function () {
+        if(this.$element.attr("contenteditable") != 0){
         this.disableImageResize();
         var a = this;
         document.addEventListener && document.addEventListener("drop", $.proxy(function () {
@@ -1672,6 +1680,7 @@ if ("undefined" == typeof jQuery) throw new Error("Froala requires jQuery");
         }), this.$element.on("mouseup", "img", function () {
             a.isResizing() || a.options.imageMove || a.isImage || a.isHTML || a.$element.attr("contenteditable", !0)
         }), this.$element.on("click touchend", "img", function (b) {
+
             if (!a.isResizing()) {
                 b.preventDefault(), b.stopPropagation(), a.$element.blur(), a.$image_editor.find("button").removeClass("active");
                 var c = $(this).css("float");
@@ -1680,6 +1689,7 @@ if ("undefined" == typeof jQuery) throw new Error("Froala requires jQuery");
                 $(this).parent().find(".f-img-handle").remove(), a.options.imageResize && ($(this).parent().append(d.clone(!0).addClass("f-h-ne")), $(this).parent().append(d.clone(!0).addClass("f-h-se")), $(this).parent().append(d.clone(!0).addClass("f-h-sw")), $(this).parent().append(d.clone(!0).addClass("f-h-nw"))), a.clearSelection(), a.showByCoordinates($(this).offset().left + $(this).width() / 2, $(this).offset().top + $(this).height()), a.imageMode = !0, a.$bttn_wrapper.find(".fr-bttn").removeClass("active")
             }
         })
+        }
     }, $.Editable.prototype.initImagePopup = function () {
         this.$image_editor = $('<div class="froala-popup froala-image-editor-popup">');
         for (var a = $('<div class="f-popup-line">').appendTo(this.$image_editor), b = 0; b < this.options.imageButtons.length; b++) {
@@ -1819,7 +1829,7 @@ if ("undefined" == typeof jQuery) throw new Error("Froala requires jQuery");
     }, $.Editable.prototype.closeImageMode = function () {
         this.$element.find("span.f-img-editor > img").each(function (a, b) {
             $(b).css("margin-left", $(b).parent().css("margin-left")), $(b).css("margin-right", $(b).parent().css("margin-right")), $(b).css("margin-bottom", $(b).parent().css("margin-bottom")), $(b).css("margin-top", $(b).parent().css("margin-top")), $(b).siblings("span.f-img-handle").remove().end().unwrap()
-        }), this.$element.find("span.f-img-editor").length && (this.$element.find("span.f-img-editor").remove(), this.$element.parents("span.f-img-editor").remove()), this.$element.removeClass("f-non-selectable"), this.editableDisabled || this.isHTML || this.$element.attr("contenteditable", !0), this.$image_editor && this.$image_editor.hide()
+        }), this.$element.find("span.f-img-editor").length && (this.$element.find("span.f-img-editor").remove(), this.$element.parents("span.f-img-editor").remove()), this.$element.removeClass("f-non-selectable"), this.editableDisabled || this.isHTML, this.$image_editor && this.$image_editor.hide()
     }, $.Editable.prototype.refreshImageList = function (a) {
         if (!this.isLink && !this.options.editInPopup) {
             this.addImageWrapper();

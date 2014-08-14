@@ -1,9 +1,11 @@
 <div class="signup-step-wrapper">
 	<div class="username-wrapper">
-		<h1>Hi! Please choose your username.</h1>
-		<img src="/images/chat/melanie.jpg" class="fb-signup-img"/>
+		<h1>Hi {{user.name}}! Please choose your username.</h1>
+		{{#if error}}{{error}}{{/if}}
+		<img src="{{user.picture}}" class="fb-signup-img"/>
 		<form method="post" class="username-form">
-			<input name="XX" placeholder="Choose Username" class="username-input">
+			<div class="signin-error"></div>
+			<input name="username" placeholder="Choose Username" class="username-input" value="{{#if previousValue}}{{previousValue}}{{/if}}">
 			<input type="submit" value="Continue" class="username-submit">
 		</form>
 	</div>
