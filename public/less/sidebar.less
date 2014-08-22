@@ -10,9 +10,6 @@
 	bottom: 0;
 	z-index: 1300;
 
-	.offset{
-		height: 50px;
-	}
 
 	.all-pads{
 		overflow-y: auto;
@@ -27,11 +24,14 @@
 
 /*   ---   New Pad   --   */
 .new-pad{
-	width: 250px;
+	width: 200px;
 	height: 50px;
 	background-color: @green;
 	position: absolute;
+	left: 25px;
+	margin-top: 20px;
 	z-index: 1400;
+	border-radius: 2px !important;
 
 	a{
 		display: block;
@@ -64,7 +64,8 @@
 
 /*   ---   Pad List   --   */
 .pad-list{
-	margin-bottom: 30px;
+	margin-top: 20px;
+	margin-bottom: 10px;
 	background-color: @sidebar;
 
 	ul{
@@ -86,6 +87,10 @@
 		color: @9;
 		background-color: @sidebar;
 		text-decoration: none;
+
+		li{
+			margin-left: 15px;
+		}
 	}
 
 	.active{

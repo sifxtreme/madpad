@@ -456,9 +456,6 @@ a:hover {
   bottom: 0;
   z-index: 1300;
 }
-.left .offset {
-  height: 50px;
-}
 .left .all-pads {
   overflow-y: auto;
   overflow-x: hidden;
@@ -466,11 +463,14 @@ a:hover {
 /*   ---   End of Side Bar General   --   */
 /*   ---   New Pad   --   */
 .new-pad {
-  width: 250px;
+  width: 200px;
   height: 50px;
   background-color: #33bea8;
   position: absolute;
+  left: 25px;
+  margin-top: 20px;
   z-index: 1400;
+  border-radius: 2px !important;
 }
 .new-pad a {
   display: block;
@@ -495,7 +495,8 @@ a:hover {
 /*   ---   End of New Pad   --   */
 /*   ---   Pad List   --   */
 .pad-list {
-  margin-bottom: 30px;
+  margin-top: 20px;
+  margin-bottom: 10px;
   background-color: #363e44;
 }
 .pad-list ul {
@@ -515,6 +516,9 @@ a:hover {
   color: #9ea5ab;
   background-color: #363e44;
   text-decoration: none;
+}
+.pad-list a li {
+  margin-left: 15px;
 }
 .pad-list .active {
   color: #33bea8;
@@ -894,7 +898,7 @@ a:hover {
   cursor: pointer;
 }
 .title .title-options .private-icon {
-  background-image: url('/images/main/private-icon.png');
+  background-image: url('/images/main/private-option.png');
 }
 .title .title-options .shared-icon {
   background-image: url('/images/main/shared-icon.png');
