@@ -86,6 +86,9 @@
 			</div>
 		</div>
 		<div class="pad-wrapper">
+		<select id="mode" size="1">
+	    <option value="abap">ABAP</option><option value="actionscript">ActionScript</option><option value="ada">ADA</option><option value="apache_conf">Apache Conf</option><option value="asciidoc">AsciiDoc</option><option value="assembly_x86">Assembly x86</option><option value="autohotkey">AutoHotKey</option><option value="batchfile">BatchFile</option><option value="c9search">C9Search</option><option value="c_cpp">C and C++</option><option value="cirru">Cirru</option><option value="clojure">Clojure</option><option value="cobol">Cobol</option><option value="coffee">CoffeeScript</option><option value="coldfusion">ColdFusion</option><option value="csharp">C#</option><option value="css">CSS</option><option value="curly">Curly</option><option value="d">D</option><option value="dart">Dart</option><option value="diff">Diff</option><option value="dockerfile">Dockerfile</option><option value="dot">Dot</option><option value="eiffel">Eiffel</option><option value="erlang">Erlang</option><option value="ejs">EJS</option><option value="forth">Forth</option><option value="ftl">FreeMarker</option><option value="gcode">Gcode</option><option value="gherkin">Gherkin</option><option value="gitignore">Gitignore</option><option value="glsl">Glsl</option><option value="golang">Go</option><option value="groovy">Groovy</option><option value="haml">HAML</option><option value="handlebars">Handlebars</option><option value="haskell">Haskell</option><option value="haxe">haXe</option><option value="html">HTML</option><option value="html_ruby">HTML (Ruby)</option><option value="ini">INI</option><option value="jack">Jack</option><option value="jade">Jade</option><option value="java">Java</option><option value="javascript">JavaScript</option><option value="json">JSON</option><option value="jsoniq">JSONiq</option><option value="jsp">JSP</option><option value="jsx">JSX</option><option value="julia">Julia</option><option value="latex">LaTeX</option><option value="less">LESS</option><option value="liquid">Liquid</option><option value="lisp">Lisp</option><option value="livescript">LiveScript</option><option value="logiql">LogiQL</option><option value="lsl">LSL</option><option value="lua">Lua</option><option value="luapage">LuaPage</option><option value="lucene">Lucene</option><option value="makefile">Makefile</option><option value="matlab">MATLAB</option><option value="markdown">Markdown</option><option value="mel">MEL</option><option value="mysql">MySQL</option><option value="mushcode">MUSHCode</option><option value="nix">Nix</option><option value="objectivec">Objective-C</option><option value="ocaml">OCaml</option><option value="pascal">Pascal</option><option value="perl">Perl</option><option value="pgsql">pgSQL</option><option value="php">PHP</option><option value="powershell">Powershell</option><option value="praat">Praat</option><option value="prolog">Prolog</option><option value="properties">Properties</option><option value="protobuf">Protobuf</option><option value="python">Python</option><option value="r">R</option><option value="rdoc">RDoc</option><option value="rhtml">RHTML</option><option value="ruby">Ruby</option><option value="rust">Rust</option><option value="sass">SASS</option><option value="scad">SCAD</option><option value="scala">Scala</option><option value="smarty">Smarty</option><option value="scheme">Scheme</option><option value="scss">SCSS</option><option value="sh">SH</option><option value="sjs">SJS</option><option value="space">Space</option><option value="snippets">snippets</option><option value="soy_template">Soy Template</option><option value="sql">SQL</option><option value="stylus">Stylus</option><option value="svg">SVG</option><option value="tcl">Tcl</option><option value="tex">Tex</option><option value="text">Text</option><option value="textile">Textile</option><option value="toml">Toml</option><option value="twig">Twig</option><option value="typescript">Typescript</option><option value="vala">Vala</option><option value="vbscript">VBScript</option><option value="velocity">Velocity</option><option value="verilog">Verilog</option><option value="xml">XML</option><option value="xquery">XQuery</option><option value="yaml">YAML</option>
+    </select>
 			<div id="editor-code" class="pad-area"></div>
 		</div>
 	</div> <!-- main text area -->
@@ -98,7 +101,7 @@
 
 		    <div class="submit-wrapper">
 			    <div class="submit-area">
-				    <form action="">
+				    <form action="" class="madpadChatForm">
 				    	<textarea id="m" autocomplete="off" class="message-input" placeholder="Send a message..."></textarea>
 				    </form>
 			    </div>
@@ -114,6 +117,12 @@ $(window).load(function(){
 
 	editor = ace.edit("editor-code");
 	editor.session.setMode("ace/mode/html");
+
+	$("#mode").on("change", function(){
+		var codeMode = $(this).val();
+		console.log(codeMode);
+		editor.session.setMode("ace/mode/" + codeMode);
+	})
 	editor.setTheme("ace/theme/chrome");
 	editor.setShowPrintMargin(false);
 
@@ -128,140 +137,6 @@ $(window).load(function(){
 </script>
 <script>
 
-	function scrollDown(){
-		$('#messages').stop().animate({
-		  scrollTop: $("#messages")[0].scrollHeight
-		}, 800);
-	}
-
-	function replaceEmoticons(str){
-		var emoticons = [
-			{regex: /O:\)/g, image: 'angel'},
-			{regex: /O:-\)/g, image: 'angel'},
-			{regex: />:\(/g, image: 'angry'},
-			{regex: />:-\(/g, image: 'angry'},
-			{regex: /\(baseball\)/g, image: 'baseball'},
-			{regex: /\(basketball\)/g, image: 'basketball'},
-			{regex: /\(bear\)/g, image: 'bear'},
-			{regex: /\(beer\)/g, image: 'beer'},
-			{regex: /\^.\^/g, image: 'bigsmile'},
-			{regex: /\(bomb\)/g, image: 'bomb'},
-			{regex: /\(cat\)/g, image: 'cat'},
-			{regex: /\(cheers\)/g, image: 'cheers'},
-			{regex: /:-\//g, image: 'confused'},
-			{regex: /;\(/g, image: 'crying'},
-			{regex: /;-\(/g, image: 'crying'},
-			{regex: /\(devil\)/g, image: 'devil'},
-			{regex: /\(dog\)/g, image: 'dog'},
-			{regex: /\(dragon\)/g, image: 'dragon'},
-			{regex: /X-D/g, image: 'ecstatic'},
-			{regex: /XD/g, image: 'ecstatic'},
-			{regex: /:\|/g, image: 'eh'},
-			{regex: /\(elsa\)/g, image: 'elsa'},
-			{regex: /\(fire\)/g, image: 'fire'},
-			{regex: /\(football\)/g, image: 'football'},
-			{regex: /\(frog\)/g, image: 'frog'},
-			{regex: /\(futbol\)/g, image: 'futbol'},
-			{regex: /\(ghost\)/g, image: 'ghost'},
-			{regex: /8-\)/g, image: 'glasses'},
-			{regex: /8\)/g, image: 'glasses'},
-			{regex: /:\)/g, image: 'happy'},
-			{regex: /:-\)/g, image: 'happy'},
-			{regex: /<3/g, image: 'heart'},
-			{regex: /:-\*/g, image: 'kiss'},
-			{regex: /:\*/g, image: 'kiss'},
-			{regex: /\(koala\)/g, image: 'koala'},
-			{regex: /\(lightning\)/g, image: 'lightning'},
-			{regex: /\(monkey\)/g, image: 'monkey'},
-			{regex: /\(octopus\)/g, image: 'octopus'},
-			{regex: /:o/g, image: 'oh'},
-			{regex: /:O/g, image: 'oh'},
-			{regex: /:-o/g, image: 'oh'},
-			{regex: /:-O/g, image: 'oh'},
-			{regex: /-_-/g, image: 'okay'},
-			{regex: /\(panda\)/g, image: 'panda'},
-			{regex: /\(poop\)/g, image: 'poop'},
-			{regex: /\(rabbit\)/g, image: 'rabbit'},
-			{regex: /:D/g, image: 'reallyhappy'},
-			{regex: /:-D/g, image: 'reallyhappy'},
-			{regex: /\(riceball\)/g, image: 'riceball'},
-			{regex: /\:\(/g, image: 'sad'},
-			{regex: /\:-\(/g, image: 'sad'},
-			{regex: /\(santa\)/g, image: 'santa'},
-			{regex: /\(snow\)/g, image: 'snow'},
-			{regex: /\(snowman\)/g, image: 'snowman'},
-			{regex: /\(stuart\)/g, image: 'stuart'},
-			{regex: /\(sun\)/g, image: 'sun'},
-			{regex: /\(tennis\)/g, image: 'tennis'},
-			{regex: /\(tiger\)/g, image: 'tiger'},
-			{regex: /\(toothless\)/g, image: 'toothless'},
-			{regex: /:p/g, image: 'tongue'},
-			{regex: /:P/g, image: 'tongue'},
-			{regex: /:-p/g, image: 'tongue'},
-			{regex: /:-P/g, image: 'tongue'},
-			{regex: /\;p/g, image: 'tongue-wink'},
-			{regex: /\;P/g, image: 'tongue-wink'},
-			{regex: /\;-p/g, image: 'tongue-wink'},
-			{regex: /\;-P/g, image: 'tongue-wink'},
-			{regex: /\(tup\)/g, image: 'thumbsup'},
-			{regex: /\(tdown\)/g, image: 'thumbsdown'},
-			{regex: /\(water\)/g, image: 'water'},
-			{regex: /\(whale\)/g, image: 'whale'},
-			{regex: /o\.o/g, image: 'what'},
-			{regex: /O\.O/g, image: 'what'},
-			{regex: /;\)/g, image: 'wink'},
-			{regex: /;-\)/g, image: 'wink'},
-			{regex: /\(seenoevil\)/g, image: 'seenoevil'},
-			{regex: /\(hearnoevil\)/g, image: 'hearnoevil'},
-			{regex: /\(speaknoevil\)/g, image: 'speakoevil'},
-		]
-
-		for(var i = 0; i<emoticons.length; i++){
-			str = str.replace(emoticons[i].regex,
-				'<img style="width: 18px;" src="/images/emoticons/' + emoticons[i].image + '.png"/>');
-		}
-
-		return str;
-	}
-
-	function convertLinks(str){
-		return Autolinker.link(str);
-	}
-
-	function convertLineBreaks(str){
-		return str.replace(/\r\n|\r|\n/g,"<br />");
-	}
-
-	function appendChat(messageObject){
-		var message = convertLineBreaks(messageObject.message);
-		
-		var whichClass;
-		if(messageObject.name == "me"){
-			whichClass = 'user';
-		}
-		else{
-			whichClass = 'other-user';
-		}
-
-		message = replaceEmoticons(message);
-		message = convertLinks(message);
-
-		var messageToAppend = "<div class='" + whichClass + "'><div class='message-area'>";
-		if(messageObject.profileId == ""){
-			messageToAppend += '<div style="background:'+ messageObject.picture.color +' url(\'/images/chat/animals/'+ messageObject.picture.animal +'.png\') no-repeat center center; background-size: 44px 44px;" class="avatar"></div>';	
-		}
-		else{
-			messageToAppend += '<div style="background:url('+ messageObject.picture +') no-repeat center center; background-size: 44px 44px" class="avatar"></div>';
-		}
-		
-		messageToAppend += '<div class="content">' + message +'<div class="name">' + messageObject.name + '</div></div></div></div>';
-		
-		$('#messages').append(messageToAppend);
-		
-		scrollDown();
-		
-	}
-
 	var socket = io();
 	var room = '{{id}}';
 	socket.emit('room', room);
@@ -275,7 +150,7 @@ $(window).load(function(){
 	var animalArray = ["panda", "tiger", "cheetah", "gorilla", "monkey", "robin", "toucan", "elephant", "chimp", "sheep", "rooster", "dog", "cow", "chicken", "rabbit", "pig", "horse", "duck", "parrot", "mouse", "puppy", "cat", "lynx", "hamster", "ferret", "warthog", "wolf", "eagle", "owl", "bear", "hedgehog", "fox", "moose", "squirrel"];
 	var animal = animalArray[Math.floor(Math.random() * animalArray.length)];
 
-	$('form').submit(function(){
+	$('.madpadChatForm').submit(function(){
 		var messageValue = $('#m').val();
 		if(messageValue == '') return false;
 		var imageUrl = "";
@@ -323,12 +198,12 @@ $(window).load(function(){
 		socket.emit('chat', messageObject);
 		$('#m').val('');
 		messageObject.name = "me";
-		appendChat(messageObject);
+		madpadChat.appendChat(messageObject);
 		return false;
 	});
 
 	socket.on('newMessage', function(msg){
-		appendChat(msg);
+		madpadChat.appendChat(msg);
 	});
 
 </script>
