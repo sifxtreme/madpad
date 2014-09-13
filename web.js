@@ -100,15 +100,23 @@ var options = {
 
 /* ***************************************************************************** */
 
-// CHAT ROOM
-
 io.on('connection', function(socket){
   socket.on('room', function(room){
     socket.join(room);
   });
+  // CHAT ROOM
   socket.on('chat', function(data){
     var messageObject = {'name': data.name, 'picture': data.picture, 'message': data.message, 'profileId': data.profileId};
     socket.broadcast.to(data.room).emit('newMessage', messageObject);
+  });
+  // CHANGE CODE LANGUAGE
+  socket.on('modeChanged', function(data){
+    // add user checking
+    Pad.update({name: data.room}, {$set: {codeType: data.codeMode}}, function(err, pad){
+      // add error checking
+      console.log(pad);
+    })
+    socket.broadcast.to(data.room).emit('changeMode', data.codeMode);
   });
 });
 
@@ -207,7 +215,19 @@ app.post('/account', function(req, res){
 
 app.get('/c/:id', function(req, res){
   sharejs.server.attach(app, options);
-  res.render('code', {id: req.params.id, user: req.session_state.user });
+  var id = req.params.id;
+  Pad.findOne({'name': 'code_' + id}, function(err, pad){
+    if(err){
+      console.log("Error: " + err);      
+    }
+    else {
+      padObject = {
+        type: pad.codeType
+      }
+      res.render('code', {id: req.params.id, user: req.session_state.user, pad: padObject });
+    }
+  });
+  
 });
 
 app.get('/t/:id', function(req, res){
@@ -278,6 +298,23 @@ function getSocialAccount(user){
 
   return {realID: user._id, id: userID, name: userName, picture: userPicture};
 }
+
+// var newPad = new Pad({
+//   name: "code_hello",
+//   owner: "",
+//   writeAccess: true,
+//   readAccess: true,
+//   codeType: 'html'
+// });
+
+// newPad.save(function(err){
+//   if(err){
+//     console.log(err);
+//   }
+//   else{
+//     console.log(newPad)
+//   }
+// })
 
 
 // port
