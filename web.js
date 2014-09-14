@@ -8,11 +8,7 @@ var Pad = require('./models/pad.js');
 var passport = require('passport');
 var auth = require('./authentication.js');
 
-var sessions = require("client-sessions");
-var secret = 'HZEYAZ2gEFb9nJinTAjjspD9cp4OKD5mkSIDEGSN';
-var c = 'Xw4rWjIG_omo3fC4S8F7VQ.vmJ7ePwTffKnsXIC6LtpilgUiIvKfNaR37FtxiQ3XMkJ_DG5kR5sDXmAuEo0_6K8F2aP0EebgzumdGA63i_NMjkqgyQGP4CG5Lp9Fq62q3jV7NpqLCev44y1KeBPr4azsIKFmQoFqMZW7_-swtr52_aWIEEJ33dtGeLqr9ltSHgqweNACIjEIeEYPrTRd2vfBJA_BgGRBNjt8b2xJmasr2AQHbnjsK9IBj1uD-qUY3nsnzVOwUgje1lseb-PP7QhKksizndInzfIJobdTaqvGm4_k0CLPiDrQ1E3fWcY8O0mElvm5EFGg6c311IDLzbts1BnGBQjvz3m7-pK4Q6qsd9CjcbxuVFpn78fBMlvYLo8lx5wehskhCuYSlSxk0yHJhjUoUFxlaL1lic8FVmypSshQwFjCjgE6ieztocu4EvposCH7axO7wmtIeZtp5m5J3QJ8uOkSdKADEvldneihFDVHFkmNjonQlCIm-QZI0V8pfhhKX_7gHvW_yL2WaluCu0swPpJyJbX0gsn6N3xQoBungUPKPiUMeyVQSCNLGy7Aj9cRM_EvUiie4o7efbCHweZ9m6KUCa9Q7x6w-Z92EKz-TnWSqRDeSksLBB9qetkFpIYuhLKkhpyQZe5cxZnQOSEmluVhwiV92WxS8N7wg.1410660296211.10800000.D_11zD1eJxAiDe3-e6m6anc612oIifPTbR4j0cP0gqY';
-var b = sessions.util.decode({cookieName: 'session_state', secret: secret}, c);
-console.log(b.content.user._id);
+var sessions = require('./cookie.js');
 
 var app = express(); 
 app.configure(function(){
@@ -23,11 +19,7 @@ app.configure(function(){
   app.use(express.bodyParser());
   app.use(express.methodOverride());
 
-  app.use(sessions({
-    secret: secret, // should be a large unguessable string
-    duration: 3 * 60 * 60 * 1000, // how long the session will stay valid in ms
-    activeDuration: 5 * 60 * 1000 // if expiresIn < activeDuration, the session will be extended by activeDuration milliseconds
-  }));
+  app.use(sessions);
 
   app.use(passport.initialize());
   app.use(passport.session());
@@ -98,7 +90,6 @@ var options = {
 
 io.on('connection', function(socket){
   socket.on('room', function(room){
-    console.log(socket.request.headers.cookie)
     socket.join(room);
   });
   // CHAT ROOM
@@ -115,6 +106,12 @@ io.on('connection', function(socket){
     })
     socket.broadcast.to(data.room).emit('changeMode', data.codeMode);
   });
+
+  // DISABLE CHAT IF OWNER
+  socket.on('disableChat', function(data){
+    var cookie = socket.request.headers.cookie;
+    console.log(sessions.getUserData(cookie))
+  });
 });
 
 /* ***************************************************************************** */
@@ -128,7 +125,7 @@ app.get('/auth/facebook',
 app.get('/auth/facebook/callback', 
   passport.authenticate('facebook', { failureRedirect: '/' }),
   function(req, res) {
-    req.session_state.user = req.user;
+    req.madpad_user.user = req.user;
     if(req.user.username) res.redirect('/' + req.user.username);
     else res.redirect('/account');
   });
@@ -140,18 +137,18 @@ app.get('/auth/github',
 app.get('/auth/github/callback', 
   passport.authenticate('github', { failureRedirect: '/' }),
   function(req, res) {
-    req.session_state.user = req.user;
+    req.madpad_user.user = req.user;
     if(req.user.username) res.redirect('/' + req.user.username);
     else res.redirect('/account');
   });
 app.get('/logout', function(req, res){
-  req.session_state.reset();
+  req.madpad_user.reset();
   req.logout();
   res.redirect('/');
 });
 
 app.post('/sys/chat', function(req, res){
-  console.log(req.session_state);
+  console.log(req.madpad_user);
   console.log(req.body);
   res.format({
     text: function(){
@@ -169,23 +166,23 @@ app.post('/sys/chat', function(req, res){
 });
 
 app.get('/account', function(req, res){
-  if(req.session_state.user.username){
+  if(req.madpad_user.user.username){
     console.log("there is already a username");
-    res.redirect("/u/"+req.session_state.user.username + "/home");
+    res.redirect("/u/"+req.madpad_user.user.username + "/home");
   }
   else{
-    var userData = getSocialAccount(req.session_state.user);
+    var userData = getSocialAccount(req.madpad_user.user);
     res.render('account', {user: userData});
   }
   
   
 });
 app.post('/account', function(req, res){
-  if(req.session_state.user.username){
-    res.redirect("/u/" + req.session_state.user.username + "/home");
+  if(req.madpad_user.user.username){
+    res.redirect("/u/" + req.madpad_user.user.username + "/home");
   }
   else {
-    var userData = getSocialAccount(req.session_state.user);
+    var userData = getSocialAccount(req.madpad_user.user);
 
     var username = req.body.username;
     var userError = validateUsername(username);
@@ -240,17 +237,17 @@ app.get('/c/:id', function(req, res){
       padObject = {
         type: pad.codeType
       }
-      res.render('code', {id: req.params.id, user: req.session_state.user, pad: padObject });
+      res.render('code', {id: req.params.id, user: req.madpad_user.user, pad: padObject });
     }
   });
   
 });
 
 app.get('/t/:id', function(req, res){
-  console.log(req.session_state);
-  req.session_state.a = 'b'
+  console.log(req.madpad_user);
+  req.madpad_user.a = 'b'
   sharejs.server.attach(app, options);
-  res.render('pad', {id: req.params.id, user: req.session_state.user });
+  res.render('pad', {id: req.params.id, user: req.madpad_user.user });
 });
 
 app.get('/', function(req, res) {
@@ -261,7 +258,7 @@ app.get('/', function(req, res) {
 
 app.get('/u/:username/:id', function(req, res){
   sharejs.server.attach(app, options);
-  res.render('code', { id: req.params.id, user: req.session_state.user, username: req.params.username });
+  res.render('code', { id: req.params.id, user: req.madpad_user.user, username: req.params.username });
 });
 
 
@@ -318,8 +315,8 @@ function getSocialAccount(user){
 }
 
 // var newPad = new Pad({
-//   name: "code_hello",
-//   owner: "",
+//   name: "sifxtreme_code_hello",
+//   owner: "53e05b93f6328bfd0b07f506",
 //   writeAccess: true,
 //   readAccess: true,
 //   codeType: 'html'
