@@ -2,7 +2,7 @@
 	<div class="username-wrapper">
 		<h1>Hi {{user.name}}! Please choose your username.</h1>
 		{{#if error}}{{error}}{{/if}}
-		<img src="{{user.picture}}" class="fb-signup-img"/>
+		<img src="{{user.picture}}" class="fb-signup-img" style="height:100px"/>
 		<form method="post" class="username-form">
 			<div class="signin-error"></div>
 			<input name="username" placeholder="Choose Username" class="username-input" value="{{#if previousValue}}{{previousValue}}{{/if}}">

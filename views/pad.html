@@ -7,7 +7,6 @@
 		<div class="all-pads">
 			<section class="user-pads pad-list pad-hover">
 				<h5>Adventjex</h5>
-				{{ > }}
 				<ul>
 					<a href="#"><li>iOS</li></a>
 					<a href="#"><li>Nodejs</li></a>
@@ -93,24 +92,27 @@
 	</div> <!-- main text area -->
 
 	<div class="right">
-			<div class="chat-title">
-				<p><span>chat</span></p>
-			</div>
-		    <div id="messages"></div>
+		<div class="chat-title">
+			<p><span>chat</span></p>
+		</div>
+    <div id="messages"></div>
 
-		    <div class="submit-wrapper">
-			    <div class="submit-area">
-				    <form action="">
-				    	<textarea id="m" autocomplete="off" class="message-input" placeholder="Send a message..."></textarea>
-				    </form>
-			    </div>
-		    </div>
+    <div class="submit-wrapper">
+	    <div class="submit-area">
+		    <form action="" class="madpadChatForm">
+		    	<textarea id="m" autocomplete="off" class="message-input" placeholder="Send a message..."></textarea>
+		    </form>
+	    </div>
+    </div>
 	</div> <!-- chat -->
 
 </div>
 <script>
 var madpadSocket = io();
 var padName = 'text_{{id}}';
+
+var user = '{{username}}';
+if(user) padName = user + '_' + padName;
 
 var padData = {
 }
