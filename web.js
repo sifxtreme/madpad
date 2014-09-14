@@ -9,6 +9,10 @@ var passport = require('passport');
 var auth = require('./authentication.js');
 
 var sessions = require("client-sessions");
+var secret = 'HZEYAZ2gEFb9nJinTAjjspD9cp4OKD5mkSIDEGSN';
+var c = 'Xw4rWjIG_omo3fC4S8F7VQ.vmJ7ePwTffKnsXIC6LtpilgUiIvKfNaR37FtxiQ3XMkJ_DG5kR5sDXmAuEo0_6K8F2aP0EebgzumdGA63i_NMjkqgyQGP4CG5Lp9Fq62q3jV7NpqLCev44y1KeBPr4azsIKFmQoFqMZW7_-swtr52_aWIEEJ33dtGeLqr9ltSHgqweNACIjEIeEYPrTRd2vfBJA_BgGRBNjt8b2xJmasr2AQHbnjsK9IBj1uD-qUY3nsnzVOwUgje1lseb-PP7QhKksizndInzfIJobdTaqvGm4_k0CLPiDrQ1E3fWcY8O0mElvm5EFGg6c311IDLzbts1BnGBQjvz3m7-pK4Q6qsd9CjcbxuVFpn78fBMlvYLo8lx5wehskhCuYSlSxk0yHJhjUoUFxlaL1lic8FVmypSshQwFjCjgE6ieztocu4EvposCH7axO7wmtIeZtp5m5J3QJ8uOkSdKADEvldneihFDVHFkmNjonQlCIm-QZI0V8pfhhKX_7gHvW_yL2WaluCu0swPpJyJbX0gsn6N3xQoBungUPKPiUMeyVQSCNLGy7Aj9cRM_EvUiie4o7efbCHweZ9m6KUCa9Q7x6w-Z92EKz-TnWSqRDeSksLBB9qetkFpIYuhLKkhpyQZe5cxZnQOSEmluVhwiV92WxS8N7wg.1410660296211.10800000.D_11zD1eJxAiDe3-e6m6anc612oIifPTbR4j0cP0gqY';
+var b = sessions.util.decode({cookieName: 'session_state', secret: secret}, c);
+console.log(b.content.user._id);
 
 var app = express(); 
 app.configure(function(){
@@ -19,12 +23,11 @@ app.configure(function(){
   app.use(express.bodyParser());
   app.use(express.methodOverride());
 
-const clientSessions = require("client-sessions");
-app.use(clientSessions({
-  secret: 'HZEYAZ2gEFb9nJinTAjjspD9cp4OKD5mkSIDEGSN', // should be a large unguessable string
-  duration: 3 * 60 * 60 * 1000, // how long the session will stay valid in ms
-  activeDuration: 5 * 60 * 1000 // if expiresIn < activeDuration, the session will be extended by activeDuration milliseconds
-}));
+  app.use(sessions({
+    secret: secret, // should be a large unguessable string
+    duration: 3 * 60 * 60 * 1000, // how long the session will stay valid in ms
+    activeDuration: 5 * 60 * 1000 // if expiresIn < activeDuration, the session will be extended by activeDuration milliseconds
+  }));
 
   app.use(passport.initialize());
   app.use(passport.session());
@@ -39,17 +42,10 @@ mongoose.connect('mongodb://localhost/madpad');
 
 // seralize and deseralize
 passport.serializeUser(function(user, done) {
-  // console.log('serializeUser: ' + user._id)
   done(null, user);
 });
 passport.deserializeUser(function(id, done) {
   done(null, id);
-  // User.findById(id, function(err, user){
-  //   console.log("trying to find user");
-  //   // console.log(user);
-  //   if(!err) done(null, user);
-  //   else done(err, null);
-  // })
 });
 
 var sharejs = require('share');
@@ -93,7 +89,7 @@ var options = {
           }
         }
       });
-  }
+    }
 };
 
 
@@ -102,6 +98,7 @@ var options = {
 
 io.on('connection', function(socket){
   socket.on('room', function(room){
+    console.log(socket.request.headers.cookie)
     socket.join(room);
   });
   // CHAT ROOM
@@ -151,6 +148,24 @@ app.get('/logout', function(req, res){
   req.session_state.reset();
   req.logout();
   res.redirect('/');
+});
+
+app.post('/sys/chat', function(req, res){
+  console.log(req.session_state);
+  console.log(req.body);
+  res.format({
+    text: function(){
+      res.send('hey');
+    },
+
+    html: function(){
+      res.send('<p>hey</p>');
+    },
+
+    json: function(){
+      res.send({ message: 'hey' });
+    }
+  });
 });
 
 app.get('/account', function(req, res){
@@ -218,6 +233,7 @@ app.get('/c/:id', function(req, res){
   var id = req.params.id;
   Pad.findOne({'name': 'code_' + id}, function(err, pad){
     if(err){
+      // TODO - add error logging here
       console.log("Error: " + err);      
     }
     else {
@@ -231,6 +247,8 @@ app.get('/c/:id', function(req, res){
 });
 
 app.get('/t/:id', function(req, res){
+  console.log(req.session_state);
+  req.session_state.a = 'b'
   sharejs.server.attach(app, options);
   res.render('pad', {id: req.params.id, user: req.session_state.user });
 });
@@ -243,7 +261,7 @@ app.get('/', function(req, res) {
 
 app.get('/u/:username/:id', function(req, res){
   sharejs.server.attach(app, options);
-  res.render('pad', { id: req.params.id, user: req.session_state.user, username: req.params.username });
+  res.render('code', { id: req.params.id, user: req.session_state.user, username: req.params.username });
 });
 
 
