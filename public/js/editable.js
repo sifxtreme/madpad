@@ -112,6 +112,38 @@
     return compareNum;
   }
 
+  function correctCursor(pos, text, isInsert){
+    isIncoming = true;
+    console.log("INCOMING");
+
+    var beforeText = $("#editor").editable("getText");
+    var textToCursor = getTextFromHeadToCaret();
+    saveS();
+
+    prevvalue = elem.value.replace(/\r\n/g, '\n');
+    if(isInsert){
+      $("#editor").editable("setHTML", prevvalue.slice(0, pos) + text + prevvalue.slice(pos));
+    }
+    else{
+      $("#editor").editable("setHTML", prevvalue.slice(0, pos) + prevvalue.slice(pos + text.length));      
+    }
+
+    var afterText = $("#editor").editable("getText");
+    var offset = calculateOffset(textToCursor, beforeText, afterText);
+    restoreS();
+    rangy.getSelection().move("character", offset);
+
+    isIncoming = false;
+
+    if(isInsert){
+      return replaceText(prevvalue.slice(0, pos) + text + prevvalue.slice(pos), transformCursor);
+    }
+    else{
+      return replaceText(prevvalue.slice(0, pos) + prevvalue.slice(pos + text.length), transformCursor);
+    }
+
+  }
+
   window.sharejs.extendDoc('attach_editable', function(elem) {
     var delete_listener, doc, event, genOp, insert_listener, prevvalue, replaceText, _i, _len, _ref,
       _this = this;
@@ -168,24 +200,7 @@
         }
       };
 
-      isIncoming = true;
-      console.log("INCOMING");
-
-      var beforeText = $("#editor").editable("getText")[0];
-      var textToCursor = getTextFromHeadToCaret();
-      saveS();
-
-      prevvalue = elem.value.replace(/\r\n/g, '\n');
-      $("#editor").editable("setHTML", prevvalue.slice(0, pos) + text + prevvalue.slice(pos));
-
-      var afterText = $("#editor").editable("getText")[0];
-      var offset = calculateOffset(textToCursor, beforeText, afterText);
-      restoreS();
-      rangy.getSelection().move("character", offset);
-
-      isIncoming = false;
-
-      return replaceText(prevvalue.slice(0, pos) + text + prevvalue.slice(pos), transformCursor);
+      return correctCursor(pos, text, true);
     });
     // ************************************************************************************************************** //
     this.on('delete', delete_listener = function(pos, text) {
@@ -197,24 +212,7 @@
         }
       };
 
-      isIncoming = true;
-      console.log("INCOMING");
-
-      var beforeText = $("#editor").editable("getText")[0];
-      var textToCursor = getTextFromHeadToCaret();
-      saveS();
-
-      prevvalue = elem.value.replace(/\r\n/g, '\n');
-      $("#editor").editable("setHTML", prevvalue.slice(0, pos) + prevvalue.slice(pos + text.length));
-
-      var afterText = $("#editor").editable("getText")[0];
-      var offset = calculateOffset(textToCursor, beforeText, afterText);
-      restoreS();
-      rangy.getSelection().move("character", offset);
-
-      isIncoming = false;
-
-      return replaceText(prevvalue.slice(0, pos) + prevvalue.slice(pos + text.length), transformCursor);
+      return correctCursor(pos, text, false);
     });
     // ************************************************************************************************************** //
     genOp = function(event) {
@@ -252,6 +250,7 @@
     //   elem.value = newText;
     //   genOp();  
     // });
+
     // ************************************************************************************************************** //
     _ref = ['textInput', 'keydown', 'keyup', 'select', 'cut', 'paste'];
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {

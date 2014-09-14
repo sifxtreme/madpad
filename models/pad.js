@@ -6,6 +6,7 @@ var Pad = mongoose.model('Pad', {
 	writeAccess: Boolean,
 	readAccess: Boolean,
 	codeType: String,
+	chatOn: Boolean,
 });
 
 module.exports = Pad;
