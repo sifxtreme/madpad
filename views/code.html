@@ -168,6 +168,9 @@
 var madpadSocket = io();
 var padName = 'code_{{id}}';
 
+var user = '{{username}}';
+if(user) padName = user + '_' + padName;
+
 var padData = {
 	type: '{{pad.type}}' || 'text',
 }
@@ -206,6 +209,25 @@ $(window).load(function(){
 	});
 
 });
+
+</script>
+<script>
+	$("body").delegate(".chaton-icon", "click", function(){
+		madpadSocket.emit('disableChat', {room: padName, disable: true})
+	})
+	$("body").delegate(".chatoff-icon", "click", function(){
+		madpadSocket.emit('disableChat', {room: padName, disable: false})
+	})
+
+	madpadSocket.on('toggleChat', function(whichWay){
+		$("#message").empty();
+		if(!whichWay){
+			mpFrontend.chat.open();
+		}
+		else{
+			mpFrontend.chat.close();
+		}
+	});
 
 </script>
 <script>

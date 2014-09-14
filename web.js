@@ -109,8 +109,25 @@ io.on('connection', function(socket){
 
   // DISABLE CHAT IF OWNER
   socket.on('disableChat', function(data){
+    if(!data.room) return;
+    if(typeof data.disable === 'undefined') return;
+
     var cookie = socket.request.headers.cookie;
-    console.log(sessions.getUserData(cookie))
+    var user = sessions.getUserData(cookie);
+
+    if(user && user.content && user.content.user && user.content.user._id){
+      var userID = user.content.user._id; 
+      console.log(userID);
+      console.log(data.room);
+      Pad.findOne({name: data.room}, {owner: userID}, function(err, pad){
+        if(err){
+          console.log(err);
+        }
+        else {
+          socket.broadcast.to(data.room).emit('toggleChat', !data.disable);
+        }
+      })
+    }
   });
 });
 
@@ -145,24 +162,6 @@ app.get('/logout', function(req, res){
   req.madpad_user.reset();
   req.logout();
   res.redirect('/');
-});
-
-app.post('/sys/chat', function(req, res){
-  console.log(req.madpad_user);
-  console.log(req.body);
-  res.format({
-    text: function(){
-      res.send('hey');
-    },
-
-    html: function(){
-      res.send('<p>hey</p>');
-    },
-
-    json: function(){
-      res.send({ message: 'hey' });
-    }
-  });
 });
 
 app.get('/account', function(req, res){

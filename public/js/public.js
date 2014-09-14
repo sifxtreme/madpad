@@ -224,20 +224,26 @@ $( window ).load(function() {
 		}
 	});
 
-	function chatToggle(){
-		$("body").delegate(".chaton-icon", "click", function(){
-			$(this).removeClass('chaton-icon').addClass('chatoff-icon');
-			$('.middle').addClass('no-chat-fix');
-			$('.right').hide();
-		});
-		$("body").delegate(".chatoff-icon", "click", function(){
-			$(this).removeClass('chatoff-icon').addClass('chaton-icon');
-			$('.middle').removeClass('no-chat-fix');
-			$('.right').show();
-		});
-
+	mpFrontend = {
+		chat: {
+			open: function(){
+				$('.chaton-icon').removeClass('chaton-icon').addClass('chatoff-icon');
+				$('.middle').addClass('no-chat-fix');
+				$('.right').hide();	
+			},
+			close: function(){
+				$('.chatoff-icon').removeClass('chatoff-icon').addClass('chaton-icon');
+				$('.middle').removeClass('no-chat-fix');
+				$('.right').show();				
+			},
+			run: function(){
+				$("body").delegate(".chaton-icon", "click", this.open)
+				$("body").delegate(".chatoff-icon", "click", this.close)		
+			}
+		},
 	}
-	chatToggle();
+
+	mpFrontend.chat.run();
 
 	function iconHover(){
 
