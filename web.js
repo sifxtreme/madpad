@@ -2,9 +2,11 @@
 var coffee = require('coffee-script');
 var express = require('express');
 var hbs = require('hbs');
+
 var mongoose = require('mongoose');
 var User = require('./models/user.js');
 var Pad = require('./models/pad.js');
+
 var passport = require('passport');
 var auth = require('./authentication.js');
 
@@ -32,7 +34,7 @@ var io = require('socket.io').listen(server, {log:false});
 // connect to the database
 mongoose.connect('mongodb://localhost/madpad');
 
-// seralize and deseralize
+// serialize and deserialize
 passport.serializeUser(function(user, done) {
   done(null, user);
 });
@@ -40,51 +42,9 @@ passport.deserializeUser(function(id, done) {
   done(null, id);
 });
 
-var sharejs = require('share');
 var redis = require('redis');
-var options = {
-  db: {type: 'redis'},
-  browserChannel: {cors: '*'},
-  auth: function(client, action) {
-    var docName = action.docName;
-    var padInfo = Pad.findOne(
-      {'name': docName},
-      function(err, obj){
-        if(!obj){
-          action.accept();          
-          console.log("PAD NOT FOUND IN DB");
-        }
-        else{
-          var writeAccess = obj.writeAccess;
-          var readAccess = obj.readAccess;
-
-          if(action.name == 'connect'){
-            action.accept();
-          }
-          else{
-            if(writeAccess){
-              action.accept();
-            }
-            else{
-              if(readAccess){
-                if(action.name == "get snapshot" || action.name == "open" || action.name == "get ops"){
-                  action.accept();
-                }
-                else{
-                  action.reject();
-                }
-              }
-              else{
-                action.reject();
-              }
-            }
-          }
-        }
-      });
-    }
-};
-
-
+var sharejs = require('share');
+var options = require('./privacy.js');
 
 /* ***************************************************************************** */
 
@@ -172,6 +132,8 @@ app.get('/:username/:id', function(req, res, next){
   // edge case for channel url for sharejs
   if(req.url.indexOf('/channel/') === 0) return next();
   
+  console.log(req.madpad_user.user)
+  
   sharejs.server.attach(app, options);
   res.render('pad', { id: req.params.id, user: req.madpad_user.user, username: req.params.username });
 });
@@ -181,25 +143,7 @@ app.get('/colors', function(req, res){
   res.render('colors');
 });
 
-// var newPad = new Pad({
-//   name: "sifxtreme_code_hello",
-//   owner: "53e05b93f6328bfd0b07f506",
-//   writeAccess: true,
-//   readAccess: true,
-//   codeType: 'html'
-// });
-
-// newPad.save(function(err){
-//   if(err){
-//     console.log(err);
-//   }
-//   else{
-//     console.log(newPad)
-//   }
-// })
-
-
-// port
+// port number
 server.listen(5000);
 
 module.exports = app

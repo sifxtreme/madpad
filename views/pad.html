@@ -117,12 +117,14 @@ if(user) padName = user + '_' + padName;
 var padData = {
 }
 
+var options = {authentication: '{{username}}'};
+
 madpadSocket.emit('room', padName);
 
 $(function(){
 	var pad = document.getElementById('pusherContentEditable');
 
-	var theSharing = sharejs.open(padName, 'text', function(error, doc) {
+	var theSharing = sharejs.open(padName, 'text', options, function(error, doc) {
 		window.doc = doc;
 		doc.attach_editable(pad);
 	});

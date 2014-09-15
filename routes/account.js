@@ -49,6 +49,24 @@ module.exports = function(app, passport){
 	  }
 	}
 
+	var createPadOnUsername = function(userID, username){
+	  padName = username + '_text_home';
+	  console.log("Creating pad document: " + padName);
+	  var newPad = new Pad({
+	  	name: padName,
+	  	owner: userID,
+	  	writeAccess: false,
+	  	readAccess: false,
+	  	codeType: ''
+	  })
+
+	  newPad.save(function(err){
+	  	if(err){
+	  		console.log("Error creating pad after username creation: " + err);
+	  	}
+	  })
+	}
+
 
 	app.get('/auth/facebook',
 	  passport.authenticate('facebook'),
@@ -129,8 +147,7 @@ module.exports = function(app, passport){
 	              else{
 	              	console.log("Updated username of user");
 	                res.redirect("/" + username + "/home");
-
-	                console.log('xxx');
+	                createPadOnUsername(userData.realID, username);
 	              }
 	            });
 	          }
