@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Pad = require('./models/pad.js');
 
-privacy = {
+var privacy = {
   db: {type: 'redis'},
   browserChannel: {cors: '*'},
   auth: function(agent, action) {
@@ -11,7 +11,6 @@ privacy = {
       {'name': docName},
       function(err, pad){
         if(!pad){
-        	console.log('pad object is not in the mongodb')
           action.accept();
         }
         else{

@@ -108,94 +108,30 @@
 
 </div>
 <script>
-var madpadSocket = io();
-var padName = 'text_{{id}}';
 
-var user = '{{username}}';
-if(user) padName = user + '_' + padName;
+var id = '{{id}}';
+var usersRoom = '{{userroom}}';
+var padName = (usersRoom) ? usersRoom + '_' + id : 'text' + '_' + id;
+
+console.log(padName);
 
 var padData = {
 }
 
+madpadUserData = {
+	facebookID: '{{user.facebookID}}',
+	githubID: '{{user.githubID}}',
+	facebookDate: new Date('{{user.facebookDate}}'),
+	githubDate: new Date('{{user.githubDate}}'),
+	facebookName: '{{user.facebookName}}',
+	facebookPicture: '{{user.facebookPicture}}',
+	githubName: '{{user.githubName}}',
+	githubPicture: '{{user.githubPicture}}',
+}
+
 var options = {authentication: '{{user._id}}'};
 
+madpadSocket = io();
 madpadSocket.emit('room', padName);
-
-$(function(){
-	var pad = document.getElementById('pusherContentEditable');
-
-	var theSharing = sharejs.open(padName, 'text', options, function(error, doc) {
-		window.doc = doc;
-		doc.attach_editable(pad);
-	});
-
-});
-</script>
-<script>
-
-	var letterArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-	var letter = letterArray[Math.floor(Math.random() * letterArray.length)];
-
-	var colorArray = ["#be3333", "#be336e", "#be339f", "#ac33be", "#7e33be", "#4d33be", "#334dbe", "#3385be", "#33acbe", "#33beaf", "#33be85", "#33be47", "#78be33", "#9cbe33", "#bcbe33", "#be9f33", "#be7b33", "#be5733"];
-	var color = colorArray[Math.floor(Math.random() * colorArray.length)];
-
-	var animalArray = ["panda", "tiger", "cheetah", "gorilla", "monkey", "robin", "toucan", "elephant", "chimp", "sheep", "rooster", "dog", "cow", "chicken", "rabbit", "pig", "horse", "duck", "parrot", "mouse", "puppy", "cat", "lynx", "hamster", "ferret", "warthog", "wolf", "eagle", "owl", "bear", "hedgehog", "fox", "moose", "squirrel"];
-	var animal = animalArray[Math.floor(Math.random() * animalArray.length)];
-
-	$('.madpadChatForm').submit(function(){
-		var messageValue = $('#m').val();
-		if(messageValue == '') return false;
-		var imageUrl = "";
-		var userId = "";
-		var facebookID = '{{user.facebookID}}';
-		var githubID = '{{user.githubID}}';
-
-		var facebookAuth = false;
-		var githubAuth = false;
-
-		if(facebookID && githubID){
-			var facebookDate = new Date('{{user.facebookDate}}');
-			var githubDate = new Date('{{user.githubDate}}');
-			console.log(githubID);
-			if(facebookDate > githubDate){
-				facebookAuth = true;
-			}
-			else{
-				githubAuth = true;
-			}
-
-		}
-		else if(facebookID){
-			facebookAuth = true;
-		}
-		else if(githubID){
-			githubAuth = true;
-		}
-		if(facebookAuth){
-			userId = facebookID;
-			name = '{{user.facebookName}}';
-			imageUrl = '{{user.facebookPicture}}';
-		}
-		if(githubAuth){
-			userId = githubID;
-			name = '{{user.githubName}}';
-			imageUrl = '{{user.githubPicture}}';			
-		}
-		var messageObject = {'room': padName, 'name': name, 'picture': imageUrl, 'message': messageValue, 'profileId': userId};
-
-		if(messageObject.profileId == ""){
-			messageObject.picture = {'letter': letter, 'color': color, 'animal': animal};
-		}
-
-		madpadSocket.emit('chat', messageObject);
-		$('#m').val('');
-		messageObject.name = "me";
-		madpadChat.appendChat(messageObject);
-		return false;
-	});
-
-	madpadSocket.on('newMessage', function(msg){
-		madpadChat.appendChat(msg);
-	});
 
 </script>

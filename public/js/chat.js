@@ -1,4 +1,18 @@
 madpadChat = {
+
+	options: {
+		letterArray: ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
+		colorArray: ["#be3333", "#be336e", "#be339f", "#ac33be", "#7e33be", "#4d33be", "#334dbe", "#3385be", "#33acbe", "#33beaf", "#33be85", "#33be47", "#78be33", "#9cbe33", "#bcbe33", "#be9f33", "#be7b33", "#be5733"],
+		animalArray: ["panda", "tiger", "cheetah", "gorilla", "monkey", "robin", "toucan", "elephant", "chimp", "sheep", "rooster", "dog", "cow", "chicken", "rabbit", "pig", "horse", "duck", "parrot", "mouse", "puppy", "cat", "lynx", "hamster", "ferret", "warthog", "wolf", "eagle", "owl", "bear", "hedgehog", "fox", "moose", "squirrel"],
+		randomize: function(){
+			return {
+				letter: this.letterArray[Math.floor(Math.random() * this.letterArray.length)],
+				color: this.colorArray[Math.floor(Math.random() * this.colorArray.length)],
+				animal: this.animalArray[Math.floor(Math.random() * this.animalArray.length)],
+			}
+		}
+	},
+	
 	scrollDown: function(){
 		$('#messages').stop().animate({
 		  scrollTop: $("#messages")[0].scrollHeight
@@ -134,3 +148,99 @@ madpadChat = {
 	}
 
 }
+
+$(document).ready(function(){
+
+	var notSignedInUserObject = madpadChat.options.randomize();
+
+	// submitting to chat
+	$('.madpadChatForm').submit(function(){
+		var messageValue = $('#m').val();
+		if(messageValue == '') return false;
+		var imageUrl = "";
+		var userId = "";
+		var facebookID = madpadUserData.facebookID
+		var githubID = madpadUserData.githubID;
+
+		var facebookAuth = false;
+		var githubAuth = false;
+
+		if(facebookID && githubID){
+			var facebookDate = new Date(madpadUserData.facebookDate);
+			var githubDate = new Date(madpadUserData.githubDate);
+			console.log(githubID);
+			if(facebookDate > githubDate){
+				facebookAuth = true;
+			}
+			else{
+				githubAuth = true;
+			}
+
+		}
+		else if(facebookID){
+			facebookAuth = true;
+		}
+		else if(githubID){
+			githubAuth = true;
+		}
+		if(facebookAuth){
+			userId = facebookID;
+			name = madpadUserData.facebookName;
+			imageUrl = madpadUserData.facebookPicture;
+		}
+		if(githubAuth){
+			userId = githubID;
+			name = madpadUserData.githubName;
+			imageUrl = madpadUserData.githubPicture;			
+		}
+		var messageObject = {
+			'room': padName,
+			'name': name,
+			'picture': imageUrl,
+			'message': messageValue,
+			'profileId': userId
+		};
+
+		if(messageObject.profileId == ""){
+			messageObject.picture = {
+				'letter': notSignedInUserObject.letter,
+				'color': notSignedInUserObject.color,
+				'animal': notSignedInUserObject.animal
+			};
+		}
+
+		madpadSocket.emit('chat', messageObject);
+		$('#m').val('');
+		messageObject.name = "me";
+		madpadChat.appendChat(messageObject);
+		return false;
+	});
+	
+	// receiving chat object from socket
+	madpadSocket.on('newMessage', function(msg){
+		madpadChat.appendChat(msg);
+	});
+
+	// toggle chat window functionality
+	var toggleChat = function(){
+
+		$("body").delegate(".chaton-icon", "click", function(){
+			madpadSocket.emit('disableChat', {room: padName, disable: true})
+		})
+		$("body").delegate(".chatoff-icon", "click", function(){
+			madpadSocket.emit('disableChat', {room: padName, disable: false})
+		})
+
+		madpadSocket.on('toggleChat', function(whichWay){
+			$("#message").empty();
+			if(!whichWay){
+				mpFrontend.chat.open();
+			}
+			else{
+				mpFrontend.chat.close();
+			}
+		});
+		
+	}();
+
+});

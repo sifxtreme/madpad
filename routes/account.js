@@ -50,14 +50,15 @@ module.exports = function(app, passport){
 	}
 
 	var createPadOnUsername = function(userID, username){
-	  padName = username + '_text_home';
+	  padName = username + '_home';
 	  console.log("Creating pad document: " + padName);
 	  var newPad = new Pad({
 	  	name: padName,
 	  	owner: userID,
 	  	writeAccess: false,
 	  	readAccess: false,
-	  	codeType: ''
+	  	codeType: 'textpad',
+	  	chatOn: false,
 	  })
 
 	  newPad.save(function(err){
@@ -100,12 +101,11 @@ module.exports = function(app, passport){
 
 	app.get('/account', function(req, res){
 	  if(req.madpad_user.user.username){
-	    console.log("we are already logged in");
+	    console.log("we are already logged in...redirecting");
 	    res.redirect("/"+req.madpad_user.user.username + "/home");
 	  }
 	  else{
 	    var userData = getSocialAccount(req.madpad_user.user);
-	    console.log(userData);
 	    res.render('account', {user: userData});
 	  }
 	});

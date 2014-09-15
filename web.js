@@ -72,6 +72,8 @@ io.on('connection', function(socket){
     if(!data.room) return;
     if(typeof data.disable === 'undefined') return;
 
+    console.log('disable chat for room: ' + data.room);
+
     var cookie = socket.request.headers.cookie;
     var user = sessions.getUserData(cookie);
 
@@ -139,8 +141,10 @@ app.get('/:username/:id', function(req, res, next){
   // edge case for channel url for sharejs
   if(req.url.indexOf('/channel/') === 0) return next();
 
+  var userroom = req.params.username;
+
   sharejs.server.attach(app, options);
-  res.render('pad', { id: req.params.id, user: req.madpad_user.user, username: req.params.username });
+  res.render('pad', { id: req.params.id, user: req.madpad_user.user, userroom: userroom });
 });
 
 
