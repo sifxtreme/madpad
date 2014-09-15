@@ -89,6 +89,13 @@ io.on('connection', function(socket){
       })
     }
   });
+
+  // // NEED COOKIE INFO
+  // socket.on('cookieInfo', function(s){
+  //   var cookie = socket.request.headers.cookie;
+  //   var user = sessions.getUserData(cookie);
+  //   console.log(user);
+  // });
 });
 
 /* ***************************************************************************** */
@@ -131,9 +138,7 @@ app.get('/:username', function(req, res, next){
 app.get('/:username/:id', function(req, res, next){
   // edge case for channel url for sharejs
   if(req.url.indexOf('/channel/') === 0) return next();
-  
-  console.log(req.madpad_user.user)
-  
+
   sharejs.server.attach(app, options);
   res.render('pad', { id: req.params.id, user: req.madpad_user.user, username: req.params.username });
 });

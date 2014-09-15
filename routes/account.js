@@ -99,8 +99,6 @@ module.exports = function(app, passport){
 	});
 
 	app.get('/account', function(req, res){
-		console.log(req.madpad_user.user);
-
 	  if(req.madpad_user.user.username){
 	    console.log("we are already logged in");
 	    res.redirect("/"+req.madpad_user.user.username + "/home");

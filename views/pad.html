@@ -117,7 +117,7 @@ if(user) padName = user + '_' + padName;
 var padData = {
 }
 
-var options = {authentication: '{{username}}'};
+var options = {authentication: '{{user._id}}'};
 
 madpadSocket.emit('room', padName);
 

@@ -5,23 +5,20 @@ privacy = {
   db: {type: 'redis'},
   browserChannel: {cors: '*'},
   auth: function(agent, action) {
-  	console.log('d' + agent.authentication)
+  	var userID = agent.authentication || '';
     var docName = action.docName;
     var padInfo = Pad.findOne(
       {'name': docName},
-      function(err, obj){
-        if(!obj){
+      function(err, pad){
+        if(!pad){
         	console.log('pad object is not in the mongodb')
           action.accept();
         }
         else{
-          var writeAccess = obj.writeAccess;
-          var readAccess = obj.readAccess;
-          console.log()
-          writeAccess = true;
-          readAccess = true;
+          var writeAccess = pad.writeAccess;
+          var readAccess = pad.readAccess;
 
-          if(action.name == 'connect'){
+          if(action.name == 'connect'){ // always allow connections
             action.accept();
           }
           else{
@@ -34,11 +31,17 @@ privacy = {
                   action.accept();
                 }
                 else{
-                  action.reject();
+                	// dont allow writing actions
+                	// but check for owner
+                	if(pad.owner == userID) action.accept();
+                  else action.reject();
                 }
               }
               else{
-                action.reject();
+              	// don't allow any actions
+              	// but check for owner
+              	if(pad.owner == userID) action.accept();
+                else action.reject();
               }
             }
           }
