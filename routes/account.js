@@ -1,6 +1,7 @@
 module.exports = function(app, passport){
 	var mongoose = require('mongoose');
 	var User = require('../models/user.js');
+	var Pad = require('../models/pad.js');
 
 	var getSocialAccount = function(user){
 	  var userID, userName, userPicture,
@@ -80,12 +81,15 @@ module.exports = function(app, passport){
 	});
 
 	app.get('/account', function(req, res){
+		console.log(req.madpad_user.user);
+
 	  if(req.madpad_user.user.username){
 	    console.log("we are already logged in");
 	    res.redirect("/"+req.madpad_user.user.username + "/home");
 	  }
 	  else{
 	    var userData = getSocialAccount(req.madpad_user.user);
+	    console.log(userData);
 	    res.render('account', {user: userData});
 	  }
 	});
@@ -123,7 +127,10 @@ module.exports = function(app, passport){
 	                res.render('account', {user: userData, error: "Error saving to DB", previousValue: username});
 	              }
 	              else{
+	              	console.log("Updated username of user");
 	                res.redirect("/" + username + "/home");
+
+	                console.log('xxx');
 	              }
 	            });
 	          }

@@ -63,7 +63,7 @@ function(accessToken, refreshToken, profile, done) {
 				// new user
 				else{
 					var newUser = new User({
-						facebookId: profileID,
+						facebookID: profileID,
 						facebookName: displayName,
 						facebookPicture: pictureURL,
 						facebookDate: Date.now(),
@@ -144,7 +144,7 @@ function(accessToken, refreshToken, profile, done) {
 				// new user
 				else{
 					var newUser = new User({
-						githubId: profileID,
+						githubID: profileID,
 						githubName: displayName,
 						githubPicture: pictureURL,
 						githubDate: Date.now(),
