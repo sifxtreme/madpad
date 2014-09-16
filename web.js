@@ -142,9 +142,48 @@ app.get('/:username/:id', function(req, res, next){
   if(req.url.indexOf('/channel/') === 0) return next();
 
   var userroom = req.params.username;
+  var roomID = req.params.id;
+  var padName = userroom + '_' + roomID;
+  // console.log(padName);
 
-  sharejs.server.attach(app, options);
-  res.render('pad', { id: req.params.id, user: req.madpad_user.user, userroom: userroom });
+  var userID = '';
+  var username = '';
+  if(req.madpad_user && req.madpad_user && req.madpad_user.user && req.madpad_user.user._id){
+    userID = req.madpad_user.user._id;
+    username = req.madpad_user.user.username;
+  }
+
+  // TO-DO have 403 send correct status
+
+  Pad.findOne({'name': padName}, function(err, pad){
+    if(err){
+      console.log(err);
+    } 
+    else{
+      if(!pad){
+        // we are logged in as the user in the url
+        if(username == userroom){
+          res.render('createpad');
+        }
+        // we are a stranger
+        else{
+          res.render('403');
+        }
+      }
+      else{
+        // we arent the correct user and we are not allowed readAccess
+        if(!pad.readAccess && pad.owner != userID){
+          res.render('403');
+        }
+        else{
+          // we have readAccess
+          sharejs.server.attach(app, options);
+          res.render('pad', { id: roomID, user: req.madpad_user.user, userroom: userroom });
+        }        
+      }
+    }
+  })
+
 });
 
 

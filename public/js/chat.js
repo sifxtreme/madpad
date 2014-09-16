@@ -150,6 +150,7 @@ madpadChat = {
 }
 
 $(document).ready(function(){
+	if(!$('.madpadChatForm').length) return;
 
 	var notSignedInUserObject = madpadChat.options.randomize();
 
@@ -232,7 +233,7 @@ $(document).ready(function(){
 		})
 
 		madpadSocket.on('toggleChat', function(whichWay){
-			$("#message").empty();
+			$("#messages").empty();
 			if(!whichWay){
 				mpFrontend.chat.open();
 			}
@@ -240,7 +241,7 @@ $(document).ready(function(){
 				mpFrontend.chat.close();
 			}
 		});
-		
+
 	}();
 
 });
