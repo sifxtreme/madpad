@@ -15,6 +15,7 @@ var sessions = require('./cookie.js');
 var app = express(); 
 app.configure(function(){
   app.set('view engine', 'html');
+  hbs.registerPartials(__dirname + '/views/partials');
   app.engine('html', hbs.__express);
   app.use(express.static('public'));
   app.use(express.cookieParser());

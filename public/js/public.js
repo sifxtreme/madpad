@@ -30,21 +30,21 @@ $( window ).load(function() {
 	// window[window_size]();
 	window_size();
     
-    $(window).bind('resize', window_size);
-    /* Set Side Bar to Window Size */
+	$(window).bind('resize', window_size);
+	/* Set Side Bar to Window Size */
 
 	$('img').bind('dragstart', function(){
 		return false; 
 	});
 
-    function newPadShadow(){
+  function newPadShadow(){
 		$('.all-pads').scroll(function() {
-		    if ($(this).scrollTop() > 0 ) {
-		        $(".new-pad").addClass("new-pad-active");
-		    }
-		    else {
-	        	$(".new-pad").removeClass("new-pad-active");
-	    	}
+			if ($(this).scrollTop() > 0 ) {
+				$(".new-pad").addClass("new-pad-active");
+			}
+			else {
+				$(".new-pad").removeClass("new-pad-active");
+			}
 		}); /* Give the drop shadow to the "New Pad" area*/
 	}
 	newPadShadow();
@@ -64,17 +64,17 @@ $( window ).load(function() {
 
 		$(document).mouseup(function (e)
 		{
-		    var container = $(".new-pad-area");
+	    var container = $(".new-pad-area");
 
-		    if (!container.is(e.target) // if the target of the click isn't the container...
-		        && container.has(e.target).length === 0) // ... nor a descendant of the container
-		    {
-		        container.hide(); /* hide the new pad area */
-		        $('.new-pad-area').animate({left:'220px'},0); /* move the div back */
-		        $('.darken').hide(); /* hiden darken state */
-		        $('.status').stop().slideUp();
+	    if (!container.is(e.target) // if the target of the click isn't the container...
+	        && container.has(e.target).length === 0) // ... nor a descendant of the container
+	    {
+				container.hide(); /* hide the new pad area */
+				$('.new-pad-area').animate({left:'220px'},0); /* move the div back */
+				$('.darken').hide(); /* hiden darken state */
+				$('.status').stop().slideUp();
 		       
-		    }
+	    }
 		});
 	}
 	newPad();
@@ -91,18 +91,6 @@ $( window ).load(function() {
 	 		$('.underline').css('border-bottom', '2px solid #ddd');
 		});
 	}
-
-
-
-	function sendMessages(){
-		$('.message-input').keypress(function(e){
-			if(e.which ==13 && !e.shiftKey){
-				$(this).submit();
-				return false;
-			}
-		}); /* allows enter to send messages and shift enter to make new line */
-	}
-	sendMessages();
 
 	function editorActive(){
 
@@ -136,77 +124,6 @@ $( window ).load(function() {
 	}
 	socialType();
 
-	// function openLogin(){
-	// 	$('.login-button').click(function(){
-	// 		$('.signup').hide();
-	// 		$('.login').show();
-	// 	});
-	// 	closeModal();
-	// }
-	// openLogin();
-
-	// function openSignUp(){
-	// 	$('.signup-button').click(function(){
-	// 		$('.login').hide();
-	// 		$('.signup').show();
-	// 	});
-	// 	closeModal();
-	// }
-	// openSignUp();
-
-	// function closeModal(){
-	// 	$('.account').hide();
-	// 	$('.modal-close').click(function(){
-	// 		$(this).parent().hide();
-	// 	});
-	// }
-	function loginToggle(){
-
-		$('.login-button').click(function(){
-			showOverlay('.login');
-		});
-
-		$('#signup-link').click(function(){
-			hideOverlay('.login');
-			showOverlay('.signup');
-		});
-
-	}
-	loginToggle();
-
-	function signUpToggle(){
-
-		$('.signup-button').click(function(){
-			hideOverlay('.login');
-			showOverlay('.signup');
-		});
-
-		$('#login-link').click(function(){
-			hideOverlay('.signup');
-			showOverlay('.login');
-		});
-	}
-	signUpToggle()
-
-	function closeAccount(){
-
-		$('.modal-close').click(function(){
-			hideOverlay('.account');
-		});
-	}
-	closeAccount();
-
-
-	$(document).keyup(function(e){
-		if(e.keyCode == 27){
-			hideOverlay('.delete-confirmation');
-			hideOverlay('.sharing-settings');
-			hideOverlay('.account');
-			$(".new-pad-area").hide();
-			$('.darken').hide();
-
-		}
-	});
 
 	mpFrontend = {
 		chat: {
@@ -349,9 +266,136 @@ $( window ).load(function() {
 				this.onFormSubmit();
 			}
 		},
+		modals: {
+			//Open and Close Overlays
+			showOverlay: function(element){
+				$(element).removeClass('overlay-close');
+				$(element).addClass('overlay-open');	
+			},
+			hideOverlay: function(element){
+				$(element).removeClass('overlay-open');
+				$(element).addClass('overlay-close');		
+			},
+			escKeyHideOverlay: function(modals){
+				$(document).keyup(function(e){
+					if(e.keyCode == 27){
+						modals.hideOverlay('.delete-confirmation');
+						modals.hideOverlay('.sharing-settings');
+						modals.hideOverlay('.account');
+						$(".new-pad-area").hide();
+						$('.darken').hide();
+					}
+				});
+			},
+
+			// settings model
+			changeSettings: {
+				selectSetting: function(){
+					var radioOn = function(element){
+						$(element).children('.radio').removeClass('radio-off').addClass('radio-on');
+					}
+					var radioOff = function(element){
+						$(element).children('.radio').removeClass('radio-on').addClass('radio-off');	
+					}
+
+					$('#private-setting').click(function(){
+						radioOn(this);
+						radioOff('#shared-setting');
+						radioOff('#public-setting');
+					});
+
+					$('#shared-setting').click(function(){
+						radioOn(this);
+						radioOff('#private-setting');
+						radioOff('#public-setting');
+					});
+
+					$('#public-setting').click(function(){
+						radioOn(this);
+						radioOff('#private-setting');
+						radioOff('#shared-setting');
+					});
+				},
+				run: function(modals){
+					this.selectSetting();
+
+					$('.pad-settings').click(function(){
+						modals.showOverlay('.sharing-settings');
+					});
+
+					$('#save-settings').click(function(){
+						modals.hideOverlay('.sharing-settings');
+					});
+
+					$('#cancel-settings').click(function(){
+						modals.hideOverlay('.sharing-settings');
+					});
+
+					$('.modal-close').click(function(){
+						modals.hideOverlay('.account');
+					});
+				}
+			},
+
+			// delete modal
+			deletePad: {
+				run: function(modals){
+					$('.trash-icon').click(function(){
+						modals.showOverlay('.delete-confirmation');
+					});
+
+					$('#confirm-delete').click(function(){
+						modals.hideOverlay('.delete-confirmation');
+					});
+
+					$('#cancel-delete').click(function(){
+						modals.hideOverlay('.delete-confirmation');
+					});
+				}
+			},
+
+			// login modal
+			login: {
+				run: function(modals){
+					$('.login-button').click(function(){
+						modals.showOverlay('.login');
+					});
+
+					$('#signup-link').click(function(){
+						modals.hideOverlay('.login');
+						modals.showOverlay('.signup');
+					});					
+				}
+			},
+
+			// signup modal
+			signup: {
+				run: function(modals){
+					$('.signup-button').click(function(){
+						modals.hideOverlay('.login');
+						modals.showOverlay('.signup');
+					});
+
+					$('#login-link').click(function(){
+						modals.hideOverlay('.signup');
+						modals.showOverlay('.login');
+					});
+				}
+			},
+
+			run: function(){
+				this.escKeyHideOverlay(this);
+				this.changeSettings.run(this);
+				this.deletePad.run(this);
+				this.login.run(this);
+				this.signup.run(this);
+			},
+
+		},
 		run: function(){
 			this.chat.run();
 			this.newPadForm.run();
+			this.modals.run();
 		}
 	}
 
@@ -373,84 +417,4 @@ $( window ).load(function() {
 	}
 	iconHover();
 
-	function selectSetting(){
-
-		function radioOn(element){
-			$(element).children('.radio').removeClass('radio-off').addClass('radio-on');
-		}
-
-		function radioOff(element){
-			$(element).children('.radio').removeClass('radio-on').addClass('radio-off');
-		}
-
-
-		$('#private-setting').click(function(){
-			radioOn(this);
-			radioOff('#shared-setting');
-			radioOff('#public-setting');
-		});
-
-		$('#shared-setting').click(function(){
-			radioOn(this);
-			radioOff('#private-setting');
-			radioOff('#public-setting');
-		});
-
-		$('#public-setting').click(function(){
-			radioOn(this);
-			radioOff('#private-setting');
-			radioOff('#shared-setting');
-		});
-	}
-
-	function settingsToggle(){
-
-		selectSetting();
-
-		$('.pad-settings').click(function(){
-			showOverlay('.sharing-settings');
-		});
-
-		$('#save-settings').click(function(){
-			hideOverlay('.sharing-settings');
-		});
-
-		$('#cancel-settings').click(function(){
-			hideOverlay('.sharing-settings');
-		});
-
-	}
-	settingsToggle();
-
-
-	function deleteToggle(){
-		$('.trash-icon').click(function(){
-			showOverlay('.delete-confirmation');
-		});
-
-		$('#confirm-delete').click(function(){
-			hideOverlay('.delete-confirmation');
-		});
-
-		$('#cancel-delete').click(function(){
-			hideOverlay('.delete-confirmation');
-		});
-	};
-	deleteToggle();
-
-
-	function hideOverlay(element){
-		$(element).removeClass('overlay-open');
-		$(element).addClass('overlay-close');
-	}
-
-	function showOverlay(element){
-		$(element).removeClass('overlay-close');
-		$(element).addClass('overlay-open');
-	}
-	//Open and Close Overlays
-
 });
-
-
-

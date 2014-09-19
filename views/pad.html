@@ -90,6 +90,10 @@
 				<!-- <a href="/auth/facebook/">Auth</a> -->
 			</div>
 			<div class="title-options">
+<!-- 				<a href="#" id="writeOpen">WRITE OPEN</a>
+				<a href="#" id="writeClose">WRITE CLOSE</a>
+				<a href="#" id="readOpen">READ OPEN</a>
+				<a href="#" id="readClose">READ CLOSE</a> -->
 				<div class="icon private-icon pad-settings"></div>
 				<div class="icon chaton-icon"></div>
 				<div class="icon trash-icon"></div>
@@ -142,4 +146,56 @@ var options = {authentication: '{{user._id}}'};
 madpadSocket = io();
 madpadSocket.emit('room', padName);
 
+$()
+
+</script>
+<script>
+$(document).ready(function(){
+	var padPrivacy = {
+		openWrite: function(){
+
+		},
+		closeWrite: function(){
+
+		},
+		openRead: function(){
+
+		},
+		closeRead: function(){
+
+		}
+	}
+	$("#writeOpen").on("click", function(){
+
+	});
+	$("#writeClose").on("click", function(){
+
+	});
+	$("#readOpen").on("click", function(){
+
+	});
+	$("#readOpen").on("click", function(){
+
+	});
+
+	madpadSocket.on('toggleWrite', function(whichWay){
+		// if(!whichWay){
+		// 	mpFrontend.chat.open();
+		// }
+		// else{
+		// 	mpFrontend.chat.close();
+		// }
+	});
+
+	madpadSocket.on('toggleRead', function(whichWay){
+		// if(!whichWay){
+		// 	mpFrontend.chat.open();
+		// }
+		// else{
+		// 	mpFrontend.chat.close();
+		// }
+	});
+
+
+});
 </script>

@@ -222,6 +222,18 @@ $(document).ready(function(){
 		madpadChat.appendChat(msg);
 	});
 
+	// submit chat form
+	function sendMessages(){
+		$('.message-input').keypress(function(e){
+			/* allows enter to send messages and shift enter to make new line */
+			if(e.which == 13 && !e.shiftKey){
+				$(this).submit();
+				return false;
+			}
+		});
+	}
+	sendMessages();
+
 	// toggle chat window functionality
 	var toggleChat = function(){
 
