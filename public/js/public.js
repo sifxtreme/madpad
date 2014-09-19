@@ -60,7 +60,6 @@ $( window ).load(function() {
 			$('.new-pad-area').animate({left:'235px'}, 100); /* move the pad for slide effect */
 			$('#create-input').focus(); /* focus on the new pad input */
 			inputFocus();
-			padType();
 		});
 
 		$(document).mouseup(function (e)
@@ -93,22 +92,7 @@ $( window ).load(function() {
 		});
 	}
 
-	function padType(){
 
-		$('#text-pad').click(function(){
-			$(this).parent().addClass('active-type');
-			$('#code-pad').parent().removeClass('active-type');
-			$('#code-info').hide();
-			$('#text-info').show();
-		}); /* if you click text pad */
-
-		$('#code-pad').click(function(){
-			$(this).parent().addClass('active-type');
-			$('#text-pad').parent().removeClass('active-type');
-			$('#text-info').hide();
-			$('#code-info').show();
-		}); /* if you click code pad */
-	}
 
 	function sendMessages(){
 		$('.message-input').keypress(function(e){
@@ -229,7 +213,7 @@ $( window ).load(function() {
 			open: function(){
 				$('.chaton-icon').removeClass('chaton-icon').addClass('chatoff-icon');
 				$('.middle').addClass('no-chat-fix');
-				$('.right').hide();	
+				$('.right').hide();
 			},
 			close: function(){
 				$('.chatoff-icon').removeClass('chatoff-icon').addClass('chaton-icon');
@@ -241,9 +225,137 @@ $( window ).load(function() {
 				$("body").delegate(".chatoff-icon", "click", this.close)		
 			}
 		},
+		newPadForm: {
+			usernameTemplate: $('input[name="pad[usernameTemplate]"]').val(),
+			username: $('input[name="pad[currentUsername]"]').val(),
+			getPadName: function(){
+				return $('input[name="pad[name]"]').val()
+			},
+			getPadType: function(){
+				return $('input[name="pad[type]"]').val()
+			},
+			textPadClick: function(){
+				var _this = this;
+				$('#text-pad').click(function(){
+					$(this).parent().addClass('active-type');
+					$('#code-pad').parent().removeClass('active-type');
+					$('#code-info').hide();
+					$('#text-info').show();
+					$('input[name="pad[type]"]').val('text');
+					_this.updateOpenPadURL();
+				}); /* if you click text pad */				
+			},
+			codePadClick: function(){
+				var _this = this;
+				$('#code-pad').click(function(){
+					$(this).parent().addClass('active-type');
+					$('#text-pad').parent().removeClass('active-type');
+					$('#text-info').hide();
+					$('#code-info').show();
+					$('input[name="pad[type]"]').val('code');
+					_this.updateOpenPadURL();
+				}); /* if you click code pad */
+			},
+			updateOpenPadURL: function(){
+				var newPadURL = window.location.host;
+				var padName = this.getPadName();
+				var padType = this.getPadType();
+				var padURL;
+
+				// return if empty pad name
+				if(padName == ''){
+					$('.inputWhatPadWillOpen').text('');
+					return false;
+				}
+
+				// pad name must be alphanumeric
+				if( /[^a-zA-Z0-9_]/.test(padName)){
+					$('.inputWhatPadWillOpen').text('Not valid pad name');
+					return false;
+				}
+
+				// check if we are the user and on our username pad template
+				if(this.username == this.usernameTemplate && this.usernameTemplate != ""){
+					padURL = '/' + this.username;
+					padURL += '/' + padName;
+				}
+				else if(padType == 'text'){
+					padURL = '/' + padName;
+				}
+				else{
+					padURL = '/code/' + padName;
+				}
+				newPadURL += padURL;
+				newPadURL = newPadURL.toLowerCase();
+
+				$('.inputWhatPadWillOpen').text(newPadURL);
+
+				return padURL;
+
+			},
+			onInputChange: function(){
+				var _this = this;
+				$('input[name="pad[name]"]').on('keyup', function(){
+					_this.updateOpenPadURL();
+				})
+			},
+			onFormSubmit: function(){
+				var _this = this;
+				$('.newPadForm').submit(function(){
+					var padName = _this.getPadName();
+					var padType = _this.getPadType();
+
+					var padURL = _this.updateOpenPadURL();
+
+					// error messaging for blank entry
+					if(padName == ''){
+						$('.inputErrors').text("Enter in some text");
+						return false;
+					}
+
+					if(_this.username != _this.usernameTemplate || _this.usernameTemplate == "" || _this.username == ""){
+						window.location.href = padURL;
+						return false;
+					}
+
+					if(!padURL) return false;
+
+					$.ajax({
+						type: "POST",
+						url: padURL,
+						data: $(this).serialize(),
+						dataType: "json",
+						timeout: 5000,
+						complete: function(){
+							console.log("complete");
+						},
+						success: function(data){
+							console.log("success");
+							console.log(data);
+						},
+						error: function(data){
+							console.log("error");
+							console.log(data);
+						}
+					})
+
+					return false;
+				});
+			},
+			run: function(){
+				this.textPadClick();
+				this.codePadClick();
+				this.onInputChange();
+				this.onFormSubmit();
+			}
+		},
+		run: function(){
+			this.chat.run();
+			this.newPadForm.run();
+		}
 	}
 
-	mpFrontend.chat.run();
+	mpFrontend.run();
 
 	function iconHover(){
 

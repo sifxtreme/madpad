@@ -1,1 +1,13 @@
-create pad
+<form method="post">
+	
+	{{#if error}}
+	<div class="error">
+		{{error}}
+	</div>
+	{{/if}}
+
+	<input type="radio" name="padType" value="code" id="padTypeCode"><label for="padTypeCode">Code</label>
+	<input type="radio" name="padType" value="text" id="padTypeText"><label for="padTypeText">Text</label>
+	<input type="submit" value="Create Pad">
+
+</form>

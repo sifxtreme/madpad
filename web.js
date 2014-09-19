@@ -106,25 +106,53 @@ io.on('connection', function(socket){
 
 require('./routes/account')(app, passport);
 
-app.get('/c/:id', function(req, res){
+// code pad
+app.get('/code/:id', function(req, res){
   sharejs.server.attach(app, options);
   var id = req.params.id;
   Pad.findOne({'name': 'code_' + id}, function(err, pad){
     if(err){
       // TODO - add error logging here
-      console.log("Error: " + err);      
+      console.log("Error: " + err);
+      // render error page
     }
     else {
-      padObject = {
-        type: pad.codeType
+      if(!pad){ // pad not in DB
+        var newPad = new Pad({
+          name: "code_" + id,
+          owner: "OWNER",
+          writeAccess: true,
+          readAccess: true,
+          codeType: 'text',
+          chatOn: true
+        })
+        newPad.save(function(err){
+          if(err){
+            // TODO - add error logging here
+            console.log("Error: " + err);
+            // render error page
+          }
+          else{
+            var padObject = {
+              type: newPad.codeType
+            }
+            res.render('code', {id: req.params.id, user: req.madpad_user.user, pad: padObject });
+          }
+        })
       }
-      res.render('code', {id: req.params.id, user: req.madpad_user.user, pad: padObject });
+      else{ // pad already in DB
+        var padObject = {
+          type: pad.codeType
+        }
+        res.render('code', {id: req.params.id, user: req.madpad_user.user, pad: padObject });        
+      }
     }
   });
   
 });
 
-app.get('/t/:id', function(req, res){
+// text pad
+app.get('/:id', function(req, res){
   sharejs.server.attach(app, options);
   res.render('pad', {id: req.params.id, user: req.madpad_user.user });
 });
@@ -134,12 +162,67 @@ app.get('/', function(req, res) {
   res.render('index');
 });
 
-app.get('/:username', function(req, res, next){
-  res.redirect('/' + req.params.username + '/home');
+
+app.post('/:username/:id', function(req, res, next){
+  if(req.params.username == 'channel') return next();
+
+  var userRoom = req.params.username;
+  var userID = '';
+  var username = '';
+  if(req.madpad_user && req.madpad_user && req.madpad_user.user && req.madpad_user.user._id){
+    userID = req.madpad_user.user._id;
+    username = req.madpad_user.user.username;
+  }
+
+  var id = req.params.id.toLowerCase();
+  var padType = "textpad"
+  if(req.body.pad.type == "code"){
+    padType = "text"
+  }
+
+  res.contentType('json');
+
+  if(username != userRoom){
+    res.send({ error: 'true', errorType: 'incorrect user'}); 
+  }
+
+  Pad.findOne({'name': username + '_' + id}, function(err, pad){
+    if(err){
+      // TODO - add error logging here
+      console.log("Error: " + err);
+      // render error page
+    }
+    else {
+      if(!pad){ // pad not in DB
+        var newPad = new Pad({
+          name: username + "_" + id,
+          owner: userID,
+          writeAccess: false,
+          readAccess: false,
+          codeType: padType,
+          chatOn: false
+        })
+        newPad.save(function(err){
+          if(err){
+            // TODO - add error logging here
+            console.log("Error: " + err);
+            // render error page
+          }
+          else{
+            res.send({success: 'true'});
+          }
+        })
+      }
+      else{ // pad already in DB
+        res.send({ error: 'true', errorType: 'existence'}); 
+      }
+    }
+  });  
+
 });
 app.get('/:username/:id', function(req, res, next){
   // edge case for channel url for sharejs
-  if(req.url.indexOf('/channel/') === 0) return next();
+  if(req.params.username == 'channel') return next();
 
   var userroom = req.params.username;
   var roomID = req.params.id;
@@ -175,10 +258,14 @@ app.get('/:username/:id', function(req, res, next){
         if(!pad.readAccess && pad.owner != userID){
           res.render('403');
         }
-        else{
-          // we have readAccess
+        else{ // we have readAccess
+          
           sharejs.server.attach(app, options);
-          res.render('pad', { id: roomID, user: req.madpad_user.user, userroom: userroom });
+          var renderTemplate = 'pad';
+          if(typeof pad.codeType !== 'undefined' && pad.codeType != 'textpad'){
+            renderTemplate = 'code';
+          }
+          res.render(renderTemplate, { id: roomID, user: req.madpad_user.user, userroom: userroom });
         }        
       }
     }

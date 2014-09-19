@@ -1,7 +1,7 @@
 <div class="madpad-container minwidth">
-<!-- 	<section class="new-pad btn btn-1e">
+	<section class="new-pad btn btn-1e">
 		<a href="#"><img src="/images/sidebar/new@2x.png">New Pad</a>
-	</section> -->
+	</section>
 	<div class="left">
 		<div class="offset"></div>
 		<div class="all-pads">
@@ -42,14 +42,24 @@
 
 	<div class="new-pad-area">
 		<div class="input-area">
-			<div class="pad-name">
-				<div class="name-input">
-					<input type="text" placeholder="Enter pad name here..." id="create-input" class="input" />
-					<div class="underline"></div>
-				</div> <!-- place to enter new pad's name -->
-			</div>
-			<br/>
-			<button class="green-btn">CREATE PAD</button>
+
+			<form method="post" class="newPadForm">
+				<div class="pad-name">
+					<div class="name-input">
+						<input type="text" name="pad[name]" placeholder="Enter pad name here..." id="create-input" class="input" />
+						<div class="underline"></div>
+					</div> <!-- place to enter new pad's name -->
+				</div>
+				<br/>
+				<button class="green-btn">CREATE PAD</button>
+				<input type="" name="pad[type]" value="text"/>
+				<input type="" name="pad[usernameTemplate]" value="{{userroom}}" />
+				<input type="" name="pad[currentUsername]" value="{{user.username}}"/>
+				<input type="" name="pad[ajax]" value="true" />
+				<div class="inputWhatPadWillOpen"></div>
+				<div class="inputErrors"></div>
+			</form>
+
 		</div> <!--  white area of creating a new pad -->
 		<div class="pad-options">
 			<div class="pad-type">

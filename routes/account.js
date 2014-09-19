@@ -77,7 +77,7 @@ module.exports = function(app, passport){
 	  passport.authenticate('facebook', { failureRedirect: '/' }),
 	  function(req, res) {
 	    req.madpad_user.user = req.user;
-	    if(req.user.username) res.redirect('/' + req.user.username);
+	    if(req.user.username) res.redirect('/' + req.user.username + '/home/');
 	    else res.redirect('/account');
 	  });
 
@@ -89,7 +89,7 @@ module.exports = function(app, passport){
 	  passport.authenticate('github', { failureRedirect: '/' }),
 	  function(req, res) {
 	    req.madpad_user.user = req.user;
-	    if(req.user.username) res.redirect('/' + req.user.username);
+	    if(req.user.username) res.redirect('/' + req.user.username + '/home/');
 	    else res.redirect('/account');
 	  });
 
