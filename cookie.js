@@ -13,6 +13,7 @@ var decode = function(text){
 }	
 
 var formatSocketCookie = function(text){
+	if(!text) return false;
 	var cookiesArray = [];
 	text = text.replace(';', '');
 	cookiesArray = text.split(' ');
@@ -30,6 +31,7 @@ var formatSocketCookie = function(text){
 }
 
 var getUserData = function(text){
+	if(!text) return false;
 	var encoded = formatSocketCookie(text);
 	if(encoded.madpad_user){
 		return decode(encoded.madpad_user);	

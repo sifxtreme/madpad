@@ -233,7 +233,6 @@ $(document).ready(function(){
 		})
 
 		madpadSocket.on('toggleChat', function(whichWay){
-			$("#messages").empty();
 			if(!whichWay){
 				mpFrontend.chat.open();
 			}
