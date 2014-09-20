@@ -208,7 +208,7 @@ $( window ).load(function() {
 				}
 
 				// pad name must be alphanumeric
-				if( /[^a-zA-Z0-9_]/.test(padName)){
+				if( /[^a-zA-Z0-9_-]/.test(padName)){
 					$('.inputWhatPadWillOpen').text('Not valid pad name');
 					return false;
 				}

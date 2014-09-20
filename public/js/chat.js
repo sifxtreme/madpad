@@ -238,10 +238,10 @@ $(document).ready(function(){
 	var toggleChat = function(){
 
 		$("body").delegate(".chaton-icon", "click", function(){
-			madpadSocket.emit('disableChat', {room: padName, disable: true})
+			madpadSocket.emit('toggleChat', {room: padName, disable: true})
 		})
 		$("body").delegate(".chatoff-icon", "click", function(){
-			madpadSocket.emit('disableChat', {room: padName, disable: false})
+			madpadSocket.emit('toggleChat', {room: padName, disable: false})
 		})
 
 		madpadSocket.on('toggleChat', function(whichWay){

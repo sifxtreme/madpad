@@ -45,7 +45,7 @@
 	<div class="middle">
 		<div class="title">
 			<div class="pad-name">
-				<h2>{{id}} <span>pad</span></h2>
+				<h2>{{id}} <span>{{#if pad.isTextPad}}pad{{else}}{code pad}{{/if}}</span></h2>
 			</div>
 			<div class="title-options">
 <!-- 				<a href="#" id="writeOpen">WRITE OPEN</a>
@@ -58,9 +58,14 @@
 			</div>
 		</div>
 		<div class="pad-wrapper">
-			<div id="editor" class="pad-area" placeholder="Start typing here!"></div>
+			{{#if pad.isTextPad}}
+				<div id="editor" class="pad-area" placeholder="Start typing here!"></div>
+				<textarea class="main" style="display:none;" id="pusherContentEditable"></textarea>
+			{{else}}
+				{{> code_modes_select}}
+				<div id="editor-code" class="pad-area"></div>
+			{{/if}}
 		</div>
-		<textarea class="main" style="display:none;" id="pusherContentEditable"></textarea>
 	</div> <!-- main text area -->
 
 	<div class="right">
@@ -82,10 +87,13 @@
 <script>
 
 var id = '{{id}}';
-var usersRoom = '{{userroom}}';
-var padName = (usersRoom) ? usersRoom + '_' + id : 'text' + '_' + id;
+var usersRoom = '{{usersRoom}}';
+var isTextPad = '{{pad.isTextPad}}';
+var padType = (isTextPad == 'true') ? 'text' : 'code';
+var padName = (usersRoom) ? usersRoom + '_' + id : padType + '_' + id;
 
 var padData = {
+	type: '{{pad.type}}' || 'text',
 }
 
 madpadUserData = {
@@ -103,8 +111,6 @@ var options = {authentication: '{{user._id}}'};
 
 madpadSocket = io();
 madpadSocket.emit('room', padName);
-
-$()
 
 </script>
 <script>

@@ -69,11 +69,12 @@ io.on('connection', function(socket){
   });
 
   // DISABLE CHAT IF OWNER
-  socket.on('disableChat', function(data){
+  socket.on('toggleChat', function(data){
     if(!data.room) return;
     if(typeof data.disable === 'undefined') return;
 
-    console.log('disable chat for room: ' + data.room);
+    console.log('toggle chat for room: ' + data.room);
+    console.log('Direction: ' + data.disable);
 
     var cookie = socket.request.headers.cookie;
     var user = sessions.getUserData(cookie);
@@ -84,13 +85,23 @@ io.on('connection', function(socket){
       console.log(data.room);
       Pad.findOne({name: data.room}, {owner: userID}, function(err, pad){
         if(err){
+          // TO DO - ERROR CHECKING
           console.log(err);
         }
         else {
           socket.broadcast.to(data.room).emit('toggleChat', !data.disable);
+          // TO DO - save toggle chat option to pad
         }
       })
     }
+  });
+
+  socket.on('toggleWrite', function(data){
+    console.log('socket toggleWrite');
+  });
+
+  socket.on('toggleRead', function(data){
+    console.log('socket toggleRead');
   });
 
   // // NEED COOKIE INFO
@@ -107,21 +118,33 @@ io.on('connection', function(socket){
 
 require('./routes/account')(app, passport);
 
+var getPadObject = function(write, read, type, chat){
+  return {
+    isTextPad: true,
+    writeAccess: write,
+    readAccess: read,
+    type: type,
+    chat: chat
+  }
+}
+
 // code pad
 app.get('/code/:id', function(req, res){
   sharejs.server.attach(app, options);
   var id = req.params.id;
+  var padObject = getPadObject(true, true, 'text', true);
+  padObject.isTextPad = false;
   Pad.findOne({'name': 'code_' + id}, function(err, pad){
     if(err){
       // TODO - add error logging here
-      console.log("Error: " + err);
+      console.log('Error: ' + err);
       // render error page
     }
     else {
       if(!pad){ // pad not in DB
         var newPad = new Pad({
-          name: "code_" + id,
-          owner: "OWNER",
+          name: 'code_' + id,
+          owner: 'OWNER',
           writeAccess: true,
           readAccess: true,
           codeType: 'text',
@@ -130,22 +153,17 @@ app.get('/code/:id', function(req, res){
         newPad.save(function(err){
           if(err){
             // TODO - add error logging here
-            console.log("Error: " + err);
+            console.log('Error: ' + err);
             // render error page
           }
           else{
-            var padObject = {
-              type: newPad.codeType
-            }
-            res.render('code', {id: req.params.id, user: req.madpad_user.user, pad: padObject });
+            res.render('pad', {id: req.params.id, user: req.madpad_user.user, pad: padObject });
           }
         })
       }
       else{ // pad already in DB
-        var padObject = {
-          type: pad.codeType
-        }
-        res.render('code', {id: req.params.id, user: req.madpad_user.user, pad: padObject });        
+        padObject.type = pad.codeType;
+        res.render('pad', {id: req.params.id, user: req.madpad_user.user, pad: padObject });        
       }
     }
   });
@@ -155,7 +173,8 @@ app.get('/code/:id', function(req, res){
 // text pad
 app.get('/:id', function(req, res){
   sharejs.server.attach(app, options);
-  res.render('pad', {id: req.params.id, user: req.madpad_user.user });
+  var padObject = getPadObject(true, true, 'textpad', true);
+  res.render('pad', {id: req.params.id, user: req.madpad_user.user, });
 });
 
 app.get('/', function(req, res) {
@@ -177,9 +196,9 @@ app.post('/:username/:id', function(req, res, next){
 
   // default set to textpad
   var id = req.params.id;
-  var padType = "textpad"
-  if(req.body.pad.type == "code"){
-    padType = "text"
+  var padType = 'textpad'
+  if(req.body.pad.type == 'code'){
+    padType = 'text'
   }
 
   // change to lowercase
@@ -200,13 +219,13 @@ app.post('/:username/:id', function(req, res, next){
   Pad.findOne({'name': username + '_' + id}, function(err, pad){
     if(err){
       // TODO - add error logging here
-      console.log("Error: " + err);
+      console.log('Error: ' + err);
       // render error page
     }
     else {
       if(!pad){ // pad not in DB
         var newPad = new Pad({
-          name: username + "_" + id,
+          name: username + '_' + id,
           owner: userID,
           writeAccess: false,
           readAccess: false,
@@ -216,7 +235,7 @@ app.post('/:username/:id', function(req, res, next){
         newPad.save(function(err){
           if(err){
             // TODO - add error logging here
-            console.log("Error: " + err);
+            console.log('Error: ' + err);
             // render error page
           }
           else{
@@ -235,10 +254,11 @@ app.get('/:username/:id', function(req, res, next){
   // edge case for channel url for sharejs
   if(req.params.username == 'channel') return next();
 
-  var userroom = req.params.username;
+  var padObject = getPadObject('pad', true, true, 'textpad', true);
+
+  var userRoom = req.params.username;
   var roomID = req.params.id;
-  var padName = userroom + '_' + roomID;
-  // console.log(padName);
+  var padName = userRoom + '_' + roomID;
 
   var userID = '';
   var username = '';
@@ -256,10 +276,10 @@ app.get('/:username/:id', function(req, res, next){
     else{
       if(!pad){
         // we are logged in as the user in the url
-        if(username == userroom){
+        if(username == userRoom){
           res.render('createpad');
         }
-        // we are a stranger
+        // we are a not the correct user
         else{
           res.render('403');
         }
@@ -271,12 +291,15 @@ app.get('/:username/:id', function(req, res, next){
         }
         else{ // we have readAccess
           
-          sharejs.server.attach(app, options);
-          var renderTemplate = 'pad';
+          padObject.writeAccess = pad.readAccess;
           if(typeof pad.codeType !== 'undefined' && pad.codeType != 'textpad'){
-            renderTemplate = 'code';
+            padObject.isTextPad = false;
+            padObject.type = pad.codeType;
           }
-          res.render(renderTemplate, { id: roomID, user: req.madpad_user.user, userroom: userroom });
+
+          sharejs.server.attach(app, options);
+          console.log(req.madpad_user.user);
+          res.render('pad', { id: roomID, user: req.madpad_user.user, usersRoom: userRoom, pad: padObject });
         }        
       }
     }

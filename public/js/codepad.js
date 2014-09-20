@@ -1,6 +1,7 @@
 $(window).load(function(){
 	if(!$('#editor-code').length) return;
 
+	// change code mode
 	var changeEditorType = function(type){
 		editor.session.setMode("ace/mode/" + type);
 		$("#mode").val(type);
@@ -24,7 +25,7 @@ $(window).load(function(){
 	});
 	
 	// share document
-	sharejs.open(padName, 'text', function(error, doc) {
+	sharejs.open(padName, 'text', options, function(error, doc) {
 		doc.attach_ace(editor);	
 		// go to the top line of the codepad editor when text loads
 		// otherwise we will end up at the bottom of the content
