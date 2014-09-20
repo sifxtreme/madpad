@@ -175,13 +175,23 @@ app.post('/:username/:id', function(req, res, next){
     username = req.madpad_user.user.username;
   }
 
-  var id = req.params.id.toLowerCase();
+  // default set to textpad
+  var id = req.params.id;
   var padType = "textpad"
   if(req.body.pad.type == "code"){
     padType = "text"
   }
 
+  // change to lowercase
+  username = username.toLowerCase();
+  id = id.toLowerCase();
+
+  // always return json
   res.contentType('json');
+
+  if(req.body.pad && typeof req.body.pad.ajax !== 'undefined' && req.body.pad.ajax !== 'true'){
+    res.send({});
+  }
 
   if(username != userRoom){
     res.send({ error: 'true', errorType: 'incorrect user'}); 

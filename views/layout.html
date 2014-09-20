@@ -45,16 +45,46 @@
     <p>Want a new pad? You got it!</p>
   </div>
 
-  {{> login}}
-  {{> signup}}
-  {{> settings}}
-  {{> delete}}
-  {{> open_pad}}
-  {{> create_pad}}
+  {{> modals/login}}
+  {{> modals/signup}}
+  {{> modals/settings}}
+  {{> modals/delete}}
+  <!-- {{> modals/open_pad}} -->
+  <!-- {{> modals/create_pad}} -->
+
 
   {{> header}}
 
   {{{body}}}
+
+  <div id="create-pad-modal" style="margin-top: 100px; border: 3px solid black">
+    <h2>CREATE PRIVATE</h2>
+    <form method="post" id="createPadForm" class="openCreatePadForm">
+      <input type="text" name="pad[name]" />
+      <input type="text" name="pad[type]" value="text" />
+      <input type="text" name="pad[username]" value="{{user.username}}" />
+      <input type="text" name="pad[ajax]" value="true" />
+      <div class="text-pad">TEXT</div>
+      <div class="code-pad">CODE</div>
+      <div class="inputWhatPadWillOpen"></div>
+      <div class="inputPadErrors"></div>
+      <button class="green-btn">CREATE PAD</button>
+    </form>
+  </div>
+
+  <div id="open-pad-modal" style="margin-top: 100px; border: 3px solid black; margin-bottom: 300px;">
+    <h2>OPEN PUBLIC</h2>
+    <form method="post" id="openPadForm" class="openCreatePadForm">
+      <input type="text" name="pad[name]" />
+      <input type="text" name="pad[type]" value="text" />
+      <input type="text" name="pad[ajax]" value="true" />
+      <div class="text-pad">TEXT</div>
+      <div class="code-pad">CODE</div>
+      <div class="inputWhatPadWillOpen"></div>
+      <div class="inputPadErrors"></div>
+      <button class="green-btn">CREATE PAD</button>
+    </form>
+  </div>
 
   <script src="/js/textpad.js"></script>
   <script src="/js/codepad.js"></script>
