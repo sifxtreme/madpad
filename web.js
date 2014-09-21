@@ -50,15 +50,31 @@ var options = require('./privacy.js');
 /* ***************************************************************************** */
 
 io.on('connection', function(socket){
+  
+  // join room initially
   socket.on('room', function(room){
     socket.join(room);
   });
-  // CHAT ROOM
+  
+  // chat room
   socket.on('chat', function(data){
     var messageObject = {'name': data.name, 'picture': data.picture, 'message': data.message, 'profileId': data.profileId};
     socket.broadcast.to(data.room).emit('newMessage', messageObject);
   });
-  // CHANGE CODE LANGUAGE
+
+  // get user id from socket
+  var getUserIdFromSocket = function(cookie){
+    var user = sessions.getUserData(cookie);
+    var userID = '';
+
+    if(user && user.content && user.content.user && user.content.user._id){
+      userID = user.content.user._id;
+    }
+
+    return userID;
+  }
+
+  // change code language
   socket.on('modeChanged', function(data){
     // add user checking
     Pad.update({name: data.room}, {$set: {codeType: data.codeMode}}, function(err, pad){
@@ -68,21 +84,17 @@ io.on('connection', function(socket){
     socket.broadcast.to(data.room).emit('changeMode', data.codeMode);
   });
 
-  // DISABLE CHAT IF OWNER
+  // disable chat if owner
   socket.on('toggleChat', function(data){
     if(!data.room) return;
     if(typeof data.disable === 'undefined') return;
 
-    console.log('toggle chat for room: ' + data.room);
+    console.log('Toggle Chat for Room: ' + data.room);
     console.log('Direction: ' + data.disable);
 
-    var cookie = socket.request.headers.cookie;
-    var user = sessions.getUserData(cookie);
+    var userID = getUserIdFromSocket(socket.request.headers.cookie);
 
-    if(user && user.content && user.content.user && user.content.user._id){
-      var userID = user.content.user._id; 
-      console.log(userID);
-      console.log(data.room);
+    if(userID){
       Pad.findOne({name: data.room}, {owner: userID}, function(err, pad){
         if(err){
           // TO DO - ERROR CHECKING
@@ -90,19 +102,44 @@ io.on('connection', function(socket){
         }
         else {
           socket.broadcast.to(data.room).emit('toggleChat', !data.disable);
+          console.log(data.disable);
+          Pad.findByIdAndUpdate(pad._id, {$set: {chatOn: !data.disable}}, function(err, pad){
+            if(err){
+              // TO DO - ERROR CHECKING
+              console.log(err);
+            }
+          });
           // TO DO - save toggle chat option to pad
         }
       })
     }
   });
 
-  socket.on('toggleWrite', function(data){
-    console.log('socket toggleWrite');
+  socket.on('togglePrivacy', function(data){
+    if(!data.room) return;
+
+    console.log('socket togglePrivacy');
+    console.log(data);
+
+    var userID = getUserIdFromSocket(socket.request.headers.cookie);
+
+    if(userID){
+      Pad.findOne({name: data.room}, {owner: userID}, function(err, pad){
+        if(err){
+          // TO DO - ERROR CHECKING
+          console.log(err);
+        }
+        else {
+          console.log('pad found');
+          console.log(pad);
+          socket.broadcast.to(data.room).emit('togglePrivacy', data);
+          // TO DO - save toggle chat option to pad
+        }
+      });
+    }
   });
 
-  socket.on('toggleRead', function(data){
-    console.log('socket toggleRead');
-  });
+
 
   // // NEED COOKIE INFO
   // socket.on('cookieInfo', function(s){
@@ -116,6 +153,7 @@ io.on('connection', function(socket){
 
 // ROUTES
 
+// login-signup routes
 require('./routes/account')(app, passport);
 
 var getPadObject = function(write, read, type, chat){
@@ -130,6 +168,7 @@ var getPadObject = function(write, read, type, chat){
 
 // code pad
 app.get('/code/:id', function(req, res){
+
   sharejs.server.attach(app, options);
   var id = req.params.id;
   var padObject = getPadObject(true, true, 'text', true);
@@ -157,13 +196,13 @@ app.get('/code/:id', function(req, res){
             // render error page
           }
           else{
-            res.render('pad', {id: req.params.id, user: req.madpad_user.user, pad: padObject });
+            res.render('pad', {id: req.params.id, user: req.madpad_user.user, userRoom: '', pad: padObject });
           }
         })
       }
       else{ // pad already in DB
         padObject.type = pad.codeType;
-        res.render('pad', {id: req.params.id, user: req.madpad_user.user, pad: padObject });        
+        res.render('pad', {id: req.params.id, user: req.madpad_user.user, userRoom: '', pad: padObject });        
       }
     }
   });
@@ -174,15 +213,16 @@ app.get('/code/:id', function(req, res){
 app.get('/:id', function(req, res){
   sharejs.server.attach(app, options);
   var padObject = getPadObject(true, true, 'textpad', true);
-  res.render('pad', {id: req.params.id, user: req.madpad_user.user, });
+  res.render('pad', {id: req.params.id, user: req.madpad_user.user, userRoom: '', pad: padObject});
 });
 
+// home page
 app.get('/', function(req, res) {
   sharejs.server.attach(app, options);
   res.render('index');
 });
 
-
+// post to create a new pad
 app.post('/:username/:id', function(req, res, next){
   if(req.params.username == 'channel') return next();
 
@@ -250,11 +290,13 @@ app.post('/:username/:id', function(req, res, next){
   });  
 
 });
+
+// user name pads
 app.get('/:username/:id', function(req, res, next){
   // edge case for channel url for sharejs
   if(req.params.username == 'channel') return next();
 
-  var padObject = getPadObject('pad', true, true, 'textpad', true);
+  var padObject = getPadObject(true, true, 'textpad', true);
 
   var userRoom = req.params.username;
   var roomID = req.params.id;
@@ -291,15 +333,17 @@ app.get('/:username/:id', function(req, res, next){
         }
         else{ // we have readAccess
           
-          padObject.writeAccess = pad.readAccess;
+          padObject.writeAccess = pad.writeAccess;
+          padObject.readAccess = pad.readAccess;
+          padObject.chat = pad.chatOn;
           if(typeof pad.codeType !== 'undefined' && pad.codeType != 'textpad'){
             padObject.isTextPad = false;
             padObject.type = pad.codeType;
           }
-
+          
           sharejs.server.attach(app, options);
-          console.log(req.madpad_user.user);
           res.render('pad', { id: roomID, user: req.madpad_user.user, usersRoom: userRoom, pad: padObject });
+
         }        
       }
     }
@@ -307,7 +351,7 @@ app.get('/:username/:id', function(req, res, next){
 
 });
 
-
+// color pad for jimmy
 app.get('/colors', function(req, res){
   res.render('colors');
 });

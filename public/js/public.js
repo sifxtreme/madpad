@@ -127,19 +127,19 @@ $( window ).load(function() {
 
 	mpFrontend = {
 		chat: {
-			open: function(){
+			close: function(){
 				$('.chaton-icon').removeClass('chaton-icon').addClass('chatoff-icon');
 				$('.middle').addClass('no-chat-fix');
 				$('.right').hide();
 			},
-			close: function(){
+			open: function(){
 				$('.chatoff-icon').removeClass('chatoff-icon').addClass('chaton-icon');
 				$('.middle').removeClass('no-chat-fix');
 				$('.right').show();				
 			},
 			run: function(){
-				$("body").delegate(".chaton-icon", "click", this.open)
-				$("body").delegate(".chatoff-icon", "click", this.close)		
+				$("body").delegate(".chatoff-icon", "click", this.open)
+				$("body").delegate(".chaton-icon", "click", this.close);
 			}
 		},
 		newPadForm: {

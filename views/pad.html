@@ -42,19 +42,19 @@
 
 	{{> new_pad}}
 
-	<div class="middle">
+	<div class="middle {{#unless pad.chat}}no-chat-fix{{/unless}}">
 		<div class="title">
 			<div class="pad-name">
 				<h2>{{id}} <span>{{#if pad.isTextPad}}pad{{else}}{code pad}{{/if}}</span></h2>
 			</div>
 			<div class="title-options">
-<!-- 				<a href="#" id="writeOpen">WRITE OPEN</a>
+				<a href="#" id="writeOpen">WRITE OPEN</a>
 				<a href="#" id="writeClose">WRITE CLOSE</a>
 				<a href="#" id="readOpen">READ OPEN</a>
-				<a href="#" id="readClose">READ CLOSE</a> -->
-				<div class="icon private-icon pad-settings"></div>
-				<div class="icon chaton-icon"></div>
-				<div class="icon trash-icon"></div>
+				<a href="#" id="readClose">READ CLOSE</a>
+				<div class="icon pad-settings {{#if pad.writeAccess}}{{#if pad.readAccess}}public-icon{{else}}shared-icon{{/if}}{{else}}private-icon{{/if}}"></div>
+				<div class="icon {{#if pad.chat}}chaton-icon{{else}}chatoff-icon{{/if}}"></div>
+				{{#if usersRoom}}<div class="icon trash-icon"></div>{{/if}}
 			</div>
 		</div>
 		<div class="pad-wrapper">
@@ -68,7 +68,7 @@
 		</div>
 	</div> <!-- main text area -->
 
-	<div class="right">
+	<div class="right" {{#unless pad.chat}}style="display:none"{{/unless}}>
 		<div class="chat-title">
 			<p><span>chat</span></p>
 		</div>
@@ -115,43 +115,38 @@ madpadSocket.emit('room', padName);
 </script>
 <script>
 $(document).ready(function(){
+	
 	var padPrivacy = {
 		openWrite: function(){
-
+			madpadSocket.emit('togglePrivacy', {room: padName, write: true, read: true});
 		},
 		closeWrite: function(){
-
+			madpadSocket.emit('togglePrivacy', {room: padName, write: false});
 		},
 		openRead: function(){
-
+			madpadSocket.emit('togglePrivacy', {room: padName, read: true});
 		},
 		closeRead: function(){
-
+			madpadSocket.emit('togglePrivacy', {room: padName, write: false, read: false});
 		}
 	}
-	$("#writeOpen").on("click", function(){
 
+	$("#writeOpen").on("click", function(){
+		padPrivacy.openWrite();
 	});
 	$("#writeClose").on("click", function(){
-
+		padPrivacy.closeWrite();
 	});
 	$("#readOpen").on("click", function(){
-
+		padPrivacy.openRead();
 	});
 	$("#readOpen").on("click", function(){
-
+		padPrivacy.closeRead();
 	});
 
-	madpadSocket.on('toggleWrite', function(whichWay){
-		// if(!whichWay){
-		// 	mpFrontend.chat.open();
-		// }
-		// else{
-		// 	mpFrontend.chat.close();
-		// }
-	});
-
-	madpadSocket.on('toggleRead', function(whichWay){
+	madpadSocket.on('togglePrivacy', function(whichWay){
+		console.log('xxx');
+		console.log(whichWay);
 		// if(!whichWay){
 		// 	mpFrontend.chat.open();
 		// }
