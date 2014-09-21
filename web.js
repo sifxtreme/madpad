@@ -50,103 +50,7 @@ var options = require('./privacy.js');
 /* ***************************************************************************** */
 
 io.on('connection', function(socket){
-  
-  // join room initially
-  socket.on('room', function(room){
-    socket.join(room);
-  });
-  
-  // chat room
-  socket.on('chat', function(data){
-    var messageObject = {'name': data.name, 'picture': data.picture, 'message': data.message, 'profileId': data.profileId};
-    socket.broadcast.to(data.room).emit('newMessage', messageObject);
-  });
-
-  // get user id from socket
-  var getUserIdFromSocket = function(cookie){
-    var user = sessions.getUserData(cookie);
-    var userID = '';
-
-    if(user && user.content && user.content.user && user.content.user._id){
-      userID = user.content.user._id;
-    }
-
-    return userID;
-  }
-
-  // change code language
-  socket.on('modeChanged', function(data){
-    // add user checking
-    Pad.update({name: data.room}, {$set: {codeType: data.codeMode}}, function(err, pad){
-      // add error checking
-      console.log(pad);
-    })
-    socket.broadcast.to(data.room).emit('changeMode', data.codeMode);
-  });
-
-  // disable chat if owner
-  socket.on('toggleChat', function(data){
-    if(!data.room) return;
-    if(typeof data.disable === 'undefined') return;
-
-    console.log('Toggle Chat for Room: ' + data.room);
-    console.log('Direction: ' + data.disable);
-
-    var userID = getUserIdFromSocket(socket.request.headers.cookie);
-
-    if(userID){
-      Pad.findOne({name: data.room}, {owner: userID}, function(err, pad){
-        if(err){
-          // TO DO - ERROR CHECKING
-          console.log(err);
-        }
-        else {
-          socket.broadcast.to(data.room).emit('toggleChat', !data.disable);
-          console.log(data.disable);
-          Pad.findByIdAndUpdate(pad._id, {$set: {chatOn: !data.disable}}, function(err, pad){
-            if(err){
-              // TO DO - ERROR CHECKING
-              console.log(err);
-            }
-          });
-          // TO DO - save toggle chat option to pad
-        }
-      })
-    }
-  });
-
-  socket.on('togglePrivacy', function(data){
-    if(!data.room) return;
-
-    console.log('socket togglePrivacy');
-    console.log(data);
-
-    var userID = getUserIdFromSocket(socket.request.headers.cookie);
-
-    if(userID){
-      Pad.findOne({name: data.room}, {owner: userID}, function(err, pad){
-        if(err){
-          // TO DO - ERROR CHECKING
-          console.log(err);
-        }
-        else {
-          console.log('pad found');
-          console.log(pad);
-          socket.broadcast.to(data.room).emit('togglePrivacy', data);
-          // TO DO - save toggle chat option to pad
-        }
-      });
-    }
-  });
-
-
-
-  // // NEED COOKIE INFO
-  // socket.on('cookieInfo', function(s){
-  //   var cookie = socket.request.headers.cookie;
-  //   var user = sessions.getUserData(cookie);
-  //   console.log(user);
-  // });
+  require('./socket-functions')(socket);
 });
 
 /* ***************************************************************************** */
@@ -281,7 +185,7 @@ app.post('/:username/:id', function(req, res, next){
           else{
             res.send({success: 'true'});
           }
-        })
+        });
       }
       else{ // pad already in DB
         res.send({ error: 'true', errorType: 'existence'}); 
@@ -340,7 +244,7 @@ app.get('/:username/:id', function(req, res, next){
             padObject.isTextPad = false;
             padObject.type = pad.codeType;
           }
-          
+
           sharejs.server.attach(app, options);
           res.render('pad', { id: roomID, user: req.madpad_user.user, usersRoom: userRoom, pad: padObject });
 

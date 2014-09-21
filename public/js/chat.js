@@ -246,10 +246,10 @@ $(document).ready(function(){
 
 		madpadSocket.on('toggleChat', function(whichWay){
 			if(!whichWay){
-				mpFrontend.chat.open();
+				mpFrontend.chat.close();
 			}
 			else{
-				mpFrontend.chat.close();
+				mpFrontend.chat.open();
 			}
 		});
 

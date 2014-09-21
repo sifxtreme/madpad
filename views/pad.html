@@ -27,7 +27,7 @@
 				</ul>
 			</section> <!-- shared pads -->
 			<section class="public-pads pad-list pad-hover">
-<!-- 				<h5>Public Pads</h5>
+				<h5>Public Pads</h5>
 				<ul>
 					<a href="#"><li>doge</li></a>
 					<a href="#"><li>reddit</li></a>
@@ -35,7 +35,7 @@
 					<a href="#"><li>facebook</li></a>
 					<a href="#"><li>netflix</li></a>
 					<a href="#"><li>okay</li></a>
-				</ul> -->
+				</ul>
 		</section> <!-- public pads -->
 		</div>
 	</div>
@@ -48,11 +48,10 @@
 				<h2>{{id}} <span>{{#if pad.isTextPad}}pad{{else}}{code pad}{{/if}}</span></h2>
 			</div>
 			<div class="title-options">
-				<a href="#" id="writeOpen">WRITE OPEN</a>
-				<a href="#" id="writeClose">WRITE CLOSE</a>
-				<a href="#" id="readOpen">READ OPEN</a>
-				<a href="#" id="readClose">READ CLOSE</a>
-				<div class="icon pad-settings {{#if pad.writeAccess}}{{#if pad.readAccess}}public-icon{{else}}shared-icon{{/if}}{{else}}private-icon{{/if}}"></div>
+				<a href="#" id="padPublic">PUBLIC</a>
+				<a href="#" id="padShared">SHARED</a>
+				<a href="#" id="padPrivate">PRIVATE</a>
+				{{#if usersRoom}}<div class="icon pad-settings {{#if pad.readAccess}}{{#if pad.writeAccess}}public-icon{{else}}shared-icon{{/if}}{{else}}private-icon{{/if}}"></div>{{/if}}
 				<div class="icon {{#if pad.chat}}chaton-icon{{else}}chatoff-icon{{/if}}"></div>
 				{{#if usersRoom}}<div class="icon trash-icon"></div>{{/if}}
 			</div>
@@ -91,6 +90,8 @@ var usersRoom = '{{usersRoom}}';
 var isTextPad = '{{pad.isTextPad}}';
 var padType = (isTextPad == 'true') ? 'text' : 'code';
 var padName = (usersRoom) ? usersRoom + '_' + id : padType + '_' + id;
+var username = '{{user.username}}';
+var userID = '{{user._id}}';
 
 var padData = {
 	type: '{{pad.type}}' || 'text',
@@ -107,7 +108,7 @@ madpadUserData = {
 	githubPicture: '{{user.githubPicture}}',
 }
 
-var options = {authentication: '{{user._id}}'};
+var options = {authentication: userID};
 
 madpadSocket = io();
 madpadSocket.emit('room', padName);
@@ -117,42 +118,58 @@ madpadSocket.emit('room', padName);
 $(document).ready(function(){
 	
 	var padPrivacy = {
-		openWrite: function(){
-			madpadSocket.emit('togglePrivacy', {room: padName, write: true, read: true});
+		makePublic: function(){
+			madpadSocket.emit('togglePrivacy', {room: padName, type: 'public', write: true, read: true});
 		},
-		closeWrite: function(){
-			madpadSocket.emit('togglePrivacy', {room: padName, write: false});
+		makeShared: function(){
+			madpadSocket.emit('togglePrivacy', {room: padName, type: 'shared', write: false, read: true});
 		},
-		openRead: function(){
-			madpadSocket.emit('togglePrivacy', {room: padName, read: true});
+		makePrivate: function(){
+			madpadSocket.emit('togglePrivacy', {room: padName, type: 'private', write: false, read: false});
 		},
-		closeRead: function(){
-			madpadSocket.emit('togglePrivacy', {room: padName, write: false, read: false});
+		changeToPublicIcon: function(){
+			$('.pad-settings').removeClass('private-icon').removeClass('shared-icon').removeClass('public-icon').addClass('public-icon');
+		},
+		changeToSharedIcon: function(){
+			$('.pad-settings').removeClass('private-icon').removeClass('shared-icon').removeClass('public-icon').addClass('shared-icon');
+		},
+		changeToPrivateIcon: function(){
+			$('.pad-settings').removeClass('private-icon').removeClass('shared-icon').removeClass('public-icon').addClass('private-icon');
 		}
 	}
 
-	$("#writeOpen").on("click", function(){
-		padPrivacy.openWrite();
+	$("#padPublic").on("click", function(){
+		padPrivacy.makePublic();
+		padPrivacy.changeToPublicIcon();
 	});
-	$("#writeClose").on("click", function(){
-		padPrivacy.closeWrite();
+	$("#padShared").on("click", function(){
+		padPrivacy.makeShared();
+		padPrivacy.changeToSharedIcon();
 	});
-	$("#readOpen").on("click", function(){
-		padPrivacy.openRead();
-	});
-	$("#readOpen").on("click", function(){
-		padPrivacy.closeRead();
+	$("#padPrivate").on("click", function(){
+		padPrivacy.makePrivate();
+		padPrivacy.changeToPrivateIcon();
 	});
 
 	madpadSocket.on('togglePrivacy', function(whichWay){
-		console.log('xxx');
+		// add user name checking
+		if(usersRoom == username) return;
 		console.log(whichWay);
-		// if(!whichWay){
-		// 	mpFrontend.chat.open();
-		// }
-		// else{
-		// 	mpFrontend.chat.close();
-		// }
+		switch(whichWay){
+			case 'private':
+				padPrivacy.changeToPrivateIcon();
+				location.reload(true);
+				break;
+			case 'shared':
+				padPrivacy.changeToSharedIcon();
+				break;
+			case 'public':
+				padPrivacy.changeToPublicIcon();
+				// open up writing on pads
+				break;
+			default:
+				break;
+		}
 	});
 
 
