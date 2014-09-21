@@ -26,6 +26,7 @@ $(document).ready(function(){
 		}
 	};
 
+	// change privacy settings of pad
 	var padPrivacy = {
 		makePublic: function(){
 			padPrivacyStatus = 'public'
@@ -53,9 +54,35 @@ $(document).ready(function(){
 		}
 	}
 
+	// toggle privacy when someone else changes privacy settings
+	madpadSocket.on('togglePrivacy', function(whichWay){
+		// add user name checking
+		if(usersRoom == username) return;
+		console.log(whichWay);
+		switch(whichWay){
+			// open up writing on pads
+			case 'public':
+				padPrivacy.changeToPublicIcon();
+				changePadEditablity.open();
+				break;
+			// turn off editing ability
+			case 'shared':
+				padPrivacy.changeToSharedIcon();
+				changePadEditablity.close();
+				break;
+			// kick out users
+			case 'private':
+				padPrivacy.changeToPrivateIcon();
+				location.reload(true);
+				break;
+			default:
+				break;
+		}
+	});
+
+	// change privacy settings modal
 	var newPadPrivacy = '';
 	var changePadPrivacy = {
-		// settings model
 		selectSetting: function(){
 			var radioOn = function(element){
 				$(element).children('.radio').removeClass('radio-off').addClass('radio-on');
@@ -129,31 +156,5 @@ $(document).ready(function(){
 	}
 
 	changePadPrivacy.run(mpFrontend.modals);
-
-	madpadSocket.on('togglePrivacy', function(whichWay){
-		// add user name checking
-		if(usersRoom == username) return;
-		console.log(whichWay);
-		switch(whichWay){
-			// open up writing on pads
-			case 'public':
-				padPrivacy.changeToPublicIcon();
-				changePadEditablity.open();
-				break;
-			// turn off editing ability
-			case 'shared':
-				padPrivacy.changeToSharedIcon();
-				changePadEditablity.close();
-				break;
-			// kick out users
-			case 'private':
-				padPrivacy.changeToPrivateIcon();
-				location.reload(true);
-				break;
-			default:
-				break;
-		}
-	});
-
 
 });
