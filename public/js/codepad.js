@@ -32,4 +32,9 @@ $(window).load(function(){
 		setTimeout(function(){editor.gotoLine(1)}, 1);
 	});
 
+	// if we are on a shared pad and not the owner
+	if(padPrivacyStatus == 'shared' && !isOwner){
+		changePadEditablity.close();
+	}
+
 });

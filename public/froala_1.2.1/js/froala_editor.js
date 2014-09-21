@@ -60,9 +60,12 @@ if ("undefined" == typeof jQuery) throw new Error("Froala requires jQuery");
         width: "auto",
         withCredentials: !1,
         zIndex: 1e3
-    }, b.prototype.uneditable = function() {
+    }, b.prototype.makeUnEditable = function() {
         console.log("made uneditable");
         this.$element.attr("contenteditable", 0);
+    }, b.prototype.makeEditable = function() {
+        console.log("made editable");
+        this.$element.attr("contenteditable", 1);
     }, b.prototype.destroy = function() {
         this.sync(), this.addFrTag(), this.hide(), this.isHTML && this.html(), this.focus(), this.clearSelection(), this.$element.blur(), this.$bttn_wrapper && this.$bttn_wrapper.html("").removeData().remove(), this.$editor && this.$editor.html("").removeData().remove(), this.raiseEvent("destroy"), this.$popup_editor && this.$popup_editor.html("").removeData().remove(), clearTimeout(this.ajaxInterval), clearTimeout(this.typingTimer), this.$element.off("mousedown mouseup click keydown keyup cut focus keypress touchstart touchend touch drop"), this.$element.off("mousedown mouseup click keydown keyup cut focus keypress touchstart touchend touch drop", "**"), a(window).off("mouseup." + this._id), a(window).off("keydown." + this._id), a(window).off("keyup." + this._id), a(window).off("hide." + this._id), a(window).off("scroll." + this._id), a(window).off("orientationchange." + this._id), a(document).off("selectionchange." + this._id), void 0 !== this.$upload_frame && this.$upload_frame.remove(), this.$textarea && (this.$box.remove(), this.$textarea.removeData("fa.editable"), this.$textarea.show());
         for (var b in this._events) delete this._events[b];

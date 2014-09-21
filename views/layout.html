@@ -52,11 +52,11 @@
   <!-- {{> modals/open_pad}} -->
   <!-- {{> modals/create_pad}} -->
 
-
   {{> header}}
 
   {{{body}}}
 
+<!-- mode in modals/create_pad once finished -->
   <div id="create-pad-modal" style="margin-top: 100px; border: 3px solid black">
     <h2>CREATE PRIVATE</h2>
     <form method="post" id="createPadForm" class="openCreatePadForm">
@@ -71,7 +71,9 @@
       <button class="green-btn">CREATE PAD</button>
     </form>
   </div>
+<!-- end move -->
 
+<!-- move to modals/open_pad once finished -->
   <div id="open-pad-modal" style="margin-top: 100px; border: 3px solid black; margin-bottom: 300px;">
     <h2>OPEN PUBLIC</h2>
     <form method="post" id="openPadForm" class="openCreatePadForm">
@@ -85,10 +87,12 @@
       <button class="green-btn">CREATE PAD</button>
     </form>
   </div>
+<!-- end move -->
 
   <script src="/js/textpad.js"></script>
   <script src="/js/codepad.js"></script>
   <script src="/js/chat.js"></script>
+  <script src="/js/privacy.js"></script>
 
 </body>
 </html>

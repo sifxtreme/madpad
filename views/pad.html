@@ -92,10 +92,17 @@ var padType = (isTextPad == 'true') ? 'text' : 'code';
 var padName = (usersRoom) ? usersRoom + '_' + id : padType + '_' + id;
 var username = '{{user.username}}';
 var userID = '{{user._id}}';
+var isOwner = (usersRoom == username) ? true : false;
 
 var padData = {
 	type: '{{pad.type}}' || 'text',
 }
+
+var padReadAccess = '{{pad.readAccess}}';
+var padWriteAccess = '{{pad.writeAccess}}';
+var padPrivacyStatus = 'private';
+if(padReadAccess) padPrivacyStatus = 'shared';
+if(padWriteAccess) padPrivacyStatus = 'public';
 
 madpadUserData = {
 	facebookID: '{{user.facebookID}}',
@@ -113,65 +120,4 @@ var options = {authentication: userID};
 madpadSocket = io();
 madpadSocket.emit('room', padName);
 
-</script>
-<script>
-$(document).ready(function(){
-	
-	var padPrivacy = {
-		makePublic: function(){
-			madpadSocket.emit('togglePrivacy', {room: padName, type: 'public', write: true, read: true});
-		},
-		makeShared: function(){
-			madpadSocket.emit('togglePrivacy', {room: padName, type: 'shared', write: false, read: true});
-		},
-		makePrivate: function(){
-			madpadSocket.emit('togglePrivacy', {room: padName, type: 'private', write: false, read: false});
-		},
-		changeToPublicIcon: function(){
-			$('.pad-settings').removeClass('private-icon').removeClass('shared-icon').removeClass('public-icon').addClass('public-icon');
-		},
-		changeToSharedIcon: function(){
-			$('.pad-settings').removeClass('private-icon').removeClass('shared-icon').removeClass('public-icon').addClass('shared-icon');
-		},
-		changeToPrivateIcon: function(){
-			$('.pad-settings').removeClass('private-icon').removeClass('shared-icon').removeClass('public-icon').addClass('private-icon');
-		}
-	}
-
-	$("#padPublic").on("click", function(){
-		padPrivacy.makePublic();
-		padPrivacy.changeToPublicIcon();
-	});
-	$("#padShared").on("click", function(){
-		padPrivacy.makeShared();
-		padPrivacy.changeToSharedIcon();
-	});
-	$("#padPrivate").on("click", function(){
-		padPrivacy.makePrivate();
-		padPrivacy.changeToPrivateIcon();
-	});
-
-	madpadSocket.on('togglePrivacy', function(whichWay){
-		// add user name checking
-		if(usersRoom == username) return;
-		console.log(whichWay);
-		switch(whichWay){
-			case 'private':
-				padPrivacy.changeToPrivateIcon();
-				location.reload(true);
-				break;
-			case 'shared':
-				padPrivacy.changeToSharedIcon();
-				break;
-			case 'public':
-				padPrivacy.changeToPublicIcon();
-				// open up writing on pads
-				break;
-			default:
-				break;
-		}
-	});
-
-
-});
 </script>
