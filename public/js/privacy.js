@@ -1,6 +1,7 @@
 $(document).ready(function(){
 	if(typeof madpadSocket === 'undefined') return;
 
+	// need to make global so that is available to codepad.js and textpad.js
 	changePadEditablity = {
 		close: function(){
 			if(typeof editor !== 'undefined'){
@@ -23,8 +24,8 @@ $(document).ready(function(){
 				}
 			}
 		}
-	}
-	
+	};
+
 	var padPrivacy = {
 		makePublic: function(){
 			padPrivacyStatus = 'public'
@@ -52,17 +53,82 @@ $(document).ready(function(){
 		}
 	}
 
-	$("#padPublic").on("click", function(){
-		padPrivacy.makePublic();
-		
-	});
-	$("#padShared").on("click", function(){
-		padPrivacy.makeShared();
-		
-	});
-	$("#padPrivate").on("click", function(){
-		padPrivacy.makePrivate();
-	});
+	var newPadPrivacy = '';
+	var changePadPrivacy = {
+		// settings model
+		selectSetting: function(){
+			var radioOn = function(element){
+				$(element).children('.radio').removeClass('radio-off').addClass('radio-on');
+			}
+			var radioOff = function(element){
+				$(element).children('.radio').removeClass('radio-on').addClass('radio-off');	
+			}
+
+			$('#private-setting').click(function(){
+				newPadPrivacy = 'private';
+				radioOn(this);
+				radioOff('#shared-setting');
+				radioOff('#public-setting');
+			});
+
+			$('#shared-setting').click(function(){
+				newPadPrivacy = 'shared';
+				radioOn(this);
+				radioOff('#private-setting');
+				radioOff('#public-setting');
+			});
+
+			$('#public-setting').click(function(){
+				newPadPrivacy = 'public';
+				radioOn(this);
+				radioOff('#private-setting');
+				radioOff('#shared-setting');
+			});
+		},
+		run: function(modals){
+			this.selectSetting();
+
+			// set correct radio button initially on page load
+			if(padPrivacyStatus == 'private'){
+				$('#private-setting').trigger('click');
+			}
+			else if(padPrivacyStatus == 'shared'){
+				$('#shared-setting').trigger('click');
+			}
+			else{
+				$('#public-setting').trigger('click');	
+			}
+
+			// bring up settings modal
+			$('.pad-settings').click(function(){
+				if(!isOwner) return false;
+				modals.showOverlay('.sharing-settings');
+			});
+
+			// save settings modal
+			$('#save-settings').click(function(){
+				if(newPadPrivacy == 'private'){
+					padPrivacy.makePrivate();
+				}
+				else if(newPadPrivacy == 'shared'){
+					padPrivacy.makeShared();
+				}
+				else{
+					padPrivacy.makePublic();
+				}
+
+				modals.hideOverlay('.sharing-settings');
+			});
+
+			// cancel modal without saving
+			$('#cancel-settings, .modal-close').click(function(){
+				newPadPrivacy = padPrivacyStatus;
+				modals.hideOverlay('.sharing-settings');
+			});
+		}
+	}
+
+	changePadPrivacy.run(mpFrontend.modals);
 
 	madpadSocket.on('togglePrivacy', function(whichWay){
 		// add user name checking

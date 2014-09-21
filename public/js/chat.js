@@ -169,7 +169,6 @@ $(document).ready(function(){
 		if(facebookID && githubID){
 			var facebookDate = new Date(madpadUserData.facebookDate);
 			var githubDate = new Date(madpadUserData.githubDate);
-			console.log(githubID);
 			if(facebookDate > githubDate){
 				facebookAuth = true;
 			}

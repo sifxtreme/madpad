@@ -74,15 +74,14 @@ module.exports = function(socket){
           console.log(err);
         }
         else {
-          socket.broadcast.to(data.room).emit('toggleChat', !data.disable);
-          console.log(data.disable);
+
           Pad.findByIdAndUpdate(pad._id, {$set: {chatOn: !data.disable}}, function(err, pad){
             if(err){
               // TO DO - ERROR CHECKING
               console.log(err);
             }
           });
-          // TO DO - save toggle chat option to pad
+          socket.broadcast.to(data.room).emit('toggleChat', !data.disable);
         }
       })
     }

@@ -1,130 +1,4 @@
-$( window ).load(function() {
-
-    window_size = function() {
-	    var height = $(window).height();										//this is the window height.
-	    var navHeight = $('.header').height();									//this is the height of the nav bar.
-	    var titleHeight = $('.title').height();									//the is the title height in the main area.
-	    var submitHeight = $('.submit-wrapper').height();						//the is the submit area height in the main area.
-	    var chatTitleHeight = $('.chat-title').height();
-	    var newPadBtnHeight = $('.new-pad').height();
-	    var editorHeight = $('.froala-editor').height();
-	    var signupStepHeight = $(window).height() - navHeight;
-	    var paddingMain = 82;													//top and bottom padding of the text area.
-	    var padHeight = height - navHeight - titleHeight - paddingMain - editorHeight; 		//this is the height of the pad.
-	    var sideHeight =  height - navHeight; 									//this is the height of the two side bars.
-	    var chatHeight = sideHeight - chatTitleHeight - submitHeight - 1;
-	    var padListHeight = sideHeight - newPadBtnHeight;
-
-	    // sideHeight = parseInt(sideHeight) + 'px';
-	    // padHeight = parseInt(padHeight) + 'px';
-	    $(".left").css('height' , sideHeight);
-	    $(".all-pads").css('height', padListHeight);
-	    $(".right").css('height', sideHeight);
-	    $(".froala-element").css('height', padHeight);
-	    $('#editor-code').css('height' , padHeight);
-	    $(".new-pad-area").css('height', sideHeight);
-	    $('#messages').css('height' , chatHeight);
-	    $('.signup-step-wrapper').css('height' , signupStepHeight);
-	
-	}/* Set heights for divs */
-	// window[window_size]();
-	window_size();
-    
-	$(window).bind('resize', window_size);
-	/* Set Side Bar to Window Size */
-
-	$('img').bind('dragstart', function(){
-		return false; 
-	});
-
-  function newPadShadow(){
-		$('.all-pads').scroll(function() {
-			if ($(this).scrollTop() > 0 ) {
-				$(".new-pad").addClass("new-pad-active");
-			}
-			else {
-				$(".new-pad").removeClass("new-pad-active");
-			}
-		}); /* Give the drop shadow to the "New Pad" area*/
-	}
-	newPadShadow();
-
-	function newPad(){
-
-		$('.new-pad-area').hide();
-		$('.darken').hide();
-
-		$('.new-pad').click(function(){
-			$('.darken').show(); /* show the darken state */
-			$('.new-pad-area').show(); /* show the new pad area */
-			$('.new-pad-area').animate({left:'235px'}, 100); /* move the pad for slide effect */
-			$('#create-input').focus(); /* focus on the new pad input */
-			inputFocus();
-		});
-
-		$(document).mouseup(function (e)
-		{
-	    var container = $(".new-pad-area");
-
-	    if (!container.is(e.target) // if the target of the click isn't the container...
-	        && container.has(e.target).length === 0) // ... nor a descendant of the container
-	    {
-				container.hide(); /* hide the new pad area */
-				$('.new-pad-area').animate({left:'220px'},0); /* move the div back */
-				$('.darken').hide(); /* hiden darken state */
-				$('.status').stop().slideUp();
-		       
-	    }
-		});
-	}
-	newPad();
-
-	function inputFocus(){
-
-		$("input").focus(function() {
-	 		$('.underline').css('border', '2px solid #33bea8');
-	 		$('.underline').css('border-top', 'none');
-		});
-
-		$("input").focusout(function() {
-			$('.underline').css('border', 'none');
-	 		$('.underline').css('border-bottom', '2px solid #ddd');
-		});
-	}
-
-	function editorActive(){
-
-		$('.froala-element').focus(function() {
-			$('.froala-box').addClass('editor-active');
-		});
-
-		$('.froala-element').blur(function() {
-			$('.froala-box').removeClass('editor-active');
-		});
-	}
-	editorActive();
-
-	function socialType(){
-
-		$('.facebook-icon').mouseenter(function(){
-			$('.social-message').html('with Facebook');
-		});
-		$('.facebook-icon').mouseleave(function(){
-			$('.social-message').html('');
-		});
-		// facebook login
-
-		$('.github-icon').mouseenter(function(){
-			$('.social-message').html('with Github');
-		});
-		$('.github-icon').mouseleave(function(){
-			$('.social-message').html('');
-		});
-		// github login
-	}
-	socialType();
-
-
+$(document).ready(function(){
 	mpFrontend = {
 		chat: {
 			close: function(){
@@ -324,55 +198,6 @@ $( window ).load(function() {
 				});
 			},
 
-			// settings model
-			changeSettings: {
-				selectSetting: function(){
-					var radioOn = function(element){
-						$(element).children('.radio').removeClass('radio-off').addClass('radio-on');
-					}
-					var radioOff = function(element){
-						$(element).children('.radio').removeClass('radio-on').addClass('radio-off');	
-					}
-
-					$('#private-setting').click(function(){
-						radioOn(this);
-						radioOff('#shared-setting');
-						radioOff('#public-setting');
-					});
-
-					$('#shared-setting').click(function(){
-						radioOn(this);
-						radioOff('#private-setting');
-						radioOff('#public-setting');
-					});
-
-					$('#public-setting').click(function(){
-						radioOn(this);
-						radioOff('#private-setting');
-						radioOff('#shared-setting');
-					});
-				},
-				run: function(modals){
-					this.selectSetting();
-
-					$('.pad-settings').click(function(){
-						modals.showOverlay('.sharing-settings');
-					});
-
-					$('#save-settings').click(function(){
-						modals.hideOverlay('.sharing-settings');
-					});
-
-					$('#cancel-settings').click(function(){
-						modals.hideOverlay('.sharing-settings');
-					});
-
-					$('.modal-close').click(function(){
-						modals.hideOverlay('.account');
-					});
-				}
-			},
-
 			// delete modal
 			deletePad: {
 				run: function(modals){
@@ -421,7 +246,6 @@ $( window ).load(function() {
 
 			run: function(){
 				this.escKeyHideOverlay(this);
-				this.changeSettings.run(this);
 				this.deletePad.run(this);
 				this.login.run(this);
 				this.signup.run(this);
@@ -436,6 +260,134 @@ $( window ).load(function() {
 	}
 
 	mpFrontend.run();
+});
+
+
+$( window ).load(function() {
+
+    window_size = function() {
+	    var height = $(window).height();										//this is the window height.
+	    var navHeight = $('.header').height();									//this is the height of the nav bar.
+	    var titleHeight = $('.title').height();									//the is the title height in the main area.
+	    var submitHeight = $('.submit-wrapper').height();						//the is the submit area height in the main area.
+	    var chatTitleHeight = $('.chat-title').height();
+	    var newPadBtnHeight = $('.new-pad').height();
+	    var editorHeight = $('.froala-editor').height();
+	    var signupStepHeight = $(window).height() - navHeight;
+	    var paddingMain = 82;													//top and bottom padding of the text area.
+	    var padHeight = height - navHeight - titleHeight - paddingMain - editorHeight; 		//this is the height of the pad.
+	    var sideHeight =  height - navHeight; 									//this is the height of the two side bars.
+	    var chatHeight = sideHeight - chatTitleHeight - submitHeight - 1;
+	    var padListHeight = sideHeight - newPadBtnHeight;
+
+	    // sideHeight = parseInt(sideHeight) + 'px';
+	    // padHeight = parseInt(padHeight) + 'px';
+	    $(".left").css('height' , sideHeight);
+	    $(".all-pads").css('height', padListHeight);
+	    $(".right").css('height', sideHeight);
+	    $(".froala-element").css('height', padHeight);
+	    $('#editor-code').css('height' , padHeight);
+	    $(".new-pad-area").css('height', sideHeight);
+	    $('#messages').css('height' , chatHeight);
+	    $('.signup-step-wrapper').css('height' , signupStepHeight);
+	
+	}/* Set heights for divs */
+	// window[window_size]();
+	window_size();
+    
+	$(window).bind('resize', window_size);
+	/* Set Side Bar to Window Size */
+
+	$('img').bind('dragstart', function(){
+		return false; 
+	});
+
+  function newPadShadow(){
+		$('.all-pads').scroll(function() {
+			if ($(this).scrollTop() > 0 ) {
+				$(".new-pad").addClass("new-pad-active");
+			}
+			else {
+				$(".new-pad").removeClass("new-pad-active");
+			}
+		}); /* Give the drop shadow to the "New Pad" area*/
+	}
+	newPadShadow();
+
+	function newPad(){
+
+		$('.new-pad-area').hide();
+		$('.darken').hide();
+
+		$('.new-pad').click(function(){
+			$('.darken').show(); /* show the darken state */
+			$('.new-pad-area').show(); /* show the new pad area */
+			$('.new-pad-area').animate({left:'235px'}, 100); /* move the pad for slide effect */
+			$('#create-input').focus(); /* focus on the new pad input */
+			inputFocus();
+		});
+
+		$(document).mouseup(function (e)
+		{
+	    var container = $(".new-pad-area");
+
+	    if (!container.is(e.target) // if the target of the click isn't the container...
+	        && container.has(e.target).length === 0) // ... nor a descendant of the container
+	    {
+				container.hide(); /* hide the new pad area */
+				$('.new-pad-area').animate({left:'220px'},0); /* move the div back */
+				$('.darken').hide(); /* hiden darken state */
+				$('.status').stop().slideUp();
+		       
+	    }
+		});
+	}
+	newPad();
+
+	function inputFocus(){
+
+		$("input").focus(function() {
+	 		$('.underline').css('border', '2px solid #33bea8');
+	 		$('.underline').css('border-top', 'none');
+		});
+
+		$("input").focusout(function() {
+			$('.underline').css('border', 'none');
+	 		$('.underline').css('border-bottom', '2px solid #ddd');
+		});
+	}
+
+	function editorActive(){
+
+		$('.froala-element').focus(function() {
+			$('.froala-box').addClass('editor-active');
+		});
+
+		$('.froala-element').blur(function() {
+			$('.froala-box').removeClass('editor-active');
+		});
+	}
+	editorActive();
+
+	function socialType(){
+
+		$('.facebook-icon').mouseenter(function(){
+			$('.social-message').html('with Facebook');
+		});
+		$('.facebook-icon').mouseleave(function(){
+			$('.social-message').html('');
+		});
+		// facebook login
+
+		$('.github-icon').mouseenter(function(){
+			$('.social-message').html('with Github');
+		});
+		$('.github-icon').mouseleave(function(){
+			$('.social-message').html('');
+		});
+		// github login
+	}
+	socialType();
 
 	function iconHover(){
 
