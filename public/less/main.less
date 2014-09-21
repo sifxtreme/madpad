@@ -178,9 +178,16 @@
 			}
 		}
 
+		.new-icon{
+			background-image: url('/images/main/new-icon.png');
+		}
+
+		.heart-icon{
+			background-image: url('/images/main/heart-icon.png');
+		}		
 
 		.private-icon{
-			background-image: url('/images/main/private-option.png');
+			background-image: url('/images/main/private-icon.png');
 		}
 
 		.shared-icon{
@@ -290,7 +297,7 @@
 
     	.setting-icons{
     		width: 30px;
-    		height: 30px;
+ 			height: 30px;
     		padding: 6px 6px;
     		background: @light;
     		border: 1px solid @ea;
@@ -303,11 +310,16 @@
     		margin-top: 30px;
 
     		&:hover{
-    			cursor: default;
+    			cursor: pointer;
+
+    			.large{
+    				color: @green;
+    			}
     		}
     	}
 
     	.setting-text{
+
     		.large{
     			color: @dark;
     			margin-bottom: 5px;

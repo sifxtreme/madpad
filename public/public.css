@@ -897,8 +897,14 @@ a:hover {
   -webkit-transition: 0.5s;
   cursor: pointer;
 }
+.title .title-options .new-icon {
+  background-image: url('/images/main/new-icon.png');
+}
+.title .title-options .heart-icon {
+  background-image: url('/images/main/heart-icon.png');
+}
 .title .title-options .private-icon {
-  background-image: url('/images/main/private-option.png');
+  background-image: url('/images/main/private-icon.png');
 }
 .title .title-options .shared-icon {
   background-image: url('/images/main/shared-icon.png');
@@ -993,7 +999,10 @@ a:hover {
   margin-top: 30px;
 }
 .sharing-settings .list-settings .settings:hover {
-  cursor: default;
+  cursor: pointer;
+}
+.sharing-settings .list-settings .settings:hover .large {
+  color: #33bea8;
 }
 .sharing-settings .list-settings .setting-text .large {
   color: #232c30;
@@ -1228,21 +1237,4 @@ a:hover {
 }
 .c17 {
   background-color: #e57e5e;
-}
-
-input::-webkit-input-placeholder {
-  color: rgba(0,5,143,.5);
-  text-transform: uppercase;
-}
-input::-moz-placeholder {
-  color: rgba(0,5,143,.5);
-  text-transform: uppercase;
-}
-input:-moz-placeholder {   /* Older versions of Firefox */
-  color: rgba(0,5,143,.5);
-  text-transform: uppercase;
-}
-input:-ms-input-placeholder { 
-  color: rgba(0,5,143,.5);
-  text-transform: uppercase;
 }
