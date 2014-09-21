@@ -4,22 +4,25 @@ $(document).ready(function(){
 	changePadEditablity = {
 		close: function(){
 			if(typeof editor !== 'undefined'){
-				editor.setReadOnly(true)	
+				if(typeof editor.setReadOnly === 'function'){
+					editor.setReadOnly(true);
+				}
+				else{
+					$("#editor").editable("makeUneditable");
+				}
 			}
-			// textpad
 		},
 
 		open: function(){
 			if(typeof editor !== 'undefined'){
-				editor.setReadOnly(false)	
+				if(typeof editor.setReadOnly === 'function'){
+					editor.setReadOnly(false);
+				}
+				else{
+					$("#editor").editable("makeEditable");		
+				}
 			}
-			// textpad
-
 		}
-	}
-
-	if(padPrivacyStatus == 'shared' && !isOwner){
-		changePadEditablity.close();
 	}
 	
 	var padPrivacy = {

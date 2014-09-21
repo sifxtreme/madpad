@@ -3,9 +3,14 @@ $(document).ready(function(){
 
 	var pad = document.getElementById('pusherContentEditable');
 
-	var theSharing = sharejs.open(padName, 'text', options, function(error, doc) {
+	sharejs.open(padName, 'text', options, function(error, doc) {
 		window.doc = doc;
 		doc.attach_editable(pad);
+
+		// if we are on a shared pad and not the owner
+		if(padPrivacyStatus == 'shared' && !isOwner){
+			changePadEditablity.close();
+		}
 	});
 
 });

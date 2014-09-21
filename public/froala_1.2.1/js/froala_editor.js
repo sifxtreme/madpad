@@ -60,11 +60,11 @@ if ("undefined" == typeof jQuery) throw new Error("Froala requires jQuery");
         width: "auto",
         withCredentials: !1,
         zIndex: 1e3
-    }, b.prototype.makeUnEditable = function() {
-        console.log("made uneditable");
+    }, b.prototype.makeUneditable = function() {
+        this.uneditable = true;
         this.$element.attr("contenteditable", 0);
     }, b.prototype.makeEditable = function() {
-        console.log("made editable");
+        this.uneditable = false;
         this.$element.attr("contenteditable", 1);
     }, b.prototype.destroy = function() {
         this.sync(), this.addFrTag(), this.hide(), this.isHTML && this.html(), this.focus(), this.clearSelection(), this.$element.blur(), this.$bttn_wrapper && this.$bttn_wrapper.html("").removeData().remove(), this.$editor && this.$editor.html("").removeData().remove(), this.raiseEvent("destroy"), this.$popup_editor && this.$popup_editor.html("").removeData().remove(), clearTimeout(this.ajaxInterval), clearTimeout(this.typingTimer), this.$element.off("mousedown mouseup click keydown keyup cut focus keypress touchstart touchend touch drop"), this.$element.off("mousedown mouseup click keydown keyup cut focus keypress touchstart touchend touch drop", "**"), a(window).off("mouseup." + this._id), a(window).off("keydown." + this._id), a(window).off("keyup." + this._id), a(window).off("hide." + this._id), a(window).off("scroll." + this._id), a(window).off("orientationchange." + this._id), a(document).off("selectionchange." + this._id), void 0 !== this.$upload_frame && this.$upload_frame.remove(), this.$textarea && (this.$box.remove(), this.$textarea.removeData("fa.editable"), this.$textarea.show());
@@ -1568,7 +1568,7 @@ function(a) {
                 }
                 b && d.addRange(f)
             }
-            this.editableDisabled || this.isHTML || this.$element.attr("contenteditable", !0), this.removeMarkers()
+            this.editableDisabled || this.uneditable || this.isHTML || this.$element.attr("contenteditable", !0), this.removeMarkers()
         }
     }, a.Editable.prototype.setSelection = function(a, b, c, d) {
         var e = this.getSelection();
@@ -2093,7 +2093,7 @@ function(a) {
     }, a.Editable.prototype.closeImageMode = function() {
         this.$element.find("span.f-img-editor > img").each(a.proxy(function(b, c) {
             this.addImageClass(a(c), this.getImageClass(a(c).parent().attr("class"))), a(c).parents(".f-img-wrap").length > 0 ? "A" == a(c).parent().parent().get(0).tagName ? a(c).siblings("span.f-img-handle").remove().end().unwrap().parent().unwrap() : a(c).siblings("span.f-img-handle").remove().end().unwrap().unwrap() : a(c).siblings("span.f-img-handle").remove().end().unwrap()
-        }, this)), this.$element.find("span.f-img-editor").length && (this.$element.find("span.f-img-editor").remove(), this.$element.parents("span.f-img-editor").remove()), this.$element.removeClass("f-non-selectable"), this.editableDisabled || this.isHTML || this.$element.attr("contenteditable", !0), this.$image_editor && this.$image_editor.hide(), this.$link_wrapper && this.$link_wrapper.find('input[type="text"].f-lt').parent().removeClass("fr-hidden")
+        }, this)), this.$element.find("span.f-img-editor").length && (this.$element.find("span.f-img-editor").remove(), this.$element.parents("span.f-img-editor").remove()), this.$element.removeClass("f-non-selectable"), this.editableDisabled || this.uneditable || this.isHTML || this.$element.attr("contenteditable", !0), this.$image_editor && this.$image_editor.hide(), this.$link_wrapper && this.$link_wrapper.find('input[type="text"].f-lt').parent().removeClass("fr-hidden")
     }, a.Editable.prototype.refreshImageList = function(b) {
         if (!this.isLink && !this.options.editInPopup) {
             var c = [],

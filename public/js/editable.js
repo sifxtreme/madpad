@@ -221,19 +221,12 @@
           console.log("CHANGES");
           var newText = $("#editor").editable("getHTML");
           elem.value = newText;
-          genOp();  
+          genOp();
         }
         
       },
     });
     window_size();
-
-    // $("#realEditor").on("input", function(){
-    //   var newText = $("#editor").editable("getHTML");
-    //   console.log("CHANGES");
-    //   elem.value = newText;
-    //   genOp();  
-    // });
 
     // ************************************************************************************************************** //
     _ref = ['textInput', 'keydown', 'keyup', 'select', 'cut', 'paste'];
