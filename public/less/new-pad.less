@@ -18,21 +18,39 @@
 
     .pad-type{
     	overflow: hidden;
-    	margin-bottom: 40px;
+    	z-index: 2;
 
     	.type-tab{
     		float: left;
     		color: @d;
     		padding: 10px 20px;
-    		border-bottom: 4px solid @ea;
     		margin-right: 10px;
+
     	}
 
     	.active{
     		border: 2px solid @blue;
     		background: @blue;
     		color: @f;
+
     	}
+    }
+
+    .type-line{
+    	width: 274px;
+    	float: left;
+    	border-top: 1px solid @ea;
+    	margin-bottom: 40px;
+    	margin-top: 0px;
+    	position: relative;
+    	top: -1px;
+    	z-index: -1;
+
+
+    }
+
+    form{
+    	clear: both;
     }
 
    	.label{
@@ -133,6 +151,7 @@
 	.inputPadErrors{
 		color: @red;
 		text-align: center;
+		margin-bottom: 10px;
 	}
 
 	button{

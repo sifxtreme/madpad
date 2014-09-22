@@ -1060,19 +1060,31 @@ a:hover {
 }
 .create-pad .pad-type {
   overflow: hidden;
-  margin-bottom: 40px;
+  z-index: 2;
 }
 .create-pad .pad-type .type-tab {
   float: left;
   color: #dddddd;
   padding: 10px 20px;
-  border-bottom: 4px solid #eaeaea;
   margin-right: 10px;
 }
 .create-pad .pad-type .active {
   border: 2px solid #5dbff1;
   background: #5dbff1;
   color: #ffffff;
+}
+.create-pad .type-line {
+  width: 274px;
+  float: left;
+  border-top: 1px solid #eaeaea;
+  margin-bottom: 40px;
+  margin-top: 0px;
+  position: relative;
+  top: -1px;
+  z-index: -1;
+}
+.create-pad form {
+  clear: both;
 }
 .create-pad .label {
   float: left;
@@ -1153,6 +1165,7 @@ a:hover {
 .create-pad .inputPadErrors {
   color: #cd7155;
   text-align: center;
+  margin-bottom: 10px;
 }
 .create-pad button {
   display: block;
