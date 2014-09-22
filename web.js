@@ -77,9 +77,78 @@ var getPadObject = function(write, read, type, chat){
   }
 }
 
+var addToPublicPadCookie = function(reqObject, padURL, padType){
+  var compare = function(a,b){
+    if (a.date > b.date)
+      return -1;
+    if (a.date < b.date)
+      return 1;
+    return 0;
+  }
+
+  var containsObject = function(obj, list){
+    for(var i = 0; i < list.length; i++) {
+      var current = list[i];
+      var obj1 = {}, obj2 = {};
+      obj1[list[i].type] = list[i].url;
+      obj2[obj.type] = obj.url;
+      if (JSON.stringify(obj1) === JSON.stringify(obj2)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  var uniqueObjects = function(a){
+    var returnObj = [];
+    for(var i = 0; i<a.length; i++){
+      if(!containsObject(a[i], returnObj)){
+        returnObj.push(a[i]);
+      }
+    }
+    return returnObj;
+  }
+
+  var currentPads = reqObject.my_pads.pads || [];
+  var dateNow = new Date().toISOString();
+  currentPads.push({type: padType, url: padURL, date: dateNow});
+  currentPads.sort(compare);
+  currentPads = uniqueObjects(currentPads);
+
+  return currentPads;
+}
+
+var formatPublicPadCookie = function(cookie){
+  if(typeof cookie !== 'object') return false;
+  var favoritePads = [], privatePads = [], sharedPads = [], publicPads = [];
+  for(var i=0; i<cookie.length; i++){
+    var p = cookie[i];
+    if(typeof p.type !== 'undefined'){
+      if(p.type == 'favorite'){
+       favoritePads.push(p.url); 
+      }
+      else if(p.type == 'private'){
+        privatePads.push(p.url);
+      }
+      else if(p.type == 'shared'){
+        sharedPads.push(p.url);
+      }
+      else if(p.type == 'public'){
+        publicPads.push(p.url);
+      }
+    }
+  }
+
+  return {favoritePads: favoritePads, privatePads: privatePads, sharedPads: sharedPads, publicPads: publicPads}
+}
+
 // code pad
 app.get('/code/:id', function(req, res){
-  req.my_pads.pads = {publicPad: 'code/' + req.params.id};
+  var myPads = {};
+
+  req.my_pads.pads = addToPublicPadCookie(req, 'code/' + req.params.id, 'public');
+  myPads = formatPublicPadCookie(req.my_pads.pads);
+
 
   sharejs.server.attach(app, options);
   var id = req.params.id;
@@ -108,13 +177,13 @@ app.get('/code/:id', function(req, res){
             // render error page
           }
           else{
-            res.render('pad', {id: req.params.id, user: req.madpad_user.user, userRoom: '', pad: padObject });
+            res.render('pad', { id: req.params.id, user: req.madpad_user.user, userRoom: '', pad: padObject, myPads: myPads });
           }
         })
       }
       else{ // pad already in DB
         padObject.type = pad.codeType;
-        res.render('pad', {id: req.params.id, user: req.madpad_user.user, userRoom: '', pad: padObject });        
+        res.render('pad', { id: req.params.id, user: req.madpad_user.user, userRoom: '', pad: padObject, myPads: myPads });        
       }
     }
   });
@@ -123,10 +192,13 @@ app.get('/code/:id', function(req, res){
 
 // text pad
 app.get('/:id', function(req, res){
-  console.log(req.my_pads.pads);
+  var myPads = {};
+  req.my_pads.pads = addToPublicPadCookie(req, '' + req.params.id, 'public');
+  myPads = formatPublicPadCookie(req.my_pads.pads);
+
   sharejs.server.attach(app, options);
   var padObject = getPadObject(true, true, 'textpad', true);
-  res.render('pad', {id: req.params.id, user: req.madpad_user.user, userRoom: '', pad: padObject});
+  res.render('pad', { id: req.params.id, user: req.madpad_user.user, userRoom: '', pad: padObject, myPads: myPads });
 });
 
 // home page
@@ -209,6 +281,8 @@ app.get('/:username/:id', function(req, res, next){
   // edge case for channel url for sharejs
   if(req.params.username == 'channel') return next();
 
+  var myPads = {};
+
   var padObject = getPadObject(true, true, 'textpad', true);
 
   var userRoom = req.params.username;
@@ -254,8 +328,11 @@ app.get('/:username/:id', function(req, res, next){
             padObject.type = pad.codeType;
           }
 
+          req.my_pads.pads = addToPublicPadCookie(req, userRoom + '/' + req.params.id, 'shared');
+          myPads = formatPublicPadCookie(req.my_pads.pads);
+
           sharejs.server.attach(app, options);
-          res.render('pad', { id: roomID, user: req.madpad_user.user, usersRoom: userRoom, pad: padObject });
+          res.render('pad', { id: roomID, user: req.madpad_user.user, usersRoom: userRoom, pad: padObject, myPads: myPads });
 
         }        
       }
