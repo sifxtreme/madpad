@@ -204,6 +204,7 @@ $(document).ready(function(){
 				modals.hideOverlay('.delete-confirmation');
 				modals.hideOverlay('.sharing-settings');
 				modals.hideOverlay('.account');
+				modals.hideOverlay('.create-pad');
 				$(".new-pad-area").hide();
 				$('.darken').hide();
 			},
@@ -221,6 +222,14 @@ $(document).ready(function(){
 
 					$('#cancel-delete').click(function(){
 						modals.hideOverlay('.delete-confirmation');
+					});
+				}
+			},
+
+			createPad: {
+				run: function(modals){
+					$('.new-icon').click(function(){
+						modals.showOverlay('.create-pad');
 					});
 				}
 			},
@@ -260,6 +269,7 @@ $(document).ready(function(){
 				this.deletePad.run(this);
 				this.login.run(this);
 				this.signup.run(this);
+				this.createPad.run(this);
 			},
 
 		},
