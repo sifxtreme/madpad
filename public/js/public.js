@@ -59,6 +59,8 @@ $(document).ready(function(){
 					$(this).addClass('active');
 					$('.openCreatePadForm').attr('createPadForm');
 					_this.updateOpenPadURL();
+					$('#new-button').html('CREATE PAD');
+					$('.pad-name').attr('placeholder' , 'Enter your pad name here...');
 				});
 			},
 			publicPadClick: function(){
@@ -68,6 +70,8 @@ $(document).ready(function(){
 					$(this).addClass('active');
 					$('.openCreatePadForm').attr('openPadForm');
 					_this.updateOpenPadURL();
+					$('#new-button').html('OPEN PAD');
+					$('.pad-name').attr('placeholder' , 'Enter public pad name...');
 				});
 			},
 			updateOpenPadURL: function(){

@@ -923,15 +923,6 @@ a:hover {
 .title .title-options .favorite-icon {
   background-image: url('/images/main/favorite-icon.png');
 }
-.title .title-options .private-icon {
-  background-image: url('/images/main/private-icon.png');
-}
-.title .title-options .shared-icon {
-  background-image: url('/images/main/shared-icon.png');
-}
-.title .title-options .public-icon {
-  background-image: url('/images/main/public-icon.png');
-}
 .title .title-options .chaton-icon {
   background-image: url('/images/main/chaton-icon.png');
 }
@@ -940,6 +931,54 @@ a:hover {
 }
 .title .title-options .trash-icon {
   background-image: url('/images/main/trash-icon.png');
+}
+.title .share-settings-icon {
+  position: relative;
+  top: 36px;
+  height: 30px;
+  line-height: 30px;
+  padding: 0px 10px;
+  background: #f9f9f9;
+  float: right;
+  border: 1px solid #eaeaea;
+  border-radius: 4px;
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  margin-right: 20px;
+}
+.title .share-settings-icon:hover {
+  cursor: pointer;
+  background: #eaeaea;
+}
+.title .share-settings-icon span {
+  color: #9ea5ab;
+  font-size: 14px;
+  position: relative;
+  top: -2px;
+}
+.title .share-settings-icon .icon {
+  width: 20px;
+  height: 28px;
+  background-size: 14px 14px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  float: left;
+  margin-right: 5px;
+}
+.title .share-settings-icon .private-icon {
+  background-image: url('/images/main/private-lock.png');
+}
+.title .share-settings-icon .shared-icon {
+  background-image: url('/images/main/shared-eye.png');
+}
+.title .share-settings-icon .public-icon {
+  background-image: url('/images/main/public-world.png');
 }
 /*   ---   End of Title Area   --   */
 /*   ---    Pad Sharing Settings  --   */
@@ -1064,23 +1103,37 @@ a:hover {
 }
 .create-pad .pad-type .type-tab {
   float: left;
-  color: #dddddd;
+  background: #eaeaea;
+  color: #ffffff;
   padding: 10px 20px;
-  margin-right: 10px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+}
+.create-pad .pad-type .type-tab:hover {
+  cursor: pointer;
+  background: #dddddd;
 }
 .create-pad .pad-type .active {
-  border: 2px solid #5dbff1;
   background: #5dbff1;
   color: #ffffff;
 }
+.create-pad .pad-type .active:hover {
+  background: #5dbff1;
+}
 .create-pad .type-line {
-  width: 274px;
+  width: 280px;
   float: left;
-  border-top: 1px solid #eaeaea;
+  border-top: 2px solid #eaeaea;
   margin-bottom: 40px;
   margin-top: 0px;
   position: relative;
-  top: -1px;
+  top: -2px;
   z-index: -1;
 }
 .create-pad form {
@@ -1121,9 +1174,9 @@ a:hover {
 }
 .create-pad .pad-option .option-tab {
   float: left;
-  padding: 10px 20px;
-  border: 2px solid #eaeaea;
-  margin-right: 10px;
+  padding: 10px 10px;
+  border-bottom: 3px solid #eaeaea;
+  margin-right: 20px;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -1133,20 +1186,16 @@ a:hover {
 }
 .create-pad .pad-option .option-tab:hover {
   cursor: pointer;
-  background: #5dbff1;
-  border: 2px solid #5dbff1 !important;
+  border-bottom: 3px solid #5dbff1 !important;
   transition: 0.3s;
   -webkit-transition: 0.3s;
-}
-.create-pad .pad-option .option-tab:hover p {
-  color: #ffffff !important;
 }
 .create-pad .pad-option .option-tab p {
   margin-top: 0px;
   color: #9ea5ab;
 }
 .create-pad .pad-option .active {
-  border: 2px solid #5dbff1;
+  border-bottom: 3px solid #5dbff1;
 }
 .create-pad .pad-option .active p {
   color: #5dbff1;

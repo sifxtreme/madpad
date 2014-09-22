@@ -45,12 +45,15 @@ $(document).ready(function(){
 		},
 		changeToPublicIcon: function(){
 			$('.pad-settings').removeClass('private-icon').removeClass('shared-icon').removeClass('public-icon').addClass('public-icon');
+			$('#settings-text').html('Editable by Anyone');
 		},
 		changeToSharedIcon: function(){
 			$('.pad-settings').removeClass('private-icon').removeClass('shared-icon').removeClass('public-icon').addClass('shared-icon');
+			$('#settings-text').html('Viewable by Anyone');
 		},
 		changeToPrivateIcon: function(){
 			$('.pad-settings').removeClass('private-icon').removeClass('shared-icon').removeClass('public-icon').addClass('private-icon');
+			$('#settings-text').html('Completely Private');
 		}
 	}
 
@@ -127,7 +130,7 @@ $(document).ready(function(){
 			}
 
 			// bring up settings modal
-			$('.pad-settings').click(function(){
+			$('.share-settings-icon').click(function(){
 				if(!isOwner) return false;
 				modals.showOverlay('.sharing-settings');
 			});

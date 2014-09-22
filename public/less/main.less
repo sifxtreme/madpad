@@ -150,6 +150,8 @@
 		}
 	} /* pad name css */
 
+
+
 	.title-options{
 		float: right;
 		height: 42px;
@@ -177,7 +179,6 @@
 
 			}
 		}
-
 		.new-icon{
 			background-image: url('/images/main/new-icon.png');
 		}
@@ -190,17 +191,7 @@
 			background-image: url('/images/main/favorite-icon.png');
 		}
 
-		.private-icon{
-			background-image: url('/images/main/private-icon.png');
-		}
-
-		.shared-icon{
-			background-image: url('/images/main/shared-icon.png');
-		}
-
-		.public-icon{
-			background-image: url('/images/main/public-icon.png');
-		}
+		
 
 		.chaton-icon{
 			background-image: url('/images/main/chaton-icon.png');
@@ -213,9 +204,62 @@
 		.trash-icon{
 			background-image: url('/images/main/trash-icon.png');
 		}
-
-
 	}
+
+	.share-settings-icon{
+		position: relative;
+		top: 36px;
+		height: 30px;
+		line-height: 30px;
+		padding: 0px 10px;
+		background: @light;
+		float: right;
+		border: 1px solid @ea;
+		border-radius: 4px;
+		transition: 0.5s;
+		-webkit-transition: 0.5s;
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+		margin-right: 20px;
+
+		&:hover{
+			cursor: pointer;
+			background: @ea;
+		}
+
+		span{
+			color: @9;
+			font-size: 14px;
+			position: relative;
+			top: -2px;
+		}
+
+		.icon{
+			width: 20px;
+			height: 28px;
+			background-size: 14px 14px;
+			background-position: center center;
+			background-repeat: no-repeat;
+			float: left;
+			margin-right: 5px;
+		}
+		.private-icon{
+			background-image: url('/images/main/private-lock.png');
+		}
+
+		.shared-icon{
+			background-image: url('/images/main/shared-eye.png');
+		}
+
+		.public-icon{
+			background-image: url('/images/main/public-world.png');
+		}
+	}
+
 
 }
 /*   ---   End of Title Area   --   */
