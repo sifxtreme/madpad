@@ -920,6 +920,9 @@ a:hover {
 .title .title-options .heart-icon {
   background-image: url('/images/main/heart-icon.png');
 }
+.title .title-options .favorite-icon {
+  background-image: url('/images/main/favorite-icon.png');
+}
 .title .title-options .private-icon {
   background-image: url('/images/main/private-icon.png');
 }
