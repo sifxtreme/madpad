@@ -11,6 +11,7 @@ var passport = require('passport');
 var auth = require('./authentication.js');
 
 var sessions = require('./cookie.js');
+var padCookie = require('./padCookie.js');
 
 var app = express(); 
 app.configure(function(){
@@ -23,6 +24,7 @@ app.configure(function(){
   app.use(express.methodOverride());
 
   app.use(sessions);
+  app.use(padCookie);
 
   app.use(passport.initialize());
   app.use(passport.session());
@@ -60,6 +62,11 @@ io.on('connection', function(socket){
 // login-signup routes
 require('./routes/account')(app, passport);
 
+// color pad for jimmy
+app.get('/colors', function(req, res){
+  res.render('colors');
+});
+
 var getPadObject = function(write, read, type, chat){
   return {
     isTextPad: true,
@@ -72,6 +79,7 @@ var getPadObject = function(write, read, type, chat){
 
 // code pad
 app.get('/code/:id', function(req, res){
+  req.my_pads.pads = {publicPad: 'code/' + req.params.id};
 
   sharejs.server.attach(app, options);
   var id = req.params.id;
@@ -115,6 +123,7 @@ app.get('/code/:id', function(req, res){
 
 // text pad
 app.get('/:id', function(req, res){
+  console.log(req.my_pads.pads);
   sharejs.server.attach(app, options);
   var padObject = getPadObject(true, true, 'textpad', true);
   res.render('pad', {id: req.params.id, user: req.madpad_user.user, userRoom: '', pad: padObject});
@@ -255,10 +264,7 @@ app.get('/:username/:id', function(req, res, next){
 
 });
 
-// color pad for jimmy
-app.get('/colors', function(req, res){
-  res.render('colors');
-});
+
 
 // port number
 server.listen(5000);

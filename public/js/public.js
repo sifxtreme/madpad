@@ -187,15 +187,25 @@ $(document).ready(function(){
 				$(element).addClass('overlay-close');		
 			},
 			escKeyHideOverlay: function(modals){
+				var _this = this;
 				$(document).keyup(function(e){
 					if(e.keyCode == 27){
-						modals.hideOverlay('.delete-confirmation');
-						modals.hideOverlay('.sharing-settings');
-						modals.hideOverlay('.account');
-						$(".new-pad-area").hide();
-						$('.darken').hide();
+						_this.hideAllOverlays(modals);
 					}
 				});
+			},
+			xButtonHideOverlay: function(modals){
+				var _this = this;
+				$('.modal-close').on('click', function(){
+					_this.hideAllOverlays(modals);
+				});
+			},
+			hideAllOverlays: function(modals){
+				modals.hideOverlay('.delete-confirmation');
+				modals.hideOverlay('.sharing-settings');
+				modals.hideOverlay('.account');
+				$(".new-pad-area").hide();
+				$('.darken').hide();
 			},
 
 			// delete modal
@@ -225,7 +235,7 @@ $(document).ready(function(){
 					$('#signup-link').click(function(){
 						modals.hideOverlay('.login');
 						modals.showOverlay('.signup');
-					});					
+					});				
 				}
 			},
 
@@ -246,6 +256,7 @@ $(document).ready(function(){
 
 			run: function(){
 				this.escKeyHideOverlay(this);
+				this.xButtonHideOverlay(this);
 				this.deletePad.run(this);
 				this.login.run(this);
 				this.signup.run(this);
