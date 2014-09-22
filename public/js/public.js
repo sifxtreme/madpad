@@ -17,78 +17,83 @@ $(document).ready(function(){
 			}
 		},
 		newPadForm: {
+			defaultURL: "Your Pad's URL",
 			getInputValue: function(elem){
 				if(!elem.length) return '';
 				return elem.val().toLowerCase() || '';
 			},
-			getPadName: function(formID){
-				var elem = $(formID + ' input[name="pad[name]"]');
+			getPadName: function(){
+				var elem = $('input[name="pad[name]"]');
 				return this.getInputValue(elem);
 			},
-			getPadType: function(formID){
-				var elem = $(formID + ' input[name="pad[type]"]');
+			getPadType: function(){
+				var elem = $('input[name="pad[type]"]');
 				return this.getInputValue(elem);
 			},
-			getPadUsername: function(formID){
-				var elem = $(formID + ' input[name="pad[username]"]');
+			getPadUsername: function(){
+				var elem = $('input[name="pad[username]"]');
 				return this.getInputValue(elem);
 			},
 			textPadClick: function(){
 				var _this = this;
 				$('.text-pad').on('click', function(){
-					var formID = $(this).closest('form').attr('id');
-					$('#' + formID + ' input[name="pad[type]"]').val('text');
-					_this.updateOpenPadURL(formID);
+					$('input[name="pad[type]"]').val('text');
+					$('.text-pad').addClass('active');
+					$('.code-pad').removeClass('active');
+					_this.updateOpenPadURL();
 				}); /* if you click text pad */
-
-				// $('#text-pad').click(function(){
-				// 	$(this).parent().addClass('active-type');
-				// 	$('#code-pad').parent().removeClass('active-type');
-				// 	$('#code-info').hide();
-				// 	$('#text-info').show();
-				// 	$('input[name="pad[type]"]').val('text');
-				// 	_this.updateOpenPadURL();
-				// }); 
 			},
 			codePadClick: function(){
 				var _this = this;
 				$('.code-pad').on('click', function(){
-					var formID = $(this).closest('form').attr('id');
-					$('#' + formID + ' input[name="pad[type]"]').val('code');
-					_this.updateOpenPadURL(formID);
+					$('input[name="pad[type]"]').val('code');
+					$('.code-pad').addClass('active');
+					$('.text-pad').removeClass('active');
+					_this.updateOpenPadURL();
 				}); /* if you click code pad */
-
-				// $('#code-pad').click(function(){
-				// 	$(this).parent().addClass('active-type');
-				// 	$('#text-pad').parent().removeClass('active-type');
-				// 	$('#text-info').hide();
-				// 	$('#code-info').show();
-				// 	$('input[name="pad[type]"]').val('code');
-				// 	_this.updateOpenPadURL();
-				// });
 			},
-			updateOpenPadURL: function(formID){
-				var formID = '#' + formID;
+			personalPadClick: function(){
+				var _this = this;
+				$('#personal-type').on('click', function(){
+					$('#public-type').removeClass('active');
+					$(this).addClass('active');
+					$('.openCreatePadForm').attr('createPadForm');
+					_this.updateOpenPadURL();
+				});
+			},
+			publicPadClick: function(){
+				var _this = this;
+				$('#public-type').on('click', function(){
+					$('#personal-type').removeClass('active');
+					$(this).addClass('active');
+					$('.openCreatePadForm').attr('openPadForm');
+					_this.updateOpenPadURL();
+				});
+			},
+			updateOpenPadURL: function(){
 				var newPadURL = window.location.host;
-				var padName = this.getPadName(formID);
-				var padType = this.getPadType(formID);
-				var padUsername = this.getPadUsername(formID);
+				var padName = this.getPadName();
+				var padType = this.getPadType();
+				var padUsername = this.getPadUsername();
 				var createPadURL, openPadURL;
+
+				$('.inputPadErrors').html('');
 
 				// return if empty pad name
 				if(padName == ''){
-					$('.inputWhatPadWillOpen').text('');
+					$('.inputWhatPadWillOpen').text(this.defaultURL);
 					return false;
 				}
 
 				// pad name must be alphanumeric
 				if( /[^a-zA-Z0-9_-]/.test(padName)){
-					$('.inputWhatPadWillOpen').text('Not valid pad name');
+					$('.inputWhatPadWillOpen').text(this.defaultURL);
+					$('.inputPadErrors').html('<p>Not valid pad name</p>');
 					return false;
 				}
 
 				// check if we are the user and on our username pad template
-				if(padUsername){
+				if(padUsername && $('#personal-type').hasClass('active')){
 					createPadURL = '/' + padUsername;
 					createPadURL += '/' + padName;
 				}
@@ -99,44 +104,46 @@ $(document).ready(function(){
 					openPadURL = '/code/' + padName;
 				}
 
-				$('#createPadForm .inputWhatPadWillOpen').text(newPadURL + createPadURL);
-				$('#openPadForm .inputWhatPadWillOpen').text(newPadURL + openPadURL);
-
+				if($('#personal-type').hasClass('active')){
+					$('.inputWhatPadWillOpen').text(newPadURL + createPadURL);	
+				}
+				else{
+					$('.inputWhatPadWillOpen').text(newPadURL + openPadURL);	
+				}
+				
 				return {'create': createPadURL, 'open': openPadURL};
 
 			},
 			onInputChange: function(){
 				var _this = this;
 				$('input[name="pad[name]"]').on('keyup', function(){
-					var formID = $(this).closest('form').attr('id');
-					_this.updateOpenPadURL(formID);
+					_this.updateOpenPadURL();
 				})
 			},
 			onFormSubmit: function(){
 				var _this = this;
 				$('.openCreatePadForm').submit(function(){
-					var formID = $(this).attr('id');
-					var padName = _this.getPadName('#' + formID);
-					var padType = _this.getPadType('#' + formID);
-					var padUsername = _this.getPadUsername('#' + formID);
+					var padName = _this.getPadName();
+					var padType = _this.getPadType();
+					var padUsername = _this.getPadUsername();
 
 					// error messaging for blank entry
 					if(padName == ''){
-						$('#' + formID + ' .inputPadErrors').text("Enter in some text");
+						$('.inputPadErrors').html("<p>Enter in a pad name</p>");
 						return false;
 					}
 
 					// check if pad url is valid
-					var padURL = _this.updateOpenPadURL(formID);
+					var padURL = _this.updateOpenPadURL();
 					if(!padURL) return false;
 
-					if(formID == 'openPadForm' && padURL.open != undefined){
+					// we are opening a pad
+					if($('#public-type').hasClass('active') && padURL.open != undefined){
 						window.location.href = padURL.open;
 						return false;
 					}
 
-
-					// we are a logged in user!
+					// we are a logged in user and creating a new pad
 					$.ajax({
 						type: "POST",
 						url: padURL.create,
@@ -154,7 +161,11 @@ $(document).ready(function(){
 							}
 							else if(data.error){
 								// add error checking here
-								$('#' + formID + ' .inputPadErrors').text(data.errorType);
+								var errorMessage = data.errorType;
+								if(data.errorType == 'existence'){
+									errorMessage = "Pad already exists. Click <a href='" + padURL.create + "'>here</a> to go to it";
+								}
+								$('.inputPadErrors').html('<p>' + errorMessage + '</p>');
 							}
 
 						},
@@ -162,7 +173,7 @@ $(document).ready(function(){
 							console.log("error");
 							console.log(data);
 							// add error checking here
-							$('#' + formID + ' .inputPadErrors').text("SOMETHING WENT WRONG");
+							$('.inputPadErrors').html('<p>Pad creation failed, please try again later</p>');
 						}
 					})
 
@@ -174,6 +185,8 @@ $(document).ready(function(){
 				this.codePadClick();
 				this.onInputChange();
 				this.onFormSubmit();
+				this.personalPadClick();
+				this.publicPadClick();
 			}
 		},
 		modals: {
