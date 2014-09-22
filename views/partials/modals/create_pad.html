@@ -1,0 +1,64 @@
+<div class="modal create-pad overlay-close">
+  <section class="modal-close">
+    <img src="/images/account/cross.png" />
+  </section>
+  <div class="modal-container">
+     <!-- mode in modals/create_pad once finished -->
+  <div id="create-pad-modal">
+    <div class="pad-type">
+      <div class="type-tab active" id="personal-type">
+          <h6>Personal Pad</h6>
+      </div>
+      <div class="type-tab" id="public-type">
+          <h6>Public Pad</h6>
+      </div>
+    </div>
+    <form method="post" id="createPadForm" class="openCreatePadForm">
+        <div class="name-input">
+          <div class="label">Pad Name</div>
+          <input type="text" name="pad[name]" class="pad-name" placeholder="Enter your pad name here..." />
+          <input type="hidden" name="pad[type]" value="text" />
+          <input type="hidden" name="pad[username]" value="{{user.username}}" />
+          <input type="hidden" name="pad[ajax]" value="true" />
+        </div>
+        <hr/>
+      <div class="pad-option">
+          <div class="label">Pad Type</div>
+          <div class="text-pad option-tab active">
+              <p>Text Pad</p>
+          </div>
+          <div class="code-pad option-tab">
+              <p>Code Pad</p>
+          </div>
+      </div>
+      <hr/>
+      <div class="inputPadErrors">
+          <p>Sorry, this pad already exists!</p>
+          <hr/>
+      </div>
+      <button class="green-btn">CREATE PAD</button>
+         <div class="inputWhatPadWillOpen">
+          <p>Your Pad's URL</p>
+          </div>
+    </form>
+  </div>
+<!-- end move -->
+
+<!-- move to modals/open_pad once finished -->
+<!--   <div id="open-pad-modal" style="margin-top: 100px; border: 3px solid black; margin-bottom: 300px;">
+    <h2>OPEN PUBLIC</h2>
+    <form method="post" id="openPadForm" class="openCreatePadForm">
+      <input type="text" name="pad[name]" />
+      <input type="hidden" name="pad[type]" value="text" />
+      <input type="hidden" name="pad[ajax]" value="true" />
+      <div class="text-pad">TEXT</div>
+      <div class="code-pad">CODE</div>
+      <div class="inputWhatPadWillOpen"></div>
+      <div class="inputPadErrors"></div>
+      <button class="green-btn">CREATE PAD</button>
+    </form>
+  </div> -->
+<!-- end move -->
+  </div>
+</div> <!-- Settings Modal -->
+

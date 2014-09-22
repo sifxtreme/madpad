@@ -304,16 +304,6 @@ a:hover {
   position: absolute;
   z-index: 2000;
 }
-.account .modal-close {
-  position: absolute;
-  right: 20px;
-  top: 20px;
-  cursor: pointer;
-}
-.account .modal-close img {
-  width: 49px;
-  padding: 10px 10px;
-}
 .account .modal-content {
   position: absolute;
   top: 40%;
@@ -459,6 +449,16 @@ a:hover {
   font-weight: 400;
   color: #232c30;
   text-align: center;
+}
+.modal-close {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  cursor: pointer;
+}
+.modal-close img {
+  width: 49px;
+  padding: 10px 10px;
 }
 /*   ---   End of Modal Less   --   */
 /*   ---   Side Bar General   --   */
@@ -978,7 +978,7 @@ a:hover {
   cursor: pointer;
 }
 .sharing-settings .list-settings .radio-on {
-  background-color: #33bea8;
+  background-color: #5dbff1;
 }
 .sharing-settings .list-settings .radio-off {
   background-color: #ffffff;
@@ -1005,7 +1005,7 @@ a:hover {
   cursor: pointer;
 }
 .sharing-settings .list-settings .settings:hover .large {
-  color: #33bea8;
+  color: #5dbff1;
 }
 .sharing-settings .list-settings .setting-text .large {
   color: #232c30;
@@ -1045,10 +1045,10 @@ a:hover {
 .create-pad .modal-container {
   position: absolute;
   left: 50%;
-  margin-left: -225px;
-  top: 40%;
+  margin-left: -330px;
+  top: 25%;
   margin-top: -110px;
-  width: 550px;
+  width: 660px;
   padding: 60px 60px;
   border: 1px solid #eaeaea;
   -webkit-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
@@ -1061,129 +1061,102 @@ a:hover {
 }
 .create-pad .pad-type .type-tab {
   float: left;
+  color: #dddddd;
   padding: 10px 20px;
-  border-radius: 16px;
-  border: 1px solid #eaeaea;
-  margin-left: 10px;
+  border-bottom: 4px solid #eaeaea;
+  margin-right: 10px;
 }
 .create-pad .pad-type .active {
-  background: #232c30;
+  border: 2px solid #5dbff1;
+  background: #5dbff1;
   color: #ffffff;
 }
-/*   ---    End of New Pad  --   */
-/*   ---   New Pad Area   --   */
-.new-pad-area {
-  overflow-y: hidden;
-  overflow-x: hidden;
-  position: absolute;
-  top: 70px;
-  left: 220px;
-  bottom: 0;
-  z-index: 1500;
-  width: 300px;
-  height: 400px;
-  background-color: #4b555d;
-  -webkit-box-shadow: 4px 0px 4px 0px rgba(0, 0, 0, 0.25);
-  -moz-box-shadow: 4px 0px 4px 0px rgba(0, 0, 0, 0.25);
-  box-shadow: 4px 0px 4px 0px rgba(0, 0, 0, 0.25);
-  display: none;
-  /* Input new pad */
-}
-.new-pad-area .input-area {
-  padding: 20px 20px;
-  background-color: #ffffff;
-}
-.new-pad-area .input-area .pad-name .name-input {
-  width: 100%;
-  height: 26px;
-}
-.new-pad-area .input-area .pad-name input {
-  width: 100%;
-  font-size: 14px;
-  outline: none;
-  background-color: transparent;
-  border: none;
-  padding: 0px 10px;
-}
-.new-pad-area .input-area .pad-name input::-webkit-input-placeholder {
-  color: #9ea5ab;
-  font-size: 14px;
-}
-.new-pad-area .input-area .pad-name input:-moz-placeholder {
-  color: #9ea5ab;
-  font-size: 14px;
-}
-.new-pad-area .input-area .pad-name input::-moz-placeholder {
-  color: #9ea5ab;
-  font-size: 14px;
-}
-.new-pad-area .input-area .pad-name input:-ms-input-placeholder {
-  color: #9ea5ab;
-  font-size: 14px;
-}
-.new-pad-area .input-area .green-btn {
-  width: 100%;
-}
-.new-pad-area .pad-options {
-  position: relative;
-  /* pad type */
-  /* pad descriptions */
-}
-.new-pad-area .pad-options .pad-type {
-  width: 100%;
-  height: 56px;
-  background: #636d75;
-  text-align: center;
-  color: #dddddd;
-  -webkit-box-shadow: inset 0px -2px 2px 0px rgba(0, 0, 0, 0.25);
-  -moz-box-shadow: inset 0px -2px 2px 0px rgba(0, 0, 0, 0.25);
-  box-shadow: inset 0px -2px 2px 0px rgba(0, 0, 0, 0.25);
-}
-.new-pad-area .pad-options .pad-type p {
-  display: block;
-  padding: 20px 0px;
-}
-.new-pad-area .pad-options .pad-type .text-pad {
-  width: 50%;
+.create-pad .label {
   float: left;
-  cursor: pointer;
+  color: #9ea5ab;
+  width: 120px;
 }
-.new-pad-area .pad-options .pad-type .code-pad {
-  width: 50%;
-  float: right;
-  cursor: pointer;
+.create-pad hr {
+  border: none;
+  border-top: 1px solid #eaeaea;
+  margin-top: 25px;
+  margin-bottom: 25px;
 }
-.new-pad-area .pad-options .pad-type .active-type {
-  background: #4b555d !important;
+.create-pad .name-input .label {
+  position: relative;
+  top: 2px;
+  line-height: 40px;
+}
+.create-pad .pad-name {
+  width: 418px;
+  height: 40px;
+  border: 1px solid #eaeaea;
+  padding-left: 10px;
+  font-size: 14px;
+}
+.create-pad .pad-name:focus {
+  border: 1px solid #eaeaea;
+  box-shadow: none;
+  outline: none;
+}
+.create-pad .pad-option {
+  display: inline-block;
+  position: relative;
+  top: 2px;
+}
+.create-pad .pad-option .option-tab {
+  float: left;
+  padding: 10px 20px;
+  border: 2px solid #eaeaea;
+  margin-right: 10px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.create-pad .pad-option .option-tab:hover {
+  cursor: pointer;
+  background: #5dbff1;
+  border: 2px solid #5dbff1 !important;
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+}
+.create-pad .pad-option .option-tab:hover p {
   color: #ffffff !important;
 }
-.new-pad-area .pad-options .pad-description {
-  position: absolute;
-  top: 100px;
-  width: 100%;
-  padding: 0px 30px;
+.create-pad .pad-option .option-tab p {
+  margin-top: 0px;
+  color: #9ea5ab;
 }
-.new-pad-area .pad-options .pad-description .icon {
+.create-pad .pad-option .active {
+  border: 2px solid #5dbff1;
+}
+.create-pad .pad-option .active p {
+  color: #5dbff1;
+}
+.create-pad .pad-option .label {
+  position: relative;
+  line-height: 40px;
+}
+.create-pad .inputWhatPadWillOpen {
+  font-style: italic;
+  color: #9ea5ab;
+  text-align: center;
+  font-size: 12px;
+  margin-top: 10px;
+}
+.create-pad .inputPadErrors {
+  color: #cd7155;
+  text-align: center;
+}
+.create-pad button {
   display: block;
-  width: 40px;
-  margin: 0 auto 20px auto;
+  width: 250px;
+  margin: 0 auto;
 }
-.new-pad-area .pad-options .pad-description .type-title {
-  text-align: center;
-  color: #ffffff;
-  font-size: 18px;
-  margin-bottom: 20px;
-}
-.new-pad-area .pad-options .pad-description .type-more {
-  text-align: center;
-  color: #dddddd;
-  font-size: 14px;
-  line-height: 20px;
-}
-.new-pad-area .pad-options #code-info {
-  display: none;
-}
-/*   ---   End of New Pad Area   --   */
+/*   ---    End of New Pad  --   */
 .color-palette {
   border: 1px solid #dddddd;
   float: left;
