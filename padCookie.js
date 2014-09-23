@@ -50,8 +50,25 @@ var sortAndAdd = function(padsArray, padURL, padType){
     return returnObj;
   }
 
+  var findFavorites = function(a){
+    var favorites = [];
+    for(var i = 0; i < a.length; i++){
+      if(a[i].favorite){
+        favorites.push(a[i].url);
+      }
+    }
+    for(var i = 0; i < a.length; i++){
+      if(favorites.indexOf(a[i].url) > -1){
+        a[i].favorite = true;
+      }
+    }
+
+    return a;
+  }
+
   var currentPads = padsArray || [];
   currentPads.push({type: padType, url: padURL, date: new Date().toISOString(), favorite: false});
+  currentPads = findFavorites(currentPads);
   currentPads.sort(compare);
   currentPads = uniqueObjects(currentPads);
 
