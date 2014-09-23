@@ -138,13 +138,14 @@ module.exports = function(app, passport){
 	          }
 
 	          else{
-	            User.findByIdAndUpdate(userData.realID, { username: username }, function(err){
+	            User.findByIdAndUpdate(userData.realID, { username: username }, function(err, user){
 	              if(err){
 	                console.log("User post submit error: " + err);
 	                res.render('account', {user: userData, error: "Error saving to DB", previousValue: username});
 	              }
 	              else{
 	              	console.log("Updated username of user");
+	              	req.madpad_user.user = user;
 	                res.redirect("/" + username + "/home");
 	                createPadOnUsername(userData.realID, username);
 	              }
