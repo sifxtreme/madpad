@@ -154,12 +154,7 @@ $(document).ready(function(){
 						data: $(this).serialize(),
 						dataType: "json",
 						timeout: 5000,
-						complete: function(){
-							console.log("complete");
-						},
 						success: function(data){
-							console.log("success");
-							console.log(data);
 							if(data.success){
 								window.location.href = padURL.create;
 							}
@@ -174,8 +169,6 @@ $(document).ready(function(){
 
 						},
 						error: function(data){
-							console.log("error");
-							console.log(data);
 							// add error checking here
 							$('.inputPadErrors').html('<p>Pad creation failed, please try again later</p>');
 						}

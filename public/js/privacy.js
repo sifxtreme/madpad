@@ -61,7 +61,7 @@ $(document).ready(function(){
 	madpadSocket.on('togglePrivacy', function(whichWay){
 		// add user name checking
 		if(usersRoom == username) return;
-		console.log(whichWay);
+		
 		switch(whichWay){
 			// open up writing on pads
 			case 'public':
