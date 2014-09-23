@@ -1,46 +1,4 @@
-/*   ---   Pad Hover Component  --   */
-.pad-hover{
-	background-color: @green;
-}
 
-.pad-hover a {
-	-webkit-transition: -webkit-transform 0.3s;
-	transition: transform 0.3s;
-	-webkit-transform: translateX(0);
-	transform: translateX(0);
-}
-
-.pad-hover a:hover,
-.pad-hover a::after {
-	-webkit-transform: translateX(6px);
-	transform: translateX(6px);
-	background-color: @hover;
-	color: @f;
-	-webkit-box-shadow: -4px 0px 4px 0px rgba(0, 0, 0, 0.25);
-	-moz-box-shadow:    -4px 0px 4px 0px rgba(0, 0, 0, 0.25);
-	box-shadow:         -4px 0px 4px 0px rgba(0, 0, 0, 0.25);
-}
-
-.pad-hover a::after {
-	left: 100%;
-	z-index: -2;
-	-webkit-transition: -webkit-transform 0.3s;
-	transition: transform 0.3s;
-	pointer-events: auto;
-}
-
-.pad-hover a:hover::after,
-.pad-hover a:focus::after {
-	-webkit-transform: translateX(0);
-	transform: translateX(0);
-}
-
-/*   ---   End of Pad Hover Component  --   */
-
-
-
-
-/*   ---   New Pad Hover Component  --   */
 
 /* General button style (reset) */
 

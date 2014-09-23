@@ -7,7 +7,13 @@
 					<h5>{{user.username}}'s pads</h5>
 					<ul>
 						{{#each myPads.privatePads}}
-							<a href="/{{this.url}}"><li>{{this.url}} {{#if this.favorite}}F{{/if}}<span class="deleteRecent">X</span></li></a>
+							<li class="pad-item">
+								{{#if this.favorite}}<span class="favorite"></span>{{/if}}
+								<a href="/{{this.url}}">{{this.url}} </a>
+								<span class="pad-heart-x">
+									<span class="deleteRecent delete"></span>
+								</span>
+							</li>
 						{{/each}}
 					</ul>
 				{{/if}}
@@ -16,7 +22,13 @@
 				<h5>shared pads</h5>
 				<ul>
 					{{#each myPads.sharedPads}}
-						<a href="/{{this.url}}"><li>{{this.url}} {{#if this.favorite}}F{{/if}}<span class="deleteRecent">X</span></li></a>
+						<li class="pad-item">
+								{{#if this.favorite}}<span class="favorite"></span>{{/if}}
+								<a href="/{{this.url}}">{{this.url}} </a>
+								<span class="pad-heart-x">
+									<span class="deleteRecent delete"></span>
+								</span>
+							</li>
 					{{/each}}
 				</ul>
 			</section> <!-- shared pads -->
@@ -24,7 +36,13 @@
 				<h5>public pads</h5>
 				<ul>
 					{{#each myPads.publicPads}}
-						<a href="/{{this.url}}"><li>{{this.url}} {{#if this.favorite}}F{{/if}}<span class="deleteRecent">X</span></li></a>
+						<li class="pad-item">
+								{{#if this.favorite}}<span class="favorite"></span>{{/if}}
+								<a href="/{{this.url}}">{{this.url}} </a>
+								<span class="pad-heart-x">
+									<span class="deleteRecent delete"></span>
+								</span>
+							</li>
 					{{/each}}
 				</ul>
 		</section> <!-- public pads -->
