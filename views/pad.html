@@ -7,7 +7,7 @@
 					<h5>{{user.username}}'s pads</h5>
 					<ul>
 						{{#each myPads.privatePads}}
-							<a href="/{{this.url}}"><li>{{this.url}} {{#if this.favorite}}F{{/if}} <span>X</span></li></a>
+							<a href="/{{this.url}}"><li>{{this.url}} {{#if this.favorite}}F{{/if}}<span class="deleteRecent">X</span></li></a>
 						{{/each}}
 					</ul>
 				{{/if}}
@@ -16,7 +16,7 @@
 				<h5>shared pads</h5>
 				<ul>
 					{{#each myPads.sharedPads}}
-						<a href="/{{this.url}}"><li>{{this.url}} {{#if this.favorite}}F{{/if}} <span>X</span></li></a>
+						<a href="/{{this.url}}"><li>{{this.url}} {{#if this.favorite}}F{{/if}}><span class="deleteRecent">X</span></li></a>
 					{{/each}}
 				</ul>
 			</section> <!-- shared pads -->
@@ -24,7 +24,7 @@
 				<h5>public pads</h5>
 				<ul>
 					{{#each myPads.publicPads}}
-						<a href="/{{this.url}}"><li>{{this.url}} {{#if this.favorite}}F{{/if}} <span>X</span></li></a>
+						<a href="/{{this.url}}"><li>{{this.url}} {{#if this.favorite}}F{{/if}}<span class="deleteRecent">X</span></li></a>
 					{{/each}}
 				</ul>
 		</section> <!-- public pads -->
@@ -120,42 +120,26 @@ var options = {authentication: userID};
 madpadSocket = io();
 madpadSocket.emit('room', padName);
 
-var hearts = {
-	favoriteName: location.pathname.slice(1),
-	isFavorited: false,
-	makeFavorite: function(){
-		$('#heartFavoriteIcon').addClass('favorite-icon').removeClass('heart-icon');
-	},
-	makeUnfavorite: function(){
-		$('#heartFavoriteIcon').addClass('heart-icon').removeClass('favorite-icon');
-	},
-	onIconClick: function(){
-		// we want to unfavorite
-		var _this = this;
-		$('#heartFavoriteIcon').on('click', function(){
-			// we want to defavorite
-			if($(this).hasClass('favorite-icon')){
-				_this.makeUnfavorite();
-			}
-			// we want to favorite
-			else{
-				_this.makeFavorite();
-			}
-		});
-	},
-	run: function(){
-		this.onIconClick();
-		{{#each myPads}}
-		{{#each this}}
-		if(this.favoriteName == '{{this.url}}'){
-			this.makeFavorite();
-		}
-		{{/each}}
-		{{/each}}
-	}
-}
+// var deleteRecent = {
+// 	remove: function(){
+// 		$('.deleteRecent').on('click', function(e){
+// 			if (!e) e = window.event;
+// 			e.stopPropagation();
+// 			var closestPad = $(this).siblings('a');
+// 			// closestPad.remove();
+// 			console.log(closestPad);
+// 			// $(this).remove();
+			
+// 			console.log(closestPad.attr('href'));
 
-hearts.run();
+// 		});
+// 	},
+// 	run: function(){
+// 		this.remove();
+// 	}
+// }
 
+// deleteRecent.run();
 
 </script>
+{{> heart_functions}}

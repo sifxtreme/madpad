@@ -2,6 +2,7 @@ module.exports = function(socket){
 
 	var sessions = require('./cookie.js');
 	var Pad = require('./models/pad.js');
+  var User = require('./models/user.js');
   
   // join room initially
   socket.on('room', function(room){
@@ -113,6 +114,72 @@ module.exports = function(socket){
             }
           })
           
+        }
+      });
+    }
+  });
+
+  // change favorites on pads
+  socket.on('favorite', function(data){
+    if(!data.padName) return;
+
+    console.log('socket favorite');
+
+    var userID = getUserIdFromSocket(socket.request.headers.cookie);
+
+    if(userID){
+      User.findById(userID, function(err, user){
+        if(err){
+          // TO DO - ERROR CHECKING
+          console.log(err);
+        }
+        else{
+          if(user){
+            for(var i=0; i<user.pads.length; i++){
+              if(user.pads[i].url == data.padName){
+                user.pads[i].favorite = data.favorite;
+              }
+            }
+            User.findByIdAndUpdate(userID, {$set: {pads: user.pads}}, function(err){
+              if(err){
+                // TO DO - ERROR CHECKING
+                console.log(err);
+              }
+            })
+          }
+        }
+      });
+    }
+  });
+
+  // delete recent pads from left side
+  socket.on('deleteRecent', function(data){
+    if(!data.padName) return;
+
+    console.log('socket deleteRecent');
+
+    var userID = getUserIdFromSocket(socket.request.headers.cookie);
+
+    if(userID){
+      User.findById(userID, function(err, user){
+        if(err){
+          // TO DO - ERROR CHECKING
+          console.log(err);
+        }
+        else{
+          if(user){
+            for(var i=0; i<user.pads.length; i++){
+              if(user.pads[i].url == data.padName){
+                user.pads.splice(i, 1);
+              }
+            }
+            // User.findByIdAndUpdate(userID, {$set: {pads: user.pads}}, function(err){
+            //   if(err){
+            //     // TO DO - ERROR CHECKING
+            //     console.log(err);
+            //   }
+            // })
+          }
         }
       });
     }
