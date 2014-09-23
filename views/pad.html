@@ -4,27 +4,27 @@
 		<div class="all-pads">
 			<section class="user-pads pad-list pad-hover">
 				{{#if user.username}}
-				<h5>{{user.username}}</h5>
-				<ul>
-					{{#each myPads.privatePads}}
-						<a href="/{{this}}"><li>{{this}}</li></a>
-					{{/each}}
-				</ul>
+					<h5>{{user.username}}'s pads</h5>
+					<ul>
+						{{#each myPads.privatePads}}
+							<a href="/{{this.url}}"><li>{{this.url}} {{#if this.favorite}}F{{/if}} <span>X</span></li></a>
+						{{/each}}
+					</ul>
 				{{/if}}
 			</section> <!-- user's pads -->
 			<section class="shared-pads pad-list pad-hover">
-				<h5>Shared Pads</h5>
+				<h5>shared pads</h5>
 				<ul>
 					{{#each myPads.sharedPads}}
-						<a href="/{{this}}"><li>{{this}}</li></a>
+						<a href="/{{this.url}}"><li>{{this.url}} {{#if this.favorite}}F{{/if}} <span>X</span></li></a>
 					{{/each}}
 				</ul>
 			</section> <!-- shared pads -->
 			<section class="public-pads pad-list pad-hover">
-				<h5>Public Pads</h5>
+				<h5>public pads</h5>
 				<ul>
 					{{#each myPads.publicPads}}
-						<a href="/{{this}}"><li>{{this}}</li></a>
+						<a href="/{{this.url}}"><li>{{this.url}} {{#if this.favorite}}F{{/if}} <span>X</span></li></a>
 					{{/each}}
 				</ul>
 		</section> <!-- public pads -->

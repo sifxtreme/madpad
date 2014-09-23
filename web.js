@@ -37,7 +37,7 @@ var io = require('socket.io').listen(server, {log:false});
 // connect to the database
 mongoose.connect('mongodb://localhost/madpad');
 
-// serialize and deserialize
+// passport serialize and deserialize
 passport.serializeUser(function(user, done) {
   done(null, user);
 });
@@ -77,124 +77,86 @@ var getPadObject = function(write, read, type, chat){
   }
 }
 
-var addToPublicPadCookie = function(reqObject, padURL, padType){
-  var compare = function(a,b){
-    if (a.date > b.date)
-      return -1;
-    if (a.date < b.date)
-      return 1;
-    return 0;
+var getUserInfoFromCookie = function(req){
+  var userID = '';
+  var username = '';
+
+  if(req.madpad_user && req.madpad_user && req.madpad_user.user && req.madpad_user.user._id){
+    userID = req.madpad_user.user._id;
+    username = req.madpad_user.user.username;
   }
 
-  var containsObject = function(obj, list){
-    for(var i = 0; i < list.length; i++) {
-      var current = list[i];
-      var obj1 = {}, obj2 = {};
-      obj1[list[i].type] = list[i].url;
-      obj2[obj.type] = obj.url;
-      if (JSON.stringify(obj1) === JSON.stringify(obj2)) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  var uniqueObjects = function(a){
-    var returnObj = [];
-    for(var i = 0; i<a.length; i++){
-      if(!containsObject(a[i], returnObj)){
-        returnObj.push(a[i]);
-      }
-    }
-    return returnObj;
-  }
-
-  var currentPads = reqObject.my_pads.pads || [];
-  var dateNow = new Date().toISOString();
-  currentPads.push({type: padType, url: padURL, date: dateNow});
-  currentPads.sort(compare);
-  currentPads = uniqueObjects(currentPads);
-
-  return currentPads;
+  return {id: userID, username: username};
 }
 
-var formatPublicPadCookie = function(cookie){
-  if(typeof cookie !== 'object') return false;
-  var favoritePads = [], privatePads = [], sharedPads = [], publicPads = [];
-  for(var i=0; i<cookie.length; i++){
-    var p = cookie[i];
-    if(typeof p.type !== 'undefined'){
-      if(p.type == 'favorite'){
-       favoritePads.push(p.url); 
-      }
-      else if(p.type == 'private'){
-        privatePads.push(p.url);
-      }
-      else if(p.type == 'shared'){
-        sharedPads.push(p.url);
-      }
-      else if(p.type == 'public'){
-        publicPads.push(p.url);
-      }
-    }
-  }
+var getUserInfoFromDB = function(){
 
-  return {favoritePads: favoritePads, privatePads: privatePads, sharedPads: sharedPads, publicPads: publicPads}
 }
 
 // code pad
 app.get('/code/:id', function(req, res){
   var myPads = {};
 
-  req.my_pads.pads = addToPublicPadCookie(req, 'code/' + req.params.id, 'public');
-  myPads = formatPublicPadCookie(req.my_pads.pads);
+  var pads = req.my_pads.pads;
+  req.my_pads.pads = padCookie.sortAndAdd(pads, 'code/' + req.params.id, 'public');
+  myPads = padCookie.format(req.my_pads.pads);
+
+  console.log(myPads);
 
 
   sharejs.server.attach(app, options);
   var id = req.params.id;
   var padObject = getPadObject(true, true, 'text', true);
   padObject.isTextPad = false;
-  Pad.findOne({'name': 'code_' + id}, function(err, pad){
-    if(err){
-      // TODO - add error logging here
-      console.log('Error: ' + err);
-      // render error page
-    }
-    else {
-      if(!pad){ // pad not in DB
-        var newPad = new Pad({
-          name: 'code_' + id,
-          owner: 'OWNER',
-          writeAccess: true,
-          readAccess: true,
-          codeType: 'text',
-          chatOn: true
-        })
-        newPad.save(function(err){
-          if(err){
-            // TODO - add error logging here
-            console.log('Error: ' + err);
-            // render error page
-          }
-          else{
-            res.render('pad', { id: req.params.id, user: req.madpad_user.user, userRoom: '', pad: padObject, myPads: myPads });
-          }
-        })
+
+  var renderView = function(){
+    Pad.findOne({'name': 'code_' + id}, function(err, pad){
+      if(err){
+        // TODO - add error logging here
+        console.log('Error: ' + err);
+        // render error page
       }
-      else{ // pad already in DB
-        padObject.type = pad.codeType;
-        res.render('pad', { id: req.params.id, user: req.madpad_user.user, userRoom: '', pad: padObject, myPads: myPads });        
+      else {
+        if(!pad){ // pad not in DB
+          var newPad = new Pad({
+            name: 'code_' + id,
+            owner: 'OWNER',
+            writeAccess: true,
+            readAccess: true,
+            codeType: 'text',
+            chatOn: true
+          })
+          newPad.save(function(err){
+            if(err){
+              // TODO - add error logging here
+              console.log('Error: ' + err);
+              // render error page
+            }
+            else{
+              res.render('pad', { id: req.params.id, user: req.madpad_user.user, userRoom: '', pad: padObject, myPads: myPads });
+            }
+          })
+        }
+        else{ // pad already in DB
+          padObject.type = pad.codeType;
+          res.render('pad', { id: req.params.id, user: req.madpad_user.user, userRoom: '', pad: padObject, myPads: myPads });        
+        }
       }
-    }
-  });
+    });
+  };
+
+  renderView();
+
+
   
 });
 
 // text pad
 app.get('/:id', function(req, res){
   var myPads = {};
-  req.my_pads.pads = addToPublicPadCookie(req, '' + req.params.id, 'public');
-  myPads = formatPublicPadCookie(req.my_pads.pads);
+  var pads = req.my_pads.pads;
+  req.my_pads.pads = padCookie.sortAndAdd(pads, '' + req.params.id, 'public');
+  myPads = padCookie.format(req.my_pads.pads);
 
   sharejs.server.attach(app, options);
   var padObject = getPadObject(true, true, 'textpad', true);
@@ -220,7 +182,7 @@ app.post('/:username/:id', function(req, res, next){
   }
 
   // default set to textpad
-  var id = req.params.id;
+  var roomID = req.params.id;
   var padType = 'textpad'
   if(req.body.pad.type == 'code'){
     padType = 'text'
@@ -228,7 +190,7 @@ app.post('/:username/:id', function(req, res, next){
 
   // change to lowercase
   username = username.toLowerCase();
-  id = id.toLowerCase();
+  roomID = roomID.toLowerCase();
 
   // always return json
   res.contentType('json');
@@ -328,8 +290,8 @@ app.get('/:username/:id', function(req, res, next){
             padObject.type = pad.codeType;
           }
 
-          req.my_pads.pads = addToPublicPadCookie(req, userRoom + '/' + req.params.id, 'shared');
-          myPads = formatPublicPadCookie(req.my_pads.pads);
+          // req.my_pads.pads = addToPublicPadCookie(req, userRoom + '/' + req.params.id, 'shared');
+          // myPads = formatPublicPadCookie(req.my_pads.pads);
 
           sharejs.server.attach(app, options);
           res.render('pad', { id: roomID, user: req.madpad_user.user, usersRoom: userRoom, pad: padObject, myPads: myPads });
