@@ -1,5 +1,5 @@
 var sessions = require("client-sessions");
-var secret = require("./cookie-secret.js")
+var secret = require("./cookie-secret.js");
 
 var options = {
 	cookieName: 'my_pads',

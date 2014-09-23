@@ -95,6 +95,7 @@ module.exports = function(app, passport){
 
 	app.get('/logout', function(req, res){
 	  req.madpad_user.reset();
+	  req.my_pads.reset();
 	  req.logout();
 	  res.redirect('/');
 	});
@@ -102,7 +103,7 @@ module.exports = function(app, passport){
 	app.get('/account', function(req, res){
 	  if(req.madpad_user.user.username){
 	    console.log("we are already logged in...redirecting");
-	    res.redirect("/"+req.madpad_user.user.username + "/home");
+	    res.redirect("/" + req.madpad_user.user.username + "/home");
 	  }
 	  else{
 	    var userData = getSocialAccount(req.madpad_user.user);
