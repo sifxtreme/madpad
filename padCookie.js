@@ -60,14 +60,11 @@ var sortAndAdd = function(padsArray, padURL, padType){
 
 var format = function(cookie){
   if(typeof cookie !== 'object') return false;
-  var favoritePads = [], privatePads = [], sharedPads = [], publicPads = [];
+  var privatePads = [], sharedPads = [], publicPads = [];
   for(var i=0; i<cookie.length; i++){
     var p = cookie[i];
     if(typeof p.type !== 'undefined'){
-      if(p.type == 'favorite'){
-       favoritePads.push({url: p.url, favorite: p.favorite}); 
-      }
-      else if(p.type == 'private'){
+      if(p.type == 'private'){
         privatePads.push({url: p.url, favorite: p.favorite});
       }
       else if(p.type == 'shared'){
@@ -79,7 +76,7 @@ var format = function(cookie){
     }
   }
 
-  return {favoritePads: favoritePads, privatePads: privatePads, sharedPads: sharedPads, publicPads: publicPads}
+  return {privatePads: privatePads, sharedPads: sharedPads, publicPads: publicPads}
 }
 
 module.exports = sessions(options);
