@@ -1,5 +1,7 @@
 $(document).ready(function(){
 	
+	$('.username-wrapper').css('opacity' , '1').addClass('move');
+
 	function padItemOptions(){
 		$('.pad-heart-x').hide();
 		$('.pad-item').mouseenter(function(){

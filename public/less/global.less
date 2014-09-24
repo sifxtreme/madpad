@@ -56,6 +56,7 @@ table {
 input{
     padding: 0 0;
     box-sizing: border-box;
+    outline: none;
 }
 
 *{
@@ -380,6 +381,7 @@ a{
 .signup-step-wrapper{
     height: 100%;
     background: @light;
+    
 
     .fb-signup-img{
         display: block;
@@ -392,15 +394,21 @@ a{
         box-shadow:         0px 2px 2px 0px rgba(0, 0, 0, 0.10);
     }
 
+    .move{
+       top: 150px !important;
+    }
     .username-wrapper{
         position: relative;
-        top: 150px;
+        top: 100px;
         left: 50%;
-        margin-left: -300px;
-        width: 600px;
+        margin-left: -400px;
+        width: 800px;
+        transition: 2s;
+        -webkit-transition: 2s;
+        opacity: 0;
 
         h1{
-            font-size: 40px;
+            font-size: 36px;
             text-align: center;
             margin-bottom: 40px;
         }

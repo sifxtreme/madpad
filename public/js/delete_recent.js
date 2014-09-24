@@ -13,10 +13,10 @@ $(document).ready(function(){
 				.animate({
 					'marginLeft' : "-=50px",
 					'opacity' : "0"
-				}, 400)
-				.delay(400)
+				}, 500)
+				.delay(500)
 				.animate({
-					'height': 0,
+					'height': "0",
 				}, 100)
 				.queue(removeElement);
 
