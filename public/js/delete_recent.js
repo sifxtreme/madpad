@@ -6,10 +6,15 @@ $(document).ready(function(){
 				var closestPad = $(this).parent().siblings('a');
 				var deleteURL = closestPad.attr('href').slice(1);
 				madpadSocket.emit('deleteRecent', deleteURL);
-				closestPad.parent().css('background-color' , '#4b555d').animate({
+				closestPad.parent().css('background-color' , '#4b555d')
+				.animate({
 					'marginLeft' : "-=50px",
 					'opacity' : "0"
-				}, 500);	
+				}, 500)
+				.delay(500)
+				.animate({
+					'height': 0
+				},1)	
 
 				//closestPad.parent().remove();
 			});
