@@ -479,6 +479,9 @@ a:hover {
 }
 /*   ---   End of Side Bar General   --   */
 /*   ---   Pad List   --   */
+.effect {
+  transform: translate(-30px);
+}
 .pad-list {
   margin-top: 20px;
   margin-bottom: 10px;
