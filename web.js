@@ -17,6 +17,7 @@ var app = express();
 app.configure(function(){
   app.set('view engine', 'html');
   hbs.registerPartials(__dirname + '/views/partials');
+  hbs.registerHelper('strip_name', function(url) {return url.split('/').pop()})
   app.engine('html', hbs.__express);
   app.use(express.static('public'));
   app.use(express.cookieParser());

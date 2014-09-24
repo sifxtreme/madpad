@@ -9,7 +9,7 @@
 						{{#each myPads.privatePads}}
 							<li class="pad-item">
 								{{#if this.favorite}}<span class="favorite"></span>{{/if}}
-								<a href="/{{this.url}}">{{this.url}} </a>
+								<a href="/{{this.url}}">{{strip_name this.url}} </a>
 								<span class="pad-heart-x">
 									<span class="deleteRecent delete"></span>
 								</span>
@@ -24,7 +24,7 @@
 					{{#each myPads.sharedPads}}
 						<li class="pad-item">
 								{{#if this.favorite}}<span class="favorite"></span>{{/if}}
-								<a href="/{{this.url}}">{{this.url}} </a>
+								<a href="/{{this.url}}">{{strip_name this.url}} </a>
 								<span class="pad-heart-x">
 									<span class="deleteRecent delete"></span>
 								</span>
@@ -38,7 +38,7 @@
 					{{#each myPads.publicPads}}
 						<li class="pad-item">
 								{{#if this.favorite}}<span class="favorite"></span>{{/if}}
-								<a href="/{{this.url}}">{{this.url}} </a>
+								<a href="/{{this.url}}">{{strip_name this.url}} </a>
 								<span class="pad-heart-x">
 									<span class="deleteRecent delete"></span>
 								</span>
