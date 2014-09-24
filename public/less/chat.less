@@ -11,21 +11,46 @@
 	border-left: 1px solid @ea;
 
 	.chat-title{
-		border-bottom: 1px solid @ea;
-		background: @light;
+		border-bottom: 1px solid @d;
+		background: @ea;
 		height: 50px;
 
-		p{
-			text-align: center;
-			color: @dark;
-			line-height: 50px;
-			font-size: 18px;
+		.avatar-list{
+			position: relative;
+			max-width: 280px;
+			top: 10px;
+			padding: 0px 10px;
 
-			span{
-				color: @hover;
-				font-size: 14px;
-				font-weight: bold;
+			li{
+				float: left;
+				margin-right: 10px;
+
+				&:hover{
+					cursor: pointer;
+				}
+
+				p{
+					font-size: 12px;
+					height: 30px;
+					line-height: 28px;
+					border: 1px solid @ea;
+					background: @f;
+					padding: 0px 10px;
+					border-radius: 20px;
+				}
 			}
+		}
+
+		.avatar-user{
+			background-size: cover;
+			background: @f;
+			border-radius: 50%;
+			height: 30px;
+			width: 30px;
+			border: 1px solid @f;
+			-webkit-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.15);
+			-moz-box-shadow:    0px 0px 2px 0px rgba(0, 0, 0, 0.15);
+			box-shadow:         0px 0px 2px 0px rgba(0, 0, 0, 0.15);
 		}
 
 	} /* chat title */

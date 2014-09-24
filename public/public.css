@@ -408,8 +408,8 @@ a:hover {
   left: 50%;
   margin-left: -400px;
   width: 800px;
-  transition: 2s;
-  -webkit-transition: 2s;
+  transition: 1.5s;
+  -webkit-transition: 1.5s;
   opacity: 0;
 }
 .signup-step-wrapper .username-wrapper h1 {
@@ -468,6 +468,36 @@ a:hover {
   padding: 10px 10px;
 }
 /*   ---   End of Modal Less   --   */
+/*   ---   Tooltip Less   --   */
+.tooltip {
+  display: inline;
+  position: relative;
+}
+.tooltip:hover:after {
+  background: #5dbff1;
+  left: 0;
+  font-size: 12px;
+  line-height: 18px;
+  border-radius: 2px;
+  top: 41px;
+  color: #ffffff;
+  content: attr(name);
+  padding: 8px 16px;
+  position: absolute;
+  z-index: 98;
+}
+.tooltip:hover:before {
+  border: solid;
+  border-color: #5dbff1 transparent;
+  border-width: 0px 6px 6px 6px;
+  top: 35px;
+  content: "";
+  left: 50%;
+  margin-left: -6px;
+  position: absolute;
+  z-index: 99;
+}
+/*   ---   End of Tooltip Less   --   */
 /*   ---   Side Bar General   --   */
 .left {
   width: 250px;
@@ -654,20 +684,42 @@ a:hover {
   /* submit area */
 }
 .right .chat-title {
-  border-bottom: 1px solid #eaeaea;
-  background: #f9f9f9;
+  border-bottom: 1px solid #dddddd;
+  background: #eaeaea;
   height: 50px;
 }
-.right .chat-title p {
-  text-align: center;
-  color: #232c30;
-  line-height: 50px;
-  font-size: 18px;
+.right .chat-title .avatar-list {
+  position: relative;
+  max-width: 280px;
+  top: 10px;
+  padding: 0px 10px;
 }
-.right .chat-title p span {
-  color: #4b555d;
-  font-size: 14px;
-  font-weight: bold;
+.right .chat-title .avatar-list li {
+  float: left;
+  margin-right: 10px;
+}
+.right .chat-title .avatar-list li:hover {
+  cursor: pointer;
+}
+.right .chat-title .avatar-list li p {
+  font-size: 12px;
+  height: 30px;
+  line-height: 28px;
+  border: 1px solid #eaeaea;
+  background: #ffffff;
+  padding: 0px 10px;
+  border-radius: 20px;
+}
+.right .chat-title .avatar-user {
+  background-size: cover;
+  background: #ffffff;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  border: 1px solid #ffffff;
+  -webkit-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.15);
 }
 .right #messages {
   padding: 10px 10px;

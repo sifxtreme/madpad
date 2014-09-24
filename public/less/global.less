@@ -403,8 +403,8 @@ a{
         left: 50%;
         margin-left: -400px;
         width: 800px;
-        transition: 2s;
-        -webkit-transition: 2s;
+        transition: 1.5s;
+        -webkit-transition: 1.5s;
         opacity: 0;
 
         h1{
@@ -479,3 +479,39 @@ a{
 }
 
 /*   ---   End of Modal Less   --   */
+
+
+
+/*   ---   Tooltip Less   --   */
+.tooltip{
+    display: inline;
+    position: relative;
+
+}
+
+.tooltip:hover:after{
+    background: @blue;
+    left: 0;
+    font-size: 12px;
+    line-height: 18px;
+    border-radius: 2px;
+    top: 41px;
+    color: @f;
+    content: attr(name);
+    padding: 8px 16px;
+    position: absolute;
+    z-index: 98;
+}
+
+.tooltip:hover:before{
+    border: solid;
+    border-color: @blue transparent;
+    border-width: 0px 6px 6px 6px;
+    top: 35px;
+    content: "";
+    left: 50%;
+    margin-left: -6px;
+    position: absolute;
+    z-index: 99;
+}
+/*   ---   End of Tooltip Less   --   */
