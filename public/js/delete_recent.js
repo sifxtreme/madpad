@@ -19,8 +19,6 @@ $(document).ready(function(){
 					'height': 0,
 				}, 100)
 				.queue(removeElement);
-
-				//closestPad.parent().remove();
 			});
 		},
 		run: function(){

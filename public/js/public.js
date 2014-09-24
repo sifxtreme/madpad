@@ -67,23 +67,23 @@ $(document).ready(function(){
 			personalPadClick: function(){
 				var _this = this;
 				$('#personal-type').on('click', function(){
-					$('#public-type').removeClass('active');
 					$(this).addClass('active');
+					$('#public-type').removeClass('active');
 					$('.openCreatePadForm').attr('createPadForm');
-					_this.updateOpenPadURL();
 					$('#new-button').html('CREATE PAD');
 					$('.pad-name').attr('placeholder' , 'Enter your pad name here...');
+					_this.updateOpenPadURL();
 				});
 			},
 			publicPadClick: function(){
 				var _this = this;
 				$('#public-type').on('click', function(){
-					$('#personal-type').removeClass('active');
 					$(this).addClass('active');
+					$('#personal-type').removeClass('active');
 					$('.openCreatePadForm').attr('openPadForm');
-					_this.updateOpenPadURL();
 					$('#new-button').html('OPEN PAD');
 					$('.pad-name').attr('placeholder' , 'Enter public pad name...');
+					_this.updateOpenPadURL();
 				});
 			},
 			updateOpenPadURL: function(){
@@ -231,23 +231,7 @@ $(document).ready(function(){
 				$('.darken').hide();
 			},
 
-			// delete modal
-			deletePad: {
-				run: function(modals){
-					$('.trash-icon').click(function(){
-						modals.showOverlay('.delete-confirmation');
-					});
-
-					$('#confirm-delete').click(function(){
-						modals.hideOverlay('.delete-confirmation');
-					});
-
-					$('#cancel-delete').click(function(){
-						modals.hideOverlay('.delete-confirmation');
-					});
-				}
-			},
-
+			// create pad modal
 			createPad: {
 				run: function(modals){
 					$('.new-icon').click(function(){
@@ -288,7 +272,6 @@ $(document).ready(function(){
 			run: function(){
 				this.escKeyHideOverlay(this);
 				this.xButtonHideOverlay(this);
-				this.deletePad.run(this);
 				this.login.run(this);
 				this.signup.run(this);
 				this.createPad.run(this);
