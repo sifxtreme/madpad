@@ -94,13 +94,10 @@ madpadSocket.emit('room', padName);
 var deleteRecent = {
 	remove: function(){
 		$('.deleteRecent').on('click', function(e){
-			var closestPad = $(this).siblings('a');
-			// closestPad.remove();
-			console.log(closestPad);
-			// $(this).remove();
-			
-			console.log(closestPad.attr('href'));
-
+			var closestPad = $(this).parent().siblings('a');
+			var deleteURL = closestPad.attr('href').slice(1);
+			madpadSocket.emit('deleteRecent', deleteURL);
+			closestPad.parent().remove();
 		});
 	},
 	run: function(){
@@ -108,7 +105,7 @@ var deleteRecent = {
 	}
 }
 
-// deleteRecent.run();
+deleteRecent.run();
 
 </script>
 {{> heart_functions}}
