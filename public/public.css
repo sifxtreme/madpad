@@ -721,6 +721,9 @@ a:hover {
   -moz-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.15);
   box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.15);
 }
+.right .chat-title .avatar-owner {
+  border: 2px solid #5dbff1;
+}
 .right #messages {
   padding: 10px 10px;
   overflow-y: auto;
