@@ -133,6 +133,7 @@ table {
 input {
   padding: 0 0;
   box-sizing: border-box;
+  outline: none;
 }
 * {
   box-sizing: border-box;
@@ -398,15 +399,21 @@ a:hover {
   -moz-box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.1);
   box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.1);
 }
+.signup-step-wrapper .move {
+  top: 150px !important;
+}
 .signup-step-wrapper .username-wrapper {
   position: relative;
-  top: 150px;
+  top: 100px;
   left: 50%;
-  margin-left: -300px;
-  width: 600px;
+  margin-left: -400px;
+  width: 800px;
+  transition: 2s;
+  -webkit-transition: 2s;
+  opacity: 0;
 }
 .signup-step-wrapper .username-wrapper h1 {
-  font-size: 40px;
+  font-size: 36px;
   text-align: center;
   margin-bottom: 40px;
 }
