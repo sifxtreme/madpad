@@ -127,6 +127,10 @@ module.exports = function(socket){
 
     var userID = getUserIdFromSocket(socket.request.headers.cookie);
 
+    var endsWith = function(str, suffix) {
+      return str.indexOf(suffix, str.length - suffix.length) !== -1;
+    }
+
     if(userID){
       User.findById(userID, function(err, user){
         if(err){
@@ -136,7 +140,9 @@ module.exports = function(socket){
         else{
           if(user){
             for(var i=0; i<user.pads.length; i++){
-              if(data.padName.lastIndexOf(user.pads[i].url, 0) === 0){
+              var checkName = data.padName;
+              if(endsWith(checkName, '/')) checkName = checkName.slice(0,-1);
+              if(checkName == user.pads[i].url){
                 user.pads[i].favorite = data.favorite;
               }
             }
