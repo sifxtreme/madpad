@@ -1,0 +1,50 @@
+<div class="all-pads">
+	<section class="user-pads pad-list pad-hover">
+		{{#if user.username}}
+			<h5>{{user.username}}'s pads</h5>
+			<ul>
+				{{#each myPads.privatePads}}
+					<li class="pad-item">
+						{{#if this.favorite}}<span class="favorite"></span>{{/if}}
+						<a href="/{{this.url}}">{{strip_name this.url}} </a>
+						<span class="pad-heart-x">
+							<span class="deleteRecent delete"></span>
+						</span>
+					</li>
+				{{/each}}
+			</ul>
+		{{/if}}
+	</section> <!-- user's pads -->
+	<section class="shared-pads pad-list pad-hover">
+		<h5>shared pads</h5>
+		<ul>
+			{{#each myPads.sharedPads}}
+				<li class="pad-item">
+					{{#if this.favorite}}<span class="favorite"></span>{{/if}}
+					<a href="/{{this.url}}">{{this.url}} </a>
+					{{#if user.username}}
+					<span class="pad-heart-x">
+						<span class="deleteRecent delete"></span>
+					</span>
+					{{/if}}
+				</li>
+			{{/each}}
+		</ul>
+	</section> <!-- shared pads -->
+	<section class="public-pads pad-list pad-hover">
+		<h5>public pads</h5>
+		<ul>
+			{{#each myPads.publicPads}}
+				<li class="pad-item">
+					{{#if this.favorite}}<span class="favorite"></span>{{/if}}
+					<a href="/{{this.url}}">{{this.url}} </a>
+					{{#if user.username}}
+					<span class="pad-heart-x">
+						<span class="deleteRecent delete"></span>
+					</span>
+					{{/if}}
+				</li>
+			{{/each}}
+		</ul>
+	</section> <!-- public pads -->
+</div>

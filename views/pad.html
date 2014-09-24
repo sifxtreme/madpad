@@ -1,55 +1,9 @@
 <div class="madpad-container minwidth">
+	
 	<div class="left">
 		<div class="offset"></div>
-		<div class="all-pads">
-			<section class="user-pads pad-list pad-hover">
-				{{#if user.username}}
-					<h5>{{user.username}}'s pads</h5>
-					<ul>
-						{{#each myPads.privatePads}}
-							<li class="pad-item">
-								{{#if this.favorite}}<span class="favorite"></span>{{/if}}
-								<a href="/{{this.url}}">{{strip_name this.url}} </a>
-								<span class="pad-heart-x">
-									<span class="deleteRecent delete"></span>
-								</span>
-							</li>
-						{{/each}}
-					</ul>
-				{{/if}}
-			</section> <!-- user's pads -->
-			<section class="shared-pads pad-list pad-hover">
-				<h5>shared pads</h5>
-				<ul>
-					{{#each myPads.sharedPads}}
-						<li class="pad-item">
-								{{#if this.favorite}}<span class="favorite"></span>{{/if}}
-								<a href="/{{this.url}}">{{strip_name this.url}} </a>
-								<span class="pad-heart-x">
-									<span class="deleteRecent delete"></span>
-								</span>
-							</li>
-					{{/each}}
-				</ul>
-			</section> <!-- shared pads -->
-			<section class="public-pads pad-list pad-hover">
-				<h5>public pads</h5>
-				<ul>
-					{{#each myPads.publicPads}}
-						<li class="pad-item">
-								{{#if this.favorite}}<span class="favorite"></span>{{/if}}
-								<a href="/{{this.url}}">{{strip_name this.url}} </a>
-								<span class="pad-heart-x">
-									<span class="deleteRecent delete"></span>
-								</span>
-							</li>
-					{{/each}}
-				</ul>
-		</section> <!-- public pads -->
-		</div>
+		{{> my_pads}}
 	</div>
-
-	{{> new_pad}}
 
 	<div class="middle {{#unless pad.chat}}no-chat-fix{{/unless}}">
 		<div class="title">
@@ -58,7 +12,7 @@
 			</div>
 			<div class="title-options">	
 				<div class="icon new-icon"></div>
-				<div id="heartFavoriteIcon" class="icon heart-icon"></div>			
+				{{#if user.username}}<div id="heartFavoriteIcon" class="icon heart-icon"></div>{{/if}}
 				<div class="icon {{#if pad.chat}}chaton-icon{{else}}chatoff-icon{{/if}}"></div>
 				{{#if usersRoom}}<div class="icon trash-icon"></div>{{/if}}
 			</div>
@@ -90,7 +44,6 @@
 			<p><span>chat</span></p>
 		</div>
     <div id="messages"></div>
-
     <div class="submit-wrapper">
 	    <div class="submit-area">
 		    <form action="" class="madpadChatForm">
@@ -100,7 +53,7 @@
     </div>
 	</div> <!-- chat -->
 
-</div>
+</div> <!-- end madpad-container -->
 <script>
 
 var id = '{{id}}';
@@ -138,24 +91,22 @@ var options = {authentication: userID};
 madpadSocket = io();
 madpadSocket.emit('room', padName);
 
-// var deleteRecent = {
-// 	remove: function(){
-// 		$('.deleteRecent').on('click', function(e){
-// 			if (!e) e = window.event;
-// 			e.stopPropagation();
-// 			var closestPad = $(this).siblings('a');
-// 			// closestPad.remove();
-// 			console.log(closestPad);
-// 			// $(this).remove();
+var deleteRecent = {
+	remove: function(){
+		$('.deleteRecent').on('click', function(e){
+			var closestPad = $(this).siblings('a');
+			// closestPad.remove();
+			console.log(closestPad);
+			// $(this).remove();
 			
-// 			console.log(closestPad.attr('href'));
+			console.log(closestPad.attr('href'));
 
-// 		});
-// 	},
-// 	run: function(){
-// 		this.remove();
-// 	}
-// }
+		});
+	},
+	run: function(){
+		this.remove();
+	}
+}
 
 // deleteRecent.run();
 
