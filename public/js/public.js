@@ -1,4 +1,16 @@
 $(document).ready(function(){
+	
+	function padItemOptions(){
+		$('.pad-heart-x').hide();
+		$('.pad-item').mouseenter(function(){
+			$(this).find('.pad-heart-x').show();
+		});
+		$('.pad-item').mouseleave(function(){
+			$(this).find('.pad-heart-x').hide();
+		});
+	}
+	padItemOptions();
+
 	mpFrontend = {
 		chat: {
 			close: function(){

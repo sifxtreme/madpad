@@ -478,46 +478,11 @@ a:hover {
   overflow-x: hidden;
 }
 /*   ---   End of Side Bar General   --   */
-/*   ---   New Pad   --   */
-.new-pad {
-  width: 200px;
-  height: 50px;
-  background-color: #33bea8;
-  position: absolute;
-  left: 25px;
-  margin-top: 20px;
-  z-index: 1400;
-  border-radius: 2px !important;
-}
-.new-pad a {
-  display: block;
-  line-height: 50px;
-  color: #ffffff;
-  padding: 0px 20px;
-  text-decoration: none;
-}
-.new-pad img {
-  width: 20px;
-  position: relative;
-  top: 5px;
-  margin-right: 10px;
-}
-.new-pad-active {
-  -webkit-box-shadow: -3px 3px 4px 0px rgba(0, 0, 0, 0.25);
-  -moz-box-shadow: -3px 3px 4px 0px rgba(0, 0, 0, 0.25);
-  box-shadow: -3px 3px 4px 0px rgba(0, 0, 0, 0.25);
-  transition: 1s;
-  -webkit-transition: 1s;
-}
-/*   ---   End of New Pad   --   */
 /*   ---   Pad List   --   */
 .pad-list {
   margin-top: 20px;
   margin-bottom: 10px;
   background-color: #363e44;
-}
-.pad-list ul {
-  background: transparent;
 }
 .pad-list h5 {
   height: 50px;
@@ -525,17 +490,62 @@ a:hover {
   padding: 0px 20px;
   background-color: #363e44;
 }
+.pad-list li {
+  background-color: #363e44;
+  overflow: hidden;
+  clear: both;
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+}
+.pad-list li:hover {
+  background-color: #4b555d;
+  cursor: pointer;
+}
+.pad-list li .favorite {
+  background: url('/images/main/favorite-icon.png') no-repeat center center;
+  background-size: 12px 12px;
+  width: 12px;
+  height: 50px;
+  float: left;
+  margin-left: 0px;
+  position: relative;
+  left: 30px;
+  margin-right: 10px;
+}
+.pad-list li .pad-heart-x {
+  line-height: 50px;
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+}
+.pad-list li .pad-heart-x span {
+  float: right;
+}
+.pad-list li .pad-heart-x .delete {
+  background: url('/images/main/small-x.png') no-repeat center center;
+  background-size: 12px 12px;
+  width: 12px;
+  height: 50px;
+  padding: 0px 20px 0px 10px;
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+}
+.pad-list li .pad-heart-x .delete:hover {
+  background: url('/images/main/small-x-hover.png') no-repeat center center;
+  background-size: 12px 12px;
+  width: 12px;
+  height: 50px;
+}
 .pad-list a {
   display: block;
+  width: 198px;
+  float: left;
   height: 50px;
   line-height: 50px;
-  padding: 0px 20px;
+  padding: 0px 0px 0px 30px;
   color: #9ea5ab;
-  background-color: #363e44;
   text-decoration: none;
-}
-.pad-list a li {
-  margin-left: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .pad-list .active {
   color: #33bea8;
@@ -553,40 +563,6 @@ a:hover {
   color: #cd7155;
 }
 /*   ---  End of User/Shared/Public Pads  --   */
-/*   ---   Pad Hover Component  --   */
-.pad-hover {
-  background-color: #33bea8;
-}
-.pad-hover a {
-  -webkit-transition: -webkit-transform 0.3s;
-  transition: transform 0.3s;
-  -webkit-transform: translateX(0);
-  transform: translateX(0);
-}
-.pad-hover a:hover,
-.pad-hover a::after {
-  -webkit-transform: translateX(6px);
-  transform: translateX(6px);
-  background-color: #4b555d;
-  color: #ffffff;
-  -webkit-box-shadow: -4px 0px 4px 0px rgba(0, 0, 0, 0.25);
-  -moz-box-shadow: -4px 0px 4px 0px rgba(0, 0, 0, 0.25);
-  box-shadow: -4px 0px 4px 0px rgba(0, 0, 0, 0.25);
-}
-.pad-hover a::after {
-  left: 100%;
-  z-index: -2;
-  -webkit-transition: -webkit-transform 0.3s;
-  transition: transform 0.3s;
-  pointer-events: auto;
-}
-.pad-hover a:hover::after,
-.pad-hover a:focus::after {
-  -webkit-transform: translateX(0);
-  transform: translateX(0);
-}
-/*   ---   End of Pad Hover Component  --   */
-/*   ---   New Pad Hover Component  --   */
 /* General button style (reset) */
 .btn {
   cursor: pointer;
