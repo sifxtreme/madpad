@@ -190,14 +190,15 @@ module.exports = function(socket){
             }
           }
 
-          if(typeof callback == 'function'){
-            callback();
-          }
-
           User.findByIdAndUpdate(userID, {$set: {pads: newPads}}, function(err){
             if(err){
               // TO DO - ERROR CHECKING
               console.log(err);
+            }
+            else{
+              if(typeof callback == 'function'){
+                callback();
+              }
             }
           })
         }
@@ -208,9 +209,7 @@ module.exports = function(socket){
   // delete recent pads from left side
   socket.on('deleteRecent', function(data){
     console.log('socket deleteRecent');
-
     var userID = getUserIdFromSocket(socket.request.headers.cookie);
-
     deletePadFromUserPads(userID, data);
   });
 
