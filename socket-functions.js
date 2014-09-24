@@ -3,6 +3,7 @@ module.exports = function(socket){
 	var sessions = require('./cookie.js');
 	var Pad = require('./models/pad.js');
   var User = require('./models/user.js');
+
   
   // join room initially
   socket.on('room', function(room){
@@ -119,6 +120,18 @@ module.exports = function(socket){
     }
   });
 
+  var filterURL = function(url){
+    var endsWith = function(str, suffix) {
+      return str.indexOf(suffix, str.length - suffix.length) !== -1;
+    }
+
+    if(endsWith(url, '/')){
+      url = url.slice(0, -1);
+    }
+
+    return url;
+  }
+
   // change favorites on pads
   socket.on('favorite', function(data){
     if(!data.padName) return;
@@ -126,10 +139,6 @@ module.exports = function(socket){
     console.log('socket favorite');
 
     var userID = getUserIdFromSocket(socket.request.headers.cookie);
-
-    var endsWith = function(str, suffix) {
-      return str.indexOf(suffix, str.length - suffix.length) !== -1;
-    }
 
     if(userID){
       User.findById(userID, function(err, user){
@@ -140,8 +149,7 @@ module.exports = function(socket){
         else{
           if(user){
             for(var i=0; i<user.pads.length; i++){
-              var checkName = data.padName;
-              if(endsWith(checkName, '/')) checkName = checkName.slice(0,-1);
+              var checkName = filterURL(data.padName);
               if(checkName == user.pads[i].url){
                 user.pads[i].favorite = data.favorite;
               }
@@ -158,36 +166,85 @@ module.exports = function(socket){
     }
   });
 
+
+  // delete pad from user preferences
+  var deletePadFromUserPads = function(userID, padToDelete, callback){
+    if(!userID) return;
+
+    User.findById(userID, function(err, user){
+      if(err){
+        // TO DO - ERROR CHECKING
+        console.log(err);
+      }
+      else{
+        if(user){
+          var newPads = user.pads;
+
+          // we don't want to delete the home pad
+          if(padToDelete == filterURL(user.username + '/home')) return;
+
+          // find the pad you need to delete 
+          for(var i=0; i<newPads.length; i++){
+            if(newPads[i].url == padToDelete){
+              newPads.splice(i, 1);
+            }
+          }
+
+          if(typeof callback == 'function'){
+            callback();
+          }
+
+          User.findByIdAndUpdate(userID, {$set: {pads: newPads}}, function(err){
+            if(err){
+              // TO DO - ERROR CHECKING
+              console.log(err);
+            }
+          })
+        }
+      }
+    });
+  }
+
   // delete recent pads from left side
   socket.on('deleteRecent', function(data){
     console.log('socket deleteRecent');
 
     var userID = getUserIdFromSocket(socket.request.headers.cookie);
 
-    if(userID){
-      User.findById(userID, function(err, user){
-        if(err){
-          // TO DO - ERROR CHECKING
-          console.log(err);
-        }
-        else{
-          if(user){
-            var newPads = user.pads;
-            for(var i=0; i<newPads.length; i++){
-              if(newPads[i].url == data){
-                newPads.splice(i, 1);
-              }
-            }
-            User.findByIdAndUpdate(userID, {$set: {pads: newPads}}, function(err){
-              if(err){
-                // TO DO - ERROR CHECKING
-                console.log(err);
-              }
-            })
-          }
-        }
-      });
-    }
+    deletePadFromUserPads(userID, data);
   });
+
+  // delete pad
+  socket.on('deletePad', function(data){
+    if(!data.room) return;
+    if(!data.padName) return;
+    if(!data.padURL) return;
+    
+    console.log('socket deletePad');
+
+    var userID = getUserIdFromSocket(socket.request.headers.cookie);
+
+    var emit = function(){
+      socket.emit('padDeleted', true);
+      socket.broadcast.to(data.room).emit('padDeleted', true);      
+    }
+
+    // don't want to delete home template
+    if(data.padURL.indexOf('/home') > -1) return;
+
+    // delete pad from mongo
+    Pad.remove({name: data.padName, owner: userID}, function(err){
+      if(err){
+        // TO DO - ERROR CHECKING
+        console.log(err);
+      }
+      else{
+        // not delete pad from users pad field
+        deletePadFromUserPads(userID, data.padURL, emit);    
+      }
+    })
+
+  })
+
 
 };
