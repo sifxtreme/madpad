@@ -2,7 +2,7 @@
 	<section class="user-pads pad-list pad-hover">
 		{{#if user.username}}
 			<h5>{{user.username}}'s pads</h5>
-			<ul>
+			<ul id="sidebar-personal-pads">
 				{{#each myPads.privatePads}}
 					<li class="pad-item">
 						{{#if this.favorite}}<span class="favorite"></span>{{/if}}

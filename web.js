@@ -17,7 +17,9 @@ var app = express();
 app.configure(function(){
   app.set('view engine', 'html');
   hbs.registerPartials(__dirname + '/views/partials');
-  hbs.registerHelper('strip_name', function(url) {return url.split('/').pop()})
+  var hbs_helpers = require('./handlebars_helpers.js');
+  hbs.registerHelper('strip_name', hbs_helpers.strip_name);
+  hbs.registerHelper('compare', hbs_helpers.compare);
   app.engine('html', hbs.__express);
   app.use(express.static('public'));
   app.use(express.cookieParser());

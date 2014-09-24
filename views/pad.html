@@ -14,7 +14,7 @@
 				<div class="icon new-icon"></div>
 				{{#if user.username}}<div id="heartFavoriteIcon" class="icon {{#if isFavorite}}favorite-icon{{else}}heart-icon{{/if}}"></div>{{/if}}
 				<div class="icon {{#if pad.chat}}chaton-icon{{else}}chatoff-icon{{/if}}"></div>
-				{{#if usersRoom}}<div class="icon trash-icon"></div>{{/if}}
+				{{#compare usersRoom user.username operator="=="}}<div class="icon trash-icon"></div>{{/compare}}
 			</div>
 			<!-- change settings icon -->
 			{{#if usersRoom}}

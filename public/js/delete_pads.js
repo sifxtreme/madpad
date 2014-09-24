@@ -31,8 +31,8 @@ $(document).ready(function(){
 
 			_this.onSocket();
 
-			// hide if not already hidden if user's home template
-			if(isOwner && id == 'home'){
+			// if user's home template AND if other users templates hide trash icon (if not already hidden)
+			if((isOwner && id == 'home') || !isOwner){
 				$('.trash-icon').remove();
 			}
 
@@ -53,6 +53,21 @@ $(document).ready(function(){
 
 	deletePad.run(mpFrontend.modals);
 
+	// check if home template
+	var isOurHomeTemplate = function(url){
+		if(url.charAt(0) == '/'){
+			url = url.slice(1);
+		}
+		var deleteURLArray = url.split('/');
+		if(deleteURLArray[0] != undefined && deleteURLArray[1] != undefined){
+			if(deleteURLArray[0] == username && deleteURLArray[1] == 'home'){
+				return true;
+			}
+		}
+		return false;
+	}
+
+	// delete pads from left side (recent pads)
 	var deleteRecent = {
 		remove: function(){
 			$('.deleteRecent').on('click', function(e){
@@ -61,7 +76,14 @@ $(document).ready(function(){
 					closestPad.parent().remove();
 				}
 				var deleteURL = closestPad.attr('href').slice(1);
+
+				// don't allow the user to delete their home template
+				if(isOurHomeTemplate(deleteURL)) return;
+
+				// remove from our cookie
 				madpadSocket.emit('deleteRecent', deleteURL);
+
+				// remove from dom with animation
 				closestPad.parent().css('background-color' , '#4b555d')
 				.animate({
 					'marginLeft' : "-=50px",
@@ -74,7 +96,17 @@ $(document).ready(function(){
 				.queue(removeElement);
 			});
 		},
+		removeXFromHome: function(){
+			// we don't want to show an X on our home template
+			$('#sidebar-personal-pads li').each(function(){
+				var padURL = $(this).children('a').attr('href');
+				if(isOurHomeTemplate(padURL)){
+					$(this).children('.pad-heart-x').remove();
+				}
+			});
+		},
 		run: function(){
+			this.removeXFromHome();
 			this.remove();
 		}
 	}
