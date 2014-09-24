@@ -1,5 +1,3 @@
-<script>
-
 var hearts = {
 	favoriteName: location.pathname.slice(1),
 	isFavorited: false,
@@ -33,16 +31,7 @@ var hearts = {
 	},
 	run: function(){
 		this.onIconClick();
-		{{#each myPads}}{{#each this}}
-		if(this.favoriteName == '{{this.url}}'){
-			{{#if this.favorite}}
-			this.makeFavorite();
-			{{/if}}
-		}
-		{{/each}}{{/each}}
 	}
 }
 
 hearts.run();
-
-</script>

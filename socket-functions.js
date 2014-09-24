@@ -136,7 +136,7 @@ module.exports = function(socket){
         else{
           if(user){
             for(var i=0; i<user.pads.length; i++){
-              if(user.pads[i].url == data.padName){
+              if(data.padName.lastIndexOf(user.pads[i].url, 0) === 0){
                 user.pads[i].favorite = data.favorite;
               }
             }
@@ -154,8 +154,6 @@ module.exports = function(socket){
 
   // delete recent pads from left side
   socket.on('deleteRecent', function(data){
-    if(!data.padName) return;
-
     console.log('socket deleteRecent');
 
     var userID = getUserIdFromSocket(socket.request.headers.cookie);
@@ -168,17 +166,18 @@ module.exports = function(socket){
         }
         else{
           if(user){
-            for(var i=0; i<user.pads.length; i++){
-              if(user.pads[i].url == data.padName){
-                user.pads.splice(i, 1);
+            var newPads = user.pads;
+            for(var i=0; i<newPads.length; i++){
+              if(newPads[i].url == data){
+                newPads.splice(i, 1);
               }
             }
-            // User.findByIdAndUpdate(userID, {$set: {pads: user.pads}}, function(err){
-            //   if(err){
-            //     // TO DO - ERROR CHECKING
-            //     console.log(err);
-            //   }
-            // })
+            User.findByIdAndUpdate(userID, {$set: {pads: newPads}}, function(err){
+              if(err){
+                // TO DO - ERROR CHECKING
+                console.log(err);
+              }
+            })
           }
         }
       });

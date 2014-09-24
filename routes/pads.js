@@ -47,9 +47,10 @@ module.exports = function(app){
 	      else{
 	        var pads = user.pads || [];
 	        pads = padCookie.sortAndAdd(pads, padName, padType);
+	        var isFavorite = isPadFavorited(pads, padName);
 	        setUserPads(userID, pads)
 	        pads = padCookie.format(pads);
-	        callback(pads);
+	        callback(pads, isFavorite);
 	        
 	      }
 	      
@@ -67,6 +68,19 @@ module.exports = function(app){
 	  })
 	};
 
+	// is pad favorited?
+	var isPadFavorited = function(pads, padName){
+		if(typeof pads !== 'object') return false;
+		if(!pads.length) return false;
+
+		for(var i=0; i<pads.length; i++){
+			if(pads[i].url == padName && pads[i].favorite){
+				return true;
+			}
+		}
+		return false;
+	}
+
 	// code pad
 	app.get('/code/:id', function(req, res){
 	  // attach sharejs server
@@ -82,7 +96,7 @@ module.exports = function(app){
 	  var padObject = getPadObject(true, true, 'text', true);
 	  padObject.isTextPad = false;
 
-	  var renderView = function(cookiePads){
+	  var renderView = function(cookiePads, isFavorite){
 	    Pad.findOne({'name': 'code_' + padID}, function(err, pad){
 	      if(err){
 	        // TODO - add error logging here
@@ -106,13 +120,13 @@ module.exports = function(app){
 	              res.render('500');
 	            }
 	            else{
-	              res.render('pad', { id: padID, user: req.madpad_user.user, userRoom: '', pad: padObject, myPads: cookiePads });
+	              res.render('pad', { id: padID, user: req.madpad_user.user, userRoom: '', pad: padObject, myPads: cookiePads, isFavorite: isFavorite });
 	            }
 	          })
 	        }
 	        else{ // pad already in DB
 	          padObject.type = pad.codeType;
-	          res.render('pad', { id: padID, user: req.madpad_user.user, userRoom: '', pad: padObject, myPads: cookiePads });        
+	          res.render('pad', { id: padID, user: req.madpad_user.user, userRoom: '', pad: padObject, myPads: cookiePads, isFavorite: isFavorite });        
 	        }
 	      }
 	    });
@@ -146,8 +160,8 @@ module.exports = function(app){
 	  var padID = req.params.id;
 	  var padObject = getPadObject(true, true, 'textpad', true);
 
-	  var renderView = function(cookiePads){
-	    res.render('pad', { id: padID, user: req.madpad_user.user, userRoom: '', pad: padObject, myPads: cookiePads });    
+	  var renderView = function(cookiePads, isFavorite){
+	    res.render('pad', { id: padID, user: req.madpad_user.user, userRoom: '', pad: padObject, myPads: cookiePads, isFavorite: isFavorite });    
 	  }
 
 	  // my pads information
@@ -284,10 +298,10 @@ module.exports = function(app){
 	            padObject.type = pad.codeType;
 	          }
 
-	          var renderView = function(cookiePads){
+	          var renderView = function(cookiePads, isFavorite){
 	            // attach sharejs server
 	            sharejs.server.attach(app, options);
-	            res.render('pad', { id: padID, user: req.madpad_user.user, usersRoom: userRoom, pad: padObject, myPads: cookiePads });  
+	            res.render('pad', { id: padID, user: req.madpad_user.user, usersRoom: userRoom, pad: padObject, myPads: cookiePads, isFavorite: isFavorite });  
 	          }
 
 	          // my pads information

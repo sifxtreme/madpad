@@ -22,7 +22,7 @@
 				<li class="pad-item">
 					{{#if this.favorite}}<span class="favorite"></span>{{/if}}
 					<a href="/{{this.url}}">{{this.url}} </a>
-					{{#if user.username}}
+					{{#if ../user.username}}
 					<span class="pad-heart-x">
 						<span class="deleteRecent delete"></span>
 					</span>
@@ -38,7 +38,7 @@
 				<li class="pad-item">
 					{{#if this.favorite}}<span class="favorite"></span>{{/if}}
 					<a href="/{{this.url}}">{{this.url}} </a>
-					{{#if user.username}}
+					{{#if ../user.username}}
 					<span class="pad-heart-x">
 						<span class="deleteRecent delete"></span>
 					</span>

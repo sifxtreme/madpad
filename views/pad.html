@@ -12,7 +12,7 @@
 			</div>
 			<div class="title-options">	
 				<div class="icon new-icon"></div>
-				{{#if user.username}}<div id="heartFavoriteIcon" class="icon heart-icon"></div>{{/if}}
+				{{#if user.username}}<div id="heartFavoriteIcon" class="icon {{#if isFavorite}}favorite-icon{{else}}heart-icon{{/if}}"></div>{{/if}}
 				<div class="icon {{#if pad.chat}}chaton-icon{{else}}chatoff-icon{{/if}}"></div>
 				{{#if usersRoom}}<div class="icon trash-icon"></div>{{/if}}
 			</div>
@@ -91,21 +91,4 @@ var options = {authentication: userID};
 madpadSocket = io();
 madpadSocket.emit('room', padName);
 
-var deleteRecent = {
-	remove: function(){
-		$('.deleteRecent').on('click', function(e){
-			var closestPad = $(this).parent().siblings('a');
-			var deleteURL = closestPad.attr('href').slice(1);
-			madpadSocket.emit('deleteRecent', deleteURL);
-			closestPad.parent().remove();
-		});
-	},
-	run: function(){
-		this.remove();
-	}
-}
-
-deleteRecent.run();
-
 </script>
-{{> heart_functions}}
