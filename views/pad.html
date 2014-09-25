@@ -84,6 +84,7 @@ if(padReadAccess) padPrivacyStatus = 'shared';
 if(padWriteAccess) padPrivacyStatus = 'public';
 
 madpadUserData = {
+	username: '{{user.username}}',
 	name: '{{user.name}}',
 	picture: '{{user.picture}}'
 }
@@ -91,6 +92,6 @@ madpadUserData = {
 var options = {authentication: userID};
 
 madpadSocket = io();
-madpadSocket.emit('room', padName);
+madpadSocket.emit('room', {room: padName, user: madpadUserData});
 
 </script>

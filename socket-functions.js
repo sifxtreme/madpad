@@ -1,57 +1,111 @@
 module.exports = function(io){
 
+  var allConnections = {
+    data: [],
+    addToRoom: function(data){
+      if(!data.room) return;
+      if(!data.user) return;
+      if(!data.socketID) return;
+
+      var roomData = []
+      if(this.data[data.room] != undefined){
+        roomData = this.data[data.room]
+      }
+
+      for(var i = roomData.length - 1; i >= 0; i--){
+        if(data.user.username && roomData[i].user.username == data.user.username){
+          roomData.splice(i, 1);
+        }
+      }
+
+      roomData.push({socketID: data.socketID, user: data.user});
+
+      this.data[data.room] = roomData;
+    },
+    removeFromRoom: function(data){
+      if(!data.room) return;
+      if(!data.socketID) return;
+
+      var roomData = [];
+      if(this.data[data.room] != undefined){
+        roomData = this.data[data.room]
+      }
+
+      for(var i = 0; i < roomData.length; i++){
+        if(roomData[i].socketID == data.socketID){
+          roomData.splice(i, 1);
+        }
+      }
+
+      this.data[data.room] = roomData;
+
+      if(roomData.length == 0) delete(this.data[data.room]);
+    },
+    getRoom: function(room){
+      return this.data[room];
+    },
+    clearAll: function(){
+      this.data = [];
+    },
+    printData: function(){
+      return JSON.stringify(this.data);
+    }
+  }
+
   io.on('connection', function(socket){
     
   	var sessions = require('./cookie.js');
   	var Pad = require('./models/pad.js');
     var User = require('./models/user.js');
 
-    var allConnections = {
-      data: [],
-      createRoom: function(name){
-
-      },
-      deleteRoom: function(name){
-
-      },
-      addToRoom: function(data){
-
-      },
-      removeFromRoom: function(data){
-
-      }
-    }
-
+    // code to do debugging on client
+    socket.on('d', function(){
+      console.log(allConnections.data)
+    });
 
     
     // join room initially
-    socket.on('room', function(room){
-      // console.log('connect');
-      socket.join(room);
-      // console.log(io.nsps['/'].adapter)
-      // var client = io.nsps['/'].adapter.rooms[room];
-      // console.log(client);
-      // console.log(socket.id);
+    socket.on('room', function(data){
+      if(!data.room) return;
 
+      socket.join(data.room);
+
+      data.socketID = socket.id;
+
+      // add person to room
+      allConnections.addToRoom(data);
+
+      // sent all room data to a user who just joined the room
+      socket.emit('chatPeople', allConnections.getRoom(data.room));
+
+      // broadcast the user who just joined the room
+      socket.broadcast.to(data.room).emit('chatJoined', data);
 
     });
 
     socket.on('disconnect', function(){
-      // console.log(socket)
-      // console.log('disconnect');
+      for(var i=0; i<socket.rooms.length; i++){
+        var roomID = socket.rooms[i];
+        
+        // run remove from room
+        allConnections.removeFromRoom({room: roomID, socketID: socket.id})
+
+        // broadcast to all rooms that a member has left
+        socket.broadcast.to(roomID).emit('chatLeft', socket.id);
+      }
+      
     });
     
     // chat room
     socket.on('chat', function(data){
     	if(!data.room) return;
 
-      // var clients = io.nsps['/'].adapter.rooms[data.room];
-      // console.log(clients);
-      // console.log(socket.id);
-    	
-      var messageObject = {'name': data.name, 'picture': data.picture, 'message': data.message, 'profileId': data.profileId};
-      socket.broadcast.to(data.room).emit('newMessage', messageObject);
+      data.socketID = socket.id;
+      socket.broadcast.to(data.room).emit('chatSent', data);
+
     });
+
+    /* ***************************************************************************** */
 
     // get user id from socket
     var getUserIdFromSocket = function(cookie){
@@ -260,7 +314,7 @@ module.exports = function(io){
 
       var emit = function(){
         socket.emit('padDeleted', true);
-        socket.broadcast.to(data.room).emit('padDeleted', true);      
+        socket.broadcast.to(data.room).emit('padDeleted', true);
       }
 
       // don't want to delete home template
