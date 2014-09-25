@@ -186,7 +186,6 @@ a:hover {
 .header .menu-container {
   float: right;
   position: relative;
-  line-height: 70px;
   z-index: 1500;
 }
 .header .menu-container a {
@@ -197,6 +196,8 @@ a:hover {
   display: block;
   padding: 10px 20px;
   outline: 0;
+  position: relative;
+  top: 16px;
 }
 .header .menu-container a:hover {
   background: #33bea8;
@@ -204,6 +205,11 @@ a:hover {
   -webkit-transition: all 0.3s;
   -moz-transition: all 0.3s;
   transition: all 0.3s;
+}
+.header .menu-container .avatar-user {
+  position: relative;
+  top: 9px;
+  height: 50px;
 }
 .header .menu-container .avatar-user:hover {
   cursor: pointer;
@@ -227,10 +233,11 @@ a:hover {
 }
 .header .menu-container .avatar-name .arrow {
   display: inline-block;
+  margin-top: -10px;
   background: url('/images/header/arrow.png') no-repeat center center;
-  background-size: 15px 7px;
-  width: 15px;
-  height: 7px;
+  background-size: 10px 5px;
+  width: 10px;
+  height: 8px;
   margin-left: 10px;
 }
 .sides {
