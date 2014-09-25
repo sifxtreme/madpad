@@ -1,6 +1,10 @@
 $(document).ready(function(){
 	
 	$('.username-wrapper').css('opacity' , '1').addClass('move');
+	$('.favorite-icon').on('click' , function(){
+		$('.status').slideDown();
+		setTimeout("$('.status').slideUp();", 3000);
+	});
 
 	function padItemOptions(){
 		$('.pad-heart-x').hide();
@@ -339,17 +343,15 @@ $( window ).load(function() {
 
 		$(document).mouseup(function (e)
 		{
-	    var container = $(".new-pad-area");
+	    // var container = $(".new-pad-area");
 
-	    if (!container.is(e.target) // if the target of the click isn't the container...
-	        && container.has(e.target).length === 0) // ... nor a descendant of the container
-	    {
-				container.hide(); /* hide the new pad area */
-				$('.new-pad-area').animate({left:'220px'},0); /* move the div back */
-				$('.darken').hide(); /* hiden darken state */
-				$('.status').stop().slideUp();
-		       
-	    }
+	  //   if (!container.is(e.target) // if the target of the click isn't the container...
+	  //       && container.has(e.target).length === 0) // ... nor a descendant of the container
+	  //   {
+			// container.hide(); /* hide the new pad area */
+			// $('.new-pad-area').animate({left:'220px'},0); /* move the div back */
+			// $('.darken').hide(); /* hiden darken state */
+	  //   }
 		});
 	}
 	newPad();
