@@ -35,10 +35,14 @@ app.configure(function(){
 });
 
 var server = require('http').Server(app);
-var io = require('socket.io').listen(server, {log:false});
 
 // connect to the database
 mongoose.connect('mongodb://localhost/madpad');
+
+// socket.io
+var io = require('socket.io').listen(server, {log:false});
+require('./socket-functions')(io);
+
 
 // passport serialize and deserialize
 passport.serializeUser(function(user, done) {
@@ -47,10 +51,6 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(id, done) {
   done(null, id);
 });
-
-/* ***************************************************************************** */
-
-require('./socket-functions')(io);
 
 /* ***************************************************************************** */
 
