@@ -1,4 +1,5 @@
 $(document).ready(function(){
+
 	madpadChat = {
 
 		options: {
@@ -126,7 +127,7 @@ $(document).ready(function(){
 
 						
 			var whichClass = (messageObject.user.name == "me") ? 'user' : 'other-user';
-			// ugly - change this later
+			// TO-DO ugly - change this later
 			var messageToAppend = "<div class='" + whichClass + "'><div class='message-area'>";
 			if(messageObject.user.profileId == ""){
 				messageToAppend += '<div style="background:'+ messageObject.user.picture.color +' url(\'/images/chat/animals/'+ messageObject.user.picture.animal +'.png\') no-repeat center center; background-size: 44px 44px;" class="avatar"></div>';	
@@ -181,33 +182,6 @@ $(document).ready(function(){
 			return false;
 		});
 
-		var allChatPeople = [];
-
-		madpadSocket.on('chatPeople', function(data){
-			console.log('chatPeople');
-			console.log(data);
-		})
-
-		madpadSocket.on('chatJoined', function(data){
-			console.log('chatJoined');
-			console.log(data);
-		})
-
-		madpadSocket.on('chatSent', function(data){
-			console.log('chatSent');
-			console.log(data);
-		})
-
-		madpadSocket.on('chatLeft', function(data){
-			console.log('chatLeft');
-			console.log(data);
-		})
-		
-		// receiving chat object from socket
-		madpadSocket.on('chatSent', function(msg){
-			madpadChat.appendChat(msg);
-		});
-
 		// submit chat form
 		function sendMessages(){
 			$('.message-input').keypress(function(e){
@@ -220,22 +194,89 @@ $(document).ready(function(){
 		}
 		sendMessages();
 
+		recentChatters = {
+			presentation: {
+				domElement: $('.avatar-list ul'),
+				createPersonNode: function(){
+
+				},
+				createSelf: function(){
+
+				},
+				createAllPeople: function(){
+
+				},
+			},
+			model: {
+				people: [],
+				initPeople: function(data){
+
+				},
+				addPerson: function(data){
+
+				},
+				removePerson: function(data){
+
+				},
+				moveUpPerson: function(data){
+
+				},
+			},
+		}
+
+		madpadSocket.on('chatPeople', function(data){
+			a = data;
+		})
+
+		madpadSocket.on('chatJoined', function(data){
+			console.log('chatJoined');
+			console.log(data);
+		})
+
+		madpadSocket.on('chatLeft', function(data){
+			console.log('chatLeft');
+			console.log(data);
+		})
+		
+		// receiving chat object from socket
+		madpadSocket.on('chatSent', function(data){
+			madpadChat.appendChat(data);
+		});
+
 		// toggle chat window functionality
 		var toggleChat = function(){
 
+			// open chat window
+			var openChat = function(){
+				$('.chatoff-icon').removeClass('chatoff-icon').addClass('chaton-icon');
+				$('.middle').removeClass('no-chat-fix');
+				$('.right').show();				
+			};
+
+			// close chat window
+			var closeChat = function(){
+				$('.chaton-icon').removeClass('chaton-icon').addClass('chatoff-icon');
+				$('.middle').addClass('no-chat-fix');
+				$('.right').hide();
+			};
+
+			// set up event listeners
 			$("body").delegate(".chaton-icon", "click", function(){
-				madpadSocket.emit('toggleChat', {room: padName, disable: true})
+				closeChat();
+				madpadSocket.emit('toggleChat', {room: padName, disable: true});
 			})
 			$("body").delegate(".chatoff-icon", "click", function(){
-				madpadSocket.emit('toggleChat', {room: padName, disable: false})
+				openChat();
+				madpadSocket.emit('toggleChat', {room: padName, disable: false});
 			})
 
+			// toggle chat if we are told to do so by owner
 			madpadSocket.on('toggleChat', function(whichWay){
 				if(!whichWay){
-					mpFrontend.chat.close();
+					closeChat();
 				}
 				else{
-					mpFrontend.chat.open();
+					openChat();
 				}
 			});
 

@@ -102,7 +102,6 @@ module.exports = function(io){
 
       data.socketID = socket.id;
       socket.broadcast.to(data.room).emit('chatSent', data);
-
     });
 
     /* ***************************************************************************** */

@@ -14,22 +14,6 @@ $(document).ready(function(){
 	padItemOptions();
 
 	mpFrontend = {
-		chat: {
-			close: function(){
-				$('.chaton-icon').removeClass('chaton-icon').addClass('chatoff-icon');
-				$('.middle').addClass('no-chat-fix');
-				$('.right').hide();
-			},
-			open: function(){
-				$('.chatoff-icon').removeClass('chatoff-icon').addClass('chaton-icon');
-				$('.middle').removeClass('no-chat-fix');
-				$('.right').show();				
-			},
-			run: function(){
-				$("body").delegate(".chatoff-icon", "click", this.open)
-				$("body").delegate(".chaton-icon", "click", this.close);
-			}
-		},
 		newPadForm: {
 			defaultURL: "Your Pad's URL",
 			getInputValue: function(elem){
@@ -281,7 +265,6 @@ $(document).ready(function(){
 
 		},
 		run: function(){
-			this.chat.run();
 			this.newPadForm.run();
 			this.modals.run();
 		}
@@ -320,7 +303,6 @@ $( window ).load(function() {
 	    $('.signup-step-wrapper').css('height' , signupStepHeight);
 	
 	}/* Set heights for divs */
-	// window[window_size]();
 	window_size();
     
 	$(window).bind('resize', window_size);
