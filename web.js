@@ -48,15 +48,9 @@ passport.deserializeUser(function(id, done) {
   done(null, id);
 });
 
-var redis = require('redis');
-var sharejs = require('share');
-var options = require('./privacy.js');
-
 /* ***************************************************************************** */
 
-io.on('connection', function(socket){
-  require('./socket-functions')(socket);
-});
+require('./socket-functions')(io);
 
 /* ***************************************************************************** */
 
