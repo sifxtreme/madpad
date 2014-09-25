@@ -186,24 +186,52 @@ a:hover {
 .header .menu-container {
   float: right;
   position: relative;
-  top: 17px;
+  line-height: 70px;
   z-index: 1500;
-}
-.header .menu-container li {
-  float: left;
 }
 .header .menu-container a {
   color: #ffffff;
+  background: transparent;
+  border: 1px solid #ffffff;
   text-decoration: none;
   display: block;
   padding: 10px 20px;
   outline: 0;
 }
 .header .menu-container a:hover {
-  color: #33bea8;
+  background: #33bea8;
+  border: 1px solid #33bea8;
   -webkit-transition: all 0.3s;
   -moz-transition: all 0.3s;
   transition: all 0.3s;
+}
+.header .menu-container .avatar-user:hover {
+  cursor: pointer;
+}
+.header .menu-container .avatar-header {
+  background: #ffffff;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  position: relative;
+  top: 10px;
+  -webkit-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.15);
+  margin-right: 5px;
+}
+.header .menu-container .avatar-name {
+  color: #ffffff;
+  font-size: 14px;
+  position: relative;
+}
+.header .menu-container .avatar-name .arrow {
+  display: inline-block;
+  background: url('/images/header/arrow.png') no-repeat center center;
+  background-size: 15px 7px;
+  width: 15px;
+  height: 7px;
+  margin-left: 10px;
 }
 .sides {
   padding: 0px 20px;

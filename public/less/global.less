@@ -112,25 +112,60 @@ a{
     .menu-container{
         float: right;
         position: relative;
-        top: 17px;
+        line-height: 70px;
         z-index: 1500;
-
-        li{
-            float: left;
-        }
 
         a{
             color: @f;
+            background: transparent;
+            border: 1px solid @f;
             text-decoration: none;
             display: block;
             padding: 10px 20px;
             outline: 0;
 
             &:hover{
-                color: @green;
+                background: @green;
+                border: 1px solid @green;
                 -webkit-transition: all 0.3s;
                 -moz-transition: all 0.3s;
                 transition: all 0.3s;
+            }
+        }
+
+        .avatar-user{
+
+            &:hover{
+                cursor: pointer;
+            }
+        }
+
+        .avatar-header{
+            background: @f;
+            border-radius: 50%;
+            height: 30px;
+            width: 30px;
+            position: relative;
+            top: 10px;
+            -webkit-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.15);
+            -moz-box-shadow:    0px 0px 2px 0px rgba(0, 0, 0, 0.15);
+            box-shadow:         0px 0px 2px 0px rgba(0, 0, 0, 0.15);
+            margin-right: 5px;
+
+        }
+
+        .avatar-name{
+            color: @f;
+            font-size: 14px;
+            position: relative;
+
+            .arrow{
+                display: inline-block;
+                background: url('/images/header/arrow.png') no-repeat center center;
+                background-size: 15px 7px;
+                width: 15px;
+                height: 7px;
+                margin-left: 10px;
             }
         }
     }

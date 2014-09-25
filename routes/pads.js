@@ -36,10 +36,10 @@ module.exports = function(app){
     		githubAuth = true;
     	}
     }
-		else if(facebookID){
+		else if(user.facebookID){
 			facebookAuth = true;
 		}
-		else if(githubID){
+		else if(user.githubID){
 			githubAuth = true;
 		}
 		if(facebookAuth){
