@@ -66,7 +66,6 @@ app.get('/colors', function(req, res){
 
 // home page
 app.get('/', function(req, res) {
-  sharejs.server.attach(app, options);
   res.render('index');
 });
 
