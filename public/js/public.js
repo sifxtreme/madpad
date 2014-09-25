@@ -1,9 +1,37 @@
 $(document).ready(function(){
 	
 	$('.username-wrapper').css('opacity' , '1').addClass('move');
-	$('.favorite-icon').on('click' , function(){
-		$('.status').slideDown();
-		setTimeout("$('.status').slideUp();", 3000);
+
+
+	headerStatusMessaging = {
+		statusMessages: {
+			a: 'yo',
+			b: 'no',
+			c: padName + ' has been changed'		
+		},
+		isAnimating: false,
+		setAnimateFalse: function(){
+			console.log('setAnimateFalse');
+			this.isAnimating = false;
+			console.log(this.isAnimating);
+		},
+		animate: function(){			
+			if(!this.isAnimating){
+				console.log('isAnimating')
+				this.isAnimating = true;
+				$('.status').stop(true, true).slideDown().delay(1000).slideUp().queue(this.setAnimateFalse);
+				// console.log('end'); console.log(this.isAnimating);
+			}
+		},
+		run: function(key){
+			// add error checking code to see if key exists
+			$('.status').find('p').html(this.statusMessages[key]);
+			this.animate();
+		}
+	}
+	$('#heartFavoriteIcon').on('click' , function(){
+		headerStatusMessaging.run('c');
+
 	});
 
 	function padItemOptions(){
