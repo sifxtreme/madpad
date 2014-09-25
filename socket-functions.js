@@ -16,6 +16,7 @@ module.exports = function(io){
         if(data.user.username && roomData[i].user.username == data.user.username){
           roomData.splice(i, 1);
         }
+        // add something here about same socket id
       }
 
       roomData.push({socketID: data.socketID, user: data.user});

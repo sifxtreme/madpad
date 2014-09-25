@@ -203,7 +203,7 @@ $(document).ready(function(){
 				var img = document.createElement('img');
 				img.src = user.picture;
 				img.className = 'avatar-user';
-				if(isOwner) img.className += ' avatar-owner';
+				if(user.username == usersRoom) img.className += ' avatar-owner';
 				li.appendChild(img);
 
 				this.domElement.append(li);
@@ -212,12 +212,32 @@ $(document).ready(function(){
 
 			},
 			createAllPeople: function(){
-				this.createPersonNode(madpadUserData);
+				if(typeof this.people !== 'object') return;
 
-				count = 0;
+				var guestNumber = 0;
+
+				for(var i=0; i < this.people.length; i++){
+					var singlePerson = this.people[i];
+
+					if(singlePerson.user.userID){
+						this.createPersonNode(singlePerson.user);
+					}
+					else{
+						guestNumber++;
+						var userData = {
+							username: 'guest-' + guestNumber,
+							picture: '/images/chat/animals/' + madpadChat.options.randomize().animal + '.png'
+						}
+						this.createPersonNode(userData);
+					}
+
+				}
 
 			},
 			people: [],
+			formatData: function(data){
+				
+			},
 			initPeople: function(data){
 
 			},
@@ -233,7 +253,7 @@ $(document).ready(function(){
 		}
 
 		madpadSocket.on('chatPeople', function(data){
-			a = data;
+			recentChatters.people = data;
 			recentChatters.createAllPeople();
 		})
 
