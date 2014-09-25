@@ -195,37 +195,46 @@ $(document).ready(function(){
 		sendMessages();
 
 		recentChatters = {
-			presentation: {
-				domElement: $('.avatar-list ul'),
-				createPersonNode: function(){
+			domElement: $('.avatar-list ul'),
+			createPersonNode: function(user){
+				var li = document.createElement('li');
+				li.className = 'tooltip'
+				li.setAttribute('name', user.username);
+				var img = document.createElement('img');
+				img.src = user.picture;
+				img.className = 'avatar-user';
+				if(isOwner) img.className += ' avatar-owner';
+				li.appendChild(img);
 
-				},
-				createSelf: function(){
-
-				},
-				createAllPeople: function(){
-
-				},
+				this.domElement.append(li);
 			},
-			model: {
-				people: [],
-				initPeople: function(data){
+			createSelf: function(){
 
-				},
-				addPerson: function(data){
+			},
+			createAllPeople: function(){
+				this.createPersonNode(madpadUserData);
 
-				},
-				removePerson: function(data){
+				count = 0;
 
-				},
-				moveUpPerson: function(data){
+			},
+			people: [],
+			initPeople: function(data){
 
-				},
+			},
+			addPerson: function(data){
+
+			},
+			removePerson: function(data){
+
+			},
+			moveUpPerson: function(data){
+
 			},
 		}
 
 		madpadSocket.on('chatPeople', function(data){
 			a = data;
+			recentChatters.createAllPeople();
 		})
 
 		madpadSocket.on('chatJoined', function(data){
