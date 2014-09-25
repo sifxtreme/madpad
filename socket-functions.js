@@ -13,7 +13,7 @@ module.exports = function(io){
       },
       deleteRoom: function(name){
 
-      }
+      },
       addToRoom: function(data){
 
       },
@@ -43,11 +43,11 @@ module.exports = function(io){
     
     // chat room
     socket.on('chat', function(data){
-      console.log(socket.id);
     	if(!data.room) return;
 
       // var clients = io.nsps['/'].adapter.rooms[data.room];
       // console.log(clients);
+      // console.log(socket.id);
     	
       var messageObject = {'name': data.name, 'picture': data.picture, 'message': data.message, 'profileId': data.profileId};
       socket.broadcast.to(data.room).emit('newMessage', messageObject);

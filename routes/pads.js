@@ -20,16 +20,55 @@ module.exports = function(app){
 	  }
 	}
 
-	var getUserInfoFromCookie = function(req){
-	  var userID = '';
-	  var username = '';
+	// get user data for chat
+	var getUserDataForChat = function(user){
+		var name = '', picture = '';
 
-	  if(req.madpad_user && req.madpad_user && req.madpad_user.user && req.madpad_user.user._id){
+    var facebookAuth = false;
+    var githubAuth = false;
+    if(user.facebookID && user.githubID){
+    	var facebookDate = new Date(user.facebookDate);
+    	var githubDate = new Date(user.githubDate);
+    	if(facebookDate > githubDate){
+    		facebookAuth = true;
+    	}
+    	else{
+    		githubAuth = true;
+    	}
+    }
+		else if(facebookID){
+			facebookAuth = true;
+		}
+		else if(githubID){
+			githubAuth = true;
+		}
+		if(facebookAuth){
+			name = user.facebookName;
+			picture = user.facebookPicture;
+		}
+		if(githubAuth){
+			name = user.githubName;
+			picture = user.githubPicture;			
+		}
+
+		return {name: name, picture: picture};
+	}
+
+	// get username and userid from cookie
+	var getUserInfoFromCookie = function(req){
+	  var userID = '', username = '', name = '', picture = '';
+
+	  if(req.madpad_user && req.madpad_user.user && req.madpad_user.user._id){
 	    userID = req.madpad_user.user._id;
 	    username = req.madpad_user.user.username;
+
+	    // get data for chat
+	    var userData = getUserDataForChat(req.madpad_user.user);
+	    name = userData.name;
+	    picture = userData.picture;
 	  }
 
-	  return {id: userID, username: username};
+	  return {_id: userID, username: username, name: name, picture: picture};
 	}
 
 	// get user pads from db and render view
@@ -88,7 +127,7 @@ module.exports = function(app){
 
 	  // get user info
 	  var userInfo = getUserInfoFromCookie(req);
-	  var userID = userInfo.id;
+	  var userID = userInfo._id;
 	  var username = userInfo.username;
 
 	  // set up pad info
@@ -120,13 +159,13 @@ module.exports = function(app){
 	              res.render('500');
 	            }
 	            else{
-	              res.render('pad', { id: padID, user: req.madpad_user.user, userRoom: '', pad: padObject, myPads: cookiePads, isFavorite: isFavorite });
+	              res.render('pad', { id: padID, user: userInfo, userRoom: '', pad: padObject, myPads: cookiePads, isFavorite: isFavorite });
 	            }
 	          })
 	        }
 	        else{ // pad already in DB
 	          padObject.type = pad.codeType;
-	          res.render('pad', { id: padID, user: req.madpad_user.user, userRoom: '', pad: padObject, myPads: cookiePads, isFavorite: isFavorite });        
+	          res.render('pad', { id: padID, user: userInfo, userRoom: '', pad: padObject, myPads: cookiePads, isFavorite: isFavorite });        
 	        }
 	      }
 	    });
@@ -153,7 +192,7 @@ module.exports = function(app){
 
 	  // get user info
 	  var userInfo = getUserInfoFromCookie(req);
-	  var userID = userInfo.id;
+	  var userID = userInfo._id;
 	  var username = userInfo.username;
 
 	  // set up pad info
@@ -161,7 +200,7 @@ module.exports = function(app){
 	  var padObject = getPadObject(true, true, 'textpad', true);
 
 	  var renderView = function(cookiePads, isFavorite){
-	    res.render('pad', { id: padID, user: req.madpad_user.user, userRoom: '', pad: padObject, myPads: cookiePads, isFavorite: isFavorite });    
+	    res.render('pad', { id: padID, user: userInfo, userRoom: '', pad: padObject, myPads: cookiePads, isFavorite: isFavorite });    
 	  }
 
 	  // my pads information
@@ -185,7 +224,7 @@ module.exports = function(app){
 	  
 	  // get user info
 	  var userInfo = getUserInfoFromCookie(req);
-	  var userID = userInfo.id;
+	  var userID = userInfo._id;
 	  var username = userInfo.username;
 
 	  // get usersRoom
@@ -255,7 +294,7 @@ module.exports = function(app){
 
 	  // get user info
 	  var userInfo = getUserInfoFromCookie(req);
-	  var userID = userInfo.id;
+	  var userID = userInfo._id;
 	  var username = userInfo.username;
 
 	  // get usersRoom
@@ -301,7 +340,7 @@ module.exports = function(app){
 	          var renderView = function(cookiePads, isFavorite){
 	            // attach sharejs server
 	            sharejs.server.attach(app, options);
-	            res.render('pad', { id: padID, user: req.madpad_user.user, usersRoom: userRoom, pad: padObject, myPads: cookiePads, isFavorite: isFavorite });  
+	            res.render('pad', { id: padID, user: userInfo, usersRoom: userRoom, pad: padObject, myPads: cookiePads, isFavorite: isFavorite });  
 	          }
 
 	          // my pads information

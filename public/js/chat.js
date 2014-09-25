@@ -158,47 +158,13 @@ $(document).ready(function(){
 	$('.madpadChatForm').submit(function(){
 		var messageValue = $('#m').val();
 		if(messageValue == '') return false;
-		var imageUrl = "";
-		var userId = "";
-		var facebookID = madpadUserData.facebookID
-		var githubID = madpadUserData.githubID;
 
-		var facebookAuth = false;
-		var githubAuth = false;
-
-		if(facebookID && githubID){
-			var facebookDate = new Date(madpadUserData.facebookDate);
-			var githubDate = new Date(madpadUserData.githubDate);
-			if(facebookDate > githubDate){
-				facebookAuth = true;
-			}
-			else{
-				githubAuth = true;
-			}
-
-		}
-		else if(facebookID){
-			facebookAuth = true;
-		}
-		else if(githubID){
-			githubAuth = true;
-		}
-		if(facebookAuth){
-			userId = facebookID;
-			name = madpadUserData.facebookName;
-			imageUrl = madpadUserData.facebookPicture;
-		}
-		if(githubAuth){
-			userId = githubID;
-			name = madpadUserData.githubName;
-			imageUrl = madpadUserData.githubPicture;			
-		}
 		var messageObject = {
 			'room': padName,
-			'name': name,
-			'picture': imageUrl,
+			'name': madpadUserData.name,
+			'picture': madpadUserData.picture,
 			'message': messageValue,
-			'profileId': userId
+			'profileId': userID
 		};
 
 		if(messageObject.profileId == ""){

@@ -84,14 +84,8 @@ if(padReadAccess) padPrivacyStatus = 'shared';
 if(padWriteAccess) padPrivacyStatus = 'public';
 
 madpadUserData = {
-	facebookID: '{{user.facebookID}}',
-	githubID: '{{user.githubID}}',
-	facebookDate: new Date('{{user.facebookDate}}'),
-	githubDate: new Date('{{user.githubDate}}'),
-	facebookName: '{{user.facebookName}}',
-	facebookPicture: '{{user.facebookPicture}}',
-	githubName: '{{user.githubName}}',
-	githubPicture: '{{user.githubPicture}}',
+	name: '{{user.name}}',
+	picture: '{{user.picture}}'
 }
 
 var options = {authentication: userID};
