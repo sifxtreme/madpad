@@ -205,6 +205,9 @@ $(document).ready(function(){
 		sendMessages();
 
 		recentChatters = {
+			clearOut: function(){
+				$('.avatar-list ul').empty();
+			},
 			createPersonNode: function(user){
 				var li = document.createElement('li');
 				li.className = 'tooltip'
@@ -217,14 +220,11 @@ $(document).ready(function(){
 				li.appendChild(img);
 				$('.avatar-list ul').append(li);
 			},
-			createSelf: function(){
-
-			},
-			formatGuestData: function(guest){
-
-			},
 			createAllPeople: function(){
 				if(typeof this.formattedData !== 'object') return;
+
+				this.clearOut();
+				this.formatData();
 
 				var guestNumber = 0;
 
@@ -260,6 +260,7 @@ $(document).ready(function(){
 				var tmpArray = [];
 				var owner = [];
 				var self = [];
+				
 				var checkDuplicatesArray = [];
 				var getUniques = function(arr) {
 			    var hash = {}, result = [];
@@ -309,34 +310,34 @@ $(document).ready(function(){
 				this.formattedData = tmpArray;
 
 			},
-			initPeople: function(data){
-
-			},
 			addPerson: function(data){
-
+				this.people.push({user: data.user, socketID: data.socketID});
 			},
-			removePerson: function(data){
-
-			},
-			moveUpPerson: function(data){
-
+			removePerson: function(socketID){
+				for(var i=0; i < this.people.length; i++){
+					if(this.people[i].socketID == socketID){
+						this.people.splice(i,1);
+					}
+				}
 			},
 		}
 
+		// we initially joined chat and are seeing all the people in the chat room
 		madpadSocket.on('chatPeople', function(data){
 			recentChatters.people = data;
-			recentChatters.formatData();
 			recentChatters.createAllPeople();
 		})
 
+		// user joined chat
 		madpadSocket.on('chatJoined', function(data){
-			console.log('chatJoined');
-			console.log(data);
+			recentChatters.addPerson(data);
+			recentChatters.createAllPeople();
 		})
 
+		// user left chat
 		madpadSocket.on('chatLeft', function(data){
-			console.log('chatLeft');
-			console.log(data);
+			recentChatters.removePerson(data)
+			recentChatters.createAllPeople();
 		})
 		
 		// receiving chat object from socket
