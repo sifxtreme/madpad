@@ -132,19 +132,36 @@ $(document).ready(function(){
 				whichClass = 'other-user';
 			}
 
-			// TO-DO ugly - change this later
-			var messageToAppend = "<div class='" + whichClass + "'><div class='message-area'>";
+			// create message html
+			var msgDiv = document.createElement('div');
+			msgDiv.className = whichClass;
+			var msgAreaDiv = document.createElement('div');
+			msgAreaDiv.className = 'message-area';
+
+			var msgAvatarDiv = document.createElement('div');
+			msgAvatarDiv.id = 'ccc';
+			msgAvatarDiv.className = 'avatar chat-avatar';
+			msgAreaDiv.appendChild(msgAvatarDiv);			
+
+			var msgContentDiv = document.createElement('div');
+			msgContentDiv.className = 'content';
+			msgContentDiv.innerHTML = message;
+			var nameDiv = document.createElement('div');
+			nameDiv.className = 'name';
+			nameDiv.innerHTML = chatUserName;
+			msgContentDiv.appendChild(nameDiv);
+			msgAreaDiv.appendChild(msgContentDiv);
+
 			if(!messageObject.user.profileId){
-				messageToAppend += '<div class="avatar chat-avatar"></div>';	
+				msgAvatarDiv.style.backgroundImage = "url('/images/chat/animals/"+messageObject.user.animal+".png')";
+				msgAvatarDiv.style.backgroundColor = messageObject.user.color;
 			}
 			else{
-				messageToAppend += '<div style="background:url('+ messageObject.user.picture +') no-repeat center center; background-size: 44px 44px" class="avatar"></div>';
+				msgAvatarDiv.style.backgroundImage = "url('"+messageObject.user.picture+"')";
 			}
-			
-			messageToAppend += '<div class="content">' + message +'<div class="name">' + chatUserName + '</div></div>';
-			messageToAppend += '</div></div>';
-			
-			$('#messages').append(messageToAppend);
+
+			msgDiv.appendChild(msgAreaDiv);
+			$('#messages').append(msgDiv);
 			
 			this.scrollDown();
 	 		
@@ -209,6 +226,7 @@ $(document).ready(function(){
 				$('.avatar-list ul').empty();
 			},
 			createPersonNode: function(user){
+				console.log(user);
 				var li = document.createElement('li');
 				li.className = 'tooltip'
 				li.setAttribute('name', user.username);
@@ -217,6 +235,7 @@ $(document).ready(function(){
 				img.src = user.picture;
 				img.className = 'avatar-user';
 				if(user.username == usersRoom) img.className += ' avatar-owner';
+				if(user.color) img.style.backgroundColor = user.color;
 				li.appendChild(img);
 				$('.avatar-list ul').append(li);
 			},
@@ -231,22 +250,25 @@ $(document).ready(function(){
 				for(var i=0; i < this.formattedData.length; i++){
 					var singlePerson = this.formattedData[i];
 
-					if(singlePerson.user.userID){
+					if(singlePerson.user.username){
 						this.createPersonNode(singlePerson.user);
 					}
 					else{
 						guestNumber++;
 						// get animal if exists, otherwise randomize
-						var animal;
+						var animal, color;
 						if(singlePerson.user.unknown && typeof singlePerson.user.unknown.animal !== 'undefined'){
 							animal = singlePerson.user.unknown.animal;
+							color = singlePerson.user.unknown.color;
 						}
 						else{
 							animal = madpadChat.options.randomize().animal;	
+							color = madpadChat.options.randomize().color;
 						}
 						var userData = {
 							username: 'guest_' + guestNumber,
-							picture: '/images/chat/animals/' + animal + '.png'
+							picture: '/images/chat/animals/' + animal + '.png',
+							color: color
 						}
 						this.createPersonNode(userData);
 					}

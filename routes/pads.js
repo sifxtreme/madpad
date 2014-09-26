@@ -145,7 +145,7 @@ module.exports = function(app){
 	  var userInfo = getUserInfoFromCookie(req);
 	  var userID = userInfo._id;
 	  var username = userInfo.username;
-	  if(!userID && Object.keys(userInfo.unknown).length == 0){
+	  if(!username && Object.keys(userInfo.unknown).length == 0){
 	  	var unknown = unknownUserOptions.randomize();
 	  	req.madpad_user.unknown = unknown;
 	  	userInfo.unknown = unknown;
@@ -215,7 +215,7 @@ module.exports = function(app){
 	  var userInfo = getUserInfoFromCookie(req);
 	  var userID = userInfo._id;
 	  var username = userInfo.username;
-	  if(!userID && Object.keys(userInfo.unknown).length == 0){
+	  if(!username && Object.keys(userInfo.unknown).length == 0){
 	  	var unknown = unknownUserOptions.randomize();
 	  	req.madpad_user.unknown = unknown;
 	  	userInfo.unknown = unknown;
@@ -322,7 +322,7 @@ module.exports = function(app){
 	  var userInfo = getUserInfoFromCookie(req);
 	  var userID = userInfo._id;
 	  var username = userInfo.username;
-	  if(!userID && Object.keys(userInfo.unknown).length == 0){
+	  if(!username && Object.keys(userInfo.unknown).length == 0){
 	  	var unknown = unknownUserOptions.randomize();
 	  	req.madpad_user.unknown = unknown;
 	  	userInfo.unknown = unknown;
