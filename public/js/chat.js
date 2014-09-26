@@ -3,12 +3,10 @@ $(document).ready(function(){
 	madpadChat = {
 
 		options: {
-			letterArray: ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
 			colorArray: ["#be3333", "#be336e", "#be339f", "#ac33be", "#7e33be", "#4d33be", "#334dbe", "#3385be", "#33acbe", "#33beaf", "#33be85", "#33be47", "#78be33", "#9cbe33", "#bcbe33", "#be9f33", "#be7b33", "#be5733"],
 			animalArray: ["panda", "tiger", "cheetah", "gorilla", "monkey", "robin", "toucan", "elephant", "chimp", "sheep", "rooster", "dog", "cow", "chicken", "rabbit", "pig", "horse", "duck", "parrot", "mouse", "puppy", "cat", "lynx", "hamster", "ferret", "warthog", "wolf", "eagle", "owl", "bear", "hedgehog", "fox", "moose", "squirrel"],
 			randomize: function(){
 				return {
-					letter: this.letterArray[Math.floor(Math.random() * this.letterArray.length)],
 					color: this.colorArray[Math.floor(Math.random() * this.colorArray.length)],
 					animal: this.animalArray[Math.floor(Math.random() * this.animalArray.length)],
 				}
@@ -124,19 +122,19 @@ $(document).ready(function(){
 	 		var message = this.prepareChatMessage.convertLineBreaks(messageObject.message);
 			message = this.replaceEmoticons(message);
 			message = this.prepareChatMessage.convertLinks(message);
-
 						
 			var whichClass = (messageObject.user.name == "me") ? 'user' : 'other-user';
 			// TO-DO ugly - change this later
 			var messageToAppend = "<div class='" + whichClass + "'><div class='message-area'>";
-			if(messageObject.user.profileId == ""){
-				messageToAppend += '<div style="background:'+ messageObject.user.picture.color +' url(\'/images/chat/animals/'+ messageObject.user.picture.animal +'.png\') no-repeat center center; background-size: 44px 44px;" class="avatar"></div>';	
+			if(!messageObject.user.profileId){
+				messageToAppend += '<div style="background:'+ messageObject.user.color +' url(\'/images/chat/animals/'+ messageObject.user.animal +'.png\') no-repeat center center; background-size: 44px 44px;" class="avatar"></div>';	
 			}
 			else{
 				messageToAppend += '<div style="background:url('+ messageObject.user.picture +') no-repeat center center; background-size: 44px 44px" class="avatar"></div>';
 			}
 			
-			messageToAppend += '<div class="content">' + message +'<div class="name">' + messageObject.user.name + '</div></div></div></div>';
+			messageToAppend += '<div class="content">' + message +'<div class="name">' + messageObject.user.name + '</div></div>';
+			messageToAppend += '</div></div>';
 			
 			$('#messages').append(messageToAppend);
 			
@@ -167,12 +165,15 @@ $(document).ready(function(){
 				}
 			}
 
-			if(userID == ""){
-				msgObject.user.picture = {
-					letter: notSignedInUserObject.letter,
-					color: notSignedInUserObject.color,
-					animal: notSignedInUserObject.animal
-				};
+			// we are not a logged in user
+			if(!userID){
+				// we have an animal cookie set
+				if(madpadUserData && madpadUserData.unknown && madpadUserData.unknown.animal){
+					msgObject.user = madpadUserData.unknown;
+				}
+				else{
+					msgObject.user = notSignedInUserObject;					
+				}
 			}
 
 			madpadSocket.emit('chat', msgObject);
@@ -201,6 +202,7 @@ $(document).ready(function(){
 				li.className = 'tooltip'
 				li.setAttribute('name', user.username);
 				var img = document.createElement('img');
+				user.picture = user.picture.replace('&amp;', '&');
 				img.src = user.picture;
 				img.className = 'avatar-user';
 				if(user.username == usersRoom) img.className += ' avatar-owner';
@@ -224,9 +226,17 @@ $(document).ready(function(){
 					}
 					else{
 						guestNumber++;
+						// get animal if exists, otherwise randomize
+						var animal;
+						if(singlePerson.user.unknown && typeof singlePerson.user.unknown.animal !== 'undefined'){
+							animal = singlePerson.user.unknown.animal;
+						}
+						else{
+							animal = madpadChat.options.randomize().animal;	
+						}
 						var userData = {
-							username: 'guest-' + guestNumber,
-							picture: '/images/chat/animals/' + madpadChat.options.randomize().animal + '.png'
+							username: 'guest_' + guestNumber,
+							picture: '/images/chat/animals/' + animal + '.png'
 						}
 						this.createPersonNode(userData);
 					}

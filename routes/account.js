@@ -68,6 +68,18 @@ module.exports = function(app, passport){
 	  })
 	}
 
+	app.get('/logout', function(req, res){
+		if(typeof req.madpad_user !== 'undefined'){
+			req.madpad_user.reset();	
+		}
+		if(typeof req.my_pads !== 'undefined'){
+			req.my_pads.reset();	
+		}
+		
+	  req.logout();
+	  res.redirect('/');
+	});
+
 
 	app.get('/auth/facebook',
 	  passport.authenticate('facebook', {scope: ['email']}),
@@ -92,13 +104,6 @@ module.exports = function(app, passport){
 	    if(req.user.username) res.redirect('/' + req.user.username + '/home/');
 	    else res.redirect('/account');
 	  });
-
-	app.get('/logout', function(req, res){
-	  req.madpad_user.reset();
-	  req.my_pads.reset();
-	  req.logout();
-	  res.redirect('/');
-	});
 
 	app.get('/account', function(req, res){
 	  if(req.madpad_user.user.username){

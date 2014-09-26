@@ -47,7 +47,7 @@
 					<li class="tooltip" name="Bear"><img src="/images/chat/animals/bear.png" class="avatar-user" title="" /></li>
 					<li class="tooltip" name="Cat"><img src="/images/chat/animals/cat.png" class="avatar-user" title=""/></li>
 					<li class="tooltip" name="Chicken"><img src="/images/chat/animals/chicken.png" class="avatar-user" title="" /></li>
-					<li class="tooltip" name="Jimmy Asif Melanie"><p>+3 more</p></li> -->
+					<li class="tooltip" name="Jimmy Asif Melanie"><p>+3</p></li> -->
 				</ul>
 			</div>
 		</div>
@@ -87,7 +87,12 @@ madpadUserData = {
 	userID: userID,
 	username: username,
 	name: '{{user.name}}',
-	picture: '{{user.picture}}'
+	picture: '{{user.picture}}',
+	unknown: {
+		name: '{{user.unknown.name}}',
+		color: '{{user.unknown.color}}',
+		animal: '{{user.unknown.animal}}',
+	}
 }
 
 var options = {authentication: userID};

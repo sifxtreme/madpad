@@ -1,12 +1,15 @@
-  <div class="header sides minwidth">
-      <div class="logo-container">
-          <a href="#"><img src="/images/header/logo@2x.png"/></a>
-      </div>
-      <div class="menu-container">
-          <a href="#" class="login-button">Log in</a>
-<!--           <div class="avatar-user">
-            <img src="/images/chat/melanie.jpg" class="avatar-header" />
-            <span class="avatar-name">Melanie Iglesias<span class="arrow"></span></span>
-          </div> -->
-      </div>
-  </div><!-- Header -->
+<div class="header sides minwidth">
+  <div class="logo-container">
+    <a href="#"><img src="/images/header/logo@2x.png"/></a>
+  </div>
+  <div class="menu-container">
+    {{#if user.username}}
+    <div class="avatar-user">
+      <img src="{{user.picture}}" class="avatar-header" />
+      <span class="avatar-name">{{user.name}}<span class="arrow"></span></span>
+    </div>
+    {{else}}
+    <a href="#" class="login-button">Log in</a>
+    {{/if}}
+  </div>
+</div><!-- Header -->

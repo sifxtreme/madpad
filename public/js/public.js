@@ -2,56 +2,56 @@ $(document).ready(function(){
 	
 	$('.username-wrapper').css('opacity' , '1').addClass('move');
 
-	var isAnimating = false;
-	headerStatusMessaging = {
-		statusMessages: {
-			favorite:  			id + ' has been favorited.',
-			unfavorite: 		id + ' is no longer a favorite.',
-			chatoff: 			'Chat is now off.',
-			chaton: 			'Chat is now on.',
-			settingSaved:  		'Your pad setting has been saved.',
-			deleted:  			id + ' has been deleted.'
-		},
+	// var isAnimating = false;
+	// headerStatusMessaging = {
+	// 	statusMessages: {
+	// 		favorite:  			id + ' has been favorited.',
+	// 		unfavorite: 		id + ' is no longer a favorite.',
+	// 		chatoff: 			'Chat is now off.',
+	// 		chaton: 			'Chat is now on.',
+	// 		settingSaved:  		'Your pad setting has been saved.',
+	// 		deleted:  			id + ' has been deleted.'
+	// 	},
 		
-		setAnimateFalse: function(){
-			isAnimating = false;
-		},
-		animate: function(){			
-			if(!isAnimating){
-				isAnimating = true;
-				$('.status').stop(true, true).slideDown().delay(2000).slideUp().queue(this.setAnimateFalse);
-			}
-		},
-		run: function(key){
-			// add error checking code to see if key exists
-			$('.status').find('p').html(this.statusMessages[key]);
-			this.animate();
-		}
-	}
+	// 	setAnimateFalse: function(){
+	// 		isAnimating = false;
+	// 	},
+	// 	animate: function(){			
+	// 		if(!isAnimating){
+	// 			isAnimating = true;
+	// 			$('.status').stop(true, true).slideDown().delay(2000).slideUp().queue(this.setAnimateFalse);
+	// 		}
+	// 	},
+	// 	run: function(key){
+	// 		// add error checking code to see if key exists
+	// 		$('.status').find('p').html(this.statusMessages[key]);
+	// 		this.animate();
+	// 	}
+	// }
 
-	$('.heart-icon').on('click' , function(){
-		headerStatusMessaging.run('favorite');
-	});
+	// $('.heart-icon').on('click' , function(){
+	// 	headerStatusMessaging.run('favorite');
+	// });
 
-	$('.favorite-icon').on('click' , function(){
-		headerStatusMessaging.run('unfavorite');
-	});
+	// $('.favorite-icon').on('click' , function(){
+	// 	headerStatusMessaging.run('unfavorite');
+	// });
 
-	$('.chaton-icon').on('click' , function(){
-		headerStatusMessaging.run('chatoff');
-	});
+	// $('.chaton-icon').on('click' , function(){
+	// 	headerStatusMessaging.run('chatoff');
+	// });
 
-	$('.chatoff-icon').on('click' , function(){
-		headerStatusMessaging.run('chaton');
-	});
+	// $('.chatoff-icon').on('click' , function(){
+	// 	headerStatusMessaging.run('chaton');
+	// });
 
-	$('#save-settings').on('click' , function(){
-		headerStatusMessaging.run('settingSaved');
-	});
+	// $('#save-settings').on('click' , function(){
+	// 	headerStatusMessaging.run('settingSaved');
+	// });
 
-	$('.deleteRecent').on('click' , function(){
-		headerStatusMessaging.run('deleted');
-	});
+	// $('.deleteRecent').on('click' , function(){
+	// 	headerStatusMessaging.run('deleted');
+	// });
 
 	function padItemOptions(){
 		$('.pad-heart-x').hide();

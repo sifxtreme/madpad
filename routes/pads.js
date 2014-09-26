@@ -1,11 +1,12 @@
 module.exports = function(app){
 	
+	// get dependencies
 	var mongoose = require('mongoose');
 	var User = require('../models/user.js');
 	var Pad = require('../models/pad.js');
-
 	var padCookie = require('../padCookie.js');
 
+	// get sharejs dependencies
 	var redis = require('redis');
 	var sharejs = require('share');
 	var options = require('../privacy.js');
@@ -56,7 +57,7 @@ module.exports = function(app){
 
 	// get username and userid from cookie
 	var getUserInfoFromCookie = function(req){
-	  var userID = '', username = '', name = '', picture = '';
+	  var userID = '', username = '', name = '', picture = '', unknown = {};
 
 	  if(req.madpad_user && req.madpad_user.user && req.madpad_user.user._id){
 	    userID = req.madpad_user.user._id;
@@ -67,8 +68,23 @@ module.exports = function(app){
 	    name = userData.name;
 	    picture = userData.picture;
 	  }
+	  else if(req.madpad_user && req.madpad_user.unknown){
+	  	unknown = req.madpad_user.unknown;
+	  }
 
-	  return {_id: userID, username: username, name: name, picture: picture};
+	  return {_id: userID, username: username, name: name, picture: picture, unknown: unknown};
+	}
+
+	// set cookie object for logged out user
+	var unknownUserOptions = {
+		colorArray: ["#be3333", "#be336e", "#be339f", "#ac33be", "#7e33be", "#4d33be", "#334dbe", "#3385be", "#33acbe", "#33beaf", "#33be85", "#33be47", "#78be33", "#9cbe33", "#bcbe33", "#be9f33", "#be7b33", "#be5733"],
+		animalArray: ["panda", "tiger", "cheetah", "gorilla", "monkey", "robin", "toucan", "elephant", "chimp", "sheep", "rooster", "dog", "cow", "chicken", "rabbit", "pig", "horse", "duck", "parrot", "mouse", "puppy", "cat", "lynx", "hamster", "ferret", "warthog", "wolf", "eagle", "owl", "bear", "hedgehog", "fox", "moose", "squirrel"],
+		randomize: function(){
+			return {
+				color: this.colorArray[Math.floor(Math.random() * this.colorArray.length)],
+				animal: this.animalArray[Math.floor(Math.random() * this.animalArray.length)],
+			}
+		}
 	}
 
 	// get user pads from db and render view
@@ -90,11 +106,10 @@ module.exports = function(app){
 	        setUserPads(userID, pads)
 	        pads = padCookie.format(pads);
 	        callback(pads, isFavorite);
-	        
 	      }
-	      
 	    }
-	  })
+	  });
+
 	};
 
 	// store user pads in db
@@ -129,6 +144,11 @@ module.exports = function(app){
 	  var userInfo = getUserInfoFromCookie(req);
 	  var userID = userInfo._id;
 	  var username = userInfo.username;
+	  if(!userID && Object.keys(userInfo.unknown).length == 0){
+	  	var unknown = unknownUserOptions.randomize();
+	  	req.madpad_user.unknown = unknown;
+	  	userInfo.unknown = unknown;
+	  }
 
 	  // set up pad info
 	  var padID = req.params.id;
@@ -194,6 +214,11 @@ module.exports = function(app){
 	  var userInfo = getUserInfoFromCookie(req);
 	  var userID = userInfo._id;
 	  var username = userInfo.username;
+	  if(!userID){
+	  	var unknown = unknownUserOptions.randomize();
+	  	req.madpad_user.unknown = unknown;
+	  	userInfo.unknown = unknown;
+	  }
 
 	  // set up pad info
 	  var padID = req.params.id;
@@ -296,6 +321,11 @@ module.exports = function(app){
 	  var userInfo = getUserInfoFromCookie(req);
 	  var userID = userInfo._id;
 	  var username = userInfo.username;
+	  if(!userID){
+	  	var unknown = unknownUserOptions.randomize();
+	  	req.madpad_user.unknown = unknown;
+	  	userInfo.unknown = unknown;
+	  }
 
 	  // get usersRoom
 	  var userRoom = req.params.username;
