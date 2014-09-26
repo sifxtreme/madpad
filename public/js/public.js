@@ -2,25 +2,24 @@ $(document).ready(function(){
 	
 	$('.username-wrapper').css('opacity' , '1').addClass('move');
 
-
+	var isAnimating = false;
 	headerStatusMessaging = {
 		statusMessages: {
-			a: 'yo',
-			b: 'no',
-			c: padName + ' has been changed'		
+			favorite:  			id + ' has been favorited.',
+			unfavorite: 		id + ' is no longer a favorite.',
+			chatoff: 			'Chat is now off.',
+			chaton: 			'Chat is now on.',
+			settingSaved:  		'Your pad setting has been saved.',
+			deleted:  			id + ' has been deleted.'
 		},
-		isAnimating: false,
+		
 		setAnimateFalse: function(){
-			console.log('setAnimateFalse');
-			this.isAnimating = false;
-			console.log(this.isAnimating);
+			isAnimating = false;
 		},
 		animate: function(){			
-			if(!this.isAnimating){
-				console.log('isAnimating')
-				this.isAnimating = true;
-				$('.status').stop(true, true).slideDown().delay(1000).slideUp().queue(this.setAnimateFalse);
-				// console.log('end'); console.log(this.isAnimating);
+			if(!isAnimating){
+				isAnimating = true;
+				$('.status').stop(true, true).slideDown().delay(2000).slideUp().queue(this.setAnimateFalse);
 			}
 		},
 		run: function(key){
@@ -29,9 +28,29 @@ $(document).ready(function(){
 			this.animate();
 		}
 	}
-	$('#heartFavoriteIcon').on('click' , function(){
-		headerStatusMessaging.run('c');
 
+	$('.heart-icon').on('click' , function(){
+		headerStatusMessaging.run('favorite');
+	});
+
+	$('.favorite-icon').on('click' , function(){
+		headerStatusMessaging.run('unfavorite');
+	});
+
+	$('.chaton-icon').on('click' , function(){
+		headerStatusMessaging.run('chatoff');
+	});
+
+	$('.chatoff-icon').on('click' , function(){
+		headerStatusMessaging.run('chaton');
+	});
+
+	$('#save-settings').on('click' , function(){
+		headerStatusMessaging.run('settingSaved');
+	});
+
+	$('.deleteRecent').on('click' , function(){
+		headerStatusMessaging.run('deleted');
 	});
 
 	function padItemOptions(){

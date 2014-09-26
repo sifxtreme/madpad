@@ -207,6 +207,8 @@ a{
     transition: all 0.3s;
 }
 
+
+
 .green-btn{
     background-color: @green;
     outline: none;
@@ -216,13 +218,18 @@ a{
     height: 40px;
     padding: 0px 20px;
     border-radius: 2px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 
     &:hover{
         background-color: @green-hover;
         transition: 0.5s;
         -webkit-transition: 0.5s;
         cursor: pointer;
-
     }
 }
 
@@ -235,6 +242,12 @@ a{
     height: 40px;
     padding: 0px 20px;
     border-radius: 2px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 
     &:hover{
         background-color: @ea;
@@ -437,7 +450,7 @@ a{
     .move{
        top: 150px !important;
     }
-    
+
     .username-wrapper{
         position: relative;
         top: 100px;
@@ -473,11 +486,6 @@ a{
         .username-submit{
             width: 100%;
             height: 50px;
-            padding: 10px 10px;
-            background: @green;
-            font-size: 16px;
-            color: @f;
-            border: none;
         }
 
     }
@@ -556,3 +564,14 @@ a{
     z-index: 99;
 }
 /*   ---   End of Tooltip Less   --   */
+
+
+/*   ---   Error Message Less   --   */
+
+.error-msg{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: @dark;
+    color: @f;
+}

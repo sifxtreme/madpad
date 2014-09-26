@@ -4,9 +4,9 @@
 		{{#if error}}{{error}}{{/if}}
 		<img src="{{user.picture}}" class="fb-signup-img" style="height:100px"/>
 		<form method="post" class="username-form">
-			<div class="signin-error"></div>
+			<div class="signin-error error-msg"></div>
 			<input name="username" placeholder="Choose Username" class="username-input" value="{{#if previousValue}}{{previousValue}}{{/if}}">
-			<input type="submit" value="Continue" class="username-submit">
+			<input type="submit" value="Continue" class="username-submit green-btn">
 		</form>
 	</div>
 </div>

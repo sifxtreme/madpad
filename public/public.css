@@ -269,6 +269,12 @@ a:hover {
   height: 40px;
   padding: 0px 20px;
   border-radius: 2px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 .green-btn:hover {
   background-color: #3bd9be;
@@ -285,6 +291,12 @@ a:hover {
   height: 40px;
   padding: 0px 20px;
   border-radius: 2px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 .cancel-btn:hover {
   background-color: #eaeaea;
@@ -468,11 +480,6 @@ a:hover {
 .signup-step-wrapper .username-wrapper .username-submit {
   width: 100%;
   height: 50px;
-  padding: 10px 10px;
-  background: #33bea8;
-  font-size: 16px;
-  color: #ffffff;
-  border: none;
 }
 /*   ---   End of Choose Username CSS   --   */
 /*   ---   Modal Less   --   */
@@ -533,6 +540,14 @@ a:hover {
   z-index: 99;
 }
 /*   ---   End of Tooltip Less   --   */
+/*   ---   Error Message Less   --   */
+.error-msg {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: #232c30;
+  color: #ffffff;
+}
 /*   ---   Side Bar General   --   */
 .left {
   width: 250px;
