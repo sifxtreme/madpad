@@ -81,6 +81,7 @@ module.exports = function(app){
 		animalArray: ["panda", "tiger", "cheetah", "gorilla", "monkey", "robin", "toucan", "elephant", "chimp", "sheep", "rooster", "dog", "cow", "chicken", "rabbit", "pig", "horse", "duck", "parrot", "mouse", "puppy", "cat", "lynx", "hamster", "ferret", "warthog", "wolf", "eagle", "owl", "bear", "hedgehog", "fox", "moose", "squirrel"],
 		randomize: function(){
 			return {
+				id: Math.random(),
 				color: this.colorArray[Math.floor(Math.random() * this.colorArray.length)],
 				animal: this.animalArray[Math.floor(Math.random() * this.animalArray.length)],
 			}
