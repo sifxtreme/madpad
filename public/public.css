@@ -216,6 +216,7 @@ a:hover {
 }
 .header .menu-container .avatar-header {
   background: #ffffff;
+  border: 1px solid #dddddd;
   border-radius: 50%;
   height: 30px;
   width: 30px;
@@ -732,6 +733,13 @@ a:hover {
   /* user message styles */
   /* other user message style */
   /* submit area */
+}
+.right .chat-avatar {
+  background-image: url('/images/chat/animals/chicken.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-color: #33bea8;
+  background-size: 44px 44px;
 }
 .right .chat-title {
   border-bottom: 1px solid #dddddd;

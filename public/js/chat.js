@@ -135,7 +135,7 @@ $(document).ready(function(){
 			// TO-DO ugly - change this later
 			var messageToAppend = "<div class='" + whichClass + "'><div class='message-area'>";
 			if(!messageObject.user.profileId){
-				messageToAppend += '<div style="background:'+ messageObject.user.color +' url(\'/images/chat/animals/'+ messageObject.user.animal +'.png\') no-repeat center center; background-size: 44px 44px;" class="avatar"></div>';	
+				messageToAppend += '<div class="avatar chat-avatar"></div>';	
 			}
 			else{
 				messageToAppend += '<div style="background:url('+ messageObject.user.picture +') no-repeat center center; background-size: 44px 44px" class="avatar"></div>';
