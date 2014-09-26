@@ -100,6 +100,7 @@ module.exports = function(io){
     // chat room
     socket.on('chat', function(data){
     	if(!data.room) return;
+      console.log(data);
 
       data.socketID = socket.id;
       socket.broadcast.to(data.room).emit('chatSent', data);

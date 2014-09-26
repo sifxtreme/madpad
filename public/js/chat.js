@@ -122,8 +122,16 @@ $(document).ready(function(){
 	 		var message = this.prepareChatMessage.convertLineBreaks(messageObject.message);
 			message = this.replaceEmoticons(message);
 			message = this.prepareChatMessage.convertLinks(message);
-						
-			var whichClass = (messageObject.user.name == "me") ? 'user' : 'other-user';
+			
+			var chatUserName = messageObject.user.name;
+			var whichClass = 'user'
+			if((userID && madpadUserData.userID == messageObject.user.profileId) || (typeof messageObject.user.id !== 'undefined' && madpadUserData.unknown.id == messageObject.user.id)){
+				chatUserName = 'me';
+			}
+			else{
+				whichClass = 'other-user';
+			}
+
 			// TO-DO ugly - change this later
 			var messageToAppend = "<div class='" + whichClass + "'><div class='message-area'>";
 			if(!messageObject.user.profileId){
@@ -133,7 +141,7 @@ $(document).ready(function(){
 				messageToAppend += '<div style="background:url('+ messageObject.user.picture +') no-repeat center center; background-size: 44px 44px" class="avatar"></div>';
 			}
 			
-			messageToAppend += '<div class="content">' + message +'<div class="name">' + messageObject.user.name + '</div></div>';
+			messageToAppend += '<div class="content">' + message +'<div class="name">' + chatUserName + '</div></div>';
 			messageToAppend += '</div></div>';
 			
 			$('#messages').append(messageToAppend);
@@ -180,6 +188,7 @@ $(document).ready(function(){
 			$('#m').val('');
 			msgObject.user.name = "me";
 			madpadChat.appendChat(msgObject);
+			msgObject.user.name = "";
 			return false;
 		});
 
@@ -196,7 +205,6 @@ $(document).ready(function(){
 		sendMessages();
 
 		recentChatters = {
-			domElement: $('.avatar-list ul'),
 			createPersonNode: function(user){
 				var li = document.createElement('li');
 				li.className = 'tooltip'
@@ -207,19 +215,21 @@ $(document).ready(function(){
 				img.className = 'avatar-user';
 				if(user.username == usersRoom) img.className += ' avatar-owner';
 				li.appendChild(img);
-
-				this.domElement.append(li);
+				$('.avatar-list ul').append(li);
 			},
 			createSelf: function(){
 
 			},
+			formatGuestData: function(guest){
+
+			},
 			createAllPeople: function(){
-				if(typeof this.people !== 'object') return;
+				if(typeof this.formattedData !== 'object') return;
 
 				var guestNumber = 0;
 
-				for(var i=0; i < this.people.length; i++){
-					var singlePerson = this.people[i];
+				for(var i=0; i < this.formattedData.length; i++){
+					var singlePerson = this.formattedData[i];
 
 					if(singlePerson.user.userID){
 						this.createPersonNode(singlePerson.user);
@@ -245,8 +255,59 @@ $(document).ready(function(){
 
 			},
 			people: [],
-			formatData: function(data){
+			formattedData: [],
+			formatData: function(){
+				var tmpArray = [];
+				var owner = [];
+				var self = [];
+				var checkDuplicatesArray = [];
+				var getUniques = function(arr) {
+			    var hash = {}, result = [];
+			    for ( var i = 0, l = arr.length; i < l; ++i ) {
+			    	var uniqueId = arr[i].user.userID || arr[i].user.unknown.id;
+		        if ( !hash.hasOwnProperty(uniqueId) ) { //it works with objects! in FF, at least
+	            hash[uniqueId] = true;
+	            result.push(arr[i]);
+		        }
+			    }
+			    return result;
+				}
+
+				var peopleCopy = this.people;
+
+				for(var i=0; i<peopleCopy.length; i++){
+					var p = peopleCopy[i];
+					// push owner
+					if(p.user.userID && p.user.username == usersRoom){
+						owner.push(p);
+					}
+					// push logged in self
+					else if(p.user.userID && p.user.userID == madpadUserData.userID){
+						self.push(p);
+					}
+					// push guest self
+					else if(p.user.unknown && p.user.unknown.id && p.user.unknown.id == madpadUserData.unknown.id){
+						self.push(p);
+					}
+					else{
+						tmpArray.push(p);
+					}
+				}
+
+				// filter out duplicates
+				tmpArray = getUniques(tmpArray);
+
+				// we want self to be first if owner isn't there
+				if(self[0]){
+					tmpArray.unshift(self[0]);
+				}
+				// we want owner to be first
+				if(owner[0]){
+					tmpArray.unshift(owner[0]);	
+				}
 				
+				this.formattedData = tmpArray;
+
 			},
 			initPeople: function(data){
 
@@ -264,6 +325,7 @@ $(document).ready(function(){
 
 		madpadSocket.on('chatPeople', function(data){
 			recentChatters.people = data;
+			recentChatters.formatData();
 			recentChatters.createAllPeople();
 		})
 
