@@ -65,11 +65,13 @@ $(document).ready(function(){
 		switch(whichWay){
 			// open up writing on pads
 			case 'public':
+				headerStatusMessaging.run('madePublic');
 				padPrivacy.changeToPublicIcon();
 				changePadEditablity.open();
 				break;
 			// turn off editing ability
 			case 'shared':
+				headerStatusMessaging.run('madeShared');
 				padPrivacy.changeToSharedIcon();
 				changePadEditablity.close();
 				break;
@@ -146,6 +148,7 @@ $(document).ready(function(){
 				else{
 					padPrivacy.makePublic();
 				}
+				headerStatusMessaging.run('settingSaved');
 
 				modals.hideOverlay('.sharing-settings');
 			});

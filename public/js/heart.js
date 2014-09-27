@@ -4,9 +4,11 @@ $(document).ready(function(){
 		favoriteName: location.pathname.slice(1),
 		isFavorited: false,
 		makeFavorite: function(){
+			headerStatusMessaging.run('favorite');
 			$('#heartFavoriteIcon').addClass('favorite-icon').removeClass('heart-icon');
 		},
 		makeUnfavorite: function(){
+			headerStatusMessaging.run('unfavorite');
 			$('#heartFavoriteIcon').addClass('heart-icon').removeClass('favorite-icon');
 		},
 		favoriteToServer: function(){
