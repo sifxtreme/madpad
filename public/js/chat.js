@@ -130,6 +130,11 @@ $(document).ready(function(){
 			}
 			else{
 				whichClass = 'other-user';
+				if(!chatUserName){
+					if(messageObject.unknown && messageObject.unknown.name){
+						chatUserName = messageObject.unknown.name;
+					}
+				}
 			}
 
 			// create message html
@@ -194,7 +199,12 @@ $(document).ready(function(){
 			if(!userID){
 				// we have an animal cookie set
 				if(madpadUserData && madpadUserData.unknown && madpadUserData.unknown.animal){
-					msgObject.user = madpadUserData.unknown;
+					msgObject.user = {
+						id: madpadUserData.unknown.id,
+						color: madpadUserData.unknown.color,
+						animal: madpadUserData.unknown.animal,
+						name: madpadUserData.unknown.name,
+					};
 				}
 				else{
 					msgObject.user = notSignedInUserObject;					
@@ -220,13 +230,13 @@ $(document).ready(function(){
 			});
 		}
 		sendMessages();
-
+	
+		// functions to change icons in chat header
 		recentChatters = {
 			clearOut: function(){
 				$('.avatar-list ul').empty();
 			},
 			createPersonNode: function(user){
-				console.log(user);
 				var li = document.createElement('li');
 				li.className = 'tooltip'
 				li.setAttribute('name', user.username);
@@ -348,19 +358,19 @@ $(document).ready(function(){
 		madpadSocket.on('chatPeople', function(data){
 			recentChatters.people = data;
 			recentChatters.createAllPeople();
-		})
+		});
 
 		// user joined chat
 		madpadSocket.on('chatJoined', function(data){
 			recentChatters.addPerson(data);
 			recentChatters.createAllPeople();
-		})
+		});
 
 		// user left chat
 		madpadSocket.on('chatLeft', function(data){
 			recentChatters.removePerson(data)
 			recentChatters.createAllPeople();
-		})
+		});
 		
 		// receiving chat object from socket
 		madpadSocket.on('chatSent', function(data){

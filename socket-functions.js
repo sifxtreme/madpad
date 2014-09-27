@@ -84,6 +84,7 @@ module.exports = function(io){
 
     });
 
+    // someone left the chat room
     socket.on('disconnect', function(){
       for(var i=0; i<socket.rooms.length; i++){
         var roomID = socket.rooms[i];
@@ -96,7 +97,7 @@ module.exports = function(io){
       }
       
     });
-    
+
     // chat room
     socket.on('chat', function(data){
     	if(!data.room) return;
