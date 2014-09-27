@@ -517,6 +517,7 @@ a:hover {
   position: relative;
 }
 .tooltip:hover:after {
+  white-space: nowrap;
   background: #5dbff1;
   left: 0;
   font-size: 12px;
@@ -539,6 +540,9 @@ a:hover {
   margin-left: -6px;
   position: absolute;
   z-index: 99;
+}
+.tooltips:hover:after {
+  white-space: pre;
 }
 /*   ---   End of Tooltip Less   --   */
 /*   ---   Error Message Less   --   */

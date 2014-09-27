@@ -540,6 +540,7 @@ a{
 }
 
 .tooltip:hover:after{
+    white-space: nowrap;
     background: @blue;
     left: 0;
     font-size: 12px;
@@ -563,6 +564,9 @@ a{
     margin-left: -6px;
     position: absolute;
     z-index: 99;
+}
+.tooltips:hover:after{
+    white-space: pre!important;
 }
 /*   ---   End of Tooltip Less   --   */
 
