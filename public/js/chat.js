@@ -176,280 +176,282 @@ $(document).ready(function(){
 
 	}
 
-	$(document).ready(function(){
-		if(!$('.madpadChatForm').length) return;
+});
 
-		var notSignedInUserObject = madpadChat.options.randomize();
+$(document).ready(function(){
+	if(!$('.madpadChatForm').length) return;
 
-		// submitting to chat
-		$('.madpadChatForm').submit(function(){
-			var msg = $('#m').val();
-			if(msg == '') return false;
+	var notSignedInUserObject = madpadChat.options.randomize();
 
-			var msgObject = {
-				room: padName,
-				message: msg,
-				user: {
-					name: madpadUserData.name,
-					username: madpadUserData.username,
-					picture: madpadUserData.picture,
-					profileId: userID					
-				}
+	// submitting to chat
+	$('.madpadChatForm').submit(function(){
+		var msg = $('#m').val();
+		if(msg == '') return false;
+
+		var msgObject = {
+			room: padName,
+			message: msg,
+			user: {
+				name: madpadUserData.name,
+				username: madpadUserData.username,
+				picture: madpadUserData.picture,
+				profileId: userID					
 			}
-
-			// we are not a logged in user
-			if(!userID){
-				// we have an animal cookie set
-				if(madpadUserData && madpadUserData.unknown && madpadUserData.unknown.animal){
-					msgObject.user = {
-						id: madpadUserData.unknown.id,
-						color: madpadUserData.unknown.color,
-						animal: madpadUserData.unknown.animal,
-						name: madpadUserData.unknown.name,
-					};
-				}
-				else{
-					msgObject.user = notSignedInUserObject;					
-				}
-			}
-
-			madpadSocket.emit('chat', msgObject);
-			$('#m').val('');
-			msgObject.user.name = "me";
-			madpadChat.appendChat(msgObject);
-			msgObject.user.name = "";
-			return false;
-		});
-
-		// submit chat form
-		function sendMessages(){
-			$('.message-input').keypress(function(e){
-				/* allows enter to send messages and shift enter to make new line */
-				if(e.which == 13 && !e.shiftKey){
-					$(this).submit();
-					return false;
-				}
-			});
-		}
-		sendMessages();
-	
-		// functions to change icons in chat header
-		recentChatters = {
-			clearOut: function(){
-				$('.avatar-list ul').empty();
-			},
-			createPersonNode: function(user){
-				var li = document.createElement('li');
-				li.className = 'tooltip'
-				li.setAttribute('name', user.username);
-				var img = document.createElement('img');
-				user.picture = user.picture.replace('&amp;', '&');
-				img.src = user.picture;
-				img.className = 'avatar-user';
-				if(user.username == usersRoom) img.className += ' avatar-owner';
-				if(user.color) img.style.backgroundColor = user.color;
-				li.appendChild(img);
-				$('.avatar-list ul').append(li);
-			},
-			createPlusNode: function(names){
-				var li = document.createElement('li');
-				li.className = 'tooltip tooltips'
-				li.setAttribute('name', names.join("\n"));
-				var p = document.createElement('p');
-				p.innerHTML = "+"+names.length;
-				li.appendChild(p);
-				$('.avatar-list ul').append(li);
-			},
-			createAllPeople: function(){
-				if(typeof this.formattedData !== 'object') return;
-
-				this.clearOut();
-				this.formatData();
-
-				var peopleNumber = this.formattedData.length;
-				var extraPeople = [];
-				var extraPerson = [];
-
-				for(var i=0; i < peopleNumber; i++){
-					var singlePerson = this.formattedData[i];
-
-					if(singlePerson.user.username){
-						this.createPersonNode(singlePerson.user);
-					}
-					else{
-
-						var animal, color, name;
-						if(singlePerson.user.unknown && typeof singlePerson.user.unknown.name !== 'undefined'){
-							animal = singlePerson.user.unknown.animal;
-							color = singlePerson.user.unknown.color;
-							name = singlePerson.user.unknown.name;
-						}
-						else{
-							animal = madpadChat.options.randomize().animal;	
-							color = madpadChat.options.randomize().color;
-							name = madpadChat.options.randomize().name + '-' + animal;
-						}
-						var userData = {
-							username: name,
-							picture: '/images/chat/animals/' + animal + '.png',
-							color: color
-						}
-						extraPerson = userData;
-
-						if(i < 3){
-							this.createPersonNode(userData);
-						}
-						else{
-							if(singlePerson.user.unknown && typeof singlePerson.user.unknown.name !== 'undefined'){
-								extraPeople.push(singlePerson.user.unknown.name);
-							}
-						}
-						
-					}
-
-				}
-
-				// if we only have one extra person add them
-				if(extraPeople.length == 1){
-					this.createPersonNode(extraPerson);
-				}
-				// if we have more do a +2 type node
-				else if(extraPeople.length > 1){
-					this.createPlusNode(extraPeople);
-				}
-				
-
-			},
-			people: [],
-			formattedData: [],
-			formatData: function(){
-				var tmpArray = [];
-				var owner = [];
-				var self = [];
-				
-				var checkDuplicatesArray = [];
-				var getUniques = function(arr) {
-			    var hash = {}, result = [];
-			    for ( var i = 0, l = arr.length; i < l; ++i ) {
-			    	var uniqueId = arr[i].user.userID || arr[i].user.unknown.id;
-		        if ( !hash.hasOwnProperty(uniqueId) ) { //it works with objects! in FF, at least
-	            hash[uniqueId] = true;
-	            result.push(arr[i]);
-		        }
-			    }
-			    return result;
-				}
-
-				var peopleCopy = this.people;
-
-				for(var i=0; i<peopleCopy.length; i++){
-					var p = peopleCopy[i];
-					// push owner
-					if(p.user.userID && p.user.username == usersRoom){
-						owner.push(p);
-					}
-					// push logged in self
-					else if(p.user.userID && p.user.userID == madpadUserData.userID){
-						self.push(p);
-					}
-					// push guest self
-					else if(p.user.unknown && p.user.unknown.id && p.user.unknown.id == madpadUserData.unknown.id){
-						self.push(p);
-					}
-					else{
-						tmpArray.push(p);
-					}
-				}
-
-				// filter out duplicates
-				tmpArray = getUniques(tmpArray);
-
-				// we want self to be first if owner isn't there
-				if(self[0]){
-					tmpArray.unshift(self[0]);
-				}
-				// we want owner to be first
-				if(owner[0]){
-					tmpArray.unshift(owner[0]);	
-				}
-				
-				this.formattedData = tmpArray;
-
-			},
-			addPerson: function(data){
-				this.people.push({user: data.user, socketID: data.socketID});
-			},
-			removePerson: function(socketID){
-				for(var i=0; i < this.people.length; i++){
-					if(this.people[i].socketID == socketID){
-						this.people.splice(i,1);
-					}
-				}
-			},
 		}
 
-		// we initially joined chat and are seeing all the people in the chat room
-		madpadSocket.on('chatPeople', function(data){
-			recentChatters.people = data;
-			recentChatters.createAllPeople();
-		});
+		// we are not a logged in user
+		if(!userID){
+			// we have an animal cookie set
+			if(madpadUserData && madpadUserData.unknown && madpadUserData.unknown.animal){
+				msgObject.user = {
+					id: madpadUserData.unknown.id,
+					color: madpadUserData.unknown.color,
+					animal: madpadUserData.unknown.animal,
+					name: madpadUserData.unknown.name,
+				};
+			}
+			else{
+				msgObject.user = notSignedInUserObject;					
+			}
+		}
 
-		// user joined chat
-		madpadSocket.on('chatJoined', function(data){
-			recentChatters.addPerson(data);
-			recentChatters.createAllPeople();
-		});
-
-		// user left chat
-		madpadSocket.on('chatLeft', function(data){
-			recentChatters.removePerson(data)
-			recentChatters.createAllPeople();
-		});
-		
-		// receiving chat object from socket
-		madpadSocket.on('chatSent', function(data){
-			madpadChat.appendChat(data);
-		});
-
-		// toggle chat window functionality
-		var toggleChat = function(){
-
-			// open chat window
-			var openChat = function(){
-				$('.chatoff-icon').removeClass('chatoff-icon').addClass('chaton-icon');
-				$('.middle').removeClass('no-chat-fix');
-				$('.right').show();				
-			};
-
-			// close chat window
-			var closeChat = function(){
-				$('.chaton-icon').removeClass('chaton-icon').addClass('chatoff-icon');
-				$('.middle').addClass('no-chat-fix');
-				$('.right').hide();
-			};
-
-			// set up event listeners
-			$("body").delegate(".chaton-icon", "click", function(){
-				closeChat();
-				madpadSocket.emit('toggleChat', {room: padName, disable: true});
-			})
-			$("body").delegate(".chatoff-icon", "click", function(){
-				openChat();
-				madpadSocket.emit('toggleChat', {room: padName, disable: false});
-			})
-
-			// toggle chat if we are told to do so by owner
-			madpadSocket.on('toggleChat', function(whichWay){
-				if(!whichWay){
-					closeChat();
-				}
-				else{
-					openChat();
-				}
-			});
-
-		}();
-
+		madpadSocket.emit('chat', msgObject);
+		$('#m').val('');
+		msgObject.user.name = "me";
+		madpadChat.appendChat(msgObject);
+		msgObject.user.name = "";
+		return false;
 	});
+
+	// submit chat form
+	function sendMessages(){
+		$('.message-input').keypress(function(e){
+			/* allows enter to send messages and shift enter to make new line */
+			if(e.which == 13 && !e.shiftKey){
+				$(this).submit();
+				return false;
+			}
+		});
+	}
+	sendMessages();
+
+	// functions to change icons in chat header
+	recentChatters = {
+		clearOut: function(){
+			$('.avatar-list ul').empty();
+		},
+		createPersonNode: function(user){
+			var li = document.createElement('li');
+			li.className = 'tooltip'
+			li.setAttribute('name', user.username);
+			var img = document.createElement('img');
+			user.picture = user.picture.replace('&amp;', '&');
+			img.src = user.picture;
+			img.className = 'avatar-user';
+			if(user.username == usersRoom) img.className += ' avatar-owner';
+			if(user.color) img.style.backgroundColor = user.color;
+			li.appendChild(img);
+			$('.avatar-list ul').append(li);
+		},
+		createPlusNode: function(names){
+			var li = document.createElement('li');
+			li.className = 'tooltip tooltips'
+			li.setAttribute('name', names.join("\n"));
+			var p = document.createElement('p');
+			p.innerHTML = "+"+names.length;
+			li.appendChild(p);
+			$('.avatar-list ul').append(li);
+		},
+		createAllPeople: function(){
+			if(typeof this.formattedData !== 'object') return;
+
+			this.clearOut();
+			this.formatData();
+
+			var peopleNumber = this.formattedData.length;
+			var extraPeople = [];
+			var extraPerson = [];
+
+			for(var i=0; i < peopleNumber; i++){
+				var singlePerson = this.formattedData[i];
+				
+				// we are a real person
+				if(singlePerson.user.username){
+					this.createPersonNode(singlePerson.user);
+				}
+				// we are a guest
+				else{
+
+					var animal, color, name;
+					if(singlePerson.user.unknown && typeof singlePerson.user.unknown.name !== 'undefined'){
+						animal = singlePerson.user.unknown.animal;
+						color = singlePerson.user.unknown.color;
+						name = singlePerson.user.unknown.name;
+					}
+					else{
+						animal = madpadChat.options.randomize().animal;	
+						color = madpadChat.options.randomize().color;
+						name = madpadChat.options.randomize().name + '-' + animal;
+					}
+					var userData = {
+						username: name,
+						picture: '/images/chat/animals/' + animal + '.png',
+						color: color
+					}
+					extraPerson = userData;
+
+					// we only want to allow 3 people in the chat header
+					if(i < 3){
+						this.createPersonNode(userData);
+					}
+					else{
+						if(singlePerson.user.unknown && typeof singlePerson.user.unknown.name !== 'undefined'){
+							extraPeople.push(singlePerson.user.unknown.name);
+						}
+					}
+					
+				}
+
+			}
+
+			// if we only have one extra person add them
+			if(extraPeople.length == 1){
+				this.createPersonNode(extraPerson);
+			}
+			// if we have more do a +2 type node
+			else if(extraPeople.length > 1){
+				this.createPlusNode(extraPeople);
+			}
+
+		},
+		people: [],
+		formattedData: [],
+		formatData: function(){
+			var tmpArray = [];
+			var owner = [];
+			var self = [];
+			
+			var checkDuplicatesArray = [];
+			var getUniques = function(arr) {
+		    var hash = {}, result = [];
+		    for ( var i = 0, l = arr.length; i < l; ++i ) {
+		    	var uniqueId = arr[i].user.userID || arr[i].user.unknown.id;
+	        if ( !hash.hasOwnProperty(uniqueId) ) { //it works with objects! in FF, at least
+            hash[uniqueId] = true;
+            result.push(arr[i]);
+	        }
+		    }
+		    return result;
+			}
+
+			var peopleCopy = this.people;
+
+			for(var i=0; i<peopleCopy.length; i++){
+				var p = peopleCopy[i];
+				// push owner
+				if(p.user.userID && p.user.username == usersRoom){
+					owner.push(p);
+				}
+				// push logged in self
+				else if(p.user.userID && p.user.userID == madpadUserData.userID){
+					self.push(p);
+				}
+				// push guest self
+				else if(p.user.unknown && p.user.unknown.id && p.user.unknown.id == madpadUserData.unknown.id){
+					self.push(p);
+				}
+				else{
+					tmpArray.push(p);
+				}
+			}
+
+			// filter out duplicates
+			tmpArray = getUniques(tmpArray);
+
+			// we want self to be first if owner isn't there
+			if(self[0]){
+				tmpArray.unshift(self[0]);
+			}
+			// we want owner to be first
+			if(owner[0]){
+				tmpArray.unshift(owner[0]);	
+			}
+			
+			this.formattedData = tmpArray;
+
+		},
+		addPerson: function(data){
+			this.people.push({user: data.user, socketID: data.socketID});
+		},
+		removePerson: function(socketID){
+			for(var i=0; i < this.people.length; i++){
+				if(this.people[i].socketID == socketID){
+					this.people.splice(i,1);
+				}
+			}
+		},
+	}
+
+	// we initially joined chat and are seeing all the people in the chat room
+	madpadSocket.on('chatPeople', function(data){
+		recentChatters.people = data;
+		recentChatters.createAllPeople();
+	});
+
+	// user joined chat
+	madpadSocket.on('chatJoined', function(data){
+		recentChatters.addPerson(data);
+		recentChatters.createAllPeople();
+	});
+
+	// user left chat
+	madpadSocket.on('chatLeft', function(data){
+		recentChatters.removePerson(data)
+		recentChatters.createAllPeople();
+	});
+	
+	// receiving chat object from socket
+	madpadSocket.on('chatSent', function(data){
+		madpadChat.appendChat(data);
+	});
+
+	// toggle chat window functionality
+	var toggleChat = function(){
+
+		// open chat window
+		var openChat = function(){
+			$('.chatoff-icon').removeClass('chatoff-icon').addClass('chaton-icon');
+			$('.middle').removeClass('no-chat-fix');
+			$('.right').show();				
+		};
+
+		// close chat window
+		var closeChat = function(){
+			$('.chaton-icon').removeClass('chaton-icon').addClass('chatoff-icon');
+			$('.middle').addClass('no-chat-fix');
+			$('.right').hide();
+		};
+
+		// set up event listeners
+		$("body").delegate(".chaton-icon", "click", function(){
+			closeChat();
+			madpadSocket.emit('toggleChat', {room: padName, disable: true});
+		})
+		$("body").delegate(".chatoff-icon", "click", function(){
+			openChat();
+			madpadSocket.emit('toggleChat', {room: padName, disable: false});
+		})
+
+		// toggle chat if we are told to do so by owner
+		madpadSocket.on('toggleChat', function(whichWay){
+			if(!whichWay){
+				closeChat();
+			}
+			else{
+				openChat();
+			}
+		});
+
+	}();
 
 });
