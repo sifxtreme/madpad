@@ -347,11 +347,11 @@ module.exports = function(app){
 	      if(!pad){
 	        // we are logged in as the user in the url
 	        if(username == userRoom){
-	          res.render('createpad');
+	          res.render('createpad', { id: padID, user: userInfo, usersRoom: userRoom});
 	        }
 	        // we are a not the correct user
 	        else{
-	          res.render('403');
+	          res.render('404');
 	        }
 	      }
 	      else{
@@ -373,7 +373,7 @@ module.exports = function(app){
 	          var renderView = function(cookiePads, isFavorite){
 	            // attach sharejs server
 	            sharejs.server.attach(app, options);
-	            res.render('pad', { id: padID, user: userInfo, usersRoom: userRoom, pad: padObject, myPads: cookiePads, isFavorite: isFavorite });  
+	            res.render('pad', { id: padID, user: userInfo, usersRoom: userRoom, pad: padObject, myPads: cookiePads, isFavorite: isFavorite });
 	          }
 
 	          // my pads information
