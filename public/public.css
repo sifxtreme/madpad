@@ -188,7 +188,7 @@ a:hover {
   position: relative;
   z-index: 1500;
 }
-.header .menu-container a {
+.header .menu-container .login-button {
   color: #ffffff;
   background: transparent;
   border: 1px solid #ffffff;
@@ -199,7 +199,7 @@ a:hover {
   position: relative;
   top: 16px;
 }
-.header .menu-container a:hover {
+.header .menu-container .login-button:hover {
   background: #33bea8;
   border: 1px solid #33bea8;
   -webkit-transition: all 0.3s;
@@ -240,6 +240,76 @@ a:hover {
   width: 10px;
   height: 8px;
   margin-left: 10px;
+}
+.header .menu-container .avatar-drop .dropdown {
+  background: #ffffff;
+  position: absolute;
+  width: 200px;
+  top: 50px;
+  right: 0px;
+  -webkit-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.1);
+}
+.header .menu-container .avatar-drop .dropdown li {
+  height: 40px;
+  line-height: 40px;
+  padding: 0px 20px;
+  border-left: 1px solid #eaeaea;
+  border-right: 1px solid #eaeaea;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.header .menu-container .avatar-drop .dropdown li:hover {
+  background: #f9f9f9;
+}
+.header .menu-container .avatar-drop .dropdown li a {
+  display: block;
+  text-decoration: none;
+  color: #9ea5ab;
+}
+.header .menu-container .avatar-drop .dropdown li:first-child {
+  background: #5dbff1;
+  color: #ffffff;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  border: none;
+  cursor: default;
+}
+.header .menu-container .avatar-drop .dropdown li:last-child {
+  margin-bottom: 0px;
+}
+.header .menu-container .avatar-drop .dropdown span {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  position: relative;
+  top: 2px;
+  margin-right: 10px;
+}
+.header .menu-container .avatar-drop .dropdown .help-icon {
+  background: url('/images/header/help-icon.png') no-repeat center center;
+  background-size: 16px 16px;
+}
+.header .menu-container .avatar-drop .dropdown .logout-icon {
+  background: url('/images/header/logout-icon.png') no-repeat center center;
+  background-size: 16px 16px;
+}
+.header .menu-container .avatar-drop .arrow-up {
+  position: absolute;
+  top: 42px;
+  right: 12px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid #5dbff1;
+  z-index: 2;
 }
 .sides {
   padding: 0px 20px;

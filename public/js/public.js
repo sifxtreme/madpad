@@ -2,6 +2,16 @@ $(document).ready(function(){
 	
 	$('.username-wrapper').css('opacity' , '1').addClass('move');
 
+	function avatarDropDown(){
+		$('.avatar-drop').hide();
+		var container = $('.header');
+		$('.avatar-header').on('click' , function(e){
+			$('.avatar-drop').show();
+		});
+	}
+	avatarDropDown();
+
+
 	var isAnimating = false;
 	headerStatusMessaging = {
 		statusMessages: {
