@@ -553,22 +553,22 @@ a:hover {
   background: #232c30;
   color: #ffffff;
 }
-.error404 {
+.error-page {
   position: relative;
   top: 35%;
   margin-top: -100px;
   text-align: center;
 }
-.error404 h1 {
+.error-page h1 {
   color: #4b555d;
   font-size: 100px;
 }
-.error404 h2 {
+.error-page h2 {
   color: #9ea5ab;
   margin-top: 20px;
   font-size: 36px;
 }
-.error404 a {
+.error-page a {
   color: #5dbff1;
   text-decoration: none;
 }
@@ -1206,6 +1206,21 @@ a:hover {
 }
 /*   ---    End of Delete Settings  --   */
 /*   ---    New Pad  --   */
+.create-pad .create-pad-container {
+  position: relative;
+  left: 50%;
+  margin-left: -330px;
+  top: 100px;
+  width: 660px;
+  padding: 60px 60px;
+  border: 1px solid #eaeaea;
+}
+.create-pad .create-pad-container h1 {
+  font-size: 18px;
+  color: #232c30;
+  margin-bottom: 40px;
+  text-align: center;
+}
 .create-pad .modal-container {
   position: absolute;
   left: 50%;
