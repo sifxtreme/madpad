@@ -617,11 +617,9 @@ a:hover {
 /*   ---   End of Tooltip Less   --   */
 /*   ---   Error Message Less   --   */
 .error-msg {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  background: #232c30;
-  color: #ffffff;
+  text-align: center;
+  color: #cd7155;
+  margin-top: 20px;
 }
 .error-page {
   position: relative;
