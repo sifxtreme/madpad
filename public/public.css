@@ -1033,6 +1033,7 @@ a:hover {
   border: 1px solid #dddddd;
   font-size: 12px;
   line-height: 18px;
+  clear: both;
 }
 #editor-code .ace_sb {
   overflow-y: auto;
@@ -1059,6 +1060,19 @@ a:hover {
 }
 #editor-code .ace_line span {
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace !important;
+}
+.code-type {
+  width: 200px;
+  height: 40px;
+  border: 1px solid #eaeaea;
+  border-bottom: none;
+  color: #232c30;
+  background: #ffffff;
+  outline: none;
+  position: relative;
+  top: 2px;
+  float: right;
+  padding: 0px 10px;
 }
 /*   ---   End of Code Editor Area   --   */
 /*   ---   Title Area   --   */
