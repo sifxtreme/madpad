@@ -63,7 +63,6 @@ module.exports = function(io){
     socket.on('d', function(){
       console.log(allConnections.data)
     });
-
     
     // join room initially
     socket.on('room', function(data){
@@ -111,8 +110,8 @@ module.exports = function(io){
     // get user id from socket
     var getUserIdFromSocket = function(cookie){
       var user = sessions.getUserData(cookie);
-      var userID = '';
 
+      var userID = '';
       if(user && user.content && user.content.user && user.content.user._id){
         userID = user.content.user._id;
       }
