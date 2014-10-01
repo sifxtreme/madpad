@@ -1,14 +1,16 @@
 $(document).ready(function(){
+	if(typeof padTemplate == 'undefined') return;
+	if(!padTemplate) return;
 
 	var hearts = {
 		favoriteName: location.pathname.slice(1),
 		isFavorited: false,
 		makeFavorite: function(){
-			headerStatusMessaging.run('favorite');
+			headerStatusMessaging.run('pad has been favorited');
 			$('#heartFavoriteIcon').addClass('favorite-icon').removeClass('heart-icon');
 		},
 		makeUnfavorite: function(){
-			headerStatusMessaging.run('unfavorite');
+			headerStatusMessaging.run('pad is no longer a favorite');
 			$('#heartFavoriteIcon').addClass('heart-icon').removeClass('favorite-icon');
 		},
 		favoriteToServer: function(){

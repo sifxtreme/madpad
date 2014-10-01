@@ -319,7 +319,10 @@ module.exports = function(io){
       }
 
       // don't want to delete home template
-      if(data.padURL.indexOf('/home') > -1) return;
+      var padURLArray = data.padURL.split('/');
+      if(padURLArray[1] && padURLArray[1] == 'home'){
+        return;
+      }
 
       // delete pad from mongo
       Pad.remove({name: data.padName, owner: userID}, function(err){

@@ -1,5 +1,6 @@
 $(document).ready(function(){
-	if(typeof madpadSocket === 'undefined') return;
+	if(typeof padTemplate == 'undefined') return;
+	if(!padTemplate) return;
 
 	// need to make global so that is available to codepad.js and textpad.js
 	changePadEditablity = {
@@ -65,13 +66,13 @@ $(document).ready(function(){
 		switch(whichWay){
 			// open up writing on pads
 			case 'public':
-				headerStatusMessaging.run('madePublic');
+				headerStatusMessaging.run('pad is now editable by anyone');
 				padPrivacy.changeToPublicIcon();
 				changePadEditablity.open();
 				break;
 			// turn off editing ability
 			case 'shared':
-				headerStatusMessaging.run('madeShared');
+				headerStatusMessaging.run('pad is now viewable by anyone');
 				padPrivacy.changeToSharedIcon();
 				changePadEditablity.close();
 				break;
@@ -148,7 +149,7 @@ $(document).ready(function(){
 				else{
 					padPrivacy.makePublic();
 				}
-				headerStatusMessaging.run('settingSaved');
+				headerStatusMessaging.run('privacy settings have been updated');
 
 				modals.hideOverlay('.sharing-settings');
 			});

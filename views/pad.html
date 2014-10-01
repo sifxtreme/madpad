@@ -1,7 +1,3 @@
-{{> modals/settings}}
-{{> modals/delete}}
-{{> modals/create_pad}}
-
 <div class="madpad-container minwidth">
 	
 	<div class="left">
@@ -71,6 +67,7 @@ var padName = (usersRoom) ? usersRoom + '_' + id : padType + '_' + id;
 var username = '{{user.username}}';
 var userID = '{{user._id}}';
 var isOwner = (usersRoom == username) ? true : false;
+var padTemplate = true;
 
 var padData = {
 	type: '{{pad.type}}' || 'text',

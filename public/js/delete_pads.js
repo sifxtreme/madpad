@@ -1,5 +1,6 @@
 $(document).ready(function(){
-	if(typeof madpadSocket === 'undefined') return;
+	if(typeof padTemplate == 'undefined') return;
+	if(!padTemplate) return;
 
 	// delete pad modal
 	var deletePad = {
@@ -18,12 +19,13 @@ $(document).ready(function(){
 
 				// go to users home template
 				if(username){
-					document.location.href = '/' + username + '/home?d=1';
+					document.location.href = '/' + username + '/home';
 				}
 				// if logged out just go to home
 				else{
-					document.location.href = '/?d=1';
+					document.location.href = '/';
 				}
+				madpadCookieFunctions.setCookie("statusMessaging", "previous pad has been deleted");
 			})
 		},
 		run: function(modals){

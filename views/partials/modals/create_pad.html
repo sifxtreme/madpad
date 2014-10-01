@@ -1,11 +1,11 @@
-<div class="modal create-pad overlay-close">
+<div class="modal create-pad overlay-close create-pad-modal">
   <section class="modal-close">
     <img src="/images/account/cross.png" />
   </section>
   <div class="modal-container">
     <div id="create-pad-modal">
       <div class="pad-type">
-        {{#if user}}
+        {{#if user.username}}
         <div class="type-tab active" id="personal-type">
             <h6>Personal Pad</h6>
         </div>
@@ -15,7 +15,7 @@
         </div>
       </div>
       <hr class="type-line" />
-      <form method="post" id="{{#if user}}createPadForm{{else}}openPadForm{{/if}}" class="openCreatePadForm">
+      <form method="post" id="{{#if user.username}}createPadForm{{else}}openPadForm{{/if}}" class="openCreatePadForm">
           <div class="name-input">
             <div class="label">Pad Name</div>
             <input type="text" name="pad[name]" class="pad-name" placeholder="Enter your pad name here..." />
@@ -36,7 +36,7 @@
         <hr/>
         <div class="inputPadErrors">
         </div>
-        <button class="green-btn" id="new-button">CREATE PAD</button>
+        <button class="green-btn" id="new-button">{{#if user.username}}CREATE{{else}}OPEN{{/if}} PAD</button>
            <div class="inputWhatPadWillOpen">
             <p>Your Pad's URL</p>
             </div>

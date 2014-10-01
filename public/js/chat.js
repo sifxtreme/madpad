@@ -1,6 +1,8 @@
 $(document).ready(function(){
+	if(typeof padTemplate == 'undefined') return;
+	if(!padTemplate) return;
 
-	madpadChat = {
+	var madpadChat = {
 
 		options: {
 			colorArray: ["#be3333", "#be336e", "#be339f", "#ac33be", "#7e33be", "#4d33be", "#334dbe", "#3385be", "#33acbe", "#33beaf", "#33be85", "#33be47", "#78be33", "#9cbe33", "#bcbe33", "#be9f33", "#be7b33", "#be5733"],
@@ -172,16 +174,66 @@ $(document).ready(function(){
 			
 			this.scrollDown();
 	 		
-		}
+		},
 
-	}
+		toggleChat: function(){
 
-});
+			// open chat window
+			var openChat = function(){
+				$('.chatoff-icon').removeClass('chatoff-icon').addClass('chaton-icon');
+				$('.middle').removeClass('no-chat-fix');
+				$('.right').show();				
+			};
 
-$(document).ready(function(){
-	if(!$('.madpadChatForm').length) return;
+			// close chat window
+			var closeChat = function(){
+				$('.chaton-icon').removeClass('chaton-icon').addClass('chatoff-icon');
+				$('.middle').addClass('no-chat-fix');
+				$('.right').hide();
+			};
 
-	var notSignedInUserObject = madpadChat.options.randomize();
+			// set up event listeners
+			$("body").delegate(".chaton-icon", "click", function(){
+				closeChat();
+				madpadSocket.emit('toggleChat', {room: padName, disable: true});
+			})
+			$("body").delegate(".chatoff-icon", "click", function(){
+				openChat();
+				madpadSocket.emit('toggleChat', {room: padName, disable: false});
+			})
+
+			// toggle chat if we are told to do so by owner
+			madpadSocket.on('toggleChat', function(whichWay){
+				if(!whichWay){
+					closeChat();
+				}
+				else{
+					openChat();
+				}
+			});
+
+		},
+
+		sendMessages: function(){
+			$('.message-input').keypress(function(e){
+				/* allows enter to send messages and shift enter to make new line */
+				if(e.which == 13 && !e.shiftKey){
+					$(this).submit();
+					return false;
+				}
+			});
+		},
+
+		run: function(){
+			this.toggleChat();
+			this.sendMessages();
+		},
+
+	};
+	madpadChat.run();
+
+	// random user object in case anything goes wrong
+	var randomUserObject = madpadChat.options.randomize()
 
 	// submitting to chat
 	$('.madpadChatForm').submit(function(){
@@ -211,7 +263,7 @@ $(document).ready(function(){
 				};
 			}
 			else{
-				msgObject.user = notSignedInUserObject;					
+				msgObject.user = randomUserObject;					
 			}
 		}
 
@@ -223,24 +275,14 @@ $(document).ready(function(){
 		return false;
 	});
 
-	// submit chat form
-	function sendMessages(){
-		$('.message-input').keypress(function(e){
-			/* allows enter to send messages and shift enter to make new line */
-			if(e.which == 13 && !e.shiftKey){
-				$(this).submit();
-				return false;
-			}
-		});
-	}
-	sendMessages();
-
 	// functions to change icons in chat header
-	recentChatters = {
+	var recentChatters = {
 		clearOut: function(){
+			// clear out chat header
 			$('.avatar-list ul').empty();
 		},
 		createPersonNode: function(user){
+			// create a person node in the chat header
 			var li = document.createElement('li');
 			li.className = 'tooltip'
 			li.setAttribute('name', user.username);
@@ -254,6 +296,7 @@ $(document).ready(function(){
 			$('.avatar-list ul').append(li);
 		},
 		createPlusNode: function(names){
+			// if we have more than a certain amount of people create a +X chat header node
 			var li = document.createElement('li');
 			li.className = 'tooltip tooltips'
 			li.setAttribute('name', names.join("\n"));
@@ -263,6 +306,8 @@ $(document).ready(function(){
 			$('.avatar-list ul').append(li);
 		},
 		createAllPeople: function(){
+			// create all people nodes for chat header
+
 			if(typeof this.formattedData !== 'object') return;
 
 			this.clearOut();
@@ -327,6 +372,7 @@ $(document).ready(function(){
 		people: [],
 		formattedData: [],
 		formatData: function(){
+			// format data so that owner and self are first
 			var tmpArray = [];
 			var owner = [];
 			var self = [];
@@ -414,44 +460,5 @@ $(document).ready(function(){
 	madpadSocket.on('chatSent', function(data){
 		madpadChat.appendChat(data);
 	});
-
-	// toggle chat window functionality
-	var toggleChat = function(){
-
-		// open chat window
-		var openChat = function(){
-			$('.chatoff-icon').removeClass('chatoff-icon').addClass('chaton-icon');
-			$('.middle').removeClass('no-chat-fix');
-			$('.right').show();				
-		};
-
-		// close chat window
-		var closeChat = function(){
-			$('.chaton-icon').removeClass('chaton-icon').addClass('chatoff-icon');
-			$('.middle').addClass('no-chat-fix');
-			$('.right').hide();
-		};
-
-		// set up event listeners
-		$("body").delegate(".chaton-icon", "click", function(){
-			closeChat();
-			madpadSocket.emit('toggleChat', {room: padName, disable: true});
-		})
-		$("body").delegate(".chatoff-icon", "click", function(){
-			openChat();
-			madpadSocket.emit('toggleChat', {room: padName, disable: false});
-		})
-
-		// toggle chat if we are told to do so by owner
-		madpadSocket.on('toggleChat', function(whichWay){
-			if(!whichWay){
-				closeChat();
-			}
-			else{
-				openChat();
-			}
-		});
-
-	}();
 
 });

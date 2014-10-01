@@ -3,7 +3,7 @@ var Pad = require('./models/pad.js');
 
 var privacy = {
   db: {type: 'redis'},
-  browserChannel: {cors: '*'},
+  browserChannel: {cors: ''},
   auth: function(agent, action) {
   	var userID = agent.authentication || '';
     var docName = action.docName;

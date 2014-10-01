@@ -22,6 +22,8 @@ $(window).load(function(){
 	// if someone else changed the codemode
 	madpadSocket.on('changeMode', function(newCode){
 		changeEditorType(newCode);
+		var newOptions = $("#mode option:selected").text().toLowerCase();
+		headerStatusMessaging.run('code has been changed to ' + newOptions);
 	});
 	
 	// share document
