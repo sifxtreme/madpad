@@ -27,7 +27,7 @@ $(window).load(function(){
 	});
 	
 	// share document
-	sharejs.open(padName, 'text', options, function(error, doc) {
+	sharejs.open(padName.toLowerCase(), 'text', options, function(error, doc) {
 		doc.attach_ace(editor);	
 		// go to the top line of the codepad editor when text loads
 		// otherwise we will end up at the bottom of the content

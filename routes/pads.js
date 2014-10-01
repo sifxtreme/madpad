@@ -146,7 +146,7 @@ module.exports = function(app){
 	  // get user info
 	  var userInfo = getUserInfoFromCookie(req);
 	  var userID = userInfo._id;
-	  var username = userInfo.username;
+	  var username = userInfo.username.toLowerCase();
 	  if(!username && Object.keys(userInfo.unknown).length == 0){
 	  	var unknown = unknownUserOptions.randomize();
 	  	req.madpad_user.unknown = unknown;
@@ -154,7 +154,7 @@ module.exports = function(app){
 	  }
 
 	  // set up pad info
-	  var padID = req.params.id;
+	  var padID = req.params.id.toLowerCase();
 	  var padObject = getPadObject(true, true, 'text', true);
 	  padObject.isTextPad = false;
 
@@ -216,7 +216,7 @@ module.exports = function(app){
 	  // get user info
 	  var userInfo = getUserInfoFromCookie(req);
 	  var userID = userInfo._id;
-	  var username = userInfo.username;
+	  var username = userInfo.username.toLowerCase();
 	  if(!username && Object.keys(userInfo.unknown).length == 0){
 	  	var unknown = unknownUserOptions.randomize();
 	  	req.madpad_user.unknown = unknown;
@@ -224,7 +224,7 @@ module.exports = function(app){
 	  }
 
 	  // set up pad info
-	  var padID = req.params.id;
+	  var padID = req.params.id.toLowerCase();
 	  var padObject = getPadObject(true, true, 'textpad', true);
 
 	  var renderView = function(cookiePads, isFavorite){
@@ -253,21 +253,17 @@ module.exports = function(app){
 	  // get user info
 	  var userInfo = getUserInfoFromCookie(req);
 	  var userID = userInfo._id;
-	  var username = userInfo.username;
+	  var username = userInfo.username.toLowerCase();
 
 	  // get usersRoom
-	  var userRoom = req.params.username;
+	  var userRoom = req.params.username.toLowerCase();
 
 	  // default set to textpad
-	  var padID = req.params.id;
+	  var padID = req.params.id.toLowerCase();
 	  var padType = 'textpad'
 	  if(req.body.pad.type == 'code'){
 	    padType = 'text'
 	  }
-
-	  // change to lowercase
-	  username = username.toLowerCase();
-	  padID = padID.toLowerCase();
 
 	  // always return json
 	  res.contentType('json');
@@ -323,18 +319,24 @@ module.exports = function(app){
 	  // get user info
 	  var userInfo = getUserInfoFromCookie(req);
 	  var userID = userInfo._id;
-	  var username = userInfo.username;
+	  var username = userInfo.username.toLowerCase();
 	  if(!username && Object.keys(userInfo.unknown).length == 0){
 	  	var unknown = unknownUserOptions.randomize();
 	  	req.madpad_user.unknown = unknown;
 	  	userInfo.unknown = unknown;
 	  }
+	  if(req.session && req.session.just_logged_in){
+	  	if(req.session.just_logged_in){
+	  		req.session.just_logged_in = false;
+	  		userInfo.justLoggedIn = true;
+	  	}
+	  }
 
 	  // get usersRoom
-	  var userRoom = req.params.username;
+	  var userRoom = req.params.username.toLowerCase();
 
 	  // set up pad info
-	  var padID = req.params.id;
+	  var padID = req.params.id.toLowerCase();
 	  var padObject = getPadObject(true, true, 'textpad', true);
 	  var padName = userRoom + '_' + padID;
 

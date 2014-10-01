@@ -63,6 +63,7 @@ module.exports = function(app, passport){
 
 	  newPad.save(function(err){
 	  	if(err){
+	  		// TO DO ADD ERROR LOGGING
 	  		console.log("Error creating pad after username creation: " + err);
 	  	}
 	  })
@@ -80,6 +81,17 @@ module.exports = function(app, passport){
 	  res.redirect('/');
 	});
 
+	var afterAuthCallback = function(req, res){
+    req.madpad_user.user = req.user;
+    if(req.user.username){
+	    req.session.just_logged_in = true;
+			res.redirect('/' + req.user.username + '/home/');
+    } 
+    else{
+	    res.redirect('/account');
+    }
+	}
+
 
 	app.get('/auth/facebook',
 	  passport.authenticate('facebook', {scope: ['email']}),
@@ -88,9 +100,7 @@ module.exports = function(app, passport){
 	app.get('/auth/facebook/callback', 
 	  passport.authenticate('facebook', { failureRedirect: '/' }),
 	  function(req, res) {
-	    req.madpad_user.user = req.user;
-	    if(req.user.username) res.redirect('/' + req.user.username + '/home/');
-	    else res.redirect('/account');
+	  	afterAuthCallback(req,res)
 	  });
 
 	app.get('/auth/github',
@@ -100,14 +110,11 @@ module.exports = function(app, passport){
 	app.get('/auth/github/callback', 
 	  passport.authenticate('github', { failureRedirect: '/' }),
 	  function(req, res) {
-	    req.madpad_user.user = req.user;
-	    if(req.user.username) res.redirect('/' + req.user.username + '/home/');
-	    else res.redirect('/account');
+			afterAuthCallback(req,res)
 	  });
 
 	app.get('/account', function(req, res){
 	  if(req.madpad_user.user.username){
-	    console.log("we are already logged in...redirecting");
 	    res.redirect("/" + req.madpad_user.user.username + "/home");
 	  }
 	  else{
@@ -123,7 +130,7 @@ module.exports = function(app, passport){
 	  else {
 	    var userData = getSocialAccount(req.madpad_user.user);
 
-	    var username = req.body.username;
+	    var username = req.body.username.toLowerCase();
 	    var userError = validateUsername(username);
 
 	    if(userError && userError.error){
@@ -137,19 +144,18 @@ module.exports = function(app, passport){
 	        }
 	        else{
 
+	        	// user already exists
 	          if(user){
-	            console.log("User already exists error");
 	            res.render('account', {user: userData, error: "User already exists", previousValue: username});
 	          }
 
 	          else{
 	            User.findByIdAndUpdate(userData.realID, { username: username }, function(err, user){
 	              if(err){
-	                console.log("User post submit error: " + err);
+	              	// TO-DO add error logging
 	                res.render('account', {user: userData, error: "Error saving to DB", previousValue: username});
 	              }
 	              else{
-	              	console.log("Updated username of user");
 	              	req.madpad_user.user = user;
 	                res.redirect("/" + username + "/home");
 	                createPadOnUsername(userData.realID, username);

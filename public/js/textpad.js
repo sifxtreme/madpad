@@ -3,7 +3,7 @@ $(document).ready(function(){
 
 	var pad = document.getElementById('pusherContentEditable');
 
-	sharejs.open(padName, 'text', options, function(error, doc) {
+	sharejs.open(padName.toLowerCase(), 'text', options, function(error, doc) {
 		window.doc = doc;
 		doc.attach_editable(pad);
 

@@ -46,12 +46,21 @@ $(document).ready(function(){
 			this.animate();
 		}
 	}
-	if(madpadCookieFunctions.getCookie('statusMessaging')){
-		var statusCookie = madpadCookieFunctions.getCookie('statusMessaging');
-		madpadCookieFunctions.deleteCookie('statusMessaging');
+
+	var displayInitialMessaging = function(msg){
 		setTimeout(function(){
-			headerStatusMessaging.run(statusCookie);
-		}, 1500)
+			headerStatusMessaging.run(msg);
+		}, 1200)		
+	}
+
+
+	if(madpadCookieFunctions.getCookie('statusMessaging')){
+		displayInitialMessaging(madpadCookieFunctions.getCookie('statusMessaging'));
+		madpadCookieFunctions.deleteCookie('statusMessaging');
+	}
+
+	if(typeof justLoggedIn !== 'undefined' && justLoggedIn){
+		displayInitialMessaging("Welcome back " + username + "!");
 	}
 
 });

@@ -10,7 +10,7 @@ var User = mongoose.model('User', {
 	githubName: String,
 	githubPicture: String,
 	githubDate: Date,
-	username: String,
+	username: {type: String, lowercase: true, trim: true},
 	pads: Array,
 	created: Date
 });

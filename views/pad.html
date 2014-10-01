@@ -59,15 +59,16 @@
 </div> <!-- end madpad-container -->
 <script>
 
-var id = '{{id}}';
-var usersRoom = '{{usersRoom}}';
+var id = '{{id}}'.toLowerCase();
+var usersRoom = '{{usersRoom}}'.toLowerCase();
 var isTextPad = '{{pad.isTextPad}}';
 var padType = (isTextPad == 'true') ? 'text' : 'code';
 var padName = (usersRoom) ? usersRoom + '_' + id : padType + '_' + id;
-var username = '{{user.username}}';
+var username = '{{user.username}}'.toLowerCase();
 var userID = '{{user._id}}';
 var isOwner = (usersRoom == username) ? true : false;
 var padTemplate = true;
+var justLoggedIn = '{{user.justLoggedIn}}';
 
 var padData = {
 	type: '{{pad.type}}' || 'text',

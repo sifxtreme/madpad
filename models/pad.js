@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var Pad = mongoose.model('Pad', {
-	name: String,
+	name: {type: String, lowercase: true, trim: true},
 	owner: String,
 	writeAccess: Boolean,
 	readAccess: Boolean,
