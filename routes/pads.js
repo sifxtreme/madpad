@@ -351,13 +351,13 @@ module.exports = function(app){
 	        }
 	        // we are a not the correct user
 	        else{
-	          res.render('404');
+	          res.render('404', {user: userInfo});
 	        }
 	      }
 	      else{
 	        // we arent the correct user and we are not allowed readAccess
 	        if(!pad.readAccess && pad.owner != userID){
-	          res.render('403');
+	          res.render('403', {user: userInfo});
 	        }
 	        else{ // we have readAccess
 	          
