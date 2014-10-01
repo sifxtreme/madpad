@@ -325,11 +325,9 @@ module.exports = function(app){
 	  	req.madpad_user.unknown = unknown;
 	  	userInfo.unknown = unknown;
 	  }
-	  if(req.session && req.session.just_logged_in){
-	  	if(req.session.just_logged_in){
-	  		req.session.just_logged_in = false;
-	  		userInfo.justLoggedIn = true;
-	  	}
+	  if(req.madpad_user && req.madpad_user.just_loggedin){
+  		req.madpad_user.just_loggedin = false;
+  		userInfo.justLoggedIn = true;
 	  }
 
 	  // get usersRoom

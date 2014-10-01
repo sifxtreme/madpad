@@ -25,7 +25,6 @@ app.configure(function(){
   app.use(express.cookieParser());
   app.use(express.bodyParser());
   app.use(express.methodOverride());
-  app.use(express.session({secret: '1234567890QWERTY'}));
 
   app.use(sessions);
   app.use(padCookie);
