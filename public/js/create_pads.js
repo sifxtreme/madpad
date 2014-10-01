@@ -116,7 +116,9 @@ $(document).ready(function(){
 		},
 		onInputChange: function(){
 			var _this = this;
-			$('input[name="pad[name]"]').filter(":last").on('keyup', function(){
+			$('input[name="pad[name]"]').filter(":last").on('keyup', function(e){
+				var keycode = (event.keyCode ? event.keyCode : event.which);
+				if(keycode == '13') return;
 				_this.updateOpenPadURL();
 			})
 		},
@@ -138,7 +140,7 @@ $(document).ready(function(){
 				if(!padURL) return false;
 
 				// we are opening a pad
-				if($('#public-type').hasClass('active') && padURL.open != undefined){
+				if(!_this.isPersonalPad && padURL.open != undefined){
 					window.location.href = padURL.open;
 					return false;
 				}
