@@ -335,7 +335,7 @@ $( window ).load(function() {
 	    $(".froala-element").css('height', padHeight);
 	    $('#editor-code').css('height' , padHeight);
 	    $(".new-pad-area").css('height', sideHeight);
-	    $('#messages').css('height' , chatHeight);
+	    // $('#messages').css('height' , chatHeight);
 	    $('.signup-step-wrapper').css('height' , signupStepHeight);
 	
 	}/* Set heights for divs */

@@ -878,30 +878,20 @@ a:hover {
   overflow-y: auto;
   font-size: 12px;
   font-weight: 300;
+  background: #eaeaea;
   color: #232c30;
 }
 .right #messages .content {
   max-width: 194px;
   min-width: 100px;
   word-wrap: break-word;
-  background: #ffffff;
   border-radius: 4px;
   padding: 10px 10px;
   margin-bottom: 20px;
-  -webkit-box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.15);
-  -moz-box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.15);
-  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.15);
-}
-.right #messages .content:hover {
-  background: #f4f6f9;
-  -webkit-box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.3);
-  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.3);
-  transition: 0.5s;
-  -webkit-transition: 0.5s;
 }
 .right .user {
   width: 100%;
+  overflow: hidden;
 }
 .right .user .avatar {
   float: right;
@@ -909,12 +899,23 @@ a:hover {
 }
 .right .user .content {
   float: left;
+  background: #ffffff;
+  margin-right: 5px;
 }
 .right .user .message-area {
   float: right;
+  background: url('/images/mobile/arrow-right.png') no-repeat;
+  background-size: 12px 20px;
+  background-position: right 52px top 10px;
+}
+.right .user .name {
+  font-size: 12px;
+  color: #9ea5ab;
+  margin-top: 10px;
 }
 .right .other-user {
   width: 100%;
+  overflow: hidden;
 }
 .right .other-user .avatar {
   float: left;
@@ -922,9 +923,19 @@ a:hover {
 }
 .right .other-user .content {
   float: right;
+  background: #5dbff1;
+  margin-left: 5px;
 }
 .right .other-user .message-area {
   float: left;
+  background: url('/images/mobile/arrow-left.png') no-repeat;
+  background-size: 12px 20px;
+  background-position: left 52px top 10px;
+}
+.right .other-user .name {
+  font-size: 12px;
+  color: #4b555d;
+  margin-top: 10px;
 }
 .right .avatar {
   background-size: cover;

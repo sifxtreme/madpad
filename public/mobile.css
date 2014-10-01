@@ -153,7 +153,9 @@ img {
   /*   ---   End of Mobile Header   --   */
   /*   ---   Pad Content   --   */
   /*   ---   End of Pad Content   --   */
-  /*   ---   Pad Content   --   */
+  /*   ---   Chat Content   --   */
+  /*   ---   Chat Bar General   --   */
+  /*   ---   End of Chat Bar General   --   */
   /*   ---   End of Chat Content   --   */
 }
 .mobile h1,
@@ -183,7 +185,7 @@ img {
   width: 100%;
   height: 50px;
   background: #232c30;
-  position: fixed;
+  position: absolute;
   z-index: 9999;
   /* left side */
 }
@@ -230,11 +232,11 @@ img {
   border-radius: 50%;
 }
 .mobile .m-tabs {
-  position: fixed;
+  position: absolute;
   margin-top: 50px;
   width: 100%;
   height: 40px;
-  background: #eaeaea;
+  background: #f4f6f9;
   overflow: hidden;
   z-index: 9999;
 }
@@ -269,7 +271,7 @@ img {
   color: #33bea8;
 }
 .mobile .tab-shadow {
-  position: fixed;
+  position: absolute;
   width: 100%;
   height: 2px;
   margin-top: 90px;
@@ -285,5 +287,194 @@ img {
   border: 1px solid #eaeaea;
   margin: 10px 10px;
   font-size: 80%;
+}
+.mobile .chat {
+  background: #f9f9f9;
+  position: relative;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  border-left: 1px solid #eaeaea;
+  /* chat title */
+  /* user message styles */
+  /* other user message style */
+  /* submit area */
+}
+.mobile .chat .num-users {
+  text-align: center;
+  background: #eaeaea;
+  border-bottom: 1px solid #dddddd;
+  height: 30px;
+}
+.mobile .chat .num-users p {
+  font-size: 12px;
+  color: #4b555d;
+  line-height: 30px;
+}
+.mobile .chat .chat-avatar {
+  background-image: url('/images/chat/animals/chicken.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-color: #33bea8;
+  background-size: 44px 44px;
+}
+.mobile .chat .chat-title {
+  border-bottom: 1px solid #dddddd;
+  background: #eaeaea;
+  height: 50px;
+}
+.mobile .chat .chat-title .avatar-list {
+  position: relative;
+  max-width: 280px;
+  top: 10px;
+  padding: 0px 10px;
+}
+.mobile .chat .chat-title .avatar-list li {
+  float: left;
+  margin-right: 10px;
+}
+.mobile .chat .chat-title .avatar-list li:hover {
+  cursor: pointer;
+}
+.mobile .chat .chat-title .avatar-list li p {
+  font-size: 12px;
+  height: 30px;
+  line-height: 28px;
+  border: 1px solid #eaeaea;
+  background: #ffffff;
+  padding: 0px 10px;
+  border-radius: 20px;
+}
+.mobile .chat .chat-title .avatar-user {
+  background-size: cover;
+  background: #ffffff;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  border: 1px solid #ffffff;
+  -webkit-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.15);
+}
+.mobile .chat .chat-title .avatar-owner {
+  border: 2px solid #5dbff1;
+}
+.mobile .chat #messages {
+  padding: 10px 10px;
+  overflow-y: auto;
+  font-size: 12px;
+  font-weight: 300;
+  background: #eaeaea;
+  color: #232c30;
+}
+.mobile .chat #messages .content {
+  max-width: 194px;
+  min-width: 100px;
+  word-wrap: break-word;
+  border-radius: 4px;
+  padding: 10px 10px;
+  margin-bottom: 20px;
+}
+.mobile .chat .user {
+  width: 100%;
+  overflow: hidden;
+}
+.mobile .chat .user .avatar {
+  float: right;
+  margin-left: 10px;
+}
+.mobile .chat .user .content {
+  float: left;
+  background: #ffffff;
+  margin-right: 5px;
+}
+.mobile .chat .user .message-area {
+  float: right;
+  background: url('/images/mobile/arrow-right.png') no-repeat;
+  background-size: 12px 20px;
+  background-position: right 52px top 10px;
+}
+.mobile .chat .user .name {
+  font-size: 12px;
+  color: #9ea5ab;
+  margin-top: 10px;
+}
+.mobile .chat .other-user {
+  width: 100%;
+  overflow: hidden;
+}
+.mobile .chat .other-user .avatar {
+  float: left;
+  margin-right: 10px;
+}
+.mobile .chat .other-user .content {
+  float: right;
+  background: #c2e2f2;
+  margin-left: 5px;
+}
+.mobile .chat .other-user .message-area {
+  float: left;
+  background: url('/images/mobile/arrow-left.png') no-repeat;
+  background-size: 12px 20px;
+  background-position: left 52px top 10px;
+}
+.mobile .chat .other-user .name {
+  font-size: 12px;
+  color: #4b555d;
+  margin-top: 10px;
+}
+.mobile .chat .avatar {
+  background-size: cover;
+  border-radius: 50%;
+  height: 44px;
+  width: 44px;
+  border: 2px solid #ffffff;
+  -webkit-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.15);
+}
+.mobile .chat .submit-wrapper {
+  width: 100%;
+  height: 70px;
+  position: relative;
+  bottom: 0;
+  background: #f9f9f9;
+}
+.mobile .chat .submit-area {
+  width: 100%;
+  background: #f9f9f9;
+  padding: 15px 15px;
+  border-top: 1px solid #dddddd;
+}
+.mobile .chat .submit-area .m-message {
+  float: left;
+  width: 70%;
+}
+.mobile .chat .submit-area .message-input {
+  width: 100%;
+  height: 40px;
+  padding: 5px 10px;
+  border: 1px solid #dddddd;
+  font-size: 12px;
+  outline: none;
+  resize: none;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
+}
+.mobile .chat .submit-area .m-submit {
+  float: right;
+  width: 27%;
+}
+.mobile .chat .submit-area .submit-button {
+  width: 100%;
+  height: 40px;
+  background: #33bea8;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  outline: none;
+  border: none;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
 }
 /*   ---   End of All Mobile LESS   ---   */

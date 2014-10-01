@@ -9,7 +9,7 @@
     <link href="/froala_1.2.1/css/froala_editor.css" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700' rel='stylesheet' type='text/css'>
     <script src="/js/jquery-1.11.1.min.js"></script>
-    <!-- <script src="/js/public.js"></script> -->
+    <script src="/js/public.js"></script>
     <script src="/js/mobile.js"></script>
     <script src="/js/Autolinker.min.js"></script>
     <script src="/sharejs/bcsocket.js"></script>
@@ -84,7 +84,12 @@
                   <div class="submit-wrapper">
                     <div class="submit-area">
                       <form action="" class="madpadChatForm">
-                        <textarea id="m" autocomplete="off" class="message-input" placeholder="Send a message..."></textarea>
+                        <div class="m-message">
+                            <textarea id="m" autocomplete="off" class="message-input" placeholder="Send a message..."></textarea>
+                        </div>
+                        <div class="m-submit">
+                            <input type="submit" class="submit-button" value="SEND"/>
+                        </div>
                       </form>
                     </div>
                   </div>

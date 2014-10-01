@@ -37,4 +37,12 @@ $(document).ready(function(){
 	}
 	mobileTabs();
 
+
+	function chatMessageHeight(){
+		var submitHeight = 70;
+		var header = 92;
+		var chatMessageHeight = $(window).height() - 162;
+		$('#messages').css('height' , chatMessageHeight);
+	}
+	chatMessageHeight();
 });
