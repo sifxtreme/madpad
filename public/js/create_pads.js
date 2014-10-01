@@ -1,6 +1,4 @@
 $(document).ready(function(){
-	if(typeof padTemplate == 'undefined') return;
-	if(!padTemplate) return;
 
 	var newPadForm = {
 		defaultURL: "Your Pad's URL",
@@ -19,15 +17,15 @@ $(document).ready(function(){
 			return elem.val().toLowerCase() || '';
 		},
 		getPadName: function(){
-			var elem = $('input[name="pad[name]"]');
+			var elem = $('input[name="pad[name]"]').filter(":last");
 			return this.getInputValue(elem);
 		},
 		getPadType: function(){
-			var elem = $('input[name="pad[type]"]');
+			var elem = $('input[name="pad[type]"]').filter(":last");
 			return this.getInputValue(elem);
 		},
 		getPadUsername: function(){
-			var elem = $('input[name="pad[username]"]');
+			var elem = $('input[name="pad[username]"]').filter(":last");
 			return this.getInputValue(elem);
 		},
 		textPadClick: function(){
@@ -118,7 +116,7 @@ $(document).ready(function(){
 		},
 		onInputChange: function(){
 			var _this = this;
-			$('input[name="pad[name]"]').on('keyup', function(){
+			$('input[name="pad[name]"]').filter(":last").on('keyup', function(){
 				_this.updateOpenPadURL();
 			})
 		},
@@ -195,6 +193,7 @@ $(document).ready(function(){
 			this.onFormSubmit();
 			this.personalPadClick();
 			this.publicPadClick();
+			this.updateOpenPadURL();
 		}
 	};
 

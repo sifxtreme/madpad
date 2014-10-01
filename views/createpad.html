@@ -4,8 +4,7 @@
     <h1>This pad doesn't exist, create it!</h1>
     <form method="post" id="createPadForm" class="openCreatePadForm">
         <div class="name-input">
-          <div class="label">Pad Name</div>
-          <input type="text" name="pad[name]" class="pad-name" placeholder="Enter your pad name here..." />
+          <input type="hidden" name="pad[name]" class="pad-name" placeholder="Enter your pad name here..." value="{{id}}" />
           <input type="hidden" name="pad[type]" value="text" />
           <input type="hidden" name="pad[username]" value="{{user.username}}" />
           <input type="hidden" name="pad[ajax]" value="true" />
