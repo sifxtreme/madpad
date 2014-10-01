@@ -1,0 +1,260 @@
+/*   ---    Mobile Less  --   */
+
+@import "variables.less";
+
+
+
+
+/*   ---   CSS Reset   --   */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    box-sizing: border-box;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+html{
+    height: 100%;
+}
+
+body {
+    line-height: 1;
+    height: 100%;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+input{
+    padding: 0 0;
+    box-sizing: border-box;
+    outline: none;
+}
+
+*{
+    box-sizing: border-box;
+}
+
+img{
+    -khtml-user-select: none;
+    -o-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+/*   ---   End of CSS Reset   --   */
+
+
+
+/*   ---   All Mobile LESS   ---   */
+.mobile{
+/*   ---   Global Mobile LESS   ---   */
+
+h1, h2, h3, h4, h5, h6, p, a, span, input, button, body, textarea{
+    font-family: "Roboto", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 300;
+}
+
+
+.m-padding{
+	padding: 0px 10px;
+}
+
+.m-offset{
+	height: 92px;
+	width: 100%;
+}
+
+
+/*   ---   End of Global LESS   ---   */
+
+
+/*   ---   Mobile Header   --   */
+.m-header{
+	width: 100%;
+	height: 50px;
+	background: @dark;
+	position: fixed;
+	z-index: 9999;
+
+	.left-header{
+		float: left;
+		height: 50px;
+
+		.hamburger{
+			float: left;
+			margin-right: 10px;
+
+			img{
+				position: relative;
+				top: 15px;
+				width: 20px;
+			}
+		}
+
+		.logo{
+			float: left;
+			
+			img{
+				position: relative;
+				top: 13px;
+				width: 24px;
+			}
+
+		}
+	}/* left side */
+
+	.right-header{
+		float: right;
+		height: 50px;
+
+		.m-icons{
+			position: relative;
+			top: 15px;
+			float: left;
+			padding: 0px 10px;
+			width: 40px;
+			height: 20px;
+
+			img{
+				width: 20px;
+			}
+		}
+
+		.m-account{
+			border-radius: 50%;
+
+			img{
+				border-radius: 50%;
+			}
+		}
+	}
+}
+
+.m-tabs{
+	position: fixed;
+	margin-top: 50px;
+	width: 100%;
+	height: 40px;
+	background: @ea;
+	overflow: hidden;
+	z-index: 9999;
+
+	.tab{
+		width: 33.33333333333%;
+		float: left;
+		position: relative;
+		top: 4px;
+		box-sizing: border-box;
+		cursor: pointer;
+
+		p{	
+			position: relative;
+			top: 0px;
+			font-size: 14px;
+			font-weight: bold;
+			text-align: center;
+			line-height: 33px;
+			text-transform: uppercase;
+			color: @hover;
+		    -webkit-touch-callout: none;
+		    -webkit-user-select: none;
+		    -khtml-user-select: none;
+		    -moz-user-select: none;
+		    -ms-user-select: none;
+		    user-select: none;
+		}
+	}
+
+	.active{
+		border-bottom: 3px solid @green;
+
+		p{
+			color: @green;
+		}
+	}
+}
+
+.tab-shadow{
+	position: fixed;
+	width: 100%;
+	height: 2px;
+	margin-top: 90px;
+	border-top: 1px solid #cfcfcf;
+	border-bottom: 1px solid #efefef;
+	opacity: 0.8;
+	z-index: 9999;
+}
+/*   ---   End of Mobile Header   --   */
+
+
+
+
+/*   ---   Pad Content   --   */
+.froala-box{
+
+	.froala-editor{
+		display: none;
+	}
+
+	.froala-element{
+		border: 1px solid @ea;
+		margin: 10px 10px;
+		font-size: 80%;
+	}
+}
+/*   ---   End of Pad Content   --   */
+
+
+
+/*   ---   Pad Content   --   */
+
+
+/*   ---   End of Chat Content   --   */
+
+}
+
+/*   ---   End of All Mobile LESS   ---   */
+
+
+
+
+
+
+
+
+
+
