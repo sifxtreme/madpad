@@ -1,3 +1,72 @@
+{{#if is_phone}}
+    <div class="m-header m-padding">
+        <div class="left-header">
+            <div class="hamburger">
+                 <img src="/images/mobile/hamburger.png" />
+            </div>
+            <div class="logo">
+                 <img src="/images/mobile/logo@2x.png" />
+            </div>
+        </div><!-- left side -->
+        <div class="right-header">
+            <div class="m-icons m-plus">
+                  <img src="/images/mobile/newpad.png" />
+            </div>
+            <div class="m-icons m-options">
+                  <img src="/images/mobile/options.png" />
+            </div>
+            <div class="m-icons m-account">
+                  <img src="/images/chat/melanie.jpg" />
+            </div>
+        </div><!-- right side -->
+    </div><!-- header -->
+    <div class="m-tabs">
+        <div class="tab m-pad active">
+            <p>Pad</p>
+        </div>
+        <div class="tab m-chat">
+            <p>Chat</p>
+        </div>
+        <div class="tab m-share">
+            <p>Share</p>
+        </div>
+    </div>
+    <div class="tab-shadow"></div>
+    <div class="m-offset"></div>
+    <div class="m-content">
+        <div class="m-pad-content">
+          {{#if pad.isTextPad}}
+            <div id="editor" class="pad-area" placeholder="Start typing here!"></div>
+            <textarea class="main" style="display:none;" id="pusherContentEditable"></textarea>
+          {{else}}
+            {{> code_modes_select}}
+            <div id="editor-code" class="pad-area"></div>
+          {{/if}}
+        </div> <!-- pad -->
+        <div class="m-chat-content">
+            <div class="chat" {{#unless pad.chat}}style="display:none"{{/unless}}>
+                  <div id="messages"></div>
+                  <div class="submit-wrapper">
+                    <div class="submit-area">
+                      <form action="" class="madpadChatForm">
+                        <div class="m-message">
+                            <textarea id="m" autocomplete="off" class="message-input" placeholder="Send a message..."></textarea>
+                        </div>
+                        <div class="m-submit">
+                            <input type="submit" class="submit-button" value="SEND"/>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+              </div> <!-- chat -->
+        </div>
+        <div class="m-share-content">
+            share
+        </div>
+
+    </div>
+
+{{else}}
 <div class="madpad-container minwidth">
 	
 	<div class="left">
@@ -57,6 +126,7 @@
 	</div> <!-- chat -->
 
 </div> <!-- end madpad-container -->
+{{/if}}
 <script>
 
 var id = '{{id}}'.toLowerCase();
