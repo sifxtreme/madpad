@@ -108,7 +108,7 @@ h1, h2, h3, h4, h5, h6, p, a, span, input, button, body, textarea{
 	height: 50px;
 	background: @dark;
 	position: absolute;
-	z-index: 9999;
+	z-index: 1900;
 
 	.left-header{
 		float: left;
@@ -153,14 +153,6 @@ h1, h2, h3, h4, h5, h6, p, a, span, input, button, body, textarea{
 				width: 20px;
 			}
 		}
-
-		.m-account{
-			border-radius: 50%;
-
-			img{
-				border-radius: 50%;
-			}
-		}
 	}
 }
 
@@ -171,7 +163,7 @@ h1, h2, h3, h4, h5, h6, p, a, span, input, button, body, textarea{
 	height: 40px;
 	background: @message;
 	overflow: hidden;
-	z-index: 9999;
+	z-index: 1900;
 
 	.tab{
 		width: 33.33333333333%;
@@ -216,11 +208,14 @@ h1, h2, h3, h4, h5, h6, p, a, span, input, button, body, textarea{
 	border-top: 1px solid #cfcfcf;
 	border-bottom: 1px solid #efefef;
 	opacity: 0.8;
-	z-index: 9999;
+	z-index: 1900;
 }
 /*   ---   End of Mobile Header   --   */
 
 
+.m-content{
+	overflow: hidden;
+}
 
 
 /*   ---   Pad Content   --   */
@@ -241,7 +236,6 @@ h1, h2, h3, h4, h5, h6, p, a, span, input, button, body, textarea{
 
 
 /*   ---   Chat Content   --   */
-/*   ---   Chat Bar General   --   */
 .chat{
 	background: @light;
 	position: relative;
@@ -473,15 +467,365 @@ h1, h2, h3, h4, h5, h6, p, a, span, input, button, body, textarea{
 		}
 	} /* submit area */
 }
-/*   ---   End of Chat Bar General   --   */
-
-
-
-
-
-
 /*   ---   End of Chat Content   --   */
 
+/*   ---    Mobile Pad Sharing Settings  --   */
+.sharing-settings{
+	width: 100%;
+	padding: 20px 20px;
+	border: 1px solid @ea;
+
+    .modal-confirm{
+    	margin-top: 20px;
+    	height: 40px;
+    	overflow: hidden;
+
+    	button{
+    		width: 100%;
+    		height: 40px;
+    		background: @green;
+    		color: @f;
+    		font-size: 14px;
+    		outline: none;
+    		border: none;
+			-webkit-appearance: none;
+			-webkit-border-radius: 0;
+    	}
+    }
+    .list-settings{
+
+    	.radio{
+    		width: 14px;
+    		height: 14px;
+    		border-radius: 50%;
+    		border: 1px solid @hover;
+    		padding: 4px 4px;
+    		float: left;
+    		position: relative;
+    		top: 8px;
+    		margin-right: 10px;
+    		transition: 0.3s;
+    		-webkit-transition: 0.3s;
+
+    		&:hover{
+    			cursor: pointer;
+    		}
+       	}
+
+    	.radio-on{
+    		background-color: @blue;
+    	}
+
+    	.radio-off{
+    		background-color: @f;
+    	}
+
+    	.setting-icons{
+    		width: 30px;
+ 			height: 30px;
+    		padding: 6px 6px;
+    		background: @light;
+    		border: 1px solid @ea;
+    		float: left;
+    		margin-right: 10px;
+
+    	}
+
+    	.settings{
+    		margin-bottom: 30px;
+    		margin-top: 0px;
+    	}
+
+    	.setting-text{
+
+    		.large{
+    			color: @dark;
+    			margin-bottom: 5px;
+    			line-height: 30px;
+    		}
+
+    	}
+    }
+}
+
+.social-media{
+	padding: 0px 20px;
+
+	.row{
+		overflow: hidden;
+		margin-top: 15px;
+
+	}
+	.col{
+		float: left;
+		width: 50%;	
+	}
+
+	.social-icon{
+		margin: 0 auto;
+
+		img{
+			width: 60px;
+			display: block;
+			margin: 0 auto;
+		}
+
+		p{
+			text-align: center;
+			margin-top: 10px;
+			font-size: 14px;
+			color: @d;
+		}
+	}
+
+}
+/*   ---    End of Mobile Pad Sharing Settings  --   */
+
+
+
+
+/*   ---    List of Pads  --   */
+
+.x-modal{
+	float: left;
+	position: absolute;
+	padding: 10px 10px;
+
+	img{
+		width: 20px;
+
+	}
+}
+.pad-list-modal{
+	position: absolute;
+	z-index: 2000;
+	width: 100%;
+	height: 100%;
+	background: @sidebar;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+
+	.pad-title{
+		clear: both;
+		text-align: center;
+		margin-top: 20px;
+		p{
+			color: @f;
+			font-size: 20px;
+		}
+	}
+}
+
+
+.overlay-close{
+    visibility: hidden;
+    opacity: 0;
+    -webkit-transform: scale(0.5, 0.5);
+    transform: scale(0.5, 0.5);
+}
+
+.overlay-open{
+    visibility: visible;
+    opacity: 1;
+    -webkit-transform: scale(1,1);
+    transform: scale(1,1);    
+    -webkit-transition: -webkit-transform 0.5s, opacity 0.5s;
+    transition: transform 0.5s, opacity 0.5s;
+}
+
+.pad-list{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	background-color: @sidebar;
+
+	h5{
+		height: 50px;
+		line-height: 50px;
+		padding: 0px 20px;
+		background-color: @sidebar;
+	}
+
+
+	li{
+		background-color: @sidebar;
+		overflow: hidden;
+		clear: both;
+		transition: 0.5s;
+		-webkit-transition: 0.5s;
+
+		.favorite{
+			background: url('/images/main/favorite-icon.png') no-repeat center center;
+			background-size: 12px 12px;
+			width: 12px;
+			height: 50px;
+			float: left;
+			margin-left: 0px;
+			position: relative;
+			left: 30px;
+			margin-right: 10px;
+		}
+		.pad-heart-x{
+			line-height: 50px;
+			transition: 0.5s;
+			-webkit-transition: 0.5s;
+
+			span{
+				float: right;
+				
+			}
+
+			.delete{
+				background: url('/images/main/small-x.png') no-repeat center center;
+				background-size: 12px 12px;
+				width: 12px;
+				height: 50px;
+				padding: 0px 20px 0px 10px;
+				transition: 0.5s;
+				-webkit-transition: 0.5s;
+
+				&:hover{
+					background: url('/images/main/small-x-hover.png') no-repeat center center;
+					background-size: 12px 12px;
+					width: 12px;
+					height: 50px;
+
+				}
+			}
+		}
+	}
+
+	a{
+		display: block;
+		width: 198px;
+		float: left;
+		height: 50px;
+		line-height: 50px;
+		padding: 0px 0px 0px 30px;
+		color: @9;
+		text-decoration: none;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	.active{
+		color: @green;
+		background-color: @dark;
+	}
+
+}
+/*   ---   End of Pad List   --   */
+
+
+
+
+/*   ---   User/Shared/Public Pads  --   */
+.user-pads{
+
+	h5{
+		color: @yellow;
+	}
+}
+
+.shared-pads{
+
+	h5{
+		color: @blue;
+	}
+}
+
+.public-pads{
+	margin-bottom: 0px;
+
+	h5{
+		color: @red;
+	}
+}
+/*   ---    List of Pads  --   */
+
+
+
+
+
+/*   ---    Login  --   */
+.m-account-modal{
+	position: absolute;
+	z-index: 2000;
+	width: 100%;
+	height: 100%;
+	background: @f;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+
+	.logo{
+		position: relative;
+		top: 50px;
+
+
+		.account-logo{
+			display: block;
+			width: 100px;
+			margin: 0 auto;
+		}
+	}
+
+	.account-content{
+		position: absolute;
+		margin-top: 50px;
+		bottom: 20px;
+		left: 50%;
+		margin-left: -125px;
+
+		h6{
+			color: @hover-light;
+			text-align: center;
+			font-size: 24px;
+			margin-bottom: 20px;
+		}
+
+		.sub-text{
+			color: @9;
+			text-align: center;
+
+			a{
+				color: @blue;
+			}
+		}
+
+		.fb-login{
+			background: #3b5997;
+		}
+
+		.github-login{
+			background: @dark;
+		}
+
+		.social-login{
+			margin: 0 auto;
+			margin-bottom: 10px;
+			width: 250px;
+
+			img{
+				width: 30px;
+				display: block;
+				margin: 0 auto;
+			}
+
+			a{	
+				display: block;
+				padding: 10px 0px;
+			}
+		}
+	}
+
+
+}
+
+
+/*   ---    End of Login  --   */
 }
 
 /*   ---   End of All Mobile LESS   ---   */

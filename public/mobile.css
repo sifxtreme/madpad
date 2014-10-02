@@ -154,9 +154,15 @@ img {
   /*   ---   Pad Content   --   */
   /*   ---   End of Pad Content   --   */
   /*   ---   Chat Content   --   */
-  /*   ---   Chat Bar General   --   */
-  /*   ---   End of Chat Bar General   --   */
   /*   ---   End of Chat Content   --   */
+  /*   ---    Mobile Pad Sharing Settings  --   */
+  /*   ---    End of Mobile Pad Sharing Settings  --   */
+  /*   ---    List of Pads  --   */
+  /*   ---   End of Pad List   --   */
+  /*   ---   User/Shared/Public Pads  --   */
+  /*   ---    List of Pads  --   */
+  /*   ---    Login  --   */
+  /*   ---    End of Login  --   */
 }
 .mobile h1,
 .mobile h2,
@@ -186,7 +192,7 @@ img {
   height: 50px;
   background: #232c30;
   position: absolute;
-  z-index: 9999;
+  z-index: 1900;
   /* left side */
 }
 .mobile .m-header .left-header {
@@ -225,12 +231,6 @@ img {
 .mobile .m-header .right-header .m-icons img {
   width: 20px;
 }
-.mobile .m-header .right-header .m-account {
-  border-radius: 50%;
-}
-.mobile .m-header .right-header .m-account img {
-  border-radius: 50%;
-}
 .mobile .m-tabs {
   position: absolute;
   margin-top: 50px;
@@ -238,7 +238,7 @@ img {
   height: 40px;
   background: #f4f6f9;
   overflow: hidden;
-  z-index: 9999;
+  z-index: 1900;
 }
 .mobile .m-tabs .tab {
   width: 33.33333333333%;
@@ -278,7 +278,10 @@ img {
   border-top: 1px solid #cfcfcf;
   border-bottom: 1px solid #efefef;
   opacity: 0.8;
-  z-index: 9999;
+  z-index: 1900;
+}
+.mobile .m-content {
+  overflow: hidden;
 }
 .mobile .froala-box .froala-editor {
   display: none;
@@ -476,5 +479,273 @@ img {
   border: none;
   -webkit-appearance: none;
   -webkit-border-radius: 0;
+}
+.mobile .sharing-settings {
+  width: 100%;
+  padding: 20px 20px;
+  border: 1px solid #eaeaea;
+}
+.mobile .sharing-settings .modal-confirm {
+  margin-top: 20px;
+  height: 40px;
+  overflow: hidden;
+}
+.mobile .sharing-settings .modal-confirm button {
+  width: 100%;
+  height: 40px;
+  background: #33bea8;
+  color: #ffffff;
+  font-size: 14px;
+  outline: none;
+  border: none;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
+}
+.mobile .sharing-settings .list-settings .radio {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid #4b555d;
+  padding: 4px 4px;
+  float: left;
+  position: relative;
+  top: 8px;
+  margin-right: 10px;
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+}
+.mobile .sharing-settings .list-settings .radio:hover {
+  cursor: pointer;
+}
+.mobile .sharing-settings .list-settings .radio-on {
+  background-color: #5dbff1;
+}
+.mobile .sharing-settings .list-settings .radio-off {
+  background-color: #ffffff;
+}
+.mobile .sharing-settings .list-settings .setting-icons {
+  width: 30px;
+  height: 30px;
+  padding: 6px 6px;
+  background: #f9f9f9;
+  border: 1px solid #eaeaea;
+  float: left;
+  margin-right: 10px;
+}
+.mobile .sharing-settings .list-settings .settings {
+  margin-bottom: 30px;
+  margin-top: 0px;
+}
+.mobile .sharing-settings .list-settings .setting-text .large {
+  color: #232c30;
+  margin-bottom: 5px;
+  line-height: 30px;
+}
+.mobile .social-media {
+  padding: 0px 20px;
+}
+.mobile .social-media .row {
+  overflow: hidden;
+  margin-top: 15px;
+}
+.mobile .social-media .col {
+  float: left;
+  width: 50%;
+}
+.mobile .social-media .social-icon {
+  margin: 0 auto;
+}
+.mobile .social-media .social-icon img {
+  width: 60px;
+  display: block;
+  margin: 0 auto;
+}
+.mobile .social-media .social-icon p {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #dddddd;
+}
+.mobile .x-modal {
+  float: left;
+  position: absolute;
+  padding: 10px 10px;
+}
+.mobile .x-modal img {
+  width: 20px;
+}
+.mobile .pad-list-modal {
+  position: absolute;
+  z-index: 2000;
+  width: 100%;
+  height: 100%;
+  background: #363e44;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.mobile .pad-list-modal .pad-title {
+  clear: both;
+  text-align: center;
+  margin-top: 20px;
+}
+.mobile .pad-list-modal .pad-title p {
+  color: #ffffff;
+  font-size: 20px;
+}
+.mobile .overlay-close {
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transform: scale(0.5, 0.5);
+  transform: scale(0.5, 0.5);
+}
+.mobile .overlay-open {
+  visibility: visible;
+  opacity: 1;
+  -webkit-transform: scale(1, 1);
+  transform: scale(1, 1);
+  -webkit-transition: -webkit-transform 0.5s, opacity 0.5s;
+  transition: transform 0.5s, opacity 0.5s;
+}
+.mobile .pad-list {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: #363e44;
+}
+.mobile .pad-list h5 {
+  height: 50px;
+  line-height: 50px;
+  padding: 0px 20px;
+  background-color: #363e44;
+}
+.mobile .pad-list li {
+  background-color: #363e44;
+  overflow: hidden;
+  clear: both;
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+}
+.mobile .pad-list li .favorite {
+  background: url('/images/main/favorite-icon.png') no-repeat center center;
+  background-size: 12px 12px;
+  width: 12px;
+  height: 50px;
+  float: left;
+  margin-left: 0px;
+  position: relative;
+  left: 30px;
+  margin-right: 10px;
+}
+.mobile .pad-list li .pad-heart-x {
+  line-height: 50px;
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+}
+.mobile .pad-list li .pad-heart-x span {
+  float: right;
+}
+.mobile .pad-list li .pad-heart-x .delete {
+  background: url('/images/main/small-x.png') no-repeat center center;
+  background-size: 12px 12px;
+  width: 12px;
+  height: 50px;
+  padding: 0px 20px 0px 10px;
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+}
+.mobile .pad-list li .pad-heart-x .delete:hover {
+  background: url('/images/main/small-x-hover.png') no-repeat center center;
+  background-size: 12px 12px;
+  width: 12px;
+  height: 50px;
+}
+.mobile .pad-list a {
+  display: block;
+  width: 198px;
+  float: left;
+  height: 50px;
+  line-height: 50px;
+  padding: 0px 0px 0px 30px;
+  color: #9ea5ab;
+  text-decoration: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mobile .pad-list .active {
+  color: #33bea8;
+  background-color: #232c30;
+}
+.mobile .user-pads h5 {
+  color: #f1cf5d;
+}
+.mobile .shared-pads h5 {
+  color: #5dbff1;
+}
+.mobile .public-pads {
+  margin-bottom: 0px;
+}
+.mobile .public-pads h5 {
+  color: #cd7155;
+}
+.mobile .m-account-modal {
+  position: absolute;
+  z-index: 2000;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.mobile .m-account-modal .logo {
+  position: relative;
+  top: 50px;
+}
+.mobile .m-account-modal .logo .account-logo {
+  display: block;
+  width: 100px;
+  margin: 0 auto;
+}
+.mobile .m-account-modal .account-content {
+  position: absolute;
+  margin-top: 50px;
+  bottom: 20px;
+  left: 50%;
+  margin-left: -125px;
+}
+.mobile .m-account-modal .account-content h6 {
+  color: #636d75;
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+.mobile .m-account-modal .account-content .sub-text {
+  color: #9ea5ab;
+  text-align: center;
+}
+.mobile .m-account-modal .account-content .sub-text a {
+  color: #5dbff1;
+}
+.mobile .m-account-modal .account-content .fb-login {
+  background: #3b5997;
+}
+.mobile .m-account-modal .account-content .github-login {
+  background: #232c30;
+}
+.mobile .m-account-modal .account-content .social-login {
+  margin: 0 auto;
+  margin-bottom: 10px;
+  width: 250px;
+}
+.mobile .m-account-modal .account-content .social-login img {
+  width: 30px;
+  display: block;
+  margin: 0 auto;
+}
+.mobile .m-account-modal .account-content .social-login a {
+  display: block;
+  padding: 10px 0px;
 }
 /*   ---   End of All Mobile LESS   ---   */

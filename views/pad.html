@@ -1,4 +1,47 @@
 {{#if is_phone}}
+	<div class='pad-list-modal overlay-close'>
+		<div class="x-modal">
+			<img src="/images/mobile/x.png" />
+		</div>
+		<div class="pad-title">
+			<p>Pad List</p>
+		</div>
+		{{> my_pads}}
+	</div>
+	<!-- Pad List -->
+
+	<div class="m-account-modal overlay-close" id="m-login">
+		<div class="x-modal">
+			<img src="/images/mobile/x-dark.png" />
+		</div>
+		<div class="logo">
+			<img src="/images/mobile/login-logo.png" class="account-logo" />
+		</div>
+		<div class="account-content">
+			<h6>login to madpad</h6>
+			<div class="social-login fb-login"><a href="/auth/facebook"><img src="/images/mobile/facebook-login.png"></a></div>
+			<div class="social-login github-login"><a href="/auth/github"><img src="/images/mobile/github-login.png"></a></div>
+			<p class="sub-text">Don't have an account? <a href="#" class="open-signup">Sign Up!</a></p>
+		</div>	
+	</div>
+	<!-- login modal -->
+
+	<div class="m-account-modal overlay-close" id="m-signup">
+		<div class="x-modal">
+			<img src="/images/mobile/x-dark.png" />
+		</div>
+		<div class="logo">
+			<img src="/images/mobile/login-logo.png" class="account-logo" />
+		</div>
+		<div class="account-content">
+			<h6>sign up for madpad</h6>
+			<div class="social-login fb-login"><a href="/auth/facebook"><img src="/images/mobile/facebook-login.png"></a></div>
+			<div class="social-login github-login"><a href="/auth/github"><img src="/images/mobile/github-login.png"></a></div>
+			<p class="sub-text">Already have an account? <a href="#" class="open-login">Login!</a></p>
+		</div>	
+	</div>
+	<!-- signup modal -->
+
     <div class="m-header m-padding">
         <div class="left-header">
             <div class="hamburger">
@@ -16,10 +59,15 @@
                   <img src="/images/mobile/options.png" />
             </div>
             <div class="m-icons m-account">
-                  <img src="/images/chat/melanie.jpg" />
+                  {{#if user.username}}
+                  test
+                  {{else}}
+                  <img src="/images/mobile/account.png" />
+                  {{/if}}
             </div>
         </div><!-- right side -->
     </div><!-- header -->
+
     <div class="m-tabs">
         <div class="tab m-pad active">
             <p>Pad</p>
@@ -32,6 +80,8 @@
         </div>
     </div>
     <div class="tab-shadow"></div>
+    <!-- tabs -->
+
     <div class="m-offset"></div>
     <div class="m-content">
         <div class="m-pad-content">
@@ -61,11 +111,70 @@
               </div> <!-- chat -->
         </div>
         <div class="m-share-content">
-            share
+			    <div class="sharing-settings">
+						<div class="list-settings">
+						  <div class="settings" id="private-setting">
+						      <div class="radio-on radio"></div>
+						      <img src="/images/main/private-lock.png" class="setting-icons"/>
+						      <div class="setting-text">
+						          <p class="large">Personal private pad</p>
+						      </div>
+						  </div> <!-- Private Setting -->
+
+						  <div class="settings" id="shared-setting">
+						      <div class="radio-off radio"></div>
+						      <img src="/images/main/shared-eye.png" class="setting-icons"/>
+						      <div class="setting-text">
+						          <p class="large">Viewable with link</p>
+						      </div>
+						  </div> <!-- Shared Setting -->
+
+						  <div class="settings" id="public-setting">
+						      <div class="radio-off radio"></div>
+						      <img src="/images/main/public-world.png" class="setting-icons"/>
+						      <div class="setting-text">
+						          <p class="large">Editable with link</p>
+						      </div>
+						  </div> <!-- Shared Setting -->
+						</div>
+						<div class="modal-confirm">
+						  <button class="green-btn" id="save-settings">Save Setting</button>
+						</div>
+			    </div> <!-- Settings Modal -->
+			    <div class="social-media">
+			    	<div class="row">
+			    		<div class="col">
+			    			<div class="social-icon">
+			    				<img src="/images/mobile/facebook.png"/>
+			    				<p>Facebook</p>
+			    			</div>
+			    		</div>
+			    		<div class="col">
+			    		<div class="social-icon">
+			    				<img src="/images/mobile/twitter.png"/>
+			    				<p>Twitter</p>
+			    			</div>
+			    		</div>
+			    	</div>
+			    	<div class="row">
+			    		<div class="col">
+			    			<div class="social-icon">
+			    				<img src="/images/mobile/email.png"/>
+			    				<p>Email</p>
+			    			</div>
+			    		</div>
+			    		<div class="col">
+			    		<div class="social-icon">
+			    				<img src="/images/mobile/share.png"/>
+			    				<p>Copy Link</p>
+			    			</div>
+			    		</div>
+			    	</div>
+			    </div>
         </div>
 
     </div>
-
+<!-- mobile html end -->
 {{else}}
 <div class="madpad-container minwidth">
 	

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no">
-    <link rel="stylesheet" href="/public.css" type="text/css">
+    {{#unless is_phone}}<link rel="stylesheet" href="/public.css" type="text/css">{{/unless}}
     {{#if is_phone}}<link rel="stylesheet" href="/mobile.css" type="text/css">{{/if}}
     <link href="/froala_1.2.1/css/font-awesome.css" rel="stylesheet" type="text/css">
     <link href="/froala_1.2.1/css/froala_editor.css" rel="stylesheet" type="text/css">

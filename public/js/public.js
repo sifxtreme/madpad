@@ -122,6 +122,7 @@ $(document).ready(function(){
 				modals.hideOverlay('.sharing-settings');
 				modals.hideOverlay('.account');
 				modals.hideOverlay('.create-pad-modal');
+				modals.hideOverlay('.pad-list-modal');
 				$(".new-pad-area").hide();
 				$('.darken').hide();
 			},
