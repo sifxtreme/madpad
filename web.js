@@ -13,6 +13,8 @@ var auth = require('./authentication.js');
 var sessions = require('./cookie.js');
 var padCookie = require('./padCookie.js');
 
+var device = require('express-device');
+
 var app = express(); 
 app.configure(function(){
   app.set('view engine', 'html');
@@ -28,6 +30,9 @@ app.configure(function(){
 
   app.use(sessions);
   app.use(padCookie);
+
+  app.use(device.capture());
+  device.enableDeviceHelpers(app);
 
   app.use(passport.initialize());
   app.use(passport.session());
