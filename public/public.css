@@ -623,8 +623,7 @@ a:hover {
 }
 .error-page {
   position: relative;
-  top: 35%;
-  margin-top: -100px;
+  top: 20%;
   text-align: center;
 }
 .error-page h1 {
