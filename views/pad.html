@@ -234,48 +234,7 @@
 	    </div>
 	</div> <!-- chat -->
 
-</div> <!-- end madpad-container -->
+</div>
+<!-- desktop html end -->
 {{/if}}
-<script>
-
-var id = '{{id}}'.toLowerCase();
-var usersRoom = '{{usersRoom}}'.toLowerCase();
-var isTextPad = '{{pad.isTextPad}}';
-var padType = (isTextPad == 'true') ? 'text' : 'code';
-var padName = (usersRoom) ? usersRoom + '_' + id : padType + '_' + id;
-var username = '{{user.username}}'.toLowerCase();
-var userID = '{{user._id}}';
-var isOwner = (usersRoom == username) ? true : false;
-var padTemplate = true;
-var justLoggedIn = '{{user.justLoggedIn}}';
-var isMobile = '{{is_phone}}';
-
-var padData = {
-	type: '{{pad.type}}' || 'text',
-}
-
-var padReadAccess = '{{pad.readAccess}}';
-var padWriteAccess = '{{pad.writeAccess}}';
-var padPrivacyStatus = 'private';
-if(padReadAccess) padPrivacyStatus = 'shared';
-if(padWriteAccess) padPrivacyStatus = 'public';
-
-madpadUserData = {
-	userID: userID,
-	username: username,
-	name: '{{user.name}}',
-	picture: '{{user.picture}}',
-	unknown: {
-		id: '{{user.unknown.id}}',
-		color: '{{user.unknown.color}}',
-		animal: '{{user.unknown.animal}}',
-		name: '{{user.unknown.name}}' + '-' + '{{user.unknown.animal}}'
-	}
-}
-
-var options = {authentication: userID};
-
-madpadSocket = io();
-madpadSocket.emit('room', {room: padName, user: madpadUserData});
-
-</script>
+{{> variables}}

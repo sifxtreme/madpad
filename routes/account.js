@@ -83,6 +83,7 @@ module.exports = function(app, passport){
 
 	var afterAuthCallback = function(req, res){
     req.madpad_user.user = req.user;
+    req.madpad_user.user.pads = [];
     if(req.user.username){
     	req.madpad_user.user.pads = [];
 	    req.madpad_user.just_loggedin = true;
@@ -158,6 +159,7 @@ module.exports = function(app, passport){
 	              }
 	              else{
 	              	req.madpad_user.user = user;
+	              	req.madpad_user.user.pads = [];
 	                res.redirect("/" + username + "/home");
 	                createPadOnUsername(userData.realID, username);
 	              }
