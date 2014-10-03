@@ -1,5 +1,4 @@
 $(document).ready(function(){
-	if(typeof padTemplate !== 'undefined') return;
 
 	if(!document.referrer || document.referrer.split('/')[2] != window.location.host){
 		$('.goback_403').html('<a href="#">go back home.</a>');
