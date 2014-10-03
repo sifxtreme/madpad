@@ -13,6 +13,8 @@ var auth = require('./authentication.js');
 var sessions = require('./cookie.js');
 var padCookie = require('./padCookie.js');
 
+var device = require('express-device');
+
 var app = express(); 
 app.configure(function(){
   app.set('view engine', 'html');
@@ -25,10 +27,12 @@ app.configure(function(){
   app.use(express.cookieParser());
   app.use(express.bodyParser());
   app.use(express.methodOverride());
-  app.use(express.session({secret: '1234567890QWERTY'}));
 
   app.use(sessions);
   app.use(padCookie);
+
+  app.use(device.capture());
+  device.enableDeviceHelpers(app);
 
   app.use(passport.initialize());
   app.use(passport.session());
@@ -72,6 +76,20 @@ app.get('/', function(req, res) {
 
 // all pad routes
 require('./routes/pads')(app);
+
+// 
+app.use(function(req, res, next) {
+  if(req.url.indexOf('channel') !== -1) return next();
+  res.status(404);
+  res.render('error', {errorType: '404'});
+});
+
+// Handle 500
+app.use(function(error, req, res, next) {
+  if(req.url.indexOf('channel') !== -1) return next();
+  res.status(500);
+  res.render('error', {errorType: '500'});
+});
 
 // port number
 server.listen(5000);

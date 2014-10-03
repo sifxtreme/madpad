@@ -78,6 +78,7 @@ $(document).ready(function(){
 				break;
 			// kick out users
 			case 'private':
+				madpadCookieFunctions.setCookie("statusMessaging", "pad was made private");
 				padPrivacy.changeToPrivateIcon();
 				location.reload(true);
 				break;

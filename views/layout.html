@@ -1,58 +1,74 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    
+    {{#unless is_phone}}<link rel="stylesheet" href="/public.css" type="text/css">{{/unless}}
+    {{#if is_phone}}<link rel="stylesheet" href="/mobile.css" type="text/css">{{/if}}
+    
+    <link href="/froala_1.2.1/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="/froala_1.2.1/css/froala_editor.css" rel="stylesheet" type="text/css">
+    
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700' rel='stylesheet' type='text/css'>
+    
+    <script src="/js/jquery-1.11.1.min.js"></script>
 
-  <link rel="stylesheet" href="/public.css" type="text/css">
+    <script src="/js/public.js"></script>
+    {{#if is_phone}}<script src="/js/mobile.js"></script>{{/if}}
+    
+    <script src="/js/Autolinker.min.js"></script>
 
-  <link href="/froala_1.2.1/css/font-awesome.css" rel="stylesheet" type="text/css">
-  <link href="/froala_1.2.1/css/froala_editor.css" rel="stylesheet" type="text/css">
-  <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700' rel='stylesheet' type='text/css'>
-  <script src="/js/jquery-1.11.1.min.js"></script>
-   
-  <script src="/js/public.js"></script>
-  <script src="/js/Autolinker.min.js"></script>
+    <script src="/sharejs/bcsocket.js"></script>
+    <script src="/sharejs/share.uncompressed.js"></script>
+    <script src="/sharejs/socket.io.js"></script>
 
-	<script src="/sharejs/bcsocket.js"></script>
-	<script src="/sharejs/share.uncompressed.js"></script>
-  <script src="/sharejs/socket.io.js"></script>
+    <script src="/froala_1.2.1/js/froala_editor.js"></script>
+    <script src="/froala_1.2.1/js/plugins/tables.min.js"></script>
+    <script src="/froala_1.2.1/js/plugins/lists.min.js"></script>
+    <script src="/froala_1.2.1/js/plugins/colors.min.js"></script>
+    <script src="/froala_1.2.1/js/plugins/font_family.min.js"></script>
+    <script src="/froala_1.2.1/js/plugins/font_size.min.js"></script>
+    <script src="/froala_1.2.1/js/plugins/block_styles.min.js"></script>
+    <script src="/froala_1.2.1/js/plugins/media_manager.min.js"></script>
+    <script src="/froala_1.2.1/js/plugins/video.min.js"></script>
 
-  <script src="/froala_1.2.1/js/froala_editor.js"></script>
-  <script src="/froala_1.2.1/js/plugins/tables.min.js"></script>
-  <script src="/froala_1.2.1/js/plugins/lists.min.js"></script>
-  <script src="/froala_1.2.1/js/plugins/colors.min.js"></script>
-  <script src="/froala_1.2.1/js/plugins/font_family.min.js"></script>
-  <script src="/froala_1.2.1/js/plugins/font_size.min.js"></script>
-  <script src="/froala_1.2.1/js/plugins/block_styles.min.js"></script>
-  <script src="/froala_1.2.1/js/plugins/media_manager.min.js"></script>
-  <script src="/froala_1.2.1/js/plugins/video.min.js"></script>
+    <script src="/rangy/range-core.js"></script>
+    <script src="/rangy/range-textarea.js"></script>
 
-  <script src="/rangy/range-core.js"></script>
-  <script src="/rangy/range-textarea.js"></script>
-  
-  <script src="/ace/ace.js"></script>
-  <script src="/ace/ace-editor.js"></script>
+    <script src="/ace/ace.js"></script>
+    <script src="/ace/ace-editor.js"></script>
 
-	<script src="/js/textarea.js"></script>
-  <script src="/js/editable.js"></script>  
-
+    <script src="/js/textarea.js"></script>
+    <script src="/js/editable.js"></script>  
 </head>
-<body>
 
-  <div class="darken"></div>
+<body {{#if is_phone}}class="mobile"{{/if}}>
 
-  <div class="status new-pad-status">
-    <p>This pad is favorited!</p>
-  </div>
+  {{#unless is_phone}}
+    <div class="darken"></div>
+    <div class="status new-pad-status">
+      <p>This pad is favorited!</p>
+    </div>
+    {{> modals/login}}
+    {{> modals/signup}}
+    {{> modals/settings}}
+    {{> modals/delete}}
+    {{> modals/create_pad}}
+    {{> header}}
+  {{/unless}}
 
-  {{> modals/login}}
-  {{> modals/signup}}
-  {{> modals/settings}}
-  {{> modals/delete}}
-  {{> modals/create_pad}}
-
-  {{> header}}
   {{{body}}}
+
+  {{#if is_phone}}
+    <script>console.log('PHONE')</script>
+  {{/if}}
+  {{#if is_tablet}}
+    <script>console.log('TABLET')</script>
+  {{/if}}
+  {{#if is_desktop}}
+    <script>console.log('DESKTOP')</script>
+  {{/if}}
 
   <script src="/js/textpad.js"></script>
   <script src="/js/codepad.js"></script>
@@ -62,6 +78,7 @@
   <script src="/js/delete_pads.js"></script>
   <script src="/js/chat.js"></script>
   <script src="/js/privacy.js"></script>
+  <script src="/js/goback_400.js"></script>
 
 </body>
 </html>

@@ -1,0 +1,22 @@
+<div class="error-page">
+	{{#compare errorType "403" operator="=="}}
+		<h1>DANG IT!</h1>
+		<h2>Looks like you don't have access to this page</h2>
+		<h2><a href="#" class="login-button">Login</a> to access this page or <span class="goback_403"><a href="#">go back</a> to where you were.</span></h2>
+	{{/compare}}
+
+	{{#compare errorType "404" operator="=="}}
+		<h1>OH NO!</h1>
+		<h2>It looks this page doesn't exist...</h2>
+		<h2 class="goback_404"><a href="#">Go back</a> to where you were.</h2>
+	{{/compare}}
+
+	{{#compare errorType "500" operator="=="}}
+		<h1>AWW SHUCKS!</h1>
+		<h2>Something went wrong</h2>
+		<h2><a href="/">Go back home</a></h2>
+	{{/compare}}
+</div>
+<script>
+var username = '{{user.username}}'.toLowerCase();
+</script>

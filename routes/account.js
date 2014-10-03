@@ -85,7 +85,8 @@ module.exports = function(app, passport){
     req.madpad_user.user = req.user;
     req.madpad_user.user.pads = [];
     if(req.user.username){
-	    req.session.just_logged_in = true;
+    	req.madpad_user.user.pads = [];
+	    req.madpad_user.just_loggedin = true;
 			res.redirect('/' + req.user.username + '/home/');
     } 
     else{
