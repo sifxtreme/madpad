@@ -3,20 +3,20 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, user-scalable=no">
-
+  
   {{#unless is_phone}}<link rel="stylesheet" href="/public.css" type="text/css">{{/unless}}
   {{#if is_phone}}<link rel="stylesheet" href="/mobile.css" type="text/css">{{/if}}
-
+  
   <link href="/froala_1.2.1/css/font-awesome.css" rel="stylesheet" type="text/css">
   <link href="/froala_1.2.1/css/froala_editor.css" rel="stylesheet" type="text/css">
-
-  <link href="/fonts/roboto.css" rel="stylesheet" type="text/css">
-
+  
+  <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700' rel='stylesheet' type='text/css'>
+  
   <script src="/js/jquery-1.11.1.min.js"></script>
 
   <script src="/js/public.js"></script>
   {{#if is_phone}}<script src="/js/mobile.js"></script>{{/if}}
-
+  
   <script src="/js/Autolinker.min.js"></script>
 
   <script src="/sharejs/bcsocket.js"></script>
@@ -70,6 +70,7 @@
     <script>console.log('DESKTOP')</script>
   {{/if}}
 
+  <script src="/js/variables.js"></script>
   <script src="/js/textpad.js"></script>
   <script src="/js/codepad.js"></script>
   <script src="/js/header_messaging.js"></script>
@@ -78,7 +79,7 @@
   <script src="/js/delete_pads.js"></script>
   <script src="/js/chat.js"></script>
   <script src="/js/privacy.js"></script>
-  <script src="/js/goback_400.js"></script>
+  <script src="/js/goback.js"></script>
 
 </body>
 </html>

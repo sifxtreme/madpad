@@ -77,14 +77,14 @@ app.get('/', function(req, res) {
 // all pad routes
 require('./routes/pads')(app);
 
-// 
+// handle 404
 app.use(function(req, res, next) {
   if(req.url.indexOf('channel') !== -1) return next();
   res.status(404);
   res.render('error', {errorType: '404'});
 });
 
-// Handle 500
+// handle 500
 app.use(function(error, req, res, next) {
   if(req.url.indexOf('channel') !== -1) return next();
   res.status(500);

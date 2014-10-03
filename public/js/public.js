@@ -200,8 +200,6 @@ $(document).ready(function(){
     $('#messages').css('height' , chatHeight);
     $('.signup-step-wrapper').css('height' , signupStepHeight);
 
-
-
 	}/* Set heights for divs */
 
 	$(window).bind('resize', window_size);
