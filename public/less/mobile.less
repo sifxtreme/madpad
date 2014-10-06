@@ -99,6 +99,75 @@ h1, h2, h3, h4, h5, h6, p, a, span, input, button, body, textarea{
 }
 
 
+.green-btn{
+    background-color: @green;
+    outline: none;
+    border: none;
+    color: @f;
+    font-size: 14px;
+    height: 40px;
+    padding: 0px 20px;
+    border-radius: 2px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    &:hover{
+        background-color: @green-hover;
+        transition: 0.5s;
+        -webkit-transition: 0.5s;
+        cursor: pointer;
+    }
+}
+
+.cancel-btn{
+    background-color: @d;
+    outline: none;
+    border: none;
+    color: @f;
+    font-size: 14px;
+    height: 40px;
+    padding: 0px 20px;
+    border-radius: 2px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    &:hover{
+        background-color: @ea;
+        transition: 0.5s;
+        -webkit-transition: 0.5s;
+        cursor: pointer;
+
+    }
+}
+
+.red-btn{
+    background-color: @red;
+    outline: none;
+    border: none;
+    color: @f;
+    font-size: 14px;
+    height: 40px;
+    padding: 0px 20px;
+    border-radius: 2px;
+
+    &:hover{
+        background-color: @red-hover;
+        transition: 0.5s;
+        -webkit-transition: 0.5s;
+        cursor: pointer;
+
+    }
+}
+
+
 /*   ---   End of Global LESS   ---   */
 
 
@@ -108,7 +177,7 @@ h1, h2, h3, h4, h5, h6, p, a, span, input, button, body, textarea{
 	height: 50px;
 	background: @dark;
 	position: absolute;
-	z-index: 1900;
+	z-index: 1902;
 
 	.left-header{
 		float: left;
@@ -473,7 +542,7 @@ h1, h2, h3, h4, h5, h6, p, a, span, input, button, body, textarea{
 .sharing-settings{
 	width: 100%;
 	padding: 20px 20px;
-	border: 1px solid @ea;
+	border-bottom: 1px solid @ea;
 
     .modal-confirm{
     	margin-top: 20px;
@@ -786,9 +855,10 @@ h1, h2, h3, h4, h5, h6, p, a, span, input, button, body, textarea{
 			margin-bottom: 20px;
 		}
 
-		.sub-text{
+		p{
 			color: @9;
 			text-align: center;
+
 
 			a{
 				color: @blue;
@@ -823,9 +893,145 @@ h1, h2, h3, h4, h5, h6, p, a, span, input, button, body, textarea{
 
 
 }
-
-
 /*   ---    End of Login  --   */
+
+
+
+
+.signup-step-wrapper{
+    height: 100%;
+    background: @light;
+    
+
+    .fb-signup-img{
+        display: block;
+        width: 100px;
+        border-radius: 50%;
+        border: 4px solid @f;
+        margin: 0 auto 40px auto;
+        -webkit-box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.10);
+        -moz-box-shadow:    0px 2px 2px 0px rgba(0, 0, 0, 0.10);
+        box-shadow:         0px 2px 2px 0px rgba(0, 0, 0, 0.10);
+    }
+
+    .username-wrapper{
+        position: relative;
+        top: 50px;
+
+        h1{
+            font-size: 20px;
+            line-height: 30px;
+            padding: 0px 20px;
+            color: @blue;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .username-form{
+            width: 300px;
+            margin: 0 auto;
+        }
+
+        .username-input{
+            width: 100%;
+            height: 50px;
+            padding: 10px 10px;
+            background: @f;
+            font-size: 16px;
+            border: 1px solid @d;
+            margin-bottom: 20px;
+
+        }
+
+        .username-submit{
+            width: 100%;
+            height: 50px;
+
+        }
+
+    }
+}
+
+/*   ---   End of Choose Username CSS   --   */
+.avatar-header{
+	border-radius: 50%;
+
+}	
+
+.mobile-dropdown{
+	position: absolute;
+	background: @sidebar;
+	width: 200px;
+	right: 0px;
+	top: 35px;
+	
+
+	li{
+		
+		a{
+			display: block;
+			text-decoration: none;
+			color: @f;
+			padding: 15px 15px;
+			width: 200px;
+			height: 46px;
+
+
+		    .help-icon{
+		        background: url('/images/header/help-icon.png') no-repeat center center;
+		        background-size: 16px 16px;
+		        width: 16px;
+		        height: 16px;
+		    }
+
+		    .logout-icon{
+		        background: url('/images/header/logout-icon.png') no-repeat center center;
+		        background-size: 16px 16px;
+		    }
+		}
+
+		.username{
+			background: @hover;
+
+			img{
+				float: left;
+				margin-right: 5px;
+				margin-top: -2px;
+			}
+		}
+
+		
+	}
+
+}
+
+
+
+/*   ---   Account User CSS   --   */
+
+
+
+
+/*   ---   End of Account User CSS   --   */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
 /*   ---   End of All Mobile LESS   ---   */

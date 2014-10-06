@@ -62,31 +62,28 @@ $(document).ready(function(){
 	 }
 	 accountLogo();
 
-	 function mobileLogin(){
-	 	$('.m-account').click(function(){
+	 function mobileAccount(){
+	 	$('#open-account').click(function(){
+	 		$('#account-text').html('login to madpad');
+	 		$('#login-msg').show();
+	 		$('#sign-msg').hide();
 	 		$('#m-login').removeClass('overlay-close');
 	 		$('#m-login').addClass('overlay-open');
 	 	});
 
-	 	$('.open-login').click(function(){
-	 		$('#m-signup').removeClass('overlay-open');
-	 		$('#m-signup').addClass('overlay-close');
-	 		$('#m-login').removeClass('overlay-close');
-	 		$('#m-login').addClass('overlay-open');
-	 	})
-	 }
-	 mobileLogin();
+	 	$('#signup-text').click(function(){
+	 		$('#login-msg').hide();
+	 		$('#sign-msg').show();
+	 		$('#account-text').html('sign up for madpad');
+	 	});
 
-
-	 function mobileSignUp(){
-	 	$('.open-signup').click(function(){
-	 		$('#m-login').removeClass('overlay-open');
-	 		$('#m-login').addClass('overlay-close');
-	 		$('#m-signup').removeClass('overlay-close');
-	 		$('#m-signup').addClass('overlay-open');
+	 	$('#login-text').click(function(){
+	 		$('#sign-msg').hide();
+	 		$('#login-msg').show();
+	 		$('#account-text').html('login to madpad');
 	 	});
 	 }
-	 mobileSignUp();
+	 mobileAccount();
 
 
 	 function hideMobileModal(){
@@ -100,4 +97,33 @@ $(document).ready(function(){
 	 	});
 	 }
 	 hideMobileModal();
+
+	var mobileUserDropDown = {
+		container: $('.m-account'),
+		toHide: $('#user-dropdown'),
+		mobileDropdown: function(){
+			$('#user-dropdown').hide();
+
+			$('#open-user').on('click' , function(e){
+				$('#user-dropdown').toggle();
+			});
+
+
+		},
+		hideOnOtherClick: function(){
+			var _this = this;
+			$(document).mouseup(function (e){
+				if (!_this.container.is(e.target) // if the target of the click isn't the container...
+				&& _this.container.has(e.target).length === 0) // ... nor a descendant of the container
+				{
+				_this.toHide.hide(); /* hide the new pad area */
+				}
+			})
+		},
+		run: function(){
+			this.mobileDropdown();
+			this.hideOnOtherClick();
+		}
+	};
+	mobileUserDropDown.run();
 });

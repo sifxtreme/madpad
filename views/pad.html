@@ -18,29 +18,14 @@
 			<img src="/images/mobile/login-logo.png" class="account-logo" />
 		</div>
 		<div class="account-content">
-			<h6>login to madpad</h6>
+			<h6 id="account-text">login to madpad</h6>
 			<div class="social-login fb-login"><a href="/auth/facebook"><img src="/images/mobile/facebook-login.png"></a></div>
 			<div class="social-login github-login"><a href="/auth/github"><img src="/images/mobile/github-login.png"></a></div>
-			<p class="sub-text">Don't have an account? <a href="#" class="open-signup">Sign Up!</a></p>
+			<p id="login-msg">Don't have an account?<a href="#" id="signup-text"> Signup!</a></p>
+			<p id="sign-msg">Already have an account?<a href="#" id="login-text"> Login!</a></p>
 		</div>	
 	</div>
 	<!-- login modal -->
-
-	<div class="m-account-modal overlay-close" id="m-signup">
-		<div class="x-modal">
-			<img src="/images/mobile/x-dark.png" />
-		</div>
-		<div class="logo">
-			<img src="/images/mobile/login-logo.png" class="account-logo" />
-		</div>
-		<div class="account-content">
-			<h6>sign up for madpad</h6>
-			<div class="social-login fb-login"><a href="/auth/facebook"><img src="/images/mobile/facebook-login.png"></a></div>
-			<div class="social-login github-login"><a href="/auth/github"><img src="/images/mobile/github-login.png"></a></div>
-			<p class="sub-text">Already have an account? <a href="#" class="open-login">Login!</a></p>
-		</div>	
-	</div>
-	<!-- signup modal -->
 
     <div class="m-header m-padding">
         <div class="left-header">
@@ -58,13 +43,23 @@
             <div class="m-icons m-options">
                   <img src="/images/mobile/options.png" />
             </div>
-            <div class="m-icons m-account">
-                  {{#if user.username}}
-                  test
-                  {{else}}
-                  <img src="/images/mobile/account.png" />
-                  {{/if}}
+            {{#if user.username}}
+            <div class="m-icons m-account" id="open-user">
+                  <img src="{{user.picture}}" class="avatar-header" />
+                  <div class="mobile-dropdown" id="user-dropdown">
+                  		<ul>
+                  			<li><a href="#" class="username"><img src="{{user.picture}}" class="avatar-header" />{{user.name}}</a></li>
+                			<li><a href="/help">Help</a></li>
+               				<li><a href="/logout">Log out</a></li>
+                  		</ul>
+                  </div>
             </div>
+            {{else}}
+            <div class="m-icons m-account" id="open-account">
+                  <img src="/images/mobile/account.png" />
+
+            </div>
+            {{/if}}
         </div><!-- right side -->
     </div><!-- header -->
 
