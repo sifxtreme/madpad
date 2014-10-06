@@ -149,35 +149,6 @@ module.exports = function(io){
       
     });
 
-    // close chat window if owner
-    socket.on('toggleChat', function(data){
-      if(!data.room) return;
-      if(typeof data.disable === 'undefined') return;
-
-      console.log('socket toggleChat');
-
-      var userID = getUserIdFromSocket(socket.request.headers.cookie);
-
-      if(userID){
-        Pad.findOne({name: data.room}, {owner: userID}, function(err, pad){
-          if(err){
-            // TO DO - ERROR CHECKING
-            console.log(err);
-          }
-          else {
-
-            Pad.findByIdAndUpdate(pad._id, {$set: {chatOn: !data.disable}}, function(err, pad){
-              if(err){
-                // TO DO - ERROR CHECKING
-                console.log(err);
-              }
-            });
-            socket.broadcast.to(data.room).emit('toggleChat', !data.disable);
-          }
-        })
-      }
-    });
-
     // change privacy on pads
     socket.on('togglePrivacy', function(data){
       if(!data.room) return;

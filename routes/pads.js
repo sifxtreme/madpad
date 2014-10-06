@@ -11,13 +11,12 @@ module.exports = function(app){
 	var sharejs = require('share');
 	var options = require('../privacy.js');
 
-	var getPadObject = function(write, read, type, chat){
+	var getPadObject = function(write, read, type){
 	  return {
 	    isTextPad: true,
 	    writeAccess: write,
 	    readAccess: read,
-	    type: type,
-	    chat: chat
+	    type: type
 	  }
 	}
 
@@ -155,7 +154,7 @@ module.exports = function(app){
 
 	  // set up pad info
 	  var padID = req.params.id.toLowerCase();
-	  var padObject = getPadObject(true, true, 'text', true);
+	  var padObject = getPadObject(true, true, 'text');
 	  padObject.isTextPad = false;
 
 	  var renderView = function(cookiePads, isFavorite){
@@ -173,7 +172,6 @@ module.exports = function(app){
 	            writeAccess: true,
 	            readAccess: true,
 	            codeType: 'text',
-	            chatOn: true
 	          })
 	          newPad.save(function(err){
 	            if(err){
@@ -225,7 +223,7 @@ module.exports = function(app){
 
 	  // set up pad info
 	  var padID = req.params.id.toLowerCase();
-	  var padObject = getPadObject(true, true, 'textpad', true);
+	  var padObject = getPadObject(true, true, 'textpad');
 
 	  var renderView = function(cookiePads, isFavorite){
 	    res.render('pad', { id: padID, user: userInfo, userRoom: '', pad: padObject, myPads: cookiePads, isFavorite: isFavorite });    
@@ -290,7 +288,6 @@ module.exports = function(app){
 	          writeAccess: false,
 	          readAccess: false,
 	          codeType: padType,
-	          chatOn: false
 	        })
 	        newPad.save(function(err){
 	          if(err){
@@ -335,7 +332,7 @@ module.exports = function(app){
 
 	  // set up pad info
 	  var padID = req.params.id.toLowerCase();
-	  var padObject = getPadObject(true, true, 'textpad', true);
+	  var padObject = getPadObject(true, true, 'textpad');
 	  var padName = userRoom + '_' + padID;
 
 
@@ -366,7 +363,6 @@ module.exports = function(app){
 	          // more set up on pad info          
 	          padObject.writeAccess = pad.writeAccess;
 	          padObject.readAccess = pad.readAccess;
-	          padObject.chat = pad.chatOn;
 	          if(typeof pad.codeType !== 'undefined' && pad.codeType != 'textpad'){
 	            padObject.isTextPad = false;
 	            padObject.type = pad.codeType;

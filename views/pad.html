@@ -89,7 +89,7 @@
           {{/if}}
         </div> <!-- pad -->
         <div class="m-chat-content">
-            <div class="chat" {{#unless pad.chat}}style="display:none"{{/unless}}>
+            <div class="chat">
                   <div id="messages"></div>
                   <div class="submit-wrapper">
                     <div class="submit-area">
@@ -178,7 +178,7 @@
 		{{> my_pads}}
 	</div>
 
-	<div class="middle {{#unless pad.chat}}no-chat-fix{{/unless}}">
+	<div class="middle">
 		<div class="title">
 			<div class="pad-name">
 				<h2>{{id}} <span>{{#if pad.isTextPad}}pad{{else}}{code pad}{{/if}}</span></h2>
@@ -186,7 +186,7 @@
 			<div class="title-options">	
 				<div class="icon new-icon"></div>
 				{{#if user.username}}<div id="heartFavoriteIcon" class="icon {{#if isFavorite}}favorite-icon{{else}}heart-icon{{/if}}"></div>{{/if}}
-				<div class="icon {{#if pad.chat}}chaton-icon{{else}}chatoff-icon{{/if}}"></div>
+				<div class="icon chaton-icon"></div>
 				{{#compare usersRoom user.username operator="=="}}<div class="icon trash-icon"></div>{{/compare}}
 			</div>
 			<!-- change settings icon -->
@@ -212,7 +212,7 @@
 		</div>
 	</div> <!-- main text area -->
 
-	<div class="right" {{#unless pad.chat}}style="display:none"{{/unless}}>
+	<div class="right">
 		<div class="chat-title">
 			<div class="avatar-list">
 				<ul>

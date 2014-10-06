@@ -195,22 +195,10 @@ $(document).ready(function(){
 			// set up event listeners
 			$("body").delegate(".chaton-icon", "click", function(){
 				closeChat();
-				madpadSocket.emit('toggleChat', {room: padName, disable: true});
 			})
 			$("body").delegate(".chatoff-icon", "click", function(){
 				openChat();
-				madpadSocket.emit('toggleChat', {room: padName, disable: false});
 			})
-
-			// toggle chat if we are told to do so by owner
-			madpadSocket.on('toggleChat', function(whichWay){
-				if(!whichWay){
-					closeChat();
-				}
-				else{
-					openChat();
-				}
-			});
 
 		},
 
