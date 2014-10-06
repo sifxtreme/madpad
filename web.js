@@ -24,6 +24,7 @@ app.configure(function(){
   hbs.registerHelper('compare', hbs_helpers.compare);
   app.engine('html', hbs.__express);
   app.use(express.static('public'));
+  app.use(express.favicon(__dirname + '/public/favicons/favicon.ico'));
   app.use(express.cookieParser());
   app.use(express.bodyParser());
   app.use(express.methodOverride());
