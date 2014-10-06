@@ -493,10 +493,10 @@ a:hover {
   line-height: 70px;
   font-size: 18px;
 }
-#login-content{
-    width: 500px;
-    margin-top: -161px; 
-    margin-left: -250px;
+#login-content {
+  width: 500px;
+  margin-top: -161px;
+  margin-left: -250px;
 }
 /*   ---   End of Status CSS   --   */
 /*   ---   Choose Username CSS   --   */
@@ -998,6 +998,15 @@ a:hover {
 }
 .middle .froala-element:-ms-input-placeholder {
   color: #9ea5ab;
+}
+.middle .froala-element strong {
+  font-weight: bold !important;
+}
+.middle .froala-element strong span {
+  font-weight: bold;
+}
+.middle .froala-element em {
+  font-style: italic;
 }
 .no-chat-fix {
   margin-right: 0px;
