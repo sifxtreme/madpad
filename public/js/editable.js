@@ -216,6 +216,7 @@
     $("#editor").editable({
       inlineMode: false,
       typingTimer: 1,
+      imageUpload: false,
       contentChangedCallback: function () {
         if(!isIncoming){
           console.log("CHANGES");
