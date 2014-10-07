@@ -43,6 +43,7 @@ $(document).ready(function(){
 		var chatMessageHeight = $(window).height() - 162;
 		$('#messages').css('height' , chatMessageHeight);
 		$('.pad-list-modal').css('height' , height);
+		$('#editor-code').css('height' , height - header -30);
 	 }
 	 window_size();
 
@@ -101,7 +102,7 @@ $(document).ready(function(){
 	var mobileUserDropDown = {
 		container: $('.m-account'),
 		toHide: $('#user-dropdown'),
-		mobileDropdown: function(){
+		dropDown: function(){
 			$('#user-dropdown').hide();
 
 			$('#open-user').on('click' , function(e){
@@ -116,14 +117,45 @@ $(document).ready(function(){
 				if (!_this.container.is(e.target) // if the target of the click isn't the container...
 				&& _this.container.has(e.target).length === 0) // ... nor a descendant of the container
 				{
-				_this.toHide.hide(); /* hide the new pad area */
+				_this.toHide.hide(); 
 				}
 			})
 		},
 		run: function(){
-			this.mobileDropdown();
+			this.dropDown();
 			this.hideOnOtherClick();
 		}
 	};
 	mobileUserDropDown.run();
+
+	var mobileOptionDropDown = {
+		container: $('.m-options'),
+		toHide: $('#option-dropdown'),
+		dropDown: function(){
+			$('#option-dropdown').hide();
+			console.log('original hide');
+			$('.m-options').on('click' , function(e){
+				$('#option-dropdown').toggle();
+				console.log('click and toggle');
+			});
+
+
+		},
+		hideOnOtherClick: function(){
+			var _this = this;
+			$(document).mouseup(function (e){
+				if (!_this.container.is(e.target) // if the target of the click isn't the container...
+				&& _this.container.has(e.target).length === 0) // ... nor a descendant of the container
+				{
+				_this.toHide.hide(); 
+				}
+			})
+		},
+		run: function(){
+			this.dropDown();
+			this.hideOnOtherClick();
+		}
+	};
+	mobileOptionDropDown.run();
+
 });

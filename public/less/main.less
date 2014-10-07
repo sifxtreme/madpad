@@ -13,6 +13,7 @@
 	margin-right: 300px;
 
 	.pad-wrapper{
+		position: relative;
 		background-color: @light;
 		padding: 40px 40px;
 		min-height: 500px;
@@ -96,7 +97,7 @@
 	}
 
 	.ace_scroller{
-		overflow-x: auto;
+		overflow-x: none;
 
 	}
 
@@ -134,17 +135,18 @@
 }
 
 .code-type{
-	width: 200px;
+	width: 120px;
 	height: 40px;
 	border: 1px solid @ea;
-	border-bottom: none;
 	color: @dark;
-	background: @f;
+	background: rgba(255, 255, 255, 0.9);
 	outline: none;
-	position: relative;
-	top:2px;
+	position: absolute;
+	top: 50px;
+	right: 60px;
 	float: right;
 	padding: 0px 10px;
+	z-index: 1000;
 }
 
 /*   ---   End of Code Editor Area   --   */

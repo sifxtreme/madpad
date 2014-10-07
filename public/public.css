@@ -959,6 +959,7 @@ a:hover {
   margin-right: 300px;
 }
 .middle .pad-wrapper {
+  position: relative;
   background-color: #f9f9f9;
   padding: 40px 40px;
   min-height: 500px;
@@ -1025,7 +1026,7 @@ a:hover {
   overflow-y: auto;
 }
 #editor-code .ace_scroller {
-  overflow-x: auto;
+  overflow-x: none;
 }
 #editor-code .ace_gutter-cell {
   padding: 0px 20px;
@@ -1048,17 +1049,18 @@ a:hover {
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace !important;
 }
 .code-type {
-  width: 200px;
+  width: 120px;
   height: 40px;
   border: 1px solid #eaeaea;
-  border-bottom: none;
   color: #232c30;
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.9);
   outline: none;
-  position: relative;
-  top: 2px;
+  position: absolute;
+  top: 50px;
+  right: 60px;
   float: right;
   padding: 0px 10px;
+  z-index: 1000;
 }
 /*   ---   End of Code Editor Area   --   */
 /*   ---   Title Area   --   */

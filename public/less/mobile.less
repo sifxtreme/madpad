@@ -300,6 +300,56 @@ h1, h2, h3, h4, h5, h6, p, a, span, input, button, body, textarea{
 		font-size: 80%;
 	}
 }
+
+#editor-code{
+	background: @f;
+	position: relative;
+	border: 1px solid @d;
+	font-size: 12px;
+	line-height: 18px;
+	clear: both;
+
+	.ace_sb{
+		overflow-y: auto;
+	}
+
+	.ace_scroller{
+		overflow-x: auto;
+
+	}
+
+	.ace_gutter-cell{
+		padding: 0px 20px;
+		text-align: center;
+
+
+	}
+
+	.ace_fold{
+		background-image: url("/images/main/dots.png");
+		background-size: 19px 7px;
+		border: none;
+	}
+
+	.ace_error{
+		background-image: url("/images/main/error.png");
+		background-size: 8px 8px;
+		background-position: 8px center;
+	}
+
+
+	.ace_gutter-cell.ace_info{
+		background-image: none;
+	}
+
+
+	.ace_line{
+
+		span{
+			font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace !important;
+		}
+	}
+}
 /*   ---   End of Pad Content   --   */
 
 
@@ -988,6 +1038,12 @@ h1, h2, h3, h4, h5, h6, p, a, span, input, button, body, textarea{
 		        background: url('/images/header/logout-icon.png') no-repeat center center;
 		        background-size: 16px 16px;
 		    }
+
+		    img{
+		    	height: 16px;
+		    	float: left;
+		    	margin-right: 10px;
+		    }
 		}
 
 		.username{
@@ -1004,8 +1060,6 @@ h1, h2, h3, h4, h5, h6, p, a, span, input, button, body, textarea{
 	}
 
 }
-
-
 
 /*   ---   Account User CSS   --   */
 
