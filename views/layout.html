@@ -17,6 +17,7 @@
   <script src="/js/jquery-1.11.1.min.js"></script>
 
   <script src="/js/public.js"></script>
+  {{#unless is_phone}}<script src="/js/desktop.js"></script>{{/unless}}
   {{#if is_phone}}<script src="/js/mobile.js"></script>{{/if}}
   
   <script src="/js/Autolinker.min.js"></script>
