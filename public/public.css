@@ -375,6 +375,9 @@ a:hover {
   -webkit-transition: 0.5s;
   cursor: pointer;
 }
+.mobile-dropdown {
+  display: none;
+}
 .red-btn {
   background-color: #cd7155;
   outline: none;
