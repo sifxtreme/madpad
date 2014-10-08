@@ -412,7 +412,6 @@ img {
   right: 0;
   bottom: 0;
   border-left: 1px solid #eaeaea;
-  display: none;
   /* chat title */
   /* user message styles */
   /* other user message style */
@@ -599,7 +598,6 @@ img {
   width: 100%;
   padding: 20px 20px;
   border-bottom: 1px solid #eaeaea;
-  display: none;
 }
 .mobile .sharing-settings .modal-confirm {
   margin-top: 20px;
