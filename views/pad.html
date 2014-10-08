@@ -26,6 +26,52 @@
 		</div>	
 	</div>
 	<!-- login modal -->
+	<div class="create-pad-modal overlay-close">
+		<div class="x-modal">
+			<img src="/images/mobile/x.png" />
+		</div>
+		<div id="create-pad-modal">
+			<div class="pad-type">
+				{{#if user.username}}
+				<div class="type-tab active" id="personal-type">
+				    <h6>Personal Pad</h6>
+				</div>
+				{{/if}}
+				<div class="type-tab {{#unless user.username}}active{{/unless}}" id="public-type">
+				    <h6>Public Pad</h6>
+				</div>
+			</div>
+	    	<hr class="type-line" />
+			<form method="post" id="{{#if user.username}}createPadForm{{else}}openPadForm{{/if}}" class="openCreatePadForm">
+			  <div class="name-input">
+			    <div class="label">Pad Name</div>
+			    <input type="text" name="pad[name]" class="pad-name" placeholder="Enter your pad name here..." />
+			    <input type="hidden" name="pad[type]" value="text" />
+			    <input type="hidden" name="pad[username]" value="{{user.username}}" />
+			    <input type="hidden" name="pad[ajax]" value="true" />
+			  </div>
+			  <hr/>
+			<div class="pad-option">
+			    <div class="label">Pad Type</div>
+			    <div class="text-pad option-tab active">
+			        <p>Text Pad</p>
+			    </div>
+			    <div class="code-pad option-tab">
+			        <p>Code Pad</p>
+			    </div>
+			</div>
+			<hr/>
+			<div class="inputPadErrors">
+			</div>
+			<button class="green-btn" id="new-button">{{#if user.username}}CREATE{{else}}OPEN{{/if}} PAD</button>
+			   <div class="inputWhatPadWillOpen">
+			    <p>Your Pad's URL</p>
+			    </div>
+			</form>
+		</div>
+
+	</div> <!-- Create Pad Modal -->
+
 
     <div class="m-header m-padding">
         <div class="left-header">

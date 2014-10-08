@@ -55,6 +55,15 @@ $(document).ready(function(){
 	 }
 	 padList();
 
+	 function newPad(){
+	 	$('.m-plus').click(function(){
+	 		$('.create-pad-modal').removeClass('overlay-close');
+	 		$('.create-pad-modal').addClass('overlay-open');
+	 	});
+	 }	
+	 newPad();
+
+
 	 function accountLogo(){
 	 	var height = $(window).height();
 	 	var loginArea = 180;
@@ -95,6 +104,8 @@ $(document).ready(function(){
 	 		$('#m-login').addClass('overlay-close');
 	 		$('#m-signup').removeClass('overlay-open');
 	 		$('#m-signup').addClass('overlay-close');
+	 		$('.create-pad-modal').removeClass('overlay-open');
+	 		$('.create-pad-modal').addClass('overlay-close');
 	 	});
 	 }
 	 hideMobileModal();

@@ -166,6 +166,8 @@ img {
   /*   ---   End of Choose Username CSS   --   */
   /*   ---   Account User CSS   --   */
   /*   ---   End of Account User CSS   --   */
+  /*   ---   New Pad CSS   --   */
+  /*   ---   End of New Pad CSS   --   */
 }
 .mobile h1,
 .mobile h2,
@@ -179,7 +181,8 @@ img {
 .mobile input,
 .mobile button,
 .mobile body,
-.mobile textarea {
+.mobile textarea,
+.mobile div {
   font-family: "Roboto", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 300;
 }
@@ -691,6 +694,17 @@ img {
   color: #ffffff;
   font-size: 20px;
 }
+.mobile .create-pad-modal {
+  position: absolute;
+  z-index: 2000;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
 .mobile .overlay-close {
   visibility: hidden;
   opacity: 0;
@@ -928,5 +942,133 @@ img {
   float: left;
   margin-right: 5px;
   margin-top: -2px;
+}
+.mobile #create-pad-modal {
+  position: relative;
+  top: 40px;
+  padding: 10px 10px;
+}
+.mobile #create-pad-modal .pad-type {
+  overflow: hidden;
+  z-index: 2;
+}
+.mobile #create-pad-modal .pad-type .type-tab {
+  float: left;
+  background: #eaeaea;
+  color: #ffffff;
+  padding: 10px 20px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+}
+.mobile #create-pad-modal .pad-type .type-tab:hover {
+  cursor: pointer;
+  background: #dddddd;
+}
+.mobile #create-pad-modal .pad-type .active {
+  background: #5dbff1;
+  color: #ffffff;
+}
+.mobile #create-pad-modal .pad-type .active:hover {
+  background: #5dbff1;
+}
+.mobile #create-pad-modal .type-line {
+  width: 100%;
+  float: left;
+  border-top: 2px solid #eaeaea;
+  margin-bottom: 20px;
+  margin-top: 0px;
+  position: relative;
+  top: -2px;
+  z-index: -1;
+}
+.mobile #create-pad-modal form {
+  clear: both;
+}
+.mobile #create-pad-modal .label {
+  color: #9ea5ab;
+  font-size: 14px;
+}
+.mobile #create-pad-modal hr {
+  border: none;
+  border-top: 1px solid #eaeaea;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.mobile #create-pad-modal .name-input .label {
+  position: relative;
+  top: 2px;
+  line-height: 40px;
+}
+.mobile #create-pad-modal .pad-name {
+  width: 100%;
+  height: 40px;
+  border: 1px solid #eaeaea;
+  padding-left: 10px;
+  font-size: 14px;
+}
+.mobile #create-pad-modal .pad-name:focus {
+  border: 1px solid #eaeaea;
+  box-shadow: none;
+  outline: none;
+}
+.mobile #create-pad-modal .pad-option {
+  display: inline-block;
+  position: relative;
+  top: 2px;
+}
+.mobile #create-pad-modal .pad-option .option-tab {
+  float: left;
+  padding: 10px 10px;
+  border-bottom: 3px solid #eaeaea;
+  margin-right: 20px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.mobile #create-pad-modal .pad-option .option-tab:hover {
+  cursor: pointer;
+  border-bottom: 3px solid #5dbff1 !important;
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+}
+.mobile #create-pad-modal .pad-option .option-tab p {
+  margin-top: 0px;
+  color: #9ea5ab;
+}
+.mobile #create-pad-modal .pad-option .active {
+  border-bottom: 3px solid #5dbff1;
+}
+.mobile #create-pad-modal .pad-option .active p {
+  color: #5dbff1;
+}
+.mobile #create-pad-modal .pad-option .label {
+  position: relative;
+  line-height: 40px;
+}
+.mobile #create-pad-modal .inputWhatPadWillOpen {
+  font-style: italic;
+  color: #9ea5ab;
+  text-align: center;
+  font-size: 12px;
+  margin-top: 10px;
+}
+.mobile #create-pad-modal .inputPadErrors {
+  color: #cd7155;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.mobile #create-pad-modal button {
+  display: block;
+  width: 100%;
+  margin: 0 auto;
 }
 /*   ---   End of All Mobile LESS   ---   */

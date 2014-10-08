@@ -17,11 +17,11 @@ $(document).ready(function(){
 	// froala editor
 	function editorActive(){
 
-		$('.froala-element').focus(function() {
+		$('#editor').mouseenter(function() {
 			$('.froala-box').addClass('editor-active');
 		});
 
-		$('.froala-element').blur(function() {
+		$('#editor').mouseleave(function() {
 			$('.froala-box').removeClass('editor-active');
 		});
 	}
