@@ -193,6 +193,20 @@ img {
   height: 92px;
   width: 100%;
 }
+.mobile .status {
+  position: absolute;
+  width: 100%;
+  height: 70px;
+  background: rgba(93, 191, 241, 0.95);
+  text-align: center;
+  z-index: 2000;
+  display: none;
+}
+.mobile .status p {
+  color: #ffffff;
+  line-height: 70px;
+  font-size: 18px;
+}
 .mobile .green-btn {
   background-color: #33bea8;
   outline: none;
