@@ -36,6 +36,15 @@ $(document).ready(function(){
 			// if user's home template AND if other users templates hide trash icon (if not already hidden)
 			if((isOwner && id == 'home') || !isOwner){
 				$('.trash-icon').remove();
+				if(isMobile){
+					$('.mobile-delete').remove();	
+				}
+			}
+
+			if(isMobile){
+				$('.mobile-delete').click(function(){
+					_this.deleteConfirm();
+				});
 			}
 
 			$('.trash-icon').click(function(){

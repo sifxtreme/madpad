@@ -136,7 +136,7 @@ $(document).ready(function(){
 	};
 	mobileUserDropDown.run();
 
-		var mobileOptionDropDown = {
+	var mobileOptionDropDown = {
 		container: $('.m-options'),
 		toHide: $('#option-dropdown'),
 		dropDown: function(){

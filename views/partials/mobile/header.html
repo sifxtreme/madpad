@@ -16,8 +16,8 @@
 			<img src="/images/mobile/options.png" />
 			<div class="mobile-dropdown" id="option-dropdown" style="display:none">
 				<ul>
-					<li><a id="heartFavoriteIcon" href="#"><img src="/images/main/favorite-icon.png" />Favorite Pad</a></li>
-					{{#compare usersRoom user.username operator="=="}}<li><a href="#"><img src="/images/main/trash.png"/>Delete Pad</a></li>{{/compare}}
+					<li><a id="heartFavoriteIcon" class="{{#if isFavorite}}favorite-icon{{else}}heart-icon{{/if}}" href="#"><img src="/images/main/{{#if isFavorite}}favorite-icon{{else}}heart-icon{{/if}}.png" /><span>{{#if isFavorite}}Unfavorite{{else}}Favorite{{/if}} Pad</span></a></li>
+					{{#compare usersRoom user.username operator="=="}}<li class="mobile-delete"><a href="#"><img src="/images/main/trash.png"/>Delete Pad</a></li>{{/compare}}
 				</ul>
 			</div>
 		</div>
