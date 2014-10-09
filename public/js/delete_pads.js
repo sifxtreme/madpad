@@ -7,6 +7,11 @@ $(document).ready(function(){
 		deleteConfirm: function(){
 			// don't allow them to delete home template
 			if(isOwner && id == 'home') return;
+			madpadSocket.emit('deletePad', {room: padName, padName: padName, padURL: location.pathname.slice(1)});	
+		},
+		deleteMobile: function(){
+			// don't allow them to delete home template
+			if(isOwner && id == 'home') return;
 			if(confirm('Are you absolutely sure? This cannot be reversed!')){
 				madpadSocket.emit('deletePad', {room: padName, padName: padName, padURL: location.pathname.slice(1)});	
 			}
@@ -43,7 +48,7 @@ $(document).ready(function(){
 
 			if(isMobile){
 				$('.mobile-delete').click(function(){
-					_this.deleteConfirm();
+					_this.deleteMobile();
 				});
 			}
 

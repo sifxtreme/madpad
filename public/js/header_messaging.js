@@ -55,8 +55,9 @@ $(document).ready(function(){
 
 
 	if(madpadCookieFunctions.getCookie('statusMessaging')){
-		displayInitialMessaging(madpadCookieFunctions.getCookie('statusMessaging'));
+		var message = madpadCookieFunctions.getCookie('statusMessaging')
 		madpadCookieFunctions.deleteCookie('statusMessaging');
+		displayInitialMessaging(message);
 	}
 
 	if(typeof justLoggedIn !== 'undefined' && justLoggedIn){
