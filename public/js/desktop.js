@@ -42,7 +42,7 @@ $(document).ready(function(){
 		});
 	}
 	if(typeof isHome != 'undefined' && isHome){
-		homeHero();
+		homeHero();	
 	}
 
 	//sticky header
@@ -107,7 +107,7 @@ $(document).ready(function(){
 		$('.signup-step-wrapper').css('height' , signupStepHeight);
 
 	}/* Set heights for divs */
-	if(typeof isHome === 'undefined'){
+	if(typeof isHome === 'undefined' || !isHome){
 		$(window).bind('resize', window_size);	
 	}
 	
@@ -116,7 +116,7 @@ $(document).ready(function(){
 
 $(window).load(function() {
 
-	if(typeof isHome === 'undefined'){
+	if(typeof isHome === 'undefined' || !isHome){
 		window_size();	
 	}
 	
