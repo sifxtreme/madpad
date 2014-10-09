@@ -136,7 +136,7 @@ $(document).ready(function(){
 			// bring up settings modal
 			$('.share-settings-icon').click(function(){
 				if(!isOwner) return false;
-				modals.showOverlay('.sharing-settings');
+				modals.showOverlay('.sharing-settings-desktop');
 			});
 
 			// save settings modal
@@ -152,13 +152,13 @@ $(document).ready(function(){
 				}
 				headerStatusMessaging.run('privacy settings have been updated');
 
-				modals.hideOverlay('.sharing-settings');
+				modals.hideOverlay('.sharing-settings-desktop');
 			});
 
 			// cancel modal without saving
 			$('#cancel-settings, .modal-close').click(function(){
 				newPadPrivacy = padPrivacyStatus;
-				modals.hideOverlay('.sharing-settings');
+				modals.hideOverlay('.sharing-settings-desktop');
 			});
 		}
 	}

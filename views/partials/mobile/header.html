@@ -1,0 +1,42 @@
+<div class="m-header m-padding">
+	<div class="left-header">
+		<div class="hamburger">
+			<img src="/images/mobile/hamburger.png" />
+		</div>
+		<div class="logo">
+			<img src="/images/mobile/logo@2x.png" />
+		</div>
+	</div><!-- left side -->
+	<div class="right-header">
+		<div class="m-icons m-plus">
+			<img src="/images/mobile/newpad.png" />
+		</div>
+		{{#if user.username}}
+		<div class="m-icons m-options">
+			<img src="/images/mobile/options.png" />
+			<div class="mobile-dropdown" id="option-dropdown" style="display:none">
+				<ul>
+					<li><a id="heartFavoriteIcon" href="#"><img src="/images/main/favorite-icon.png" />Favorite Pad</a></li>
+					{{#compare usersRoom user.username operator="=="}}<li><a href="#"><img src="/images/main/trash.png"/>Delete Pad</a></li>{{/compare}}
+				</ul>
+			</div>
+		</div>
+		{{/if}}
+		{{#if user.username}}
+			<div class="m-icons m-account" id="open-user">
+				<img src="{{user.picture}}" class="avatar-header" />
+				<div class="mobile-dropdown" id="user-dropdown" style="display:none">
+					<ul>
+						<li><a href="#" class="username"><img src="{{user.picture}}" class="avatar-header" />{{user.username}}</a></li>
+						<li><a href="/help">Help</a></li>
+						<li><a href="/logout">Log out</a></li>
+					</ul>
+				</div>
+			</div>
+		{{else}}
+			<div class="m-icons m-account" id="open-account">
+				<img src="/images/mobile/account.png" />
+			</div>
+		{{/if}}
+	</div><!-- right side -->
+</div><!-- header -->

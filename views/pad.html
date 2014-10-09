@@ -1,226 +1,122 @@
 {{#if is_phone}}
-	<div class='pad-list-modal overlay-close'>
-		<div class="x-modal">
-			<img src="/images/mobile/x.png" />
+	
+	<div class="m-tabs">
+		<div class="tab m-pad active">
+			<p>Pad</p>
 		</div>
-		<div class="pad-title">
-			<p>Pad List</p>
+		<div class="tab m-chat">
+			<p>Chat</p>
 		</div>
-		{{> my_pads}}
+		<div class="tab m-share">
+			<p>Share</p>
+		</div>
 	</div>
-	<!-- Pad List -->
+	<div class="tab-shadow"></div>
+	<!-- tabs -->
 
-	<div class="m-account-modal overlay-close" id="m-login">
-		<div class="x-modal">
-			<img src="/images/mobile/x-dark.png" />
-		</div>
-		<div class="logo">
-			<img src="/images/mobile/login-logo.png" class="account-logo" />
-		</div>
-		<div class="account-content">
-			<h6 id="account-text">login to madpad</h6>
-			<div class="social-login fb-login"><a href="/auth/facebook"><img src="/images/mobile/facebook-login.png"></a></div>
-			<div class="social-login github-login"><a href="/auth/github"><img src="/images/mobile/github-login.png"></a></div>
-			<p id="login-msg">Don't have an account?<a href="#" id="signup-text"> Signup!</a></p>
-			<p id="sign-msg">Already have an account?<a href="#" id="login-text"> Login!</a></p>
-		</div>	
-	</div>
-	<!-- login modal -->
-	<div class="create-pad-modal overlay-close">
-		<div class="x-modal">
-			<img src="/images/mobile/x-dark.png" />
-		</div>
-		<div id="create-pad-modal">
-			<div class="pad-type">
-				{{#if user.username}}
-				<div class="type-tab active" id="personal-type">
-				    <h6>Personal Pad</h6>
+	<div class="m-offset"></div>
+	<div class="m-content">
+
+		<div class="m-pad-content">
+			{{#if pad.isTextPad}}
+				<div id="editor" class="pad-area" placeholder="Start typing here!"></div>
+				<textarea class="main" style="display:none;" id="pusherContentEditable"></textarea>
+			{{else}}
+				{{> code_modes_select}}
+				<div id="editor-code" class="pad-area"></div>
+			{{/if}}
+		</div> <!-- pad -->
+
+		<div class="m-chat-content" style="display:none">
+			<div class="chat">
+				<div id="messages"></div>
+				<div class="submit-wrapper">
+					<div class="submit-area">
+						<form action="" class="madpadChatForm">
+							<div class="m-message">
+								<textarea id="m" autocomplete="off" class="message-input" placeholder="Send a message..."></textarea>
+							</div>
+							<div class="m-submit">
+								<input type="submit" class="submit-button" value="SEND"/>
+							</div>
+						</form>
+					</div>
 				</div>
-				{{/if}}
-				<div class="type-tab {{#unless user.username}}active{{/unless}}" id="public-type">
-				    <h6>Public Pad</h6>
+			</div>
+		</div> <!-- chat -->
+
+		<div class="m-share-content" style="display:none">
+
+			{{#if usersRoom}}
+				<div class="sharing-settings">
+					<div class="list-settings">
+
+						<div class="settings" id="private-setting">
+							<div class="radio-on radio"></div>
+							<img src="/images/main/private-lock.png" class="setting-icons"/>
+							<div class="setting-text">
+								<p class="large">Personal private pad</p>
+							</div>
+						</div> <!-- Private Setting -->
+
+						<div class="settings" id="shared-setting">
+							<div class="radio-off radio"></div>
+							<img src="/images/main/shared-eye.png" class="setting-icons"/>
+							<div class="setting-text">
+								<p class="large">Viewable with link</p>
+							</div>
+						</div> <!-- Shared Setting -->
+
+						<div class="settings" id="public-setting">
+							<div class="radio-off radio"></div>
+							<img src="/images/main/public-world.png" class="setting-icons"/>
+							<div class="setting-text">
+								<p class="large">Editable with link</p>
+							</div>
+						</div> <!-- Shared Setting -->
+					</div>
+
+					<div class="modal-confirm">
+						<button class="green-btn" id="save-settings">Save Setting</button>
+					</div>
+				</div> <!-- Settings Modal -->
+			{{/if}}
+
+			<div class="social-media">
+				<div class="row">
+					<div class="col">
+						<div class="social-icon">
+							<img src="/images/mobile/facebook.png"/>
+							<p>Facebook</p>
+						</div>
+					</div>
+					<div class="col">
+						<div class="social-icon">
+							<img src="/images/mobile/twitter.png"/>
+							<p>Twitter</p>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col">
+						<div class="social-icon">
+							<img src="/images/mobile/email.png"/>
+							<p>Email</p>
+						</div>
+					</div>
+					<div class="col">
+						<div class="social-icon">
+							<img src="/images/mobile/share.png"/>
+							<p>Copy Link</p>
+						</div>
+					</div>
 				</div>
 			</div>
-	    	<hr class="type-line" />
-			<form method="post" id="{{#if user.username}}createPadForm{{else}}openPadForm{{/if}}" class="openCreatePadForm">
-			  <div class="name-input">
-			    <div class="label">Pad Name</div>
-			    <input type="text" name="pad[name]" class="pad-name" placeholder="Enter your pad name here..." />
-			    <input type="hidden" name="pad[type]" value="text" />
-			    <input type="hidden" name="pad[username]" value="{{user.username}}" />
-			    <input type="hidden" name="pad[ajax]" value="true" />
-			  </div>
-			  <hr/>
-			<div class="pad-option">
-			    <div class="label">Pad Type</div>
-			    <div class="text-pad option-tab active">
-			        <p>Text Pad</p>
-			    </div>
-			    <div class="code-pad option-tab">
-			        <p>Code Pad</p>
-			    </div>
-			</div>
-			<hr/>
-			<div class="inputPadErrors">
-			</div>
-			<button class="green-btn" id="new-button">{{#if user.username}}CREATE{{else}}OPEN{{/if}} PAD</button>
-			   <div class="inputWhatPadWillOpen">
-			    <p>Your Pad's URL</p>
-			    </div>
-			</form>
+
 		</div>
 
-	</div> <!-- Create Pad Modal -->
+  </div> <!-- m-content -->
 
-
-    <div class="m-header m-padding">
-        <div class="left-header">
-            <div class="hamburger">
-                 <img src="/images/mobile/hamburger.png" />
-            </div>
-            <div class="logo">
-                 <img src="/images/mobile/logo@2x.png" />
-            </div>
-        </div><!-- left side -->
-        <div class="right-header">
-            <div class="m-icons m-plus">
-                  <img src="/images/mobile/newpad.png" />
-            </div>
-            <div class="m-icons m-options">
-                  <img src="/images/mobile/options.png" />
-                  <div class="mobile-dropdown" id="option-dropdown">
-                  		<ul>
-                			<li><a id="heartFavoriteIcon" href="/help"><img src="/images/main/favorite-icon.png" />Favorite Pad</a></li>
-               				<li><a href="/logout"><img src="/images/main/trash.png" />Delete Pad</a></li>
-                  		</ul>
-                  </div>
-            </div>
-            {{#if user.username}}
-            <div class="m-icons m-account" id="open-user">
-                  <img src="{{user.picture}}" class="avatar-header" />
-                  <div class="mobile-dropdown" id="user-dropdown">
-                  		<ul>
-                  			<li><a href="#" class="username"><img src="{{user.picture}}" class="avatar-header" />{{user.name}}</a></li>
-                			<li><a href="/help">Help</a></li>
-               				<li><a href="/logout">Log out</a></li>
-                  		</ul>
-                  </div>
-            </div>
-            {{else}}
-            <div class="m-icons m-account" id="open-account">
-                  <img src="/images/mobile/account.png" />
-
-            </div>
-            {{/if}}
-        </div><!-- right side -->
-    </div><!-- header -->
-
-    <div class="m-tabs">
-        <div class="tab m-pad active">
-            <p>Pad</p>
-        </div>
-        <div class="tab m-chat">
-            <p>Chat</p>
-        </div>
-        <div class="tab m-share">
-            <p>Share</p>
-        </div>
-    </div>
-    <div class="tab-shadow"></div>
-    <!-- tabs -->
-
-    <div class="m-offset"></div>
-    <div class="m-content">
-        <div class="m-pad-content">
-          {{#if pad.isTextPad}}
-            <div id="editor" class="pad-area" placeholder="Start typing here!"></div>
-            <textarea class="main" style="display:none;" id="pusherContentEditable"></textarea>
-          {{else}}
-            {{> code_modes_select}}
-            <div id="editor-code" class="pad-area"></div>
-          {{/if}}
-        </div> <!-- pad -->
-        <div class="m-chat-content">
-            <div class="chat">
-                  <div id="messages"></div>
-                  <div class="submit-wrapper">
-                    <div class="submit-area">
-                      <form action="" class="madpadChatForm">
-                        <div class="m-message">
-                            <textarea id="m" autocomplete="off" class="message-input" placeholder="Send a message..."></textarea>
-                        </div>
-                        <div class="m-submit">
-                            <input type="submit" class="submit-button" value="SEND"/>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-              </div> <!-- chat -->
-        </div>
-        <div class="m-share-content">
-			    <div class="sharing-settings">
-						<div class="list-settings">
-						  <div class="settings" id="private-setting">
-						      <div class="radio-on radio"></div>
-						      <img src="/images/main/private-lock.png" class="setting-icons"/>
-						      <div class="setting-text">
-						          <p class="large">Personal private pad</p>
-						      </div>
-						  </div> <!-- Private Setting -->
-
-						  <div class="settings" id="shared-setting">
-						      <div class="radio-off radio"></div>
-						      <img src="/images/main/shared-eye.png" class="setting-icons"/>
-						      <div class="setting-text">
-						          <p class="large">Viewable with link</p>
-						      </div>
-						  </div> <!-- Shared Setting -->
-
-						  <div class="settings" id="public-setting">
-						      <div class="radio-off radio"></div>
-						      <img src="/images/main/public-world.png" class="setting-icons"/>
-						      <div class="setting-text">
-						          <p class="large">Editable with link</p>
-						      </div>
-						  </div> <!-- Shared Setting -->
-						</div>
-						<div class="modal-confirm">
-						  <button class="green-btn" id="save-settings">Save Setting</button>
-						</div>
-			    </div> <!-- Settings Modal -->
-			    <div class="social-media">
-			    	<div class="row">
-			    		<div class="col">
-			    			<div class="social-icon">
-			    				<img src="/images/mobile/facebook.png"/>
-			    				<p>Facebook</p>
-			    			</div>
-			    		</div>
-			    		<div class="col">
-			    		<div class="social-icon">
-			    				<img src="/images/mobile/twitter.png"/>
-			    				<p>Twitter</p>
-			    			</div>
-			    		</div>
-			    	</div>
-			    	<div class="row">
-			    		<div class="col">
-			    			<div class="social-icon">
-			    				<img src="/images/mobile/email.png"/>
-			    				<p>Email</p>
-			    			</div>
-			    		</div>
-			    		<div class="col">
-			    		<div class="social-icon">
-			    				<img src="/images/mobile/share.png"/>
-			    				<p>Copy Link</p>
-			    			</div>
-			    		</div>
-			    	</div>
-			    </div>
-        </div>
-
-    </div>
 <!-- mobile html end -->
 {{else}}
 <div class="madpad-container minwidth">

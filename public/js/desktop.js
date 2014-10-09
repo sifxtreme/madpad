@@ -1,27 +1,71 @@
 $(document).ready(function(){
 
+	$('.username-wrapper').css('opacity' , '1').addClass('move');
+
+	// add x on hover to recent pads
+	var padItemOptions = function(){
+		$('.pad-heart-x').hide();
+		$('.pad-item').mouseenter(function(){
+			$(this).find('.pad-heart-x').show();
+		});
+		$('.pad-item').mouseleave(function(){
+			$(this).find('.pad-heart-x').hide();
+		});
+	}
+	padItemOptions();
+
+	// froala editor
+	function editorActive(){
+
+		$('#editor').mouseenter(function() {
+			$('.froala-box').addClass('editor-active');
+		});
+
+		$('#editor').mouseleave(function() {
+			$('.froala-box').removeClass('editor-active');
+		});
+	}
+	editorActive();
+
+	// add classes on icon hover
+	function iconHover(){
+
+		$('.title-options').children('.icon').mouseenter(function(){
+			$(this).css('background-color', '#f4f6f9');
+		});
+
+		$('.title-options').children('.icon').mouseleave(function(){
+			$(this).css('background-color', 'transparent');
+		});
+
+		$('.title-options').children('.icon').click(function(){
+			$(this).css('background-color', 'transparent')
+		});
+	}
+	iconHover();
+
 	// size everything properly
-  window_size = function() {
+	window_size = function() {
 
-    var height = $(window).height();													//this is the window height.
-    var navHeight = $('.header').height();										//this is the height of the nav bar.
-    var titleHeight = $('.title').height();										//the is the title height in the main area.
-    var editorHeight = $('.froala-editor').height();
-    var paddingMain = 82;																			//top and bottom padding of the text area.
-    var padHeight = height - navHeight - titleHeight - editorHeight - paddingMain;
-    var sideHeight =  height - navHeight; 										//this is the height of the two side bars.
-    var chatTitleHeight = $('.chat-title').height();
-    var submitHeight = $('.submit-wrapper').height();					//the is the submit area height in the main area.
-    var chatHeight = sideHeight - chatTitleHeight - submitHeight - 1;
-    var signupStepHeight = $(window).height() - navHeight;
+		var height = $(window).height();
+		var navHeight = $('.header').height();
+		var titleHeight = $('.title').height();
+		var editorHeight = $('.froala-editor').height();
+		var paddingMain = 82;
+		var padHeight = height - navHeight - titleHeight - editorHeight - paddingMain;
+		var sideHeight =  height - navHeight;
+		var chatTitleHeight = $('.chat-title').height();
+		var submitHeight = $('.submit-wrapper').height();
+		var chatHeight = sideHeight - chatTitleHeight - submitHeight - 1;
+		var signupStepHeight = $(window).height() - navHeight;
 
-    $(".left").css('height' , sideHeight);
-    $(".all-pads").css('height', sideHeight);
-    $(".right").css('height', sideHeight);
-    $(".froala-element").css('height', padHeight);
-    $('#editor-code').css('height' , padHeight);
-    $('#messages').css('height' , chatHeight);
-    $('.signup-step-wrapper').css('height' , signupStepHeight);
+		$(".left").css('height' , sideHeight);
+		$(".all-pads").css('height', sideHeight);
+		$(".right").css('height', sideHeight);
+		$(".froala-element").css('height', padHeight);
+		$('#editor-code').css('height' , padHeight);
+		$('#messages').css('height' , chatHeight);
+		$('.signup-step-wrapper').css('height' , signupStepHeight);
 
 	}/* Set heights for divs */
 
@@ -31,10 +75,10 @@ $(document).ready(function(){
 
 $(window).load(function() {
 
-    window_size();
-    
-    $('img').bind('dragstart', function(){
-        return false; 
-    });
+	window_size();
+	
+	$('img').bind('dragstart', function(){
+		return false; 
+	});
 
 });

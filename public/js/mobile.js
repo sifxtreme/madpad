@@ -1,12 +1,24 @@
 $(document).ready(function(){
 
-	function mobileTabs(){
+	window_size = function() {
+		var height = $(window).height();
+		var submitHeight = 70;
+		var header = 50;
+		var tabHeight = 40;
+		var padding = 15;
+		var chatMessageHeight = $(window).height() - 162;
+		$('#messages').css('height' , chatMessageHeight);
+		$('.pad-list-modal').css('height' , height);
+		$('#editor-code').css('height' , height - header - 30);
+		$(".froala-element").css('height', height - header - tabHeight - padding*2);
+	}
+	window_size();
+
+	var mobileTabs = function(){
 		$('.m-chat-content').hide();
 		$('.m-share-content').hide();
 
 		$('.m-pad').click(function(){
-			console.log('clicked pad');
-			console.log(this);
 			$(this).addClass('active');
 			$('.m-chat').removeClass('active');
 			$('.m-share').removeClass('active');
@@ -36,91 +48,76 @@ $(document).ready(function(){
 	}
 	mobileTabs();
 
-	 window_size = function() {
-	 	var height = $(window).height();
-	 	var submitHeight = 70;
-		var header = 92;
-		var chatMessageHeight = $(window).height() - 162;
-		$('#messages').css('height' , chatMessageHeight);
-		$('.pad-list-modal').css('height' , height);
-		$('#editor-code').css('height' , height - header -30);
-	 }
-	 window_size();
+	function padList(){
+		$('.hamburger').click(function(){
+			$('.pad-list-modal').removeClass('overlay-close');
+			$('.pad-list-modal').addClass('overlay-open');
+		});
+	}
+	padList();
 
-	 function padList(){
-	 	$('.hamburger').click(function(){
-	 		$('.pad-list-modal').removeClass('overlay-close');
-	 		$('.pad-list-modal').addClass('overlay-open');
-	 	});
-	 }
-	 padList();
-
-	 function newPad(){
-	 	$('.m-plus').click(function(){
-	 		$('.create-pad-modal').removeClass('overlay-close');
-	 		$('.create-pad-modal').addClass('overlay-open');
-	 	});
-	 }	
-	 newPad();
+	function newPad(){
+		$('.m-plus').click(function(){
+			$('.create-pad-modal').removeClass('overlay-close');
+			$('.create-pad-modal').addClass('overlay-open');
+		});
+	}	
+	newPad();
 
 
-	 function accountLogo(){
-	 	var height = $(window).height();
-	 	var loginArea = 180;
-	 	var logoOffset = (height - loginArea)/2 - 60;
-	 	$('.logo').css('top' , logoOffset);
-	 }
-	 accountLogo();
+	function accountLogo(){
+		var height = $(window).height();
+		var loginArea = 180;
+		var logoOffset = (height - loginArea)/2 - 60;
+		$('.logo').css('top' , logoOffset);
+	}
+	accountLogo();
 
-	 function mobileAccount(){
-	 	$('#open-account').click(function(){
-	 		$('#account-text').html('login to madpad');
-	 		$('#login-msg').show();
-	 		$('#sign-msg').hide();
-	 		$('#m-login').removeClass('overlay-close');
-	 		$('#m-login').addClass('overlay-open');
-	 	});
+	function mobileAccount(){
+		$('#open-account').click(function(){
+			$('#account-text').html('login to madpad');
+			$('#login-msg').show();
+			$('#sign-msg').hide();
+			$('#m-login').removeClass('overlay-close');
+			$('#m-login').addClass('overlay-open');
+		});
 
-	 	$('#signup-text').click(function(){
-	 		$('#login-msg').hide();
-	 		$('#sign-msg').show();
-	 		$('#account-text').html('sign up for madpad');
-	 	});
+		$('#signup-text').click(function(){
+			$('#login-msg').hide();
+			$('#sign-msg').show();
+			$('#account-text').html('sign up for madpad');
+		});
 
-	 	$('#login-text').click(function(){
-	 		$('#sign-msg').hide();
-	 		$('#login-msg').show();
-	 		$('#account-text').html('login to madpad');
-	 	});
-	 }
-	 mobileAccount();
+		$('#login-text').click(function(){
+			$('#sign-msg').hide();
+			$('#login-msg').show();
+			$('#account-text').html('login to madpad');
+		});
+	}
+	mobileAccount();
 
-
-	 function hideMobileModal(){
-	 	$('.x-modal').click(function(){
-	 		$('.pad-list-modal').removeClass('overlay-open');
-	 		$('.pad-list-modal').addClass('overlay-close');
-	 		$('#m-login').removeClass('overlay-open');
-	 		$('#m-login').addClass('overlay-close');
-	 		$('#m-signup').removeClass('overlay-open');
-	 		$('#m-signup').addClass('overlay-close');
-	 		$('.create-pad-modal').removeClass('overlay-open');
-	 		$('.create-pad-modal').addClass('overlay-close');
-	 	});
-	 }
-	 hideMobileModal();
+	function hideMobileModal(){
+		$('.x-modal').click(function(){
+			$('.pad-list-modal').removeClass('overlay-open');
+			$('.pad-list-modal').addClass('overlay-close');
+			$('#m-login').removeClass('overlay-open');
+			$('#m-login').addClass('overlay-close');
+			$('#m-signup').removeClass('overlay-open');
+			$('#m-signup').addClass('overlay-close');
+			$('.create-pad-modal').removeClass('overlay-open');
+			$('.create-pad-modal').addClass('overlay-close');
+		});
+	}
+	hideMobileModal();
 
 	var mobileUserDropDown = {
 		container: $('.m-account'),
 		toHide: $('#user-dropdown'),
 		dropDown: function(){
-			$('#user-dropdown').hide();
-
+			var _this = this;
 			$('#open-user').on('click' , function(e){
-				$('#user-dropdown').toggle();
+				_this.toHide.toggle();
 			});
-
-
 		},
 		hideOnOtherClick: function(){
 			var _this = this;
@@ -139,18 +136,14 @@ $(document).ready(function(){
 	};
 	mobileUserDropDown.run();
 
-	var mobileOptionDropDown = {
+		var mobileOptionDropDown = {
 		container: $('.m-options'),
 		toHide: $('#option-dropdown'),
 		dropDown: function(){
-			$('#option-dropdown').hide();
-			console.log('original hide');
-			$('.m-options').on('click' , function(e){
-				$('#option-dropdown').toggle();
-				console.log('click and toggle');
+			var _this = this;
+			this.container.on('click' , function(e){
+				_this.toHide.toggle();
 			});
-
-
 		},
 		hideOnOtherClick: function(){
 			var _this = this;

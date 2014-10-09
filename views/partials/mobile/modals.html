@@ -1,0 +1,74 @@
+<div class="pad-list-modal overlay-close">
+	<div class="x-modal">
+		<img src="/images/mobile/x.png" />
+	</div>
+	<div class="pad-title">
+		<p>Pad List</p>
+	</div>
+	{{> my_pads}}
+</div>
+<!-- Pad List -->
+
+<div class="m-account-modal overlay-close" id="m-login">
+	<div class="x-modal">
+		<img src="/images/mobile/x-dark.png" />
+	</div>
+	<div class="logo">
+		<img src="/images/mobile/login-logo.png" class="account-logo" />
+	</div>
+	<div class="account-content">
+		<h6 id="account-text">login to madpad</h6>
+		<div class="social-login fb-login"><a href="/auth/facebook"><img src="/images/mobile/facebook-login.png"></a></div>
+		<div class="social-login github-login"><a href="/auth/github"><img src="/images/mobile/github-login.png"></a></div>
+		<p id="login-msg">Don't have an account?<a href="#" id="signup-text"> Signup!</a></p>
+		<p id="sign-msg">Already have an account?<a href="#" id="login-text"> Login!</a></p>
+	</div>	
+</div>
+<!-- login modal -->
+
+<div class="create-pad-modal overlay-close">
+	<div class="x-modal">
+		<img src="/images/mobile/x-dark.png" />
+	</div>
+	<div id="create-pad-modal">
+		<div class="pad-type">
+			{{#if user.username}}
+			<div class="type-tab active" id="personal-type">
+			    <h6>Personal Pad</h6>
+			</div>
+			{{/if}}
+			<div class="type-tab {{#unless user.username}}active{{/unless}}" id="public-type">
+			    <h6>Public Pad</h6>
+			</div>
+		</div>
+    	<hr class="type-line" />
+		<form method="post" id="{{#if user.username}}createPadForm{{else}}openPadForm{{/if}}" class="openCreatePadForm">
+		  <div class="name-input">
+		    <div class="label">Pad Name</div>
+		    <input type="text" name="pad[name]" class="pad-name" placeholder="Enter your pad name here..." />
+		    <input type="hidden" name="pad[type]" value="text" />
+		    <input type="hidden" name="pad[username]" value="{{user.username}}" />
+		    <input type="hidden" name="pad[ajax]" value="true" />
+		  </div>
+		  <hr/>
+		<div class="pad-option">
+		    <div class="label">Pad Type</div>
+		    <div class="text-pad option-tab active">
+		        <p>Text Pad</p>
+		    </div>
+		    <div class="code-pad option-tab">
+		        <p>Code Pad</p>
+		    </div>
+		</div>
+		<hr/>
+		<div class="inputPadErrors">
+		</div>
+		<button class="green-btn" id="new-button">{{#if user.username}}CREATE{{else}}OPEN{{/if}} PAD</button>
+		   <div class="inputWhatPadWillOpen">
+		    <p>Your Pad's URL</p>
+		    </div>
+		</form>
+	</div>
+
+</div>
+<!-- Create Pad Modal -->

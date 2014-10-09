@@ -196,7 +196,7 @@ img {
 .mobile .status {
   position: absolute;
   width: 100%;
-  height: 70px;
+  height: 50px;
   background: rgba(93, 191, 241, 0.95);
   text-align: center;
   z-index: 2000;
@@ -204,8 +204,8 @@ img {
 }
 .mobile .status p {
   color: #ffffff;
-  line-height: 70px;
-  font-size: 18px;
+  line-height: 50px;
+  font-size: 16px;
 }
 .mobile .green-btn {
   background-color: #33bea8;
@@ -310,6 +310,7 @@ img {
 }
 .mobile .m-header .right-header .m-icons img {
   width: 20px;
+  height: 20px;
 }
 .mobile .m-tabs {
   position: absolute;
@@ -379,6 +380,9 @@ img {
   line-height: 18px;
   clear: both;
 }
+.mobile #editor-code div {
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace !important;
+}
 .mobile #editor-code .ace_sb {
   overflow-y: auto;
 }
@@ -401,9 +405,6 @@ img {
 }
 .mobile #editor-code .ace_gutter-cell.ace_info {
   background-image: none;
-}
-.mobile #editor-code .ace_line span {
-  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace !important;
 }
 .mobile .chat {
   background: #f9f9f9;
