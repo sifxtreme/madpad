@@ -673,7 +673,7 @@ a:hover {
   opacity: .98;
 }
 .hero .pad-example .froala-element {
-  height: 400px;
+  height: 400px !important;
   background: #ffffff;
 }
 .hero .pad-example .editor-active {
@@ -752,6 +752,52 @@ a:hover {
 }
 .header-sticky {
   background: #232c30;
+}
+.section {
+  padding: 80px 0px;
+}
+.section .row {
+  overflow: hidden;
+}
+.section .col-50 {
+  float: left;
+  width: 50%;
+  padding: 0px 80px;
+}
+.section h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+.section p {
+  font-size: 18px;
+  line-height: 28px;
+  margin-bottom: 20px;
+}
+.white {
+  background: #ffffff;
+}
+.grey {
+  background: #eaeaea;
+}
+.codesection .code-example {
+  width: 100%;
+  min-width: 500px;
+  max-width: 715px;
+  display: block;
+  margin: 0 auto;
+}
+.codesection .text {
+  padding-top: 0px;
+}
+@media (min-width: 1400px) {
+  .codesection .text {
+    padding-top: 20px;
+  }
+}
+@media (min-width: 1600px) {
+  .codesection .text {
+    padding-top: 80px;
+  }
 }
 /*   ---   End of Home Page   --   */
 /*   ---   Side Bar General   --   */

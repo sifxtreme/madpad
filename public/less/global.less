@@ -732,7 +732,7 @@ a{
         opacity: .98;
 
         .froala-element{
-            height: 400px;
+            height: 400px !important;
             background: @f;
         }
 
@@ -830,6 +830,62 @@ a{
 }
 
 
+.section{
+    padding: 80px 0px;
+
+    .row{
+        overflow: hidden;
+    }
+
+    .col-50{
+        float: left;
+        width: 50%;
+        padding: 0px 80px;
+    }
+
+    h1{
+        font-size: 36px;
+        margin-bottom: 20px;
+    }
+
+    p{
+        font-size: 18px;
+        line-height: 28px;
+        margin-bottom: 20px;
+    }
+}
+
+.white{
+    background: @f;
+}
+
+.grey{
+    background: @ea;
+}
+
+.codesection{
+
+    .code-example{
+        width: 100%;
+        min-width: 500px;
+        max-width: 715px;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .text{
+        padding-top: 0px;
+
+        @media(min-width: 1400px){
+            padding-top: 20px;
+        }
+
+        @media (min-width: 1600px){
+            padding-top: 80px;
+        }
+    }
+
+}
 
 
 
