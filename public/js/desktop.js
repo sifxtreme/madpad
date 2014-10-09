@@ -41,11 +41,29 @@ $(document).ready(function(){
 			$('.hero').removeClass('visible');
 		});
 	}
-	if(typeof isHome === 'undefined' || !isHome){
-		homeHero();
+	if(typeof isHome != 'undefined' && isHome){
+		homeHero();	
 	}
 
+	//sticky header
+	if(typeof isHome != 'undefined' && isHome){
+		$('.header').addClass('header-fixed');
+		$('.offset').css('height' , '70px');
 
+		function stickyHeader(){
+			$(window).scroll(function(){
+				var scroll = $(window).scrollTop();
+
+				if(scroll >= 650){
+					$('.header').addClass('header-sticky');
+				}
+				else{
+					$('.header').removeClass('header-sticky');
+				}
+			});
+		}
+		stickyHeader();
+	}
 
 
 	// add classes on icon hover
