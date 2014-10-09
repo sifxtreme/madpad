@@ -29,6 +29,24 @@ $(document).ready(function(){
 		editorActive();
 	}
 
+	//home page example
+	function homeHero(){
+		$('#editor').mouseenter(function() {
+			$('.hero').addClass('visible');
+			$('.hero').removeClass('hidden');
+		});
+
+		$('#editor').mouseleave(function() {
+			$('.hero').addClass('hidden');
+			$('.hero').removeClass('visible');
+		});
+	}
+	if(typeof isHome === 'undefined'){
+		homeHero();
+	}
+
+
+
 
 	// add classes on icon hover
 	function iconHover(){

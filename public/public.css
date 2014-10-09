@@ -642,13 +642,13 @@ a:hover {
   position: relative;
   background-color: #232c30;
   width: 100%;
-  height: 700px;
+  height: 770px;
   transition: 0.5s;
   -webkit-transition: 0.5s;
 }
 .hero .text {
   position: relative;
-  top: 60px;
+  top: 130px;
   text-align: center;
 }
 .hero h1 {
@@ -667,7 +667,7 @@ a:hover {
   width: 850px;
   height: 400px;
   position: relative;
-  top: 100px;
+  top: 160px;
   display: block;
   margin: 0 auto;
   opacity: .98;
@@ -733,7 +733,25 @@ a:hover {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  opacity: 0.5s;
+}
+.visible:before {
+  opacity: 0.1;
+  transition: 1s ease;
+  -webkit-transition: 1s ease;
+}
+.hidden:before {
+  opacity: 1;
+  transition: 1s;
+  -webkit-transition: 1s;
+}
+.header-fixed {
+  background: transparent;
+  position: fixed;
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+}
+.header-sticky {
+  background: #232c30;
 }
 /*   ---   End of Home Page   --   */
 /*   ---   Side Bar General   --   */
