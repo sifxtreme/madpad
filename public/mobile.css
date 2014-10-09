@@ -287,6 +287,7 @@ img {
   position: relative;
   top: 15px;
   width: 20px;
+  height: 20px;
 }
 .mobile .m-header .left-header .logo {
   float: left;
@@ -310,7 +311,6 @@ img {
 }
 .mobile .m-header .right-header .m-icons img {
   width: 20px;
-  height: 20px;
 }
 .mobile .m-tabs {
   position: absolute;

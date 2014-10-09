@@ -25,7 +25,10 @@ $(document).ready(function(){
 			$('.froala-box').removeClass('editor-active');
 		});
 	}
-	editorActive();
+	if(!isHome){
+		editorActive();
+	}
+
 
 	// add classes on icon hover
 	function iconHover(){
@@ -68,14 +71,19 @@ $(document).ready(function(){
 		$('.signup-step-wrapper').css('height' , signupStepHeight);
 
 	}/* Set heights for divs */
-
-	$(window).bind('resize', window_size);
+	if(!isHome){
+		$(window).bind('resize', window_size);	
+	}
+	
 
 })
 
 $(window).load(function() {
 
-	window_size();
+	if(!isHome){
+		window_size();	
+	}
+	
 	
 	$('img').bind('dragstart', function(){
 		return false; 

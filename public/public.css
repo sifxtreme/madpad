@@ -636,6 +636,106 @@ a:hover {
   color: #5dbff1;
   text-decoration: none;
 }
+/*   ---   End of Error Message Less   --   */
+/*   ---   Home Page   --   */
+.hero {
+  position: relative;
+  background-color: #232c30;
+  width: 100%;
+  height: 700px;
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+}
+.hero .text {
+  position: relative;
+  top: 60px;
+  text-align: center;
+}
+.hero h1 {
+  font-size: 50px;
+  color: #ffffff;
+  text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+  margin-bottom: 20px;
+  font-weight: normal;
+}
+.hero h2 {
+  font-size: 30px;
+  color: #eaeaea;
+  text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+}
+.hero .pad-example {
+  width: 850px;
+  height: 400px;
+  position: relative;
+  top: 100px;
+  display: block;
+  margin: 0 auto;
+  opacity: .98;
+}
+.hero .pad-example .froala-element {
+  height: 400px;
+  background: #ffffff;
+}
+.hero .pad-example .editor-active {
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+}
+.hero .pad-example .froala-box {
+  border: 1px solid #eaeaea !important;
+}
+.hero .pad-example .froala-editor {
+  border: none !important;
+  border-bottom: 1px solid #eaeaea !important;
+  z-index: 10;
+}
+.hero .pad-example .froala-element {
+  border: none !important;
+  background: #ffffff;
+  padding: 20px 20px !important;
+  font-size: 14px;
+  color: #232c30;
+  font-weight: 100;
+}
+.hero .pad-example .froala-element::-webkit-input-placeholder {
+  color: #9ea5ab;
+}
+.hero .pad-example .froala-element:-moz-placeholder {
+  color: #9ea5ab;
+}
+.hero .pad-example .froala-element::-moz-placeholder {
+  color: #9ea5ab;
+}
+.hero .pad-example .froala-element:-ms-input-placeholder {
+  color: #9ea5ab;
+}
+.hero .pad-example .froala-element strong {
+  font-weight: bold !important;
+}
+.hero .pad-example .froala-element strong span {
+  font-weight: bold;
+}
+.hero .pad-example .froala-element em {
+  font-style: italic;
+}
+.hero .pad-example .pad-area {
+  border: 4px solid #5dbff1 !important;
+}
+.hero:before {
+  position: absolute;
+  content: "";
+  top: 0px;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: url('/images/global/hero.jpg') no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  opacity: 0.5s;
+}
+/*   ---   End of Home Page   --   */
 /*   ---   Side Bar General   --   */
 .left {
   width: 250px;
