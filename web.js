@@ -70,11 +70,6 @@ app.get('/colors', function(req, res){
   res.render('colors');
 });
 
-// home page
-app.get('/', function(req, res) {
-  res.render('index');
-});
-
 // all pad routes
 require('./routes/pads')(app);
 

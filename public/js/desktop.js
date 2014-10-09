@@ -25,7 +25,7 @@ $(document).ready(function(){
 			$('.froala-box').removeClass('editor-active');
 		});
 	}
-	if(!isHome){
+	if(typeof isHome === 'undefined'){
 		editorActive();
 	}
 
@@ -89,7 +89,7 @@ $(document).ready(function(){
 		$('.signup-step-wrapper').css('height' , signupStepHeight);
 
 	}/* Set heights for divs */
-	if(!isHome){
+	if(typeof isHome === 'undefined'){
 		$(window).bind('resize', window_size);	
 	}
 	
@@ -98,7 +98,7 @@ $(document).ready(function(){
 
 $(window).load(function() {
 
-	if(!isHome){
+	if(typeof isHome === 'undefined'){
 		window_size();	
 	}
 	

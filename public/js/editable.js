@@ -228,7 +228,7 @@
       },
     });
 
-    if(!isHome){
+    if(typeof isHome === 'undefined'){
       window_size();
     }
 
