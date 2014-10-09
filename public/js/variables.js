@@ -1,5 +1,6 @@
 $(document).ready(function(){
 	var mpIsMobile = (document.getElementById("mpIsMobile")) ? document.getElementById("mpIsMobile").value : "";
+	var mpIsHome = (document.getElementById("mpIsHome")) ? document.getElementById("mpIsHome").value : "";
 
 	var mpUsersRoom = (document.getElementById("mpUsersRoom")) ? document.getElementById("mpUsersRoom").value : "";
 	var mpUserUsername = (document.getElementById("mpUserUsername")) ? document.getElementById("mpUserUsername").value : "";
@@ -24,6 +25,7 @@ $(document).ready(function(){
 	
 	////////////////
 	isMobile = mpIsMobile;
+	isHome = mpIsHome;
 	////////////////
 
 	// global user data

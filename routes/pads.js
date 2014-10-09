@@ -226,7 +226,7 @@ module.exports = function(app){
 	  var padObject = getPadObject(true, true, 'textpad');
 
 	  var renderView = function(cookiePads, isFavorite){
-	    res.render('pad', { id: padID, user: userInfo, userRoom: '', pad: padObject, myPads: cookiePads, isFavorite: isFavorite });    
+	    res.render('pad', { id: padID, user: userInfo, userRoom: '', pad: padObject, myPads: cookiePads, isFavorite: isFavorite });
 	  }
 
 	  // my pads information
@@ -393,6 +393,28 @@ module.exports = function(app){
 	    }
 	  })
 
+	});
+
+	// home page
+	app.get('/', function(req, res) {
+	  // attach sharejs server
+	  sharejs.server.attach(app, options);
+
+	  // get user info
+	  var userInfo = getUserInfoFromCookie(req);
+	  var userID = userInfo._id;
+	  var username = userInfo.username.toLowerCase();
+	  if(!username && Object.keys(userInfo.unknown).length == 0){
+	  	var unknown = unknownUserOptions.randomize();
+	  	req.madpad_user.unknown = unknown;
+	  	userInfo.unknown = unknown;
+	  }
+
+	  // set up pad info
+	  var padID = "_";
+	  var padObject = getPadObject(true, true, 'textpad');
+
+	  res.render('index', { id: padID, user: userInfo, userRoom: '', pad: padObject, isHome: true });
 	});
 
 }
