@@ -15,6 +15,7 @@
 			</ul>
 		{{/if}}
 	</section> <!-- user's pads -->
+	{{#compare myPads.sharedPads.length "0" operator=">"}}
 	<section class="shared-pads pad-list pad-hover">
 		<h5>shared pads</h5>
 		<ul>
@@ -31,6 +32,8 @@
 			{{/each}}
 		</ul>
 	</section> <!-- shared pads -->
+	{{/compare}}
+	{{#compare myPads.publicPads.length "0" operator=">"}}
 	<section class="public-pads pad-list pad-hover">
 		<h5>public pads</h5>
 		<ul>
@@ -47,4 +50,5 @@
 			{{/each}}
 		</ul>
 	</section> <!-- public pads -->
+	{{/compare}}
 </div>
