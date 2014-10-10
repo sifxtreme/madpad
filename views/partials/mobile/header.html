@@ -4,7 +4,7 @@
 			<img src="/images/mobile/hamburger.png" />
 		</div>
 		<div class="logo">
-			<img src="/images/mobile/logo@2x.png" />
+			<a href="/"><img src="/images/mobile/logo@2x.png" /></a>
 		</div>
 	</div><!-- left side -->
 	<div class="right-header">
@@ -27,7 +27,7 @@
 				<img src="{{user.picture}}" class="avatar-header" />
 				<div class="mobile-dropdown" id="user-dropdown" style="display:none">
 					<ul>
-						<li><a href="#" class="username"><img src="{{user.picture}}" class="avatar-header" />{{user.username}}</a></li>
+						<li><a href="/{{user.username}}/home" class="username"><img src="{{user.picture}}" class="avatar-header" />{{user.username}}</a></li>
 						<li><a href="/help">Help</a></li>
 						<li><a href="/logout">Log out</a></li>
 					</ul>

@@ -1,6 +1,6 @@
   <div class="header sides minwidth">
   <div class="logo-container">
-      <a href="#"><img src="/images/header/logo@2x.png"/></a>
+      <a href="/"><img src="/images/header/logo@2x.png"/></a>
   </div>
   <div class="menu-container">
       {{#if user.username}}
@@ -9,7 +9,7 @@
           <div class="avatar-drop" style="display:none;">
               <div class="arrow-up"></div>
               <ul class="dropdown">
-                <li>{{user.username}}</li>
+                <li><a href="/{{user.username}}/home">{{user.username}}</a></li>
                 <li><a href="/help"><span class="help-icon"></span>Help</a></li>
                 <li><a href="/logout"><span class="logout-icon"></span>Log out</a></li>
               </ul>

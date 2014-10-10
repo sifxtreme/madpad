@@ -281,6 +281,9 @@ a:hover {
   border: none;
   cursor: default;
 }
+.header .menu-container .avatar-drop .dropdown li:first-child a{
+  color: #ffffff;
+}
 .header .menu-container .avatar-drop .dropdown li:last-child {
   margin-bottom: 0px;
 }
