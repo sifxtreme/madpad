@@ -274,14 +274,13 @@ a:hover {
 }
 .header .menu-container .avatar-drop .dropdown li:first-child {
   background: #5dbff1;
-  color: #ffffff;
   height: 60px;
   line-height: 60px;
   text-align: center;
   border: none;
   cursor: default;
 }
-.header .menu-container .avatar-drop .dropdown li:first-child a{
+.header .menu-container .avatar-drop .dropdown li:first-child a {
   color: #ffffff;
 }
 .header .menu-container .avatar-drop .dropdown li:last-child {
@@ -756,11 +755,10 @@ a:hover {
 .header-sticky {
   background: #232c30;
 }
-.section {
-  padding: 80px 0px;
-}
 .section .row {
   overflow: hidden;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 .section .col-50 {
   float: left;
@@ -780,7 +778,10 @@ a:hover {
   background: #ffffff;
 }
 .grey {
-  background: #eaeaea;
+  background: #f9f9f9;
+}
+.codesection {
+  padding: 80px 0px;
 }
 .codesection .code-example {
   width: 100%;
@@ -801,6 +802,17 @@ a:hover {
   .codesection .text {
     padding-top: 80px;
   }
+}
+.iphonesection {
+  padding-top: 80px;
+}
+.iphonesection .text {
+  padding-top: 120px;
+}
+.iphonesection .iphone {
+  width: 400px;
+  margin: 0 auto;
+  display: block;
 }
 /*   ---   End of Home Page   --   */
 /*   ---   Side Bar General   --   */
