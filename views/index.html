@@ -1,15 +1,22 @@
 <!-- <div class="offset"></div> -->
 <div class="hero">
 	<div class="text">
-		<h1>madpad is here</h1>
-		<h2>Ultra fast "document" and {code} editing from anywhere</h2>
+		<h1 class="noselect">madpad is here</h1>
+		<h2 class="noselect">Ultra fast "document" and {code} editing from anywhere</h2>
 	</div>
-	<div class="pad-example">
+	<div class="pad-example" id="textpad-home">
 		<div id="editor" class="pad-area editor-active" placeholder="Start typing here!"></div>
 		<textarea class="main" style="display:none;" id="pusherContentEditable"></textarea>
 	</div>
+	<div class="pad-example" id="codepad-home">
+
+		<div id="editor-code" class="pad-area editor-active"></div>
+	</div>
+	<div class="toggle noselect">
+		<span id="code-btn" class="active" >code</span><span id="text-btn">text</span>
+	</div>
 </div>
-<div class="section white minwidth sides codesection">
+<div class="section white minwidth codesection">
 	<div class="row">
 		<div class="col-50 text">
 			<h1>Text editing or code editing. Why not both?</h1>
@@ -22,7 +29,7 @@
 	</div>
 </div>
 
-<div class="section grey minwidth sides iphonesection ">
+<div class="section grey minwidth iphonesection ">
 	<div class="row">
 		<div class="col-50">
 			<img src="/images/global/iphone.png" class="iphone" />
@@ -30,13 +37,29 @@
 		<div class="col-50 text">
 			<h1>Chat about your docs</h1>
 			<p>Communication is important.  We've made it easy.</p>
-			<p>Madpad allows you to chat with your collaborators on any device.  Even without having to log in, you can contribute to the converation with your own personal avatars.</p>
+			<p>Madpad allows you to chat with your collaborators on any device.  Even without having to log in, you can contribute to the conversation whereever you are.</p>
 		</div>
 	</div>
 </div>
 
+<div class="section white minwidth privacy ">
+	<div class="row">
+		<div class="col-50 text">
+			<h1>Customize your privacy.</h1>
+			<p>Privacy is immportant, we understand.</p>
+			<p>Madpad gives you the flexibility of different privacy settings for all of your documents.  Keeping your work private or sharing it with the world couldn't be easier.</p>
+		</div>
+		<div class="col-50">
+			<img src="/images/global/privacy.png" class="iphone" />
+		</div>
+	</div>
+</div>
 
-<div style="height: 500px;"></div>
+<div class="section blue minwidth signuparea">
+	<h1 class="noselect">Ready to get started?</h1>
+	<a href="#" class="login-button noselect">Sign Up</a>
+</div>
+
 <!-- <p>For example go to <a href="/YOUR_NAME">madpad.me/YOUR_NAME</a> to create or edit a snippet.</p>
 <p>Or if you want a random short URL that you can remember go to <a href="/{{random}}">madpad.me/{{random}}</a></p> -->
 

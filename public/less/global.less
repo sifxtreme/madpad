@@ -272,6 +272,15 @@ a{
 .sides{
     padding: 0px 20px;
 }
+
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
 /*   ---   End of Header   --   */
 
 
@@ -725,6 +734,33 @@ a{
         text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
     }
 
+    .toggle{
+        position: absolute;
+        right: 20px;
+        bottom: 20px;
+        background: @ea;
+        border: 4px solid @f;
+        padding: 4px 4px;
+        border-radius: 50px;
+
+        span{
+            display: inline-block;
+            width: 70px;
+            line-height: 30px;
+            text-align: center;
+            padding: 4px 4px;
+            color: @7;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            
+        }
+        .active{
+            background: @blue;
+            color: @f;
+        }
+    }
+
     .pad-example{
         width: 850px;
         height: 400px;
@@ -789,6 +825,10 @@ a{
             }
         }
 
+        #editor-code{
+            height: 444px !important;
+        }
+
         .pad-area{
             border: 4px solid @blue !important;
         }
@@ -850,6 +890,7 @@ a{
     h1{
         font-size: 36px;
         margin-bottom: 20px;
+        line-height: 48px;
     }
 
     p{
@@ -865,6 +906,10 @@ a{
 
 .grey{
     background: @light;
+}
+
+.blue{
+    background: @blue;
 }
 
 .codesection{
@@ -898,6 +943,7 @@ a{
 
     .text{
         padding-top: 120px;
+        padding-left: 0px;
     }
 
     .iphone{
@@ -906,6 +952,49 @@ a{
         display: block;
     }
 }
+
+.privacy{
+    padding: 80px 0px;
+
+    .text{
+        padding-top: 80px;
+    }
+
+    .iphone{
+        width: 400px;
+        margin: 0 auto;
+        display: block;
+    }
+}
+
+.signuparea{
+    padding: 120px 0px;
+    text-align: center;
+    background: url("/images/global/signup.jpg") no-repeat center center;
+    background-size: cover;    
+
+    h1{
+        color: @f;
+        margin-bottom: 40px;
+    }
+
+    a{
+        display: inline-block;
+        border: 1px solid @f;
+        font-size: 18px;
+        color: @f;
+        padding: 10px 20px;
+        text-decoration: none;
+
+        &:hover{
+            color: @green;
+            border: 1px solid @green;
+            transition: 0.5s;
+            -webkit-transition: 0.5s;
+        }
+    }
+}
+
 
 
 
