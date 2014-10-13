@@ -107,19 +107,13 @@ $(document).ready(function(){
 		$('.signup-step-wrapper').css('height' , signupStepHeight);
 
 	}/* Set heights for divs */
-	if(typeof isHome === 'undefined' || !isHome){
-		$(window).bind('resize', window_size);	
-	}
-	
+	$(window).bind('resize', window_size);	
 
 })
 
 $(window).load(function() {
 
-	if(typeof isHome === 'undefined' || !isHome){
-		window_size();	
-	}
-	
+	window_size();
 	
 	$('img').bind('dragstart', function(){
 		return false; 

@@ -129,7 +129,6 @@
 
   function correctCursor(pos, text, isInsert, elem, transformCursor){
     isIncoming = true;
-    console.log("INCOMING");
 
     var beforeText = $("#editor").editable("getText");
     var textToCursor = getTextFromHeadToCaret();
@@ -219,7 +218,6 @@
       imageUpload: false,
       contentChangedCallback: function () {
         if(!isIncoming){
-          console.log("CHANGES");
           var newText = $("#editor").editable("getHTML");
           elem.value = newText;
           genOp();
