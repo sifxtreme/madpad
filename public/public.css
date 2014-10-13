@@ -316,6 +316,14 @@ a:hover {
 .sides {
   padding: 0px 20px;
 }
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 /*   ---   End of Header   --   */
 /*   ---   Random CSS   --   */
 .madpad-container {
@@ -665,6 +673,30 @@ a:hover {
   color: #eaeaea;
   text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
 }
+.hero .toggle {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  background: #eaeaea;
+  border: 4px solid #ffffff;
+  padding: 4px 4px;
+  border-radius: 50px;
+}
+.hero .toggle span {
+  display: inline-block;
+  width: 70px;
+  line-height: 30px;
+  text-align: center;
+  padding: 4px 4px;
+  color: #777777;
+  font-weight: bold;
+  border-radius: 50px;
+  cursor: pointer;
+}
+.hero .toggle .active {
+  background: #5dbff1;
+  color: #ffffff;
+}
 .hero .pad-example {
   width: 850px;
   height: 400px;
@@ -720,6 +752,9 @@ a:hover {
 .hero .pad-example .froala-element em {
   font-style: italic;
 }
+.hero .pad-example #editor-code {
+  height: 444px !important;
+}
 .hero .pad-example .pad-area {
   border: 4px solid #5dbff1 !important;
 }
@@ -768,6 +803,7 @@ a:hover {
 .section h1 {
   font-size: 36px;
   margin-bottom: 20px;
+  line-height: 48px;
 }
 .section p {
   font-size: 18px;
@@ -779,6 +815,9 @@ a:hover {
 }
 .grey {
   background: #f9f9f9;
+}
+.blue {
+  background: #5dbff1;
 }
 .codesection {
   padding: 80px 0px;
@@ -808,11 +847,47 @@ a:hover {
 }
 .iphonesection .text {
   padding-top: 120px;
+  padding-left: 0px;
 }
 .iphonesection .iphone {
   width: 400px;
   margin: 0 auto;
   display: block;
+}
+.privacy {
+  padding: 80px 0px;
+}
+.privacy .text {
+  padding-top: 80px;
+}
+.privacy .iphone {
+  width: 400px;
+  margin: 0 auto;
+  display: block;
+}
+.signuparea {
+  padding: 120px 0px;
+  text-align: center;
+  background: url("/images/global/signup.jpg") no-repeat center center;
+  background-size: cover;
+}
+.signuparea h1 {
+  color: #ffffff;
+  margin-bottom: 40px;
+}
+.signuparea a {
+  display: inline-block;
+  border: 1px solid #ffffff;
+  font-size: 18px;
+  color: #ffffff;
+  padding: 10px 20px;
+  text-decoration: none;
+}
+.signuparea a:hover {
+  color: #33bea8;
+  border: 1px solid #33bea8;
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
 }
 /*   ---   End of Home Page   --   */
 /*   ---   Side Bar General   --   */
