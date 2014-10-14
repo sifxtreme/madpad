@@ -70,8 +70,14 @@ app.get('/colors', function(req, res){
   res.render('colors');
 });
 
+app.get('/about', function(req, res){
+  res.render('about');
+});
+
 // all pad routes
 require('./routes/pads')(app);
+
+
 
 // handle 404
 app.use(function(req, res, next) {

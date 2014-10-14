@@ -270,7 +270,8 @@ a{
 }
 
 .sides{
-    padding: 0px 20px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .noselect {
@@ -767,6 +768,10 @@ a{
         right: 20px;
     }
 
+    #textpad-home{
+        display: none;
+    }
+
     .pad-example{
         width: 850px;
         height: 400px;
@@ -775,6 +780,8 @@ a{
         display: block;
         margin: 0 auto;
         opacity: .98;
+
+
 
         .froala-element{
             height: 400px !important;
@@ -831,6 +838,7 @@ a{
             }
         }
 
+
         #editor-code{
             height: 444px !important;
         }
@@ -878,6 +886,13 @@ a{
 
 .header-sticky{
     background: @dark;
+
+    .menu-container{
+        .login-button{
+            border: 1px solid @green;
+            color: @green;
+        }
+    }
 }
 
 
@@ -1006,29 +1021,55 @@ a{
     }
 }
 
+/* Footer */
+footer{
+    width: 100%;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background: @dark;
+    border-top: 1px solid @hover;
 
+    .row{
+        overflow: hidden;
+    }
 
-/* Fading Up */
-.fade-up{
-    position: relative;
-    top: 150px;
-    opacity: 0;
+    .leftside{
+        float: left;
+        width: 30%;
+
+        p{
+            font-size: 14px;
+            color: @f;
+            opacity: 0.5;
+            line-height: 18px;
+        }
+    }
 }
-
-.fade-down{
-    position: relative;
-    top: -150px;
-    opacity: 0;
-}
-
-
-
-
-
-
-
 
 /*   ---   End of Home Page   --   */
 
 
 
+
+
+/*   ---  About us Page   --   */
+
+.about-wrap{
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    top: 40%;
+    margin-top: -150px;
+    .col{
+        float: left;
+        width: 50%;
+    }
+
+    .about-avatar{
+        width: 200px;
+        border-radius: 50%;
+        display: block;
+        margin: 0 auto;
+    }
+
+}

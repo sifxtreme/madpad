@@ -60,32 +60,6 @@ $(document).ready(function(){
 			});
 		}
 
-
-		function fadeUp(){
-		    $(".fade-up").animate({
-		        opacity: 1
-		    }, {
-		        duration: 800,
-		        queue: false
-		    });
-		    $(".fade-up").animate({
-		        "top": "0px"
-		    }, {
-		        duration: 800,
-		        queue: false
-		    });
-		}
-
-		function visibleOnScroll(){
-			$(window).on("scroll", function() {
-			    if ($(window).scrollTop() >= $('.fade-up').offset().top-$(window).height()) {
-			        fadeUp();
-			    }
-
-			});
-		}
-		visibleOnScroll();
-
 		function togglePadHome(){
 			$('#textpad-home').hide();
 			$('#text-btn').click(function(){
