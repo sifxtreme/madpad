@@ -205,6 +205,7 @@ a:hover {
   -webkit-transition: all 0.3s;
   -moz-transition: all 0.3s;
   transition: all 0.3s;
+  color: #ffffff;
 }
 .header .menu-container .avatar-user {
   position: relative;
@@ -930,18 +931,47 @@ footer .leftside p {
   max-width: 1100px;
   margin: 0 auto;
   position: relative;
-  top: 40%;
-  margin-top: -150px;
+  top: 100px;
+}
+.about-wrap h1 {
+  font-size: 40px;
+  color: #dddddd;
+  text-align: center;
+  margin-bottom: 60px;
 }
 .about-wrap .col {
   float: left;
   width: 50%;
+  text-align: center;
+}
+.about-wrap .col h2 {
+  font-size: 30px;
+  color: #5dbff1;
+  margin-top: 30px;
 }
 .about-wrap .about-avatar {
   width: 200px;
   border-radius: 50%;
   display: block;
   margin: 0 auto;
+}
+.about-wrap hr {
+  width: 300px;
+  border: none;
+  border-top: 2px solid #eaeaea;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.about-wrap .social-logo {
+  width: 30px;
+  height: 30px;
+  margin: 0px 10px;
+  opacity: 0.7;
+}
+.about-wrap .social-logo:hover {
+  opacity: 1;
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
 }
 /*   ---   Side Bar General   --   */
 .left {
