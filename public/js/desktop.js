@@ -4,6 +4,15 @@ $(document).ready(function(){
 
 	$('.username-wrapper').css('opacity' , '1').addClass('move');
 
+	var helpClick = function(){
+		$(".help-click").click(function(){
+			$(".uv-icon").trigger("click");
+			return false;
+		});
+	}
+
+	helpClick();
+
 	// add x on hover to recent pads
 	var padItemOptions = function(){
 		$('.pad-heart-x').hide();
