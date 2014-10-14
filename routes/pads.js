@@ -137,6 +137,25 @@ module.exports = function(app){
 		return false;
 	}
 
+	// privacy policy
+	app.get('/privacy-policy', function(req, res) {
+
+	  // get user info
+	  var userInfo = getUserInfoFromCookie(req);
+	  var userID = userInfo._id;
+
+	  res.render('privacy-policy', { user: userInfo, userRoom: '' });
+	});
+
+	// about page
+	app.get('/about', function(req, res){
+	  // get user info
+	  var userInfo = getUserInfoFromCookie(req);
+	  var userID = userInfo._id;
+
+	  res.render('about', { user: userInfo, userRoom: '' });
+	});
+
 	// code pad
 	app.get('/code/:id', function(req, res){
 	  // attach sharejs server

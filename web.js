@@ -65,19 +65,8 @@ passport.deserializeUser(function(id, done) {
 // login-signup routes
 require('./routes/account')(app, passport);
 
-// color pad for jimmy
-app.get('/colors', function(req, res){
-  res.render('colors');
-});
-
-app.get('/about', function(req, res){
-  res.render('about');
-});
-
-// all pad routes
+// all other routes
 require('./routes/pads')(app);
-
-
 
 // handle 404
 app.use(function(req, res, next) {
@@ -90,6 +79,7 @@ app.use(function(req, res, next) {
 app.use(function(error, req, res, next) {
   if(req.url.indexOf('channel') !== -1) return next();
   res.status(500);
+  console.log(error);
   res.render('error', {errorType: '500'});
 });
 

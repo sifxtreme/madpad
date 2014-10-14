@@ -30,6 +30,18 @@
 
   {{{body}}}
 
+  {{#unless is_phone}}
+  {{#if isHome}}
+  <link rel="stylesheet" type="text/css" href="/home/css/component.css" />
+  <script src="/home/js/modernizr.custom.js"></script>
+  <script src="/home/js/classie.js"></script>
+  <script src="/home/js/cbpScroller.js"></script>
+  <script>
+    new cbpScroller( document.getElementById( 'cbp-so-scroller' ) );
+  </script>
+  {{/if}}
+  {{/unless}}
+
   <script src="/js/jquery-1.11.1.min.js"></script>
 
   <script src="/js/modals.js"></script>

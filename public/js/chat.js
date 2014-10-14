@@ -1,6 +1,7 @@
 $(document).ready(function(){
 	if(typeof padTemplate == 'undefined') return;
 	if(!padTemplate) return;
+	if(isHome) return;
 
 	var madpadChat = {
 
