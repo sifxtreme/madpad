@@ -697,6 +697,11 @@ a:hover {
   background: #5dbff1;
   color: #ffffff;
 }
+.hero .code-type {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
 .hero .pad-example {
   width: 850px;
   height: 400px;
@@ -765,7 +770,7 @@ a:hover {
   right: 0;
   left: 0;
   bottom: 0;
-  background: url('/images/global/hero.jpg') no-repeat center center;
+  background: url('/images/global/hero1.jpg') no-repeat center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -846,8 +851,9 @@ a:hover {
   padding-top: 80px;
 }
 .iphonesection .text {
-  padding-top: 120px;
   padding-left: 0px;
+  position: relative;
+  top: 120px;
 }
 .iphonesection .iphone {
   width: 400px;
@@ -888,6 +894,17 @@ a:hover {
   border: 1px solid #33bea8;
   transition: 0.5s;
   -webkit-transition: 0.5s;
+}
+/* Fading Up */
+.fade-up {
+  position: relative;
+  top: 150px;
+  opacity: 0;
+}
+.fade-down {
+  position: relative;
+  top: -150px;
+  opacity: 0;
 }
 /*   ---   End of Home Page   --   */
 /*   ---   Side Bar General   --   */

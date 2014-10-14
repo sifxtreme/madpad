@@ -761,6 +761,12 @@ a{
         }
     }
 
+    .code-type{
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
+
     .pad-example{
         width: 850px;
         height: 400px;
@@ -835,6 +841,8 @@ a{
     }
 }
 
+
+
 .hero:before{
     position: absolute;
     content: "";
@@ -842,7 +850,7 @@ a{
     right: 0;
     left: 0;
     bottom: 0;
-    background: url('/images/global/hero.jpg') no-repeat center center;
+    background: url('/images/global/hero1.jpg') no-repeat center center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -942,9 +950,12 @@ a{
     padding-top: 80px;
 
     .text{
-        padding-top: 120px;
         padding-left: 0px;
+        position: relative;
+        top: 120px;
     }
+
+
 
     .iphone{
         width: 400px;
@@ -993,6 +1004,21 @@ a{
             -webkit-transition: 0.5s;
         }
     }
+}
+
+
+
+/* Fading Up */
+.fade-up{
+    position: relative;
+    top: 150px;
+    opacity: 0;
+}
+
+.fade-down{
+    position: relative;
+    top: -150px;
+    opacity: 0;
 }
 
 
