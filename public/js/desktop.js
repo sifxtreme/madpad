@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+	isHome = (document.location.pathname == '/') ? true : false;
+
 	$('.username-wrapper').css('opacity' , '1').addClass('move');
 
 	// add x on hover to recent pads
@@ -25,48 +27,12 @@ $(document).ready(function(){
 			$('.froala-box').removeClass('editor-active');
 		});
 	}
-	if(typeof isHome === 'undefined'){
+	if(!isHome){
 		editorActive();
 	}
 
 	//home page example
-	function homeHero(){
-		$('#editor').mouseenter(function() {
-			$('.hero').addClass('visible');
-			$('.hero').removeClass('hidden');
-		});
-
-		$('#editor').mouseleave(function() {
-			$('.hero').addClass('hidden');
-			$('.hero').removeClass('visible');
-		});
-	}
-	if(typeof isHome != 'undefined' && isHome){
-		homeHero();	
-	}
-
-	function togglePadHome(){
-		$('#textpad-home').hide();
-		$('#text-btn').click(function(){
-			$('#code-btn').removeClass('active');
-			$('#text-btn').addClass('active');
-			$('#codepad-home').hide();
-			$('#textpad-home').show();
-		});
-		$('#code-btn').click(function(){
-			$('#text-btn').removeClass('active');
-			$('#code-btn').addClass('active');
-			$('#textpad-home').hide();
-			$('#codepad-home').show();
-		});
-	}
-	if(typeof isHome != 'undefined' &&isHome){
-		togglePadHome();
-	}
-
-	//sticky header
-	if(typeof isHome != 'undefined' && isHome){
-		$('.header').addClass('header-fixed');
+	if(isHome){
 		$('.offset').css('height' , '70px');
 
 		function stickyHeader(){
@@ -81,9 +47,39 @@ $(document).ready(function(){
 				}
 			});
 		}
+
+		function homeHero(){
+			$('#editor, #editor-code').mouseenter(function() {
+				$('.hero').addClass('visible');
+				$('.hero').removeClass('hidden');
+			});
+
+			$('#editor, #editor-code').mouseleave(function() {
+				$('.hero').addClass('hidden');
+				$('.hero').removeClass('visible');
+			});
+		}
+
+		function togglePadHome(){
+			$('#textpad-home').hide();
+			$('#text-btn').click(function(){
+				$('#code-btn').removeClass('active');
+				$('#text-btn').addClass('active');
+				$('#codepad-home').hide();
+				$('#textpad-home').show();
+			});
+			$('#code-btn').click(function(){
+				$('#text-btn').removeClass('active');
+				$('#code-btn').addClass('active');
+				$('#textpad-home').hide();
+				$('#codepad-home').show();
+			});
+		}
+
+		homeHero();
+		togglePadHome();
 		stickyHeader();
 	}
-
 
 	// add classes on icon hover
 	function iconHover(){
@@ -126,13 +122,18 @@ $(document).ready(function(){
 		$('.signup-step-wrapper').css('height' , signupStepHeight);
 
 	}/* Set heights for divs */
-	$(window).bind('resize', window_size);	
+	if(!isHome){
+		$(window).bind('resize', window_size);		
+	}
+	
 
 })
 
 $(window).load(function() {
 
-	window_size();
+	if(!isHome){
+		window_size();	
+	}
 	
 	$('img').bind('dragstart', function(){
 		return false; 

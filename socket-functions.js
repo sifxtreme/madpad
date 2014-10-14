@@ -124,8 +124,6 @@ module.exports = function(io){
     	if(!data.room) return;
       if(typeof data.codeMode === 'undefined') return;
 
-      console.log('socket modeChanged');
-
       var userID = getUserIdFromSocket(socket.request.headers.cookie);
 
       Pad.findOne({name: data.room}, function(err, pad){
@@ -134,16 +132,20 @@ module.exports = function(io){
           console.log(err);
         }
         else {
-        	// if it's a public pad or we are the owner
-        	if(pad.writeAccess || pad.owner == userID){
-        		Pad.findByIdAndUpdate(pad._id, {$set: {codeType: data.codeMode}}, function(err, pad){
-  						if(err){
-  							// TO DO - ERROR CHECKING
-  							console.log(err);
-  						}
-  			    });
-        		socket.broadcast.to(data.room).emit('changeMode', data.codeMode);
-        	}
+          
+          if(pad){
+            // if it's a public pad or we are the owner
+            if(pad.writeAccess || pad.owner == userID){
+              Pad.findByIdAndUpdate(pad._id, {$set: {codeType: data.codeMode}}, function(err, pad){
+                if(err){
+                  // TO DO - ERROR CHECKING
+                  console.log(err);
+                }
+              });
+              socket.broadcast.to(data.room).emit('changeMode', data.codeMode);
+            }            
+          }
+
         }
       });
       
@@ -164,17 +166,19 @@ module.exports = function(io){
             console.log(err);
           }
           else {
-            
-            Pad.findByIdAndUpdate(pad._id, {$set: {writeAccess: data.write, readAccess: data.read}}, function(err, pad){
-              if(err){
-                // TO DO - ERROR CHECKING
-                console.log(err);
-              }
-              else{
-                socket.broadcast.to(data.room).emit('togglePrivacy', data.type);
-              }
-            })
-            
+
+            if(pad){
+              Pad.findByIdAndUpdate(pad._id, {$set: {writeAccess: data.write, readAccess: data.read}}, function(err, pad){
+                if(err){
+                  // TO DO - ERROR CHECKING
+                  console.log(err);
+                }
+                else{
+                  socket.broadcast.to(data.room).emit('togglePrivacy', data.type);
+                }
+              })              
+            }
+         
           }
         });
       }

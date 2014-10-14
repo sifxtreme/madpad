@@ -7,9 +7,15 @@ $(document).ready(function(){
 
 	// toggle extra pads - add animation here
 	$(".toggle-recent-pads").click(function(){
-		var aElement = $(this).children("a");
-		console.log(aElement);
-		console.log($(this).html());
+		aElement = $(this).children("a");
+
+		if(aElement.text() == "More Pads"){
+			aElement.text("Fewer Pads")
+		} 
+		else {
+			aElement.text("More Pads");
+		}
+		
 		$(this).parent().children(".pad-item-hidden").toggle();
 		return false;
 	})

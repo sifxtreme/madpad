@@ -226,7 +226,7 @@
       },
     });
 
-    if(typeof isHome === 'undefined' || !isHome){
+    if(document.location.pathname != '/'){
       window_size();
     }
 

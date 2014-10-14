@@ -33,6 +33,9 @@ $(document).ready(function(){
 			var _this = this;
 			$('.login-button').on('click', function(){
 				_this.switchToLogin();
+				if($(this).hasClass('home-signup')){
+					_this.switchToSignup();
+				}
 				modals.showOverlay('.login-signup');
 			});
 		},

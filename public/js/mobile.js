@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+	isHome = (document.location.pathname == '/') ? true : false;
+
 	window_size = function() {
 		var height = $(window).height();
 		var submitHeight = 70;

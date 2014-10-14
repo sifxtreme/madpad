@@ -11,6 +11,25 @@
   <link href="/froala_1.2.1/css/font-awesome.css" rel="stylesheet" type="text/css">
   <link href="/froala_1.2.1/css/froala_editor.css" rel="stylesheet" type="text/css">
   
+</head>
+
+<body {{#if is_phone}}class="mobile"{{/if}}>
+
+  {{> status_messaging}}
+
+  {{#if is_phone}}
+    {{> mobile/modals}}
+    {{> mobile/header}}
+  {{else}}
+    {{> modals/login_signup}}
+    {{> modals/settings}}
+    {{> modals/delete}}
+    {{> modals/create_pad}}
+    {{> header}}
+  {{/if}}
+
+  {{{body}}}
+
   <script src="/js/jquery-1.11.1.min.js"></script>
 
   <script src="/js/modals.js"></script>
@@ -39,25 +58,7 @@
   <script src="/ace/ace-editor.js"></script>
 
   <script src="/js/textarea.js"></script>
-  <script src="/js/editable.js"></script>  
-</head>
-
-<body {{#if is_phone}}class="mobile"{{/if}}>
-
-  {{> status_messaging}}
-
-  {{#if is_phone}}
-    {{> mobile/modals}}
-    {{> mobile/header}}
-  {{else}}
-    {{> modals/login_signup}}
-    {{> modals/settings}}
-    {{> modals/delete}}
-    {{> modals/create_pad}}
-    {{> header}}
-  {{/if}}
-
-  {{{body}}}
+  <script src="/js/editable.js"></script>
 
   <script src="/js/variables.js"></script>
   <script src="/js/textpad.js"></script>

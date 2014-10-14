@@ -1,6 +1,12 @@
 $(window).load(function(){
 	if(!$('#editor-code').length) return;
 
+	// check for home page
+	if(isHome){
+		padName += "______";
+		padData.type = 'text';
+	}
+
 	// change code mode
 	var changeEditorType = function(type){
 		editor.session.setMode("ace/mode/" + type);
@@ -16,7 +22,10 @@ $(window).load(function(){
 	$("#mode").on("change", function(){
 		var codeMode = $(this).val();
 		editor.session.setMode("ace/mode/" + codeMode);
-		madpadSocket.emit('modeChanged', {room: padName, codeMode: codeMode});
+		if(!isHome){
+			madpadSocket.emit('modeChanged', {room: padName, codeMode: codeMode});	
+		}
+		
 	})
 
 	// if someone else changed the codemode
