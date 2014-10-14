@@ -4,7 +4,7 @@ $(window).load(function(){
 	// check for home page
 	if(isHome){
 		padName += "______";
-		padData.type = 'text';
+		padData.type = 'html';
 	}
 
 	// change code mode

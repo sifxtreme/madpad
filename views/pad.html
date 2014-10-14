@@ -132,14 +132,14 @@
 				<h2>{{id}} <span>{{#if pad.isTextPad}}pad{{else}}{code pad}{{/if}}</span></h2>
 			</div>
 			<div class="title-options">	
-				<div class="icon new-icon"></div>
-				{{#if user.username}}<div id="heartFavoriteIcon" class="icon {{#if isFavorite}}favorite-icon{{else}}heart-icon{{/if}}"></div>{{/if}}
-				<div class="icon chaton-icon"></div>
-				{{#compare usersRoom user.username operator="=="}}<div class="icon trash-icon"></div>{{/compare}}
+				<div class="icon new-icon tooltip" name="open new pad"></div>
+				{{#if user.username}}<div id="heartFavoriteIcon" class="icon {{#if isFavorite}}favorite-icon{{else}}heart-icon{{/if}} tooltip" name="toggle favorite"></div>{{/if}}
+				<div class="icon chaton-icon tooltip" name="toggle chat"></div>
+				{{#compare usersRoom user.username operator="=="}}<div class="icon trash-icon tooltip" name="delete pad"></div>{{/compare}}
 			</div>
 			<!-- change settings icon -->
 			{{#if usersRoom}}
-				<div class="share-settings-icon">
+				<div class="share-settings-icon {{#compare usersRoom user.username operator='=='}}tooltip{{/compare}}" name="change privacy settings">
 					<div class="icon pad-settings 
 						{{#if pad.readAccess}}{{#if pad.writeAccess}}public-icon{{else}}shared-icon{{/if}}{{else}}private-icon{{/if}}">
 					</div>
