@@ -147,6 +147,16 @@ module.exports = function(app){
 	  res.render('privacy-policy', { user: userInfo, userRoom: '' });
 	});
 
+	// privacy policy
+	app.get('/terms-of-service', function(req, res) {
+
+	  // get user info
+	  var userInfo = getUserInfoFromCookie(req);
+	  var userID = userInfo._id;
+
+	  res.render('terms-of-service', { user: userInfo, userRoom: '' });
+	});
+
 	// about page
 	app.get('/about', function(req, res){
 	  // get user info
