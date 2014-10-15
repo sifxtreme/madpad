@@ -168,6 +168,7 @@ img {
   /*   ---   End of Account User CSS   --   */
   /*   ---   New Pad CSS   --   */
   /*   ---   End of New Pad CSS   --   */
+  /*   ---  Feedback Override  --   */
 }
 .mobile h1,
 .mobile h2,
@@ -1085,5 +1086,21 @@ img {
   display: block;
   width: 100%;
   margin: 0 auto;
+}
+.mobile .uv-icon > svg {
+  display: none;
+  width: 0px;
+  height: 0px;
+}
+.mobile .uv-icon {
+  width: 0px !important;
+  height: 0px !important;
+}
+.mobile .uv-popover-tail {
+  display: none;
+}
+.mobile .uv-icon.uv-bottom-left {
+  bottom: 0px !important;
+  left: 10px !important;
 }
 /*   ---   End of All Mobile LESS   ---   */
