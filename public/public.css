@@ -991,6 +991,43 @@ footer .leftside p {
   bottom: 0px !important;
   left: 10px !important;
 }
+/*   ---  End of Feedback Override  --   */
+/*   ---  Privacy/TOS  --   */
+.tos {
+  width: 1100px;
+  margin: 0 auto;
+  padding: 40px 0px;
+}
+.tos h1 {
+  font-size: 30px;
+  color: #232c30;
+  line-height: 36px;
+  margin-bottom: 10px;
+}
+.tos h2 {
+  font-size: 24px;
+  color: #232c30;
+  line-height: 30px;
+  margin-bottom: 10px;
+}
+.tos p {
+  color: #777777;
+  font-size: 14px;
+  line-height: 20px;
+  margin-bottom: 10px;
+}
+.tos ul {
+  padding-left: 20px;
+  margin-bottom: 10px;
+}
+.tos li {
+  font-size: 14px;
+  color: #777777;
+  line-height: 20px;
+  list-style: circle;
+  margin-left: 20px;
+}
+/*   ---  End of Privacy/TOS  --   */
 /*   ---   Side Bar General   --   */
 .left {
   width: 250px;
