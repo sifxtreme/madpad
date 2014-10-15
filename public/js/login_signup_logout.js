@@ -92,4 +92,14 @@ $(document).ready(function(){
 	};
 	avatarDropdown.run();
 
+	var helpClick = function(){
+		$(".help-click").click(function(){
+			$(".uv-icon").trigger("click");
+			avatarDropdown.toHide.hide();
+			return false;
+		});
+	}
+
+	helpClick();
+
 });
