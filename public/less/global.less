@@ -859,7 +859,7 @@ a{
     right: 0;
     left: 0;
     bottom: 0;
-    background: url('/images/global/hero1.jpg') no-repeat center center;
+    background: url('/images/global/hero2.jpg') no-repeat center center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -1034,6 +1034,7 @@ footer{
         overflow: hidden;
     }
 
+
     .leftside{
         float: left;
         width: 30%;
@@ -1043,6 +1044,32 @@ footer{
             color: @f;
             opacity: 0.5;
             line-height: 18px;
+        }
+    }
+
+    .rightside{
+        float: right;
+
+        ul{
+            a{
+                display: block;
+                float: left;
+                margin: 0 20px;
+                font-size: 14px;
+                line-height: 18px;
+            }
+
+            li{
+                float: left;
+                color: @f;
+                opacity: 0.5;
+
+                &:hover{
+                    opacity: 1;
+                    transition: 0.5s;
+                    -webkit-transition: 0.5s;
+                }
+            }
         }
     }
 }
