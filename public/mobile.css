@@ -172,6 +172,8 @@ img {
   /*   ---  End of Feedback Override  --   */
   /*   ---  Home Page  --   */
   /*   ---  End of Home Page  --   */
+  /*   ---  About Page  --   */
+  /*   ---  End of About  ---   */
 }
 .mobile h1,
 .mobile h2,
@@ -1220,5 +1222,50 @@ img {
   opacity: 1;
   transition: 0.5s;
   -webkit-transition: 0.5s;
+}
+.mobile .about-wrap {
+  position: relative;
+  top: 80px;
+  padding: 0px 20px;
+}
+.mobile .about-wrap h1 {
+  font-size: 30px;
+  line-height: 36px;
+  color: #dddddd;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.mobile .about-wrap .row {
+  overflow: hidden;
+}
+.mobile .about-wrap .col {
+  width: 100%;
+  margin-top: 40px;
+}
+.mobile .about-wrap .col .about-avatar {
+  width: 150px;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto;
+}
+.mobile .about-wrap .col h2 {
+  font-size: 30px;
+  color: #232c30;
+  margin: 20px 0px;
+  text-align: center;
+}
+.mobile .about-wrap .col .social-logo {
+  display: inline-block;
+  margin: 10px 10px;
+  width: 40px;
+  text-align: center;
+}
+.mobile .about-wrap .col .social {
+  display: block;
+  overflow: hidden;
+  text-align: center;
+}
+.mobile .about-wrap .col a {
+  overflow: hidden;
 }
 /*   ---   End of All Mobile LESS   ---   */
