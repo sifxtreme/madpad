@@ -16,6 +16,23 @@ $(document).ready(function(){
 	}
 	window_size();
 
+	var socialIcons = function(){
+		// $("#share-facebook").attr("href", "https://www.facebook.com/sharer/sharer.php?u=" + "madpad.me" + window.location.pathname);
+		// $("#share-facebook").click(function(){
+			// $("#a-share-facebook").trigger("click");
+			// return false;
+		// })
+		// $("#share-twitter").click(function(){
+		// 	window.open("https://www.facebook.com/sharer/sharer.php?u="+document.URL, "_blank");
+		// })
+		// $("#share-email").click(function(){
+		// 	window.open("https://www.facebook.com/sharer/sharer.php?u="+document.URL, "_blank");
+		// })
+		$("#share-share").click(function(){
+			window.prompt("Copy to Clipboard", document.URL);
+		})
+	}();
+
 	var mobileTabs = function(){
 		$('.m-chat-content').hide();
 		$('.m-share-content').hide();
@@ -82,18 +99,29 @@ $(document).ready(function(){
 			$('#sign-msg').hide();
 			$('#m-login').removeClass('overlay-close');
 			$('#m-login').addClass('overlay-open');
+			return false;
 		});
 
-		$('#signup-text').click(function(){
+		$(".home-signup").click(function(){
 			$('#login-msg').hide();
 			$('#sign-msg').show();
 			$('#account-text').html('sign up for madpad');
+			$('#m-login').removeClass('overlay-close');
+			$('#m-login').addClass('overlay-open');
+		});
+
+		$('#signup-text, .home-signup').click(function(){
+			$('#login-msg').hide();
+			$('#sign-msg').show();
+			$('#account-text').html('sign up for madpad');
+			return false;
 		});
 
 		$('#login-text').click(function(){
 			$('#sign-msg').hide();
 			$('#login-msg').show();
 			$('#account-text').html('login to madpad');
+			return false;
 		});
 	}
 	mobileAccount();

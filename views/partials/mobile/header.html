@@ -21,18 +21,16 @@
 				</ul>
 			</div>
 		</div>
-		{{/if}}
-		{{#if user.username}}
-			<div class="m-icons m-account" id="open-user">
-				<img src="{{user.picture}}" class="avatar-header" />
-				<div class="mobile-dropdown" id="user-dropdown" style="display:none">
-					<ul>
-						<li><a href="/{{user.username}}/home" class="username"><img src="{{user.picture}}" class="avatar-header" />{{user.username}}</a></li>
-						<li class="help-click"><a href="/help">Help</a></li>
-						<li><a href="/logout">Log out</a></li>
-					</ul>
-				</div>
+		<div class="m-icons m-account" id="open-user">
+			<img src="{{user.picture}}" class="avatar-header" />
+			<div class="mobile-dropdown" id="user-dropdown" style="display:none">
+				<ul>
+					<li><a href="/{{user.username}}/home" class="username"><img src="{{user.picture}}" class="avatar-header" style="height: 20px" />{{user.username}}</a></li>
+					<li class="help-click"><a href="/help">Help</a></li>
+					<li><a href="/logout">Log out</a></li>
+				</ul>
 			</div>
+		</div>
 		{{else}}
 			<div class="m-icons m-account" id="open-account">
 				<img src="/images/mobile/account.png" />
