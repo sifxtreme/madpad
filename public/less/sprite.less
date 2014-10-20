@@ -1,0 +1,70 @@
+@dots: -5px, -5px, 38px, 14px;
+@arrow: -5px, -29px, 28px, 14px;
+@error: -5px, -53px, 16px, 16px;
+@arrow-right: -5px, -79px, 20px, 30px;
+@arrow-left: -5px, -119px, 20px, 30px;
+@logo: -5px, -159px, 124px, 30px;
+@small-x-hover: -5px, -199px, 30px, 30px;
+@small-x: -5px, -239px, 30px, 30px;
+@trash: -5px, -279px, 44px, 44px;
+@favorite-icon: -5px, -333px, 50px, 44px;
+@heart-icon: -5px, -387px, 50px, 44px;
+@chatoff-icon: -5px, -441px, 50px, 44px;
+@options: -5px, -495px, 44px, 44px;
+@private-icon: -5px, -549px, 50px, 44px;
+@private-option: -5px, -603px, 50px, 44px;
+@public-icon: -5px, -657px, 50px, 44px;
+@shared-icon: -5px, -711px, 50px, 44px;
+@chaton-icon: -5px, -765px, 50px, 44px;
+@new-icon: -5px, -819px, 50px, 44px;
+@trash-icon: -5px, -873px, 50px, 44px;
+@logout-icon: -5px, -927px, 50px, 50px;
+@help-icon: -5px, -987px, 50px, 50px;
+@cross: -5px, -1047px, 58px, 58px;
+@private-lock: -5px, -1115px, 60px, 60px;
+@x: -5px, -1185px, 60px, 60px;
+@logo_2x: -5px, -1255px, 248px, 60px;
+@public-world: -5px, -1325px, 60px, 60px;
+@account: -5px, -1395px, 60px, 60px;
+@options: -5px, -1465px, 60px, 60px;
+@x-dark: -5px, -1535px, 60px, 60px;
+@newpad: -5px, -1605px, 60px, 60px;
+@logo_2x: -5px, -1675px, 60px, 60px;
+@hamburger: -5px, -1745px, 60px, 60px;
+@shared-eye: -5px, -1815px, 60px, 60px;
+@github-login: -5px, -1885px, 80px, 80px;
+@facebook-login: -5px, -1975px, 80px, 80px;
+@facebook: -5px, -2065px, 100px, 100px;
+@email: -5px, -2175px, 100px, 100px;
+@share: -5px, -2285px, 100px, 100px;
+@twitter: -5px, -2395px, 100px, 100px;
+@facebook: -5px, -2505px, 340px, 340px;
+@github: -5px, -2855px, 340px, 340px;
+
+.sprite-width(@sprite) {
+  width: extract(@sprite, 3);
+}
+
+.sprite-height(@sprite) {
+  height: extract(@sprite, 4);
+}
+
+.sprite-position(@sprite) {
+  @sprite-offset-x: extract(@sprite, 1);
+  @sprite-offset-y: extract(@sprite, 2);
+  background-position: @sprite-offset-x  @sprite-offset-y;
+}
+
+.sprite(@sprite) {
+  .sprite-position(@sprite);
+  background-repeat: no-repeat;
+  overflow: hidden;
+  display: block;
+  .sprite-width(@sprite);
+  .sprite-height(@sprite);
+}
+
+.icon {
+  background-image: url('images/sprite.png');
+}
+
