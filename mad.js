@@ -1,3 +1,5 @@
+require('newrelic');
+
 // dependencies
 var coffee = require('coffee-script');
 var express = require('express');
