@@ -1,18 +1,19 @@
-@arrow-right: -5px, -5px, 20px, 30px;
-@arrow-left: -5px, -45px, 20px, 30px;
-@hamburger: -5px, -85px, 60px, 60px;
-@x-dark: -5px, -155px, 60px, 60px;
-@options: -5px, -225px, 60px, 60px;
-@newpad: -5px, -295px, 60px, 60px;
-@logo_2x: -5px, -365px, 60px, 60px;
-@account: -5px, -435px, 60px, 60px;
-@x: -5px, -505px, 60px, 60px;
-@github-login: -5px, -575px, 80px, 80px;
-@facebook-login: -5px, -665px, 80px, 80px;
-@facebook: -5px, -755px, 100px, 100px;
-@share: -5px, -865px, 100px, 100px;
-@twitter: -5px, -975px, 100px, 100px;
-@email: -5px, -1085px, 100px, 100px;
+@login-logo: -2px, -2px, 150px, 150px;
+@email: -157px, -2px, 50px, 50px;
+@facebook: -157px, -57px, 50px, 50px;
+@twitter: -2px, -157px, 50px, 50px;
+@share: -57px, -157px, 50px, 50px;
+@facebook-login: -157px, -112px, 40px, 40px;
+@github-login: -112px, -157px, 40px, 40px;
+@hamburger: -157px, -157px, 30px, 30px;
+@account: -212px, -2px, 30px, 30px;
+@logo_2x: -212px, -37px, 30px, 30px;
+@newpad: -212px, -72px, 30px, 30px;
+@options: -212px, -107px, 30px, 30px;
+@x-dark: -212px, -142px, 30px, 30px;
+@x: -212px, -177px, 30px, 30px;
+@arrow-left: -192px, -157px, 10px, 15px;
+@arrow-right: -2px, -212px, 10px, 15px;
 
 .sprite-width(@sprite) {
   width: extract(@sprite, 3);
@@ -39,5 +40,9 @@
 
 .icon {
   background-image: url('images/mobile-sprite.png');
+  @media (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5), (min-resolution: 1.5dppx) {
+    background-image: url('images/mobile-sprite-x2.png');
+    background-size: 245px 230px;
+  }
 }
 

@@ -8,26 +8,28 @@ var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
 var minifyCSS = require('gulp-minify-css');
 
-// generate sprite.png and _sprite.scss
 gulp.task('sprites', function () {
-  return gulp.src(['./public/images/account/*.png', './public/images/header/*.png', './public/images/main/*.png', './public/images/mobile/*.png'])
+  return gulp.src(['./public/images/about/*.png','./public/images/account/*.png', './public/images/header/*.png', './public/images/main/*.png'])
     .pipe(sprite({
       name: 'sprite',
       style: 'sprite.less',
       cssPath: './images',
-      processor: 'less'
+      processor: 'less',
+      orientation: "binary-tree",
+      retina: true
     }))
     .pipe(gulpif('*.png', gulp.dest('./public/images/'), gulp.dest('./public/less/')))
 });
 
-// generate sprite.png and _sprite.scss
 gulp.task('mobile-sprites', function () {
   return gulp.src(['./public/images/mobile/*.png'])
     .pipe(sprite({
       name: 'mobile-sprite',
       style: 'mobile-sprite.less',
       cssPath: './images',
-      processor: 'less'
+      processor: 'less',
+      orientation: "binary-tree",
+      retina: true
     }))
     .pipe(gulpif('*.png', gulp.dest('./public/images/'), gulp.dest('./public/less/')))
 });
