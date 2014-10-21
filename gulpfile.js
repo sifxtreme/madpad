@@ -8,6 +8,16 @@ var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
 var minifyCSS = require('gulp-minify-css');
 
+var imageop = require('gulp-image-optimization');
+
+gulp.task('images', function(cb) {
+  gulp.src(['./public/images/**/*.png','./public/images/**/*.jpg','./public/images/**/*.gif','./public/images/**/*.jpeg']).pipe(imageop({
+      optimizationLevel: 5,
+      progressive: true,
+      interlaced: true
+  })).pipe(gulp.dest('./public/images/')).on('end', cb).on('error', cb);
+});
+
 gulp.task('sprites', function () {
   return gulp.src(['./public/images/about/*.png','./public/images/account/*.png', './public/images/header/*.png', './public/images/main/*.png'])
     .pipe(sprite({
