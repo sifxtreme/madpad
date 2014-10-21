@@ -66,3 +66,11 @@ gulp.task('js', function(){
     .pipe(uglify())
     .pipe(gulp.dest('./public/js/'))
 });
+
+gulp.task('js-mobile', function(){
+  return gulp.src(["./public/js/home-scroll.js", "./public/js/jquery-1.11.1.min.js", "./public/js/modals.js", "./public/js/mobile.js", "./public/js/Autolinker.min.js", "./public/sharejs/bcsocket.js", "./public/sharejs/share.uncompressed.js", "./public/sharejs/socket.io.js", "./public/js/froala.js", "./public/rangy/range-core.js", "./public/rangy/range-textarea.js", "./public/js/ace-editor.js", "./public/js/textarea.js", "./public/js/editable.js", "./public/js/variables.js", "./public/js/textpad.js", "./public/js/codepad.js", "./public/js/ui.js"])
+    .pipe(concat('all-mobile.js'))
+    .pipe(gulp.dest('./public/js/'))
+    .pipe(uglify())
+    .pipe(gulp.dest('./public/js/'))
+});

@@ -31,15 +31,17 @@
     {{> mobile/header}}
   {{else}}
     {{> modals/login_signup}}
-    {{> modals/settings}}
-    {{> modals/delete}}
-    {{> modals/create_pad}}
+    {{#unless isHome}}
+      {{> modals/settings}}
+      {{> modals/delete}}
+      {{> modals/create_pad}}
+    {{/unless}}
     {{> header}}
   {{/if}}
 
   {{{body}}}
   <script src="/ace/ace.js"></script>
-  <script src="/js/all.js"></script>
+  <script src="/js/all{{#if is_phone}}-mobile{{/if}}.js"></script>
   {{> feedback}}
 
 </body>
