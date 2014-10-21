@@ -1,0 +1,43 @@
+@arrow-right: -5px, -5px, 20px, 30px;
+@arrow-left: -5px, -45px, 20px, 30px;
+@hamburger: -5px, -85px, 60px, 60px;
+@x-dark: -5px, -155px, 60px, 60px;
+@options: -5px, -225px, 60px, 60px;
+@newpad: -5px, -295px, 60px, 60px;
+@logo_2x: -5px, -365px, 60px, 60px;
+@account: -5px, -435px, 60px, 60px;
+@x: -5px, -505px, 60px, 60px;
+@github-login: -5px, -575px, 80px, 80px;
+@facebook-login: -5px, -665px, 80px, 80px;
+@facebook: -5px, -755px, 100px, 100px;
+@share: -5px, -865px, 100px, 100px;
+@twitter: -5px, -975px, 100px, 100px;
+@email: -5px, -1085px, 100px, 100px;
+
+.sprite-width(@sprite) {
+  width: extract(@sprite, 3);
+}
+
+.sprite-height(@sprite) {
+  height: extract(@sprite, 4);
+}
+
+.sprite-position(@sprite) {
+  @sprite-offset-x: extract(@sprite, 1);
+  @sprite-offset-y: extract(@sprite, 2);
+  background-position: @sprite-offset-x  @sprite-offset-y;
+}
+
+.sprite(@sprite) {
+  .sprite-position(@sprite);
+  background-repeat: no-repeat;
+  overflow: hidden;
+  display: block;
+  .sprite-width(@sprite);
+  .sprite-height(@sprite);
+}
+
+.icon {
+  background-image: url('images/mobile-sprite.png');
+}
+

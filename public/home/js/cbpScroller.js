@@ -8,7 +8,7 @@
  * Copyright 2013, Codrops
  * http://www.codrops.com
  */
-;( function( window ) {
+( function( window ) {
 	
 	'use strict';
 
@@ -135,5 +135,10 @@
 
 	// add to global namespace
 	window.cbpScroller = cbpScroller;
+	if(document.getElementById( 'cbp-so-scroller' )){
+		new cbpScroller( document.getElementById( 'cbp-so-scroller' ) );	
+	}
+	
 
 } )( window );
+
