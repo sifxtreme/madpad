@@ -12,7 +12,7 @@
 						</span>
 					</li>
 				{{/each}}
-			{{#compare myPads.privatePads.length '3' operator='>='}}
+			{{#compare myPads.privatePads.length '3' operator='>'}}
 			<li class="pad-item toggle-recent-pads">
 				<a href="#">More Pads</a>
 			</li>
@@ -35,7 +35,7 @@
 					{{/if}}
 				</li>
 			{{/each}}
-			{{#compare myPads.sharedPads.length '3' operator='>='}}
+			{{#compare myPads.sharedPads.length '3' operator='>'}}
 			<li class="pad-item toggle-recent-pads">
 				<a href="#">More Pads</a>
 			</li>
@@ -58,7 +58,7 @@
 					{{/if}}
 				</li>
 			{{/each}}
-			{{#compare myPads.publicPads.length '3' operator='>='}}
+			{{#compare myPads.publicPads.length '3' operator='>'}}
 			<li class="pad-item toggle-recent-pads">
 				<a href="#">More Pads</a>
 			</li>

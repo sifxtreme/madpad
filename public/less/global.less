@@ -75,8 +75,6 @@ img{
 
 
 
-
-
 /*   ---   Header   --   */
 h1, h2, h3, h4, h5, h6, p, a, span, input, button, body, textarea{
     font-family: "Roboto", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
@@ -100,13 +98,16 @@ a{
     	position: relative;
     	top: 50%;
         z-index: 1500;
-    	
 
-    	img{
-    		width: 124px;
-    		position: relative;
-    		margin-top: -50%;
-    	}
+        a {
+            display: inline-block;
+
+            .logo-image {
+                .sprite(@logo);
+                margin-top: -50%;
+            }
+        }
+    	
     }
 
     .menu-container{
@@ -168,7 +169,7 @@ a{
             .arrow{
                 display: inline-block;
                 margin-top: -10px;
-                background: url('/images/header/arrow.png') no-repeat center center;
+                background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAOCAYAAAA8E3wEAAAA20lEQVQ4y7WUsRGCUAyGc0dDywA4gs7AuQTHEhSce+geNrqCM2hrIwNwZ0Xz2eRpRFGC8t+lIsl3Ie+PADvgChSATBSFMvYCtDy0mgC2Mv1bAUqetQGiP4Ai7WVV2pHtpFsg/gEWa4/7ZGFlNmkJNCbpACQjYInWBjXaW7pAARZAbZKPQOqApVoTVGtP6QMKMANOpugCzAfA5pobdNJe8g3Y91uyD7Bs6Dq8i8/f5OWeBzfmaVfme+W11BjzAqw18B4N73lqeVXrOYtej3W9+uSxKYDBq2eNhbf+Bq2F8+gCm1xyAAAAAElFTkSuQmCC) no-repeat center center;
                 background-size: 10px 5px;
                 width: 10px;
                 height: 8px;
@@ -230,7 +231,6 @@ a{
                     margin-bottom: 0px;
                 }
 
-
                 span{
                     display: inline-block;
                     width: 16px;
@@ -240,17 +240,13 @@ a{
                     margin-right: 10px;
                 }
 
-
                 .help-icon{
-                    background: url('/images/header/help-icon.png') no-repeat center center;
-                    background-size: 16px 16px;
+                    .sprite(@help-icon);
                 }
 
                 .logout-icon{
-                    background: url('/images/header/logout-icon.png') no-repeat center center;
-                    background-size: 16px 16px;
+                    .sprite(@logout-icon);
                 }
-
 
             }
 
@@ -310,7 +306,6 @@ a{
     -moz-transition: all 0.3s;
     transition: all 0.3s;
 }
-
 
 
 .green-btn{
@@ -454,9 +449,7 @@ a{
             display: block;
         }
 
-        img{
-            width: 170px;
-
+        .facebook-icon, .github-icon{
             &:hover{
                 transition: 0.3s;
                 -webkit-transition: 0.3s;
@@ -468,11 +461,14 @@ a{
 
         .facebook-icon{
             float: left;
+            .sprite(@facebook);
         }
 
         .github-icon{
             float: right;
+            .sprite(@github);
         }
+
     }
 
     .social-type{

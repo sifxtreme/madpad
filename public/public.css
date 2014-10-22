@@ -178,10 +178,23 @@ a:hover {
   top: 50%;
   z-index: 1500;
 }
-.header .logo-container img {
+.header .logo-container a {
+  display: inline-block;
+}
+.header .logo-container a .logo-image {
+  background-image: url('images/sprites/desktop.png');
+  background-position: -5px -239px;
+  background-repeat: no-repeat;
+  overflow: hidden;
   width: 124px;
-  position: relative;
+  height: 30px;
   margin-top: -50%;
+}
+@media (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5), (min-resolution: 1.5dppx) {
+  .header .logo-container a .logo-image {
+    background-image: url('images/sprites/desktop-x2.png');
+    background-size: 360px 331px;
+  }
 }
 .header .menu-container {
   float: right;
@@ -236,7 +249,7 @@ a:hover {
 .header .menu-container .avatar-name .arrow {
   display: inline-block;
   margin-top: -10px;
-  background: url('/images/header/arrow.png') no-repeat center center;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAOCAYAAAA8E3wEAAAA20lEQVQ4y7WUsRGCUAyGc0dDywA4gs7AuQTHEhSce+geNrqCM2hrIwNwZ0Xz2eRpRFGC8t+lIsl3Ie+PADvgChSATBSFMvYCtDy0mgC2Mv1bAUqetQGiP4Ai7WVV2pHtpFsg/gEWa4/7ZGFlNmkJNCbpACQjYInWBjXaW7pAARZAbZKPQOqApVoTVGtP6QMKMANOpugCzAfA5pobdNJe8g3Y91uyD7Bs6Dq8i8/f5OWeBzfmaVfme+W11BjzAqw18B4N73lqeVXrOYtej3W9+uSxKYDBq2eNhbf+Bq2F8+gCm1xyAAAAAElFTkSuQmCC) no-repeat center center;
   background-size: 10px 5px;
   width: 10px;
   height: 8px;
@@ -296,12 +309,32 @@ a:hover {
   margin-right: 10px;
 }
 .header .menu-container .avatar-drop .dropdown .help-icon {
-  background: url('/images/header/help-icon.png') no-repeat center center;
-  background-size: 16px 16px;
+  background-image: url('images/sprites/desktop.png');
+  background-position: -339px -185px;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  width: 16px;
+  height: 16px;
+}
+@media (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5), (min-resolution: 1.5dppx) {
+  .header .menu-container .avatar-drop .dropdown .help-icon {
+    background-image: url('images/sprites/desktop-x2.png');
+    background-size: 360px 331px;
+  }
 }
 .header .menu-container .avatar-drop .dropdown .logout-icon {
-  background: url('/images/header/logout-icon.png') no-repeat center center;
-  background-size: 16px 16px;
+  background-image: url('images/sprites/desktop.png');
+  background-position: -5px -311px;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  width: 16px;
+  height: 16px;
+}
+@media (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5), (min-resolution: 1.5dppx) {
+  .header .menu-container .avatar-drop .dropdown .logout-icon {
+    background-image: url('images/sprites/desktop-x2.png');
+    background-size: 360px 331px;
+  }
 }
 .header .menu-container .avatar-drop .arrow-up {
   position: absolute;
@@ -463,10 +496,8 @@ a:hover {
 .account .social-icons a {
   display: block;
 }
-.account .social-icons img {
-  width: 170px;
-}
-.account .social-icons img:hover {
+.account .social-icons .facebook-icon:hover,
+.account .social-icons .github-icon:hover {
   transition: 0.3s;
   -webkit-transition: 0.3s;
   -webkit-box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.75);
@@ -475,9 +506,33 @@ a:hover {
 }
 .account .social-icons .facebook-icon {
   float: left;
+  background-image: url('images/sprites/desktop.png');
+  background-position: -5px -5px;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  width: 170px;
+  height: 170px;
+}
+@media (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5), (min-resolution: 1.5dppx) {
+  .account .social-icons .facebook-icon {
+    background-image: url('images/sprites/desktop-x2.png');
+    background-size: 360px 331px;
+  }
 }
 .account .social-icons .github-icon {
   float: right;
+  background-image: url('images/sprites/desktop.png');
+  background-position: -185px -5px;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  width: 170px;
+  height: 170px;
+}
+@media (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5), (min-resolution: 1.5dppx) {
+  .account .social-icons .github-icon {
+    background-image: url('images/sprites/desktop-x2.png');
+    background-size: 360px 331px;
+  }
 }
 .account .social-type {
   transition: 0.3s;
@@ -1092,7 +1147,7 @@ footer .rightside ul li:hover {
   cursor: pointer;
 }
 .pad-list li .favorite {
-  background: url('/images/main/favorite-icon.png') no-repeat center center;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAsCAYAAAAn4+taAAACF0lEQVRo3t2Zv2oCQRCHN0YkhYWEkDptiOADBLsUCUGsbPUBREhIYWspImhll85/lT6AjaWFiVaxFiIiKGliwEIuMzILx8XTW+8u3m7xNd7uzO9rzr1Z9vacYBa4AXJAF5gBGrEEhsArEAcCFusxWhunvUOqxevOqFeOepvW0TRtw75mt1RQs8gUeNkjFKA1U4G6XcoiLHIGVAQaGfkAIlvqRujZoXUrlM2SyAXQs9GM8wPEdHVj9Jvduj3KuFMkCAwcaMZZA4/E2sG6A8pqKtJ2sJnbtM1EkhJJcJJGkaDgW8QrYOagXiQjoQQnoxcZSSwy4iJhiSU4YRR5UkDkCUWaCog0GR3YZBcZoshcAZE5U0Big1IiKwVEVkzSo8mfowqKdBQQ6aBIXgGRPIpEFRCJoogP+JRYArP7+Ok3K7FIVn+MDwFfEkpg5pDxUzcj60eVUcQPvEskgVn9ZlOUa0kklpR154AuJYFIyurItOBhiYLI7Bf/W2oelKhRNqFp/CnQ8pBEizIddK2AG6sekKhukxARQU6A0hElSpSB2RXhpB2eqFuZ5Kf35TpEBLkDFv8gsaBezC0R5ArouyjRpx7MbRF+D1h2QaIseKFqW4RzD0wcEJhQLeEMTokg50DdhkSdarBji3ASgi+CBe2x1dcNEeQSaFiQaNBa5lURzgMw3iIwpmeO9XJbhN9LFoFvosivlN0Q+QWkSijBTzjVjQAAAABJRU5ErkJggg==) no-repeat center center;
   background-size: 12px 12px;
   width: 12px;
   height: 50px;
@@ -1111,7 +1166,7 @@ footer .rightside ul li:hover {
   float: right;
 }
 .pad-list li .pad-heart-x .delete {
-  background: url('/images/main/small-x.png') no-repeat center center;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAABUElEQVRIx9WXMQuCUBDHDT+AS9LSEjTW3PdwdXNrbvELCH4Dm9oCoY8REa25NrrpErSG3YN78LhOfVZwNPwJ7937/0Lfnaez2x8ckA86g1Z4ba2maXqFvsrf1zEV9EAFqAHdh8ItoXf0VxxPg48Y1KpBy1+A0acm/kcNDkBPsliBFt+AcX9FfBUn0GClkIGXoPknYNxXMtDQfMZaEUnU8NkQMOaXjFdk5lGjNbPhBpragDHvxnis6R/kzDYt8EkXGNc56IZ7HG23MGYMCqz3NzDGC2ZP3Hb4ug5Owhhdse7NPA/jNDfpKrW+ckkZw4sB9/Ca5qR9jcWmSWSM8Qk0xl+6ltm0URvwCLRlAA8mpvJGvwIruaA9AzKl1l0b6BCwhuct0HwI9C/AIrda7HCJlJNIAxFpmSIvCZHXosggIDL6iAx7YuOt2EAv9gkj8tH2AgYJ5nWkhSgeAAAAAElFTkSuQmCC) no-repeat center center;
   background-size: 12px 12px;
   width: 12px;
   height: 50px;
@@ -1120,7 +1175,7 @@ footer .rightside ul li:hover {
   -webkit-transition: 0.5s;
 }
 .pad-list li .pad-heart-x .delete:hover {
-  background: url('/images/main/small-x-hover.png') no-repeat center center;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAABT0lEQVRIx9WXsQrCQAyGLT5AF4uLi+Cos+/R1a2bs4svIPQN6gsIfY8i4mrXdutWF8FVag5ycMRce9VCcPiR5nL/J+0lTUdlWY5AAegCWuO1s5qm6RT6Kv9Ax1TQB+WgBvToC3eEPtBfcXwNzjCodQethgCjz534Zxocgl5ksQYtfwHj/pr4Kk6owUobBl6BFt+AcV/FQDfmM9aKSKKGz/uAMb9ivCIzjxptmQ0FaOYCxryC8djSP8iZ7SzwaRsY1znojnsctlu4ZwxyrPcPMMZzZs/edvjaDs6BMbph3Zt5PsZp7qGt1LrKJWYMrwbcx2uaE3c1FpcmkTDGZ9AEf+la4tJGXcAe6MgAnkxM5XlDgZXGoBMDMqXWxy7QPmANTy3QtA/0L8Ait1rscImUk0gDEWmZIi8JkdeiyCAgMvqIDHti463YQC/2CSPy0fYGhNyU/2oFPPoAAAAASUVORK5CYII=) no-repeat center center;
   background-size: 12px 12px;
   width: 12px;
   height: 50px;
@@ -1204,7 +1259,6 @@ footer .rightside ul li:hover {
   /* submit area */
 }
 .right .chat-avatar {
-  background-image: url('/images/chat/animals/chicken.png');
   background-repeat: no-repeat;
   background-position: center center;
   background-color: #33bea8;
@@ -1282,7 +1336,7 @@ footer .rightside ul li:hover {
 }
 .right .user .message-area {
   float: right;
-  background: url('/images/mobile/arrow-right.png') no-repeat;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAeCAYAAAAsEj5rAAAApklEQVRIx62S0QmAMAwFdQJxFsGp/HAwwYnEOfSnpoKFShLS5AWenwd3tkspbbSB1iGWP/kO2oQE5rtoCxL4XSgBBwwlkIDuBBrQlcACbEpgBZoTtABNCTxANYEXKCaIANkECGCVAAUsCZDAm7aigCdtRinvtBHxU15FWo94NkUR8Q4rxQiQVfQCRUUPUFVsAZoUrUCzogXYpKgBXYoS0K3IAUOK/z2gji6SH93mfQAAAABJRU5ErkJggg==) no-repeat;
   background-size: 12px 20px;
   background-position: right 52px top 10px;
 }
@@ -1306,7 +1360,7 @@ footer .rightside ul li:hover {
 }
 .right .other-user .message-area {
   float: left;
-  background: url('/images/mobile/arrow-left.png') no-repeat;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAeBAMAAADePCNYAAAAMFBMVEXC4vL////C4vLC4vLC4vLC4vLC4vLC4vLC4vLC4vLC4vLC4vLC4vLC4vLC4vLC4vJOWzOfAAAAD3RSTlMAAAEPETM2bHCsr93f+foESvCaAAAAZklEQVQY00XOsQ3DMBBD0Q8Bdu8i2UUraCetoJU0gkZiCoe8qx7AXxz87xkW32O1JXPIvI/Zlswh8z5mWzKHzHeWMkuZpcwSniVm8dohvZgEkkASSAJJ3td7kVm8dkgvMoufHT79BzLgkYyf7GDKAAAAAElFTkSuQmCC) no-repeat;
   background-size: 12px 20px;
   background-position: left 52px top 10px;
 }
@@ -1445,12 +1499,12 @@ footer .rightside ul li:hover {
   text-align: center;
 }
 #editor-code .ace_fold {
-  background-image: url("/images/main/dots.png");
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAOBAMAAACx7HPGAAAAElBMVEUzvqjd3d3f39/o6Oj6+vr////gdMRPAAAAOElEQVQY02MIMRJEBcquDE6C6ECFwRBDTJhBEUNMiEEQE4DEBBgYkQmKxTDswOYWbG7G5jcsYQAAD5YSVVZ4lccAAAAASUVORK5CYII=);
   background-size: 19px 7px;
   border: none;
 }
 #editor-code .ace_error {
-  background-image: url("/images/main/error.png");
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAYUlEQVQ4y2P439R8BYhvALEMEDMQiWWgeq4wQBn/gfgOkYbIQNWC9NxAFyBkCIZanBLEaAaJE1RASI4YW/C6jhh/4vUaMYGFN3BpYgBFXqAoECmKRooSEsVJmeLMRFF2BgD2fliTyHmqvwAAAABJRU5ErkJggg==);
   background-size: 8px 8px;
   background-position: 8px center;
 }
@@ -1519,22 +1573,22 @@ footer .rightside ul li:hover {
   cursor: pointer;
 }
 .title .title-options .new-icon {
-  background-image: url('/images/main/new-icon.png');
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAsCAMAAAAQPRtoAAAAwFBMVEWfpav///+fpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaufpaupdVGQAAAAP3RSTlMAAAECAxAREhodHikqKzM0NTw9Q0ZHUFJTXF1eZHF4jo+QmaGio66ys7S1trzEyMnKy9DY2drh4ufo8fT3+/z+33cTAAAB5UlEQVRIx63W23bpUBSA4cwVlCqqimpDg1Itql2tOiX+93+rfZFgRRBD97zLTL4xcpiHWLIXlpWpuaPZClazkVvLSCysvWO7PvAxwh/U7ZNEPU6JxfRRHSeFMQdjXDhGHC+4Yv7ilHPpdK7svMyDjOccJKodnH6vpqxtpKrvQbat4kT1AJgUrWhIcQJAT8VIG2Ddsq19InZrDdDeJw7AsiISJyKVJYATJQUPWN7KYSK3S8ArmESNgXVFjhGprIGxMsgTQEuOE2kBPO2IPQU+bJNkO52sSewPYGpvyQNAUUzSh75JpAjwsCUD4E0iRIOOEHkDBhty5QP3SeQe8K9CUgPmqSSSmgO1kLSBriQR6YYlYInIyPi0J4gDjEIyA8rJpAzMQrICcmE+29daa6098LTWWn82NyQHrEICkA7znXhP5sNTaYDLyQq4Tr6xa+PGZsBd8uPfAb+Xv+RnoJdMesCzUTCL5IJZGAWT8YFqEqkCfmZT/K/AMEo+4StKhsDrtl/qAKUIaUIzQkoA9V0jfwOTSCNb+Xyk9+0J8L1rZGmcNy4afxtKcnPO6Lv564AVcZPGuBtfFt1gWZSOLIuuOrCS3KA9htGVNAyyrjq5+BbnLr6L1quIavzEwU9D/d9fhbN+SP4BbPefJfFf58EAAAAASUVORK5CYII=);
 }
 .title .title-options .heart-icon {
-  background-image: url('/images/main/heart-icon.png');
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAsCAYAAAAn4+taAAADe0lEQVRo3s2Zz0tUURTH3ziDhs1CpDIRRCgXmuAyMJ02LdIQRdBV6R8wCkYLNwrSahyChMCdtHFUCHLvLDQoEJIcN7kUMxkEpc0YSMjr3DgXhsc598e8O/YWHxjm3Ps95/tm7n33nee9z33wDHgAzAPbwCngIxdAAVgGhoBaQz0Pxw7h3AJqSd1TzDWPuVkd3/f/oUv2CAV9Q4rAK42hWhxTtNDdxlqsjdwAliwSBfkOdBO63RirVHcJazMycgvYCZFM8hsYLNMdxO/C6u5gjUojSWDPQTLJFfAMuXKou4e1skY2FJN/AHPAQ6AJuAncB14Am4p5F4GFHGQTNe6hZhPmmMOc3LwNzsi44qq+Buo0G8Nj4NDiqh7iHJVmHebmfs3xoJEks4v8AYYtttTbwK6BiV0ca6o7jLVQu2Sy3MgUk3DSIpnkLnCsMHGMY2x1Jxm9qXIjB8SAT0CsgoSCAYWRgQo1Y1hTUO9AGuliEvZWmFCyRWhuhdTsZWrtEsFp5obmhSRF6KYc6FI31GkRWCcCCw4SCp7jOaqAn11oLhD1rnuYJBgYcZS0GowQ9RZE4IwIdEbYSCdR75nHLJ7GCBtppGrmjDRE2EgDZ+SSCLRE2EgLUe+lxxxNUhE2Qm3rRRHIE4HZCBuZJerNi0CGCOxH2Mg+UW9GBPqYBd8TQRM9TK19IlgD/GQOjVEzQh0aRe01csAM43QsQibGmBpnyo/xYm/+Rd0xgeYImGhmTiCi5obgoy73cPXZsvHmmlqsgX2oChpJAN+YCcshHrLCEMPcVE2i1gTXRelQdDyy/8FIVtGZ6dA16CYUj6mZazSRUdQxYdoyzSpE3gHxKhqIYw7f5J+hMyLuLTmF2Eegvgom6lGby5vD2qy68XGNqFhsrQ5NtCo2G3nx4pW+VhATVxTiYm/vd2Cin7lPSFa4v7OpEbkFvtV0DjO4fdsaSGgWtY+5Y2Ff9JST1nTUvwDtFnrtOEfVyU/rdCoxIngCnCuSlzB5TPMLp3Esp3OOubxqGRG0GTSq8ziOmps3aHC3mdYTxog8/yxqChJX/CUu0jh+LmnmLNqe68IakTwFTjTFfUVUY05Qy7oGV0Zkn2k1xGu01TB9NJdGJKOajYBa0KNh81bDiOAOsGZgYg3HelE1Un6nPiIMHDk6CVybEfle8g3uVCX8nHSdRxr5C+UrlU80sMv5AAAAAElFTkSuQmCC);
 }
 .title .title-options .favorite-icon {
-  background-image: url('/images/main/favorite-icon.png');
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAsCAYAAAAn4+taAAACF0lEQVRo3t2Zv2oCQRCHN0YkhYWEkDptiOADBLsUCUGsbPUBREhIYWspImhll85/lT6AjaWFiVaxFiIiKGliwEIuMzILx8XTW+8u3m7xNd7uzO9rzr1Z9vacYBa4AXJAF5gBGrEEhsArEAcCFusxWhunvUOqxevOqFeOepvW0TRtw75mt1RQs8gUeNkjFKA1U4G6XcoiLHIGVAQaGfkAIlvqRujZoXUrlM2SyAXQs9GM8wPEdHVj9Jvduj3KuFMkCAwcaMZZA4/E2sG6A8pqKtJ2sJnbtM1EkhJJcJJGkaDgW8QrYOagXiQjoQQnoxcZSSwy4iJhiSU4YRR5UkDkCUWaCog0GR3YZBcZoshcAZE5U0Big1IiKwVEVkzSo8mfowqKdBQQ6aBIXgGRPIpEFRCJoogP+JRYArP7+Ok3K7FIVn+MDwFfEkpg5pDxUzcj60eVUcQPvEskgVn9ZlOUa0kklpR154AuJYFIyurItOBhiYLI7Bf/W2oelKhRNqFp/CnQ8pBEizIddK2AG6sekKhukxARQU6A0hElSpSB2RXhpB2eqFuZ5Kf35TpEBLkDFv8gsaBezC0R5ArouyjRpx7MbRF+D1h2QaIseKFqW4RzD0wcEJhQLeEMTokg50DdhkSdarBji3ASgi+CBe2x1dcNEeQSaFiQaNBa5lURzgMw3iIwpmeO9XJbhN9LFoFvosivlN0Q+QWkSijBTzjVjQAAAABJRU5ErkJggg==);
 }
 .title .title-options .chaton-icon {
-  background-image: url('/images/main/chaton-icon.png');
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAsCAYAAAAn4+taAAADvklEQVRo3u2ZW0hUQRiAT3aR7nQxgnow6KmICHuM6PJUlGBaCKVFD5URJEEGUakJoQRSZBRYZmtrgmQmRGxlW2QmgeQ+CCZBorS6iablJTV3+v/lPzDOXs6Zc1klVvhQPPPPme+cmX8uR2GMKf8DSkwkJmKTSEnpQ6OsAg4BhcBzoBXoA/wAIyaAbqAJuAdkA9uBeSbuOwWjImuBC0Az11gjjABPgFSzUrIiW4Aq4K9JgVD4gIvAEjtFVgMOobvYRS9wAphltchB6vMsyryjLmxaZDZQNA0CPD+AbWZEUMI5zRJ8QthlVOTmDJHgZbbKihyJciNxcH8C6oAKoByouVXqcOdX1fuy61r9x1/5WIZ7UMULOIEUIA5QEFEEs1O/zQ3/CZTRJLpGfYBqg4gkwMM1PhweKhskcsdGAZw804H4UF2Dk0gGRnVIqGDZZF4kARi1QaCTUrjY+AQSKwZcQFthRV3v0Tf9TEKCl0lSRU7ZIOEUZuo5JPUamJxa1sFOurqMSPDdLA5vUmOxRI7wBvYD7eHKF1S+1N3o0w2/WG3HH5b5NuhaikJdwCqJc5zAQspGEWMgO+mW6ByaZPhT/31MvO7EG45bJFEqjIMWPXFCig1Q2DI85anzEsMTfpbbPCTGeBWLJL4BC0hiPs0PumJFiQdfRpkfGvyhZzwgo0MiAN542AKRdO5t3JaJDSeCP02+cV0SqkirBWk2jiQ2yC75Q3UtXkaPRIZ7oEeh2daMSDH3Nu7Kxocb7KqMtsQgy3rR4cGbJ5sUOcCJeGXjI6Xf+20jmhJIXpW7XaGlQ7cJkY0ksdxYvLkJEWOhjhH1SWabEEmkOhKN1lHkeMaMLFEwBmOxDlVkLuAx2JBNVMcyM120oNIlJYNlMYbif/NLic0GU3EaV0eXGRl8unq6GZZR3wTRKK5MU4MXdZrc4OJLzM9JjkACwGzGp2b8G/+H17CMEHc+1PbxsKSMl1a3GLveprOvSAwAK8PthXdL7hiPcbHXoyxyRutcq1xydlf3H3gE+j5KEo/xQE9LRHbp8oiLXYoD0GaJanxoWieNiw0ek17h6og3smTRAZ7wX1aPVrVEdoaoYIgmTkzTuXSoEGpgXxPOb/GQ7bOFInkyZ785QrCLm8EVYRe4A8iiQY7dqxY4K5RDsT10bcykSJmMSDUF4SF2plUfZYhFwD7gKn0jwU3YV6CDfn+kTxiX6CGl0cZNFWmQEcEsVElbVmUGgLvOfDq26tMrgkF7Z4iAyDrgKbAiSCT2VTcmEhOJyD9P1OMCBNHE0gAAAABJRU5ErkJggg==);
 }
 .title .title-options .chatoff-icon {
-  background-image: url('/images/main/chatoff-icon.png');
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAsCAYAAAAn4+taAAADsUlEQVRo3u2ZWUhUURjHb7ZIOy1GUA8GPRURYY8RLU9FCeaSkEQQRUGQCRpJiwWJZgxpStGITcuYIVkEPQhBiJFRSM2DICLYAmMmVpApbXP7f8N35XjmjjPnLqPEDPyYy8z5zj2/e8/9znI1Xde1/wEtKZIUcUmk1nvLKstAHqgAT0AXGAIhoDO/QT94CepBIdgMZtk47zisiqwEJ0Gn0FgrjIAHINuulKrIBtAE/tgUMGMAlIIFboosB7el7uIWg+AwmOa0SC73eT3BtHEXti0yHVROgoDIZ7DJjghJ+CdZQkwI26yKVE8RCVFmo6pIQYIbSQ/3K/AY3AE+0FLn9T1rulw+0FpWGOooLtA7T+QaBIEfZIEUoBGyCGWnLy43/Cto4EF0hXEBjQYxGSAgND4aAS4bIXLNRQEaPPNBqlnXECQywWgcEgZUNlMUSQOjLgh84BQuNz6NxTygFXT7aqoHXxft1RUkRJkMQ+SICxJ+aaSewVJPwd/xZX16+6mDViTEbpZCJ2lxWKJEugO7QU+08o2eyojG9Xor9OG+br3PXzv2Gx3Tb731lWYyWRp3AackigSBuZyNJoxBdopoGDU4/AmF9PfNN8LQMX3oPxMRP53wl0MSXuk5eBtPnJRix66+0fDwt3As3iUxNWsOSfSBOSwxm8eHuGKj9X3xLoh3J1p5OvEPB0TyhbtRpxLrpEiXA2k2hSXWqE75nelaeZ80Hm3tiHiEu3FdNd6Jh72t9FCATp5pU2SPIBJUjTdNv0ix0dNvRUT5+1UXezSeOvTbEFnLEoutxdsbECkWdYwYV7LQhkg615FutY6bV2t0K1MUiqFYqsMQmQkCFhuyjutYZKeL+j2XlGSoLMVw/HdxKrHeYirOEer4aEeGrm483YzKGHeCeSHPTLMjJ3UxuSLE19ofk3zhBEDZTEzNdEy/0X9URoorNls+7lOUCfLslmJXu7T3NRHfwNJoa+HtiivGA0JsVYJFjsXa1/Ipju7G+oO2QNsTJHGPNvRiiahOXe4KsQvpAXRZopkuWqydxvkWt0nPCnWkWpmyxAHt8J8xtlZjiWw1qWCYB05K0+d4U8HswS6X9m9pk+2NgyJlKnu/JVJwqzCCa9IqcAs4yg85da9H4LhUjsR28H8/bYo0qIg0cxBtYu936qUMMw/sAhf4HQktwnrBO/7u4FcYp/ki5fDCzRB5riJCWaiRl6zaFIBWned522ooXhEK2jlFBGRWgYdgSYRI8q1uUiQpMiH/AGRdg9I7lb0QAAAAAElFTkSuQmCC);
 }
 .title .title-options .trash-icon {
-  background-image: url('/images/main/trash-icon.png');
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAsCAYAAAAn4+taAAAC7ElEQVRo3u2ZQUgUYRiGN1uJwEMeOhgZKUHoISKRwLopHVopD55CzItWB6NLnmLpUiGSLHlJOrQXg1iJxaKD2iE7SZq0WRDhBiUe7GDQIkRb0/vDZ/x8jO44832zE3h4WNhd3/d/dGac+f6Y4zixIDwcyxgqwVPwBzgeMN+bAnuD9m8QExI551GAcz5qIj0+RXqiLjILsi7M/m8iHfQ+p6MsIiiqBbdAqgSTbIF5sOBCnn1v0kO26a8NKpLzeexLkwsq4kSFHREXkXFwuATN4LQHmj1kjWuJpLe4avlmi+70jkgJkTlwBRzQFMF7+8Al8CaMk/0DuAGawO6gInjdDy6DV+CXxsle9HBFMcWfwHMwBC6AY+CgteBK+k0fBWdBEjwGb8EPLx1BRYYicvkdCXyvhZBG+s2VQ8Dc1jSK3TQi7A4rMIfFe/BTaMEm5yN4wt6/LXr3i8BeVtBufXYIJMBN+ic2R+fMV7AKvoNvYAV8Bu/ofLpL51ONldXOenqlRVpZwVWNy6/JZT2t0iJ1rCClJJJiPXXSInF2fZ9QEplgl/W4+BMiQpeskkUlkUWrY0nlUZfGNxsl60oi61bHlJbIKDt+ayRFTB7LH9USGWBFLcIiLSx/QEukkxV1CYt0sfxOLZEmVpQUFkmy/BNaItVuD1qCImmWX602oEP4mlU0IywyY2WvqU4aUTBvlS0Liyxb2fPaIhn2598jIUI5dm5GW2SQFTYIiTSw3EFtkT5WmBASSbDcPm2RNlbYLyTSz3LbtEXqWeGwkMgwy63XFomzyUpWSCRrZRa3c/vue6OHHlf/jfuFROzti3woO1YoesGGBub4rvIpUkU/bw8xpsMSue8yBSnQBKQbHAEVmyy8gj7vpu8XXLIehCVyCvwuMd4p0OHyEjyj19wmC+dcDG0zlC7DC8LDuGlwpiy7uig+Ce6BLz4Xv0LzreNR2Z7eZZ4fwHXwiIYIq9YhWKQh3WswBq6ZxZtzRmp7+i/3P1W+1r9MCgAAAABJRU5ErkJggg==);
 }
 .title .share-settings-icon {
   position: relative;
@@ -1567,22 +1621,51 @@ footer .rightside ul li:hover {
   top: -2px;
 }
 .title .share-settings-icon .icon {
-  width: 20px;
-  height: 28px;
-  background-size: 14px 14px;
-  background-position: center center;
-  background-repeat: no-repeat;
   float: left;
   margin-right: 5px;
+  margin-top: 7px;
 }
 .title .share-settings-icon .private-icon {
-  background-image: url('/images/main/private-lock.png');
+  background-image: url('images/sprites/desktop.png');
+  background-position: -121px -311px;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  width: 14px;
+  height: 14px;
+}
+@media (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5), (min-resolution: 1.5dppx) {
+  .title .share-settings-icon .private-icon {
+    background-image: url('images/sprites/desktop-x2.png');
+    background-size: 360px 331px;
+  }
 }
 .title .share-settings-icon .shared-icon {
-  background-image: url('/images/main/shared-eye.png');
+  background-image: url('images/sprites/desktop.png');
+  background-position: -169px -311px;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  width: 14px;
+  height: 14px;
+}
+@media (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5), (min-resolution: 1.5dppx) {
+  .title .share-settings-icon .shared-icon {
+    background-image: url('images/sprites/desktop-x2.png');
+    background-size: 360px 331px;
+  }
 }
 .title .share-settings-icon .public-icon {
-  background-image: url('/images/main/public-world.png');
+  background-image: url('images/sprites/desktop.png');
+  background-position: -145px -311px;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  width: 14px;
+  height: 14px;
+}
+@media (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5), (min-resolution: 1.5dppx) {
+  .title .share-settings-icon .public-icon {
+    background-image: url('images/sprites/desktop-x2.png');
+    background-size: 360px 331px;
+  }
 }
 /*   ---   End of Title Area   --   */
 /*   ---    Pad Sharing Settings  --   */
@@ -1643,6 +1726,48 @@ footer .rightside ul li:hover {
   border: 1px solid #eaeaea;
   float: left;
   margin-right: 10px;
+}
+.sharing-settings .list-settings .setting-icons .private-lock {
+  background-image: url('images/sprites/desktop.png');
+  background-position: -279px -279px;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  width: 18px;
+  height: 18px;
+}
+@media (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5), (min-resolution: 1.5dppx) {
+  .sharing-settings .list-settings .setting-icons .private-lock {
+    background-image: url('images/sprites/desktop-x2.png');
+    background-size: 360px 331px;
+  }
+}
+.sharing-settings .list-settings .setting-icons .shared-eye {
+  background-image: url('images/sprites/desktop.png');
+  background-position: -335px -279px;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  width: 18px;
+  height: 18px;
+}
+@media (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5), (min-resolution: 1.5dppx) {
+  .sharing-settings .list-settings .setting-icons .shared-eye {
+    background-image: url('images/sprites/desktop-x2.png');
+    background-size: 360px 331px;
+  }
+}
+.sharing-settings .list-settings .setting-icons .public-world {
+  background-image: url('images/sprites/desktop.png');
+  background-position: -307px -279px;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  width: 18px;
+  height: 18px;
+}
+@media (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5), (min-resolution: 1.5dppx) {
+  .sharing-settings .list-settings .setting-icons .public-world {
+    background-image: url('images/sprites/desktop-x2.png');
+    background-size: 360px 331px;
+  }
 }
 .sharing-settings .list-settings .settings {
   margin-top: 30px;
@@ -1841,75 +1966,3 @@ footer .rightside ul li:hover {
   margin: 0 auto;
 }
 /*   ---    End of New Pad  --   */
-.color-palette {
-  border: 1px solid #dddddd;
-  float: left;
-  margin: 20px 20px;
-  color: #777777;
-}
-.color-palette h1 {
-  text-align: center;
-  margin: 20px 0px;
-}
-.color-palette h2 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-.color-box {
-  width: 200px;
-  height: 200px;
-}
-.c1 {
-  background-color: #232c30;
-}
-.c2 {
-  background-color: #363e44;
-}
-.c3 {
-  background-color: #ffffff;
-}
-.c4 {
-  background-color: #dddddd;
-}
-.c5 {
-  background-color: #eaeaea;
-}
-/* 5 */
-.c6 {
-  background-color: #9ea5ab;
-}
-.c7 {
-  background-color: #777777;
-}
-.c8 {
-  background-color: #f1cf5d;
-}
-.c9 {
-  background-color: #5dbff1;
-}
-.c10 {
-  background-color: #cd7155;
-}
-/* 10 */
-.c11 {
-  background-color: #33bea8;
-}
-.c12 {
-  background-color: #3bd9be;
-}
-.c13 {
-  background-color: #4b555d;
-}
-.c14 {
-  background-color: #636d75;
-}
-.c15 {
-  background-color: #f9f9f9;
-}
-/* 15 */
-.c16 {
-  background-color: #f4f6f9;
-}
-.c17 {
-  background-color: #e57e5e;
-}
