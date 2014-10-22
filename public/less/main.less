@@ -13,10 +13,13 @@
 	margin-right: 300px;
 
 	.pad-wrapper{
-		position: relative;
+		position: absolute;
 		background-color: @light;
 		padding: 40px 40px;
-		min-height: 500px;
+		top: 100px;
+		left: 0;
+		right: 0;
+		bottom: 0;
 	}
 
 	.editor-active{
@@ -30,6 +33,11 @@
 
 	.froala-box{
 		border: 1px solid @ea !important;
+		position: absolute;
+		top: 40px;
+		bottom: 40px;
+		left: 40px;
+		right: 40px;
 	}
 
 	.froala-editor{
@@ -45,6 +53,9 @@
 		font-size: 14px;
 		color: @dark;
 		font-weight: 100;
+
+		position: absolute;
+		top: 36px; bottom: 0; left: 0; right: 0;
 		&::-webkit-input-placeholder {
 		    color:    @9;
 		}
@@ -86,7 +97,11 @@
 
 #editor-code{
 	background: @f;
-	position: relative;
+	position: absolute;
+	top: 40px;
+	bottom: 40px;
+	left: 40px;
+	right: 40px;
 	border: 1px solid @d;
 	font-size: 12px;
 	line-height: 18px;

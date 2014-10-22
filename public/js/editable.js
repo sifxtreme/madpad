@@ -226,10 +226,6 @@ var _editableScript = function() {
       },
     });
 
-    if(document.location.pathname != '/'){
-      window_size();
-    }
-
     // ************************************************************************************************************** //
     _ref = ['textInput', 'keydown', 'keyup', 'select', 'cut', 'paste'];
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {

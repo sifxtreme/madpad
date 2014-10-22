@@ -642,6 +642,7 @@ a:hover {
 }
 .modal-close img {
   width: 49px;
+  height: 49px;
   padding: 10px 10px;
 }
 /*   ---   End of Modal Less   --   */
@@ -1107,10 +1108,10 @@ footer .rightside ul li:hover {
 .left {
   width: 250px;
   min-height: 500px;
-  float: left;
   background-color: #363e44;
-  overflow: hidden;
-  position: relative;
+  position: absolute;
+  overflow: auto;
+  top: 70px;
   left: 0;
   bottom: 0;
   z-index: 1300;
@@ -1246,10 +1247,9 @@ footer .rightside ul li:hover {
 .right {
   width: 300px;
   min-height: 500px;
-  float: right;
   background: #f9f9f9;
-  position: relative;
-  top: 0;
+  position: absolute;
+  top: 70px;
   right: 0;
   bottom: 0;
   border-left: 1px solid #eaeaea;
@@ -1308,9 +1308,14 @@ footer .rightside ul li:hover {
 .right #messages {
   padding: 10px 10px;
   overflow-y: auto;
+  position: absolute;
+  top: 50px;
+  left: 0;
+  right: 0;
+  bottom: 80px;
   font-size: 12px;
   font-weight: 300;
-  background: #eaeaea;
+  background: #f9f9f9;
   color: #232c30;
 }
 .right #messages .content {
@@ -1425,10 +1430,13 @@ footer .rightside ul li:hover {
   margin-right: 300px;
 }
 .middle .pad-wrapper {
-  position: relative;
+  position: absolute;
   background-color: #f9f9f9;
   padding: 40px 40px;
-  min-height: 500px;
+  top: 100px;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 .middle .editor-active {
   border: 1px solid #ffffff;
@@ -1440,6 +1448,11 @@ footer .rightside ul li:hover {
 }
 .middle .froala-box {
   border: 1px solid #eaeaea !important;
+  position: absolute;
+  top: 40px;
+  bottom: 40px;
+  left: 40px;
+  right: 40px;
 }
 .middle .froala-editor {
   border: none !important;
@@ -1453,6 +1466,11 @@ footer .rightside ul li:hover {
   font-size: 14px;
   color: #232c30;
   font-weight: 100;
+  position: absolute;
+  top: 36px;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 .middle .froala-element::-webkit-input-placeholder {
   color: #9ea5ab;
@@ -1482,7 +1500,11 @@ footer .rightside ul li:hover {
 /*   ---   Code Editor Area   --   */
 #editor-code {
   background: #ffffff;
-  position: relative;
+  position: absolute;
+  top: 40px;
+  bottom: 40px;
+  left: 40px;
+  right: 40px;
   border: 1px solid #dddddd;
   font-size: 12px;
   line-height: 18px;

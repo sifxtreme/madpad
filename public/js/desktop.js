@@ -98,45 +98,22 @@ $(document).ready(function(){
 	}
 	iconHover();
 
-	// size everything properly
-	window_size = function() {
-
-		var height = $(window).height();
-		var navHeight = $('.header').height();
-		var titleHeight = $('.title').height();
-		var editorHeight = $('.froala-editor').height();
-		var paddingMain = 82;
-		var padHeight = height - navHeight - titleHeight - editorHeight - paddingMain;
-		var sideHeight =  height - navHeight;
-		var chatTitleHeight = $('.chat-title').height();
-		var submitHeight = $('.submit-wrapper').height();
-		var chatHeight = sideHeight - chatTitleHeight - submitHeight - 1;
-		var signupStepHeight = $(window).height() - navHeight;
-
-		$(".left").css('height' , sideHeight);
-		$(".all-pads").css('height', sideHeight);
-		$(".right").css('height', sideHeight);
-		$(".froala-element").css('height', padHeight);
-		$('#editor-code').css('height' , padHeight);
-		$('#messages').css('height' , chatHeight);
-		$('.signup-step-wrapper').css('height' , signupStepHeight);
-
-	}/* Set heights for divs */
-	if(!isHome){
-		$(window).bind('resize', window_size);		
-	}
-	
-
 })
 
 $(window).load(function() {
+	// size everything properly
+	window_size = function() {
+		var signupStepHeight = $(window).height() - $('.header').height();
+		$('.signup-step-wrapper').css('height', signupStepHeight);
 
-	if(!isHome){
-		window_size();	
-	}
+		var froalaToolbarHeight = $(".froala-editor").height();
+		$(".froala-element").attr("top", froalaToolbarHeight);		
+
+	}/* Set height for divs */
+	$(window).bind('resize', window_size);
 	
 	$('img').bind('dragstart', function(){
 		return false; 
 	});
-
-});
+	
+})

@@ -2,10 +2,9 @@
 .right{
 	width: 300px;
 	min-height: 500px;
-	float: right;
 	background: @light;
-	position: relative;
-	top: 0;
+	position: absolute;
+	top: 70px;
 	right: 0;
 	bottom: 0;
 	border-left: 1px solid @ea;
@@ -70,9 +69,14 @@
 	#messages{
 		padding: 10px 10px;
 		overflow-y: auto;
+		position: absolute;
+		top: 50px;
+		left: 0;
+		right: 0;
+		bottom: 80px;
 		font-size: 12px;
 		font-weight: 300;
-		background: @ea;
+		background: @light;
 		color: @dark;
 
 		.content{
