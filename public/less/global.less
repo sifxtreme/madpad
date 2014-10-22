@@ -1216,12 +1216,32 @@ footer{
 
 .loading{
     position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    z-index: 9999;
+
+}
+
+.spin-wrapper{
+    position: relative;
     width: 100px;
     height: 100px;
     left: 50%;
-    margin-left: -50px;
+    top: 43%;
+    margin-left: -40px;
+    margin-top: -90px;
+}
+
+.box{
+    position: relative;
+    width: 100px;
+    height: 100px;
+    left: 50%;
     top: 50%;
+    margin-left: -50px;
     margin-top: -50px;
+    background: red;
 }
 
 .spinner {

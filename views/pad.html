@@ -129,6 +129,17 @@
 
 <!-- mobile html end -->
 {{else}}
+<div class="loading">
+	
+	<div class="spin-wrapper">	
+		<div class="spinner">
+		  <div class="ball ball-1"></div>
+		  <div class="ball ball-2"></div>
+		  <div class="ball ball-3"></div>
+		  <div class="ball ball-4"></div>
+		</div>	
+	</div>	
+</div>
 <div class="madpad-container minwidth">
 	
 	<div class="left">
@@ -162,14 +173,14 @@
 		</div>
 		
 		<div class="pad-wrapper">
-			<div class="loading">		
+<!-- 			<div class="loading">		
 				<div class="spinner">
 				  <div class="ball ball-1"></div>
 				  <div class="ball ball-2"></div>
 				  <div class="ball ball-3"></div>
 				  <div class="ball ball-4"></div>
 				</div>	
-			</div>
+			</div> -->
 			{{#if pad.isTextPad}}
 				<div id="editor" class="pad-area" placeholder="Start typing here!"></div>
 				<textarea class="main" id="pusherContentEditable"></textarea>

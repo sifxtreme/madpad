@@ -738,6 +738,9 @@ img {
   right: 0;
   bottom: 0;
 }
+.mobile .pad-list-modal .pad-item-hidden {
+  display: none;
+}
 .mobile .pad-list-modal .pad-title {
   clear: both;
   text-align: center;
