@@ -212,6 +212,7 @@ var _editableScript = function() {
       });
     };
     // ************************************************************************************************************** //
+    $(".loading").hide();
     $("#editor").editable({
       inlineMode: false,
       typingTimer: 1,

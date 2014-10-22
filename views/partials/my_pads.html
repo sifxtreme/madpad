@@ -4,7 +4,7 @@
 			<h5>{{user.username}}'s pads</h5>
 			<ul id="sidebar-personal-pads">
 				{{#each myPads.privatePads}}
-					<li class="pad-item {{#compare @index '3' operator='>='}}pad-item-hidden{{/compare}}" {{#compare @index '3' operator='>='}}style="display:none"{{/compare}}>
+					<li class="pad-item {{#compare @index '3' operator='>='}}pad-item-hidden{{/compare}}">
 						{{#if this.favorite}}<span class="favorite"></span>{{/if}}
 						<a href="/{{this.url}}">{{strip_name this.url}} </a>
 						<span class="pad-heart-x">
@@ -25,7 +25,7 @@
 		<h5>shared pads</h5>
 		<ul>
 			{{#each myPads.sharedPads}}
-				<li class="pad-item {{#compare @index '3' operator='>='}}pad-item-hidden{{/compare}}" {{#compare @index '3' operator='>='}}style="display:none"{{/compare}}>
+				<li class="pad-item {{#compare @index '3' operator='>='}}pad-item-hidden{{/compare}}">
 					{{#if this.favorite}}<span class="favorite"></span>{{/if}}
 					<a href="/{{this.url}}">{{this.url}} </a>
 					{{#if ../user.username}}
@@ -48,7 +48,7 @@
 		<h5>public pads</h5>
 		<ul>
 			{{#each myPads.publicPads}}
-				<li class="pad-item {{#compare @index '3' operator='>='}}pad-item-hidden{{/compare}}" {{#compare @index '3' operator='>='}}style="display:none"{{/compare}}>
+				<li class="pad-item {{#compare @index '3' operator='>='}}pad-item-hidden{{/compare}}">
 					{{#if this.favorite}}<span class="favorite"></span>{{/if}}
 					<a href="/{{this.url}}">{{this.url}} </a>
 					{{#if ../user.username}}

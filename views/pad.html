@@ -129,10 +129,6 @@
 
 <!-- mobile html end -->
 {{else}}
-<!-- <div id="holder">
-	<div class="dot"></div>
-	<div class="pulse"></div>
-</div> -->
 <div class="madpad-container minwidth">
 	
 	<div class="left">
@@ -176,7 +172,7 @@
 			</div>
 			{{#if pad.isTextPad}}
 				<div id="editor" class="pad-area" placeholder="Start typing here!"></div>
-				<textarea class="main" style="display:none;" id="pusherContentEditable"></textarea>
+				<textarea class="main" id="pusherContentEditable"></textarea>
 			{{else}}
 				{{> code_modes_select}}
 				<div id="editor-code" class="pad-area"></div>

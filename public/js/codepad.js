@@ -13,6 +13,7 @@ $(window).load(function(){
 		$("#mode").val(type);
 	}
 	// initial code editor
+	$(".loading").hide();
 	editor = ace.edit("editor-code");
 	changeEditorType(padData.type);
 	editor.setTheme("ace/theme/chrome");
