@@ -40,6 +40,7 @@ gulp.task('mobile-sprites', function () {
       cssPath: './images/sprites',
       processor: 'less',
       orientation: "binary-tree",
+      margin: 10,
       retina: true
     }))
     .pipe(gulpif('*.png', gulp.dest('./public/images/sprites/'), gulp.dest('./public/less/sprites/')))

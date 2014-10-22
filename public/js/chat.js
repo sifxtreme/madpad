@@ -183,6 +183,7 @@ $(document).ready(function(){
 			var openChat = function(){
 				$('.chatoff-icon').removeClass('chatoff-icon').addClass('chaton-icon');
 				$('.middle').removeClass('no-chat-fix');
+				$('.middle').parent().hide().show(0);
 				$('.right').show();				
 			};
 
@@ -190,6 +191,7 @@ $(document).ready(function(){
 			var closeChat = function(){
 				$('.chaton-icon').removeClass('chaton-icon').addClass('chatoff-icon');
 				$('.middle').addClass('no-chat-fix');
+				$('.middle').parent().hide().show(0);
 				$('.right').hide();
 			};
 
