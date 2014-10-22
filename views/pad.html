@@ -129,6 +129,10 @@
 
 <!-- mobile html end -->
 {{else}}
+<!-- <div id="holder">
+	<div class="dot"></div>
+	<div class="pulse"></div>
+</div> -->
 <div class="madpad-container minwidth">
 	
 	<div class="left">
@@ -137,7 +141,7 @@
 	</div>
 
 	<div class="middle">
-		
+
 		<div class="title">
 			<div class="pad-name">
 				<h2>{{id}} <span>{{#if pad.isTextPad}}pad{{else}}{code pad}{{/if}}</span></h2>
@@ -162,6 +166,14 @@
 		</div>
 		
 		<div class="pad-wrapper">
+			<div class="loading">		
+				<div class="spinner">
+				  <div class="ball ball-1"></div>
+				  <div class="ball ball-2"></div>
+				  <div class="ball ball-3"></div>
+				  <div class="ball ball-4"></div>
+				</div>	
+			</div>
 			{{#if pad.isTextPad}}
 				<div id="editor" class="pad-area" placeholder="Start typing here!"></div>
 				<textarea class="main" style="display:none;" id="pusherContentEditable"></textarea>
