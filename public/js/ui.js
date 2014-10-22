@@ -722,7 +722,7 @@ $(document).ready(function(){
 			message = this.prepareChatMessage.convertLinks(message);
 			
 			var chatUserName = messageObject.user.name;
-			var whichClass = 'user'
+			var whichClass = 'user';
 			if((userID && madpadUserData.userID == messageObject.user.profileId) || (typeof messageObject.user.id !== 'undefined' && madpadUserData.unknown.id == messageObject.user.id)){
 				chatUserName = 'me';
 			}
@@ -789,10 +789,10 @@ $(document).ready(function(){
 			// set up event listeners
 			$("body").delegate(".chaton-icon", "click", function(){
 				closeChat();
-			})
+			});
 			$("body").delegate(".chatoff-icon", "click", function(){
 				openChat();
-			})
+			});
 
 		},
 
@@ -815,7 +815,7 @@ $(document).ready(function(){
 	madpadChat.run();
 
 	// random user object in case anything goes wrong
-	var randomUserObject = madpadChat.options.randomize()
+	var randomUserObject = madpadChat.options.randomize();
 
 	// submitting to chat
 	$('.madpadChatForm').submit(function(){
@@ -831,7 +831,7 @@ $(document).ready(function(){
 				picture: madpadUserData.picture,
 				profileId: userID					
 			}
-		}
+		};
 
 		// we are not a logged in user
 		if(!userID){
@@ -866,7 +866,7 @@ $(document).ready(function(){
 		createPersonNode: function(user){
 			// create a person node in the chat header
 			var li = document.createElement('li');
-			li.className = 'tooltip'
+			li.className = 'tooltip';
 			li.setAttribute('name', user.username);
 			var img = document.createElement('img');
 			user.picture = user.picture.replace('&amp;', '&');
@@ -880,7 +880,7 @@ $(document).ready(function(){
 		createPlusNode: function(names){
 			// if we have more than a certain amount of people create a +X chat header node
 			var li = document.createElement('li');
-			li.className = 'tooltip tooltips'
+			li.className = 'tooltip tooltips';
 			li.setAttribute('name', names.join("\n"));
 			var p = document.createElement('p');
 			p.innerHTML = "+"+names.length;
@@ -959,7 +959,6 @@ $(document).ready(function(){
 			var owner = [];
 			var self = [];
 			
-			var checkDuplicatesArray = [];
 			var getUniques = function(arr) {
 		    var hash = {}, result = [];
 		    for ( var i = 0, l = arr.length; i < l; ++i ) {
@@ -1018,7 +1017,7 @@ $(document).ready(function(){
 				}
 			}
 		},
-	}
+	};
 
 	// we initially joined chat and are seeing all the people in the chat room
 	madpadSocket.on('chatPeople', function(data){
@@ -1034,7 +1033,7 @@ $(document).ready(function(){
 
 	// user left chat
 	madpadSocket.on('chatLeft', function(data){
-		recentChatters.removePerson(data)
+		recentChatters.removePerson(data);
 		recentChatters.createAllPeople();
 	});
 	
