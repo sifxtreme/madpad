@@ -11,9 +11,8 @@ $(window).load(function(){
 	var changeEditorType = function(type){
 		editor.session.setMode("ace/mode/" + type);
 		$("#mode").val(type);
-	}
+	};
 	// initial code editor
-	$(".loading").hide();
 	editor = ace.edit("editor-code");
 	changeEditorType(padData.type);
 	editor.setTheme("ace/theme/chrome");
@@ -27,7 +26,7 @@ $(window).load(function(){
 			madpadSocket.emit('modeChanged', {room: padName, codeMode: codeMode});	
 		}
 		
-	})
+	});
 
 	// if someone else changed the codemode
 	madpadSocket.on('changeMode', function(newCode){
@@ -41,7 +40,8 @@ $(window).load(function(){
 		doc.attach_ace(editor);	
 		// go to the top line of the codepad editor when text loads
 		// otherwise we will end up at the bottom of the content
-		setTimeout(function(){editor.gotoLine(1)}, 1);
+		setTimeout(function(){ editor.gotoLine(1); }, 1);
+		$(".loading").hide();
 	});
 
 	// if we are on a shared pad and not the owner
