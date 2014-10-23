@@ -1,13 +1,10 @@
 var gulp = require('gulp');
 var gulpif = require('gulp-if');
 var sprite = require('css-sprite').stream;
-
 var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
-
 var concat = require('gulp-concat');
 var minifyCSS = require('gulp-minify-css');
-
 var imageop = require('gulp-image-optimization');
 
 gulp.task('images', function(cb) {
