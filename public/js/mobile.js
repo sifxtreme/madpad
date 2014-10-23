@@ -17,17 +17,21 @@ $(document).ready(function(){
 	window_size();
 
 	var socialIcons = function(){
-		// $("#share-facebook").attr("href", "https://www.facebook.com/sharer/sharer.php?u=" + "madpad.me" + window.location.pathname);
-		// $("#share-facebook").click(function(){
-			// $("#a-share-facebook").trigger("click");
-			// return false;
-		// })
-		// $("#share-twitter").click(function(){
-		// 	window.open("https://www.facebook.com/sharer/sharer.php?u="+document.URL, "_blank");
-		// })
-		// $("#share-email").click(function(){
-		// 	window.open("https://www.facebook.com/sharer/sharer.php?u="+document.URL, "_blank");
-		// })
+		var fbShare = $("#share-facebook");
+		if(fbShare.length){
+			var fbURL = fbShare.attr("href").replace(/www\.madpad\.me/g, encodeURIComponent(window.location.host + "/" + window.location.pathname));
+			fbShare.attr("href", fbURL);			
+		}
+		var twitterShare = $("#share-twitter");
+		if(twitterShare.length){
+			var twitterURL = twitterShare.attr("href").replace(/www\.madpad\.me/g, encodeURIComponent(window.location.host + "/" + window.location.pathname));
+			twitterShare.attr("href", twitterURL);
+		}
+		var emailShare = $("share-email");
+		if(emailShare.length){
+			var emailURL = emailShare.attr("href").replace(/www\.madpad\.me/g, encodeURIComponent(window.location.host + "/" + window.location.pathname));
+			emailShare.attr("href", emailURL);
+		}
 		$("#share-share").click(function(){
 			window.prompt("Copy to Clipboard", document.URL);
 		})
