@@ -235,7 +235,7 @@ $(document).ready(function(){
 			room: padName,
 			message: msg,
 			user: {
-				name: madpadUserData.name,
+				name: madpadUserData.username,
 				username: madpadUserData.username,
 				picture: madpadUserData.picture,
 				profileId: userID					
