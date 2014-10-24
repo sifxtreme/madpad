@@ -2,19 +2,15 @@ $(document).ready(function(){
 
 	isHome = (document.location.pathname == '/') ? true : false;
 
-	window_size = function() {
+	var window_size = function() {
 		var height = $(window).height();
-		var submitHeight = 70;
 		var header = 50;
-		var tabHeight = 40;
-		var padding = 15;
-		var chatMessageHeight = $(window).height() - 162;
-		$('#messages').css('height' , chatMessageHeight);
-		$('.pad-list-modal').css('height' , height);
-		$('#editor-code').css('height' , height - header - 30);
-		$(".froala-element").css('height', height - header - tabHeight - padding*2);
-	}
-	window_size();
+		var chatMessageHeight = height - 162;
+		$('#messages').css('height', chatMessageHeight);
+		$('.pad-list-modal').css('height', height);
+		$('#editor-code').css('height', height - header - 30);
+	}();
+
 
 	var socialIcons = function(){
 		var fbShare = $("#share-facebook");
@@ -34,7 +30,7 @@ $(document).ready(function(){
 		}
 		$("#share-share").click(function(){
 			window.prompt("Copy to Clipboard", document.URL);
-		})
+		});
 	}();
 
 	var mobileTabs = function(){
@@ -68,7 +64,7 @@ $(document).ready(function(){
 			$('.m-pad-content').hide();
 			$('.m-chat-content').hide();
 		});
-	}
+	};
 	mobileTabs();
 
 	function padList(){
@@ -149,7 +145,7 @@ $(document).ready(function(){
 		toHide: $('#user-dropdown'),
 		dropDown: function(){
 			var _this = this;
-			$('#open-user').on('click' , function(e){
+			$('#open-user').on('click' , function(){
 				_this.toHide.toggle();
 			});
 		},
@@ -161,7 +157,7 @@ $(document).ready(function(){
 				{
 				_this.toHide.hide(); 
 				}
-			})
+			});
 		},
 		run: function(){
 			this.dropDown();
