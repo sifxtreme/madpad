@@ -1077,16 +1077,24 @@ footer{
 /*   ---   End of Home Page   --   */
 
 
-
+.about-wrapper {
+    footer {
+        @media (min-height: 720px){
+            position: absolute;
+            bottom: 0;
+        }
+    }
+}
 
 
 /*   ---  About us Page   --   */
 
+
 .about-wrap{
     max-width: 1100px;
     margin: 0 auto;
-    position: relative;
-    top: 100px;
+    margin-top: 100px;
+    min-height: 550px;
 
     h1{
         font-size: 40px;

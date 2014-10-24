@@ -121,7 +121,7 @@ module.exports = function(app, passport){
 	  }
 	  else{
 	    var userData = getSocialAccount(req.madpad_user.user);
-	    res.render('account', {user: userData});
+	    res.render('account', {user: userData, mobileDontShowPads: true});
 	  }
 	});
 

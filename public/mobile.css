@@ -1260,6 +1260,9 @@ img {
   transition: 0.5s;
   -webkit-transition: 0.5s;
 }
+.mobile .about-wrapper footer {
+  margin-top: 100px;
+}
 .mobile .about-wrap {
   position: relative;
   top: 80px;

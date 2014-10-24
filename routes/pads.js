@@ -144,7 +144,7 @@ module.exports = function(app){
 	  var userInfo = getUserInfoFromCookie(req);
 	  var userID = userInfo._id;
 
-	  res.render('privacy-policy', { user: userInfo, userRoom: '' });
+	  res.render('privacy-policy', { user: userInfo, userRoom: '', mobileDontShowPads: true });
 	});
 
 	// privacy policy
@@ -154,7 +154,7 @@ module.exports = function(app){
 	  var userInfo = getUserInfoFromCookie(req);
 	  var userID = userInfo._id;
 
-	  res.render('terms-of-service', { user: userInfo, userRoom: '' });
+	  res.render('terms-of-service', { user: userInfo, userRoom: '', mobileDontShowPads: true });
 	});
 
 	// about page
@@ -163,7 +163,7 @@ module.exports = function(app){
 	  var userInfo = getUserInfoFromCookie(req);
 	  var userID = userInfo._id;
 
-	  res.render('about', { user: userInfo, userRoom: '' });
+	  res.render('about', { user: userInfo, userRoom: '', mobileDontShowPads: true });
 	});
 
 	// code pad
@@ -443,7 +443,7 @@ module.exports = function(app){
 	  var padID = "_";
 	  var padObject = getPadObject(true, true, 'textpad');
 
-	  res.render('index', { id: padID, user: userInfo, userRoom: '', pad: padObject, isHome: true });
+	  res.render('index', { id: padID, user: userInfo, userRoom: '', pad: padObject, isHome: true, mobileDontShowPads: true });
 	});
 
 }
