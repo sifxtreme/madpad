@@ -212,7 +212,6 @@ var _editableScript = function() {
       });
     };
     // ************************************************************************************************************** //
-    $(".loading").hide();
     $("#editor").editable({
       inlineMode: false,
       typingTimer: 1,
@@ -223,9 +222,10 @@ var _editableScript = function() {
           elem.value = newText;
           genOp();
         }
-        
       },
     });
+    $(".loading").fadeOut();
+    $("#holder").fadeOut();
 
     // ************************************************************************************************************** //
     _ref = ['textInput', 'keydown', 'keyup', 'select', 'cut', 'paste'];

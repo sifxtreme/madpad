@@ -103,13 +103,15 @@ $(document).ready(function(){
 $(window).load(function() {
 	// size everything properly
 	window_size = function() {
+		console.log('xxx');
 		var signupStepHeight = $(window).height() - $('.header').height();
 		$('.signup-step-wrapper').css('height', signupStepHeight);
 
 		var froalaToolbarHeight = $(".froala-editor").height();
-		$(".froala-element").attr("top", froalaToolbarHeight);		
+		$(".froala-element").css("top", froalaToolbarHeight);
 
 	}/* Set height for divs */
+	window_size();
 	$(window).bind('resize', window_size);
 	
 	$('img').bind('dragstart', function(){

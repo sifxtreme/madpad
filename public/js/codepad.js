@@ -41,7 +41,8 @@ $(window).load(function(){
 		// go to the top line of the codepad editor when text loads
 		// otherwise we will end up at the bottom of the content
 		setTimeout(function(){ editor.gotoLine(1); }, 1);
-		$(".loading").hide();
+		$(".loading").fadeOut();
+		$("#holder").fadeOut();
 	});
 
 	// if we are on a shared pad and not the owner
