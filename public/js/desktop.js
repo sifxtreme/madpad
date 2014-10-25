@@ -35,16 +35,20 @@ $(document).ready(function(){
 	if(isHome){
 		$('.offset').css('height' , '70px');
 
+		var checkStickyHeader = function(){
+			var scroll = $(window).scrollTop();
+
+			if(scroll >= 650){
+				$('.header').addClass('header-sticky');
+			}
+			else{
+				$('.header').removeClass('header-sticky');
+			}			
+		}
+
 		function stickyHeader(){
 			$(window).scroll(function(){
-				var scroll = $(window).scrollTop();
-
-				if(scroll >= 650){
-					$('.header').addClass('header-sticky');
-				}
-				else{
-					$('.header').removeClass('header-sticky');
-				}
+				checkStickyHeader();
 			});
 		}
 
