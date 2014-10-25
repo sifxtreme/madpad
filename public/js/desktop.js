@@ -103,7 +103,6 @@ $(document).ready(function(){
 $(window).load(function() {
 	// size everything properly
 	window_size = function() {
-		console.log('xxx');
 		var signupStepHeight = $(window).height() - $('.header').height();
 		$('.signup-step-wrapper').css('height', signupStepHeight);
 

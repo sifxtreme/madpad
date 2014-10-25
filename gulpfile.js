@@ -59,7 +59,7 @@ gulp.task('js-froala', function(){
 });
 
 gulp.task('js-ui', function(){
-  return gulp.src(["./public/js/header_messaging.js","./public/js/login_signup_logout.js","./public/js/recent_pads.js","./public/js/heart.js","./public/js/create_pads.js","./public/js/delete_pads.js","./public/js/chat.js","./public/js/privacy.js","./public/js/goback.js"])
+  return gulp.src(["./public/js/header_messaging.js","./public/js/login_signup_logout.js","./public/js/recent_pads.js","./public/js/heart.js","./public/js/create_pads.js","./public/js/delete_pads.js","./public/js/chat.js","./public/js/privacy.js","./public/js/goback.js","./public/js/retina.js"])
     .pipe(concat('ui.js'))
     .pipe(gulp.dest('./public/js/'))
 });
