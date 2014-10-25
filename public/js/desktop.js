@@ -46,6 +46,8 @@ $(document).ready(function(){
 			}			
 		}
 
+		checkStickyHeader();
+
 		function stickyHeader(){
 			$(window).scroll(function(){
 				checkStickyHeader();
