@@ -167,7 +167,7 @@ module.exports = function(app){
 	});
 
 	// code pad
-	app.get('/code/:id', function(req, res){
+	app.get('/:id', function(req, res){
 	  // attach sharejs server
 	  sharejs.server.attach(app, options);
 
@@ -223,43 +223,6 @@ module.exports = function(app){
 
 	  // my pads information
 	  var myPads = {};
-	  var newPadName = 'code/' + padID;
-	  if(userID){ // we are logged in
-	    getUserPads(userID, newPadName, 'public', renderView);
-	  }
-	  else{ // we are not logged in
-	    req.my_pads.pads = padCookie.sortAndAdd(req.my_pads.pads, newPadName, 'public');
-	    myPads = padCookie.format(req.my_pads.pads);
-	    renderView(myPads);
-	  }
-	  
-	});
-
-	// text pad
-	app.get('/:id', function(req, res){
-	  // attach sharejs server
-	  sharejs.server.attach(app, options);
-
-	  // get user info
-	  var userInfo = getUserInfoFromCookie(req);
-	  var userID = userInfo._id;
-	  var username = userInfo.username.toLowerCase();
-	  if(!username && Object.keys(userInfo.unknown).length == 0){
-	  	var unknown = unknownUserOptions.randomize();
-	  	req.madpad_user.unknown = unknown;
-	  	userInfo.unknown = unknown;
-	  }
-
-	  // set up pad info
-	  var padID = req.params.id.toLowerCase();
-	  var padObject = getPadObject(true, true, 'textpad');
-
-	  var renderView = function(cookiePads, isFavorite){
-	    res.render('pad', { id: padID, user: userInfo, userRoom: '', pad: padObject, myPads: cookiePads, isFavorite: isFavorite });
-	  }
-
-	  // my pads information
-	  var myPads = {};
 	  var newPadName = padID;
 	  if(userID){ // we are logged in
 	    getUserPads(userID, newPadName, 'public', renderView);
@@ -269,7 +232,7 @@ module.exports = function(app){
 	    myPads = padCookie.format(req.my_pads.pads);
 	    renderView(myPads);
 	  }
-
+	  
 	});
 
 

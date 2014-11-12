@@ -22,13 +22,7 @@
 				<div class="dot"></div>
 				<div class="pulse"></div>
 			</div>
-			{{#if pad.isTextPad}}
-				<div id="editor" class="pad-area" placeholder="Start typing here!"></div>
-				<textarea class="main" style="display:none;" id="pusherContentEditable"></textarea>
-			{{else}}
-				{{> code_modes_select}}
-				<div id="editor-code" class="pad-area"></div>
-			{{/if}}
+			<textarea id="editor-code" class="pad-area" placeholder="Enter some text here"></textarea>
 		</div> <!-- pad -->
 
 		<div class="m-chat-content" style="display:none">
@@ -155,7 +149,7 @@
 
 		<div class="title">
 			<div class="pad-name">
-				<h2>{{id}} <span>{{#if pad.isTextPad}}pad{{else}}{code pad}{{/if}}</span></h2>
+				<h2>{{id}} <span>{code pad}</span></h2>
 			</div>
 			<div class="title-options">	
 				<div class="icon new-icon tooltip" name="open new pad"></div>
@@ -177,21 +171,8 @@
 		</div>
 		
 		<div class="pad-wrapper">
-<!-- 			<div class="loading">		
-				<div class="spinner">
-				  <div class="ball ball-1"></div>
-				  <div class="ball ball-2"></div>
-				  <div class="ball ball-3"></div>
-				  <div class="ball ball-4"></div>
-				</div>	
-			</div> -->
-			{{#if pad.isTextPad}}
-				<div id="editor" class="pad-area" placeholder="Start typing here!"></div>
-				<textarea class="main" id="pusherContentEditable"></textarea>
-			{{else}}
-				{{> code_modes_select}}
-				<div id="editor-code" class="pad-area"></div>
-			{{/if}}
+			{{> code_modes_select}}
+			<div id="editor-code" class="pad-area"></div>
 		</div>
 		
 	</div> <!-- main text area -->

@@ -4,11 +4,9 @@ $(document).ready(function(){
 
 	var window_size = function() {
 		var height = $(window).height();
-		var header = 50;
 		var chatMessageHeight = height - 162;
 		$('#messages').css('height', chatMessageHeight);
 		$('.pad-list-modal').css('height', height);
-		$('#editor-code').css('height', height - header - 30);
 	}();
 
 
