@@ -19,7 +19,7 @@
   
 </head>
 
-<body {{#if is_phone}}class="mobile"{{/if}}>
+<body id="body" {{#if is_phone}}class="mobile"{{/if}}>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -48,10 +48,10 @@
 
   {{{body}}}
 
-  <script src="/ace/ace.js"></script>
-  <script src="/js/all{{#if is_phone}}-mobile{{/if}}-1.js"></script>
+<!--   // <script src="/ace/ace.js"></script>
+  // <script src="/js/all{{#if is_phone}}-mobile{{/if}}-1.js"></script> -->
 
-<!-- 
+
   <script src="/js/jquery-1.11.1.min.js"></script>
   <script src="/js/modals.js"></script>
   <script src="/js/{{#if is_phone}}mobile{{else}}desktop{{/if}}.js"></script>
@@ -74,7 +74,7 @@
   <script src="/js/goback.js"></script>
   <script src="/js/retina.js"></script>
   
- -->
+
   {{> feedback}}
 
 </body>
