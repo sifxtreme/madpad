@@ -71,6 +71,8 @@ module.exports = function(app){
 	  	unknown = req.madpad_user.unknown;
 	  }
 
+	  if(typeof username === "undefined") username = "";
+
 	  return {_id: userID, username: username, name: name, picture: picture, unknown: unknown};
 	}
 
