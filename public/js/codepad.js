@@ -26,6 +26,7 @@ $(window).load(function(){
 		changeEditorType(padData.type);
 		editor.setTheme("ace/theme/chrome");
 		editor.setShowPrintMargin(false);
+		editor.session.setUseWrapMode(true)
 
 		// change language on code
 		$("#mode").on("change", function(){

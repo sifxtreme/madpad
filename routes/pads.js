@@ -253,9 +253,9 @@ module.exports = function(app){
 	  // default set to textpad
 	  var padID = req.params.id.toLowerCase();
 	  var padType = 'textpad'
-	  if(req.body.pad.type == 'code'){
+	  // if(req.body.pad.type == 'code'){
 	    padType = 'text'
-	  }
+	  // }
 
 	  // always return json
 	  res.contentType('json');
