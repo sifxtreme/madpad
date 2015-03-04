@@ -50,77 +50,67 @@
 {{> footer}}
 {{else}}
 
-<div class="hero">
+<div class="home">
+	<!-- <div class="black-bg"></div> -->
+	<div class="hero" >
+		<div class="hero-info" data-scroll-speed="-5">
+			<h1>madpad is here.</h1>
+			<h2>Ultra fast collaborative code editing</h2>
+		</div>	
+			<div class="try">
+				<input class="url-input" placeholder="Enter a name of a pad..."/>
+				<a href="#" class="try-btn">GO TO PAD</a>
+			</div>
+	</div>
 
-	<div class="text">
-		<h1 class="noselect">madpad is here</h1>
-		<h2 class="noselect">Ultra fast collaborative code editing</h2>
+
+	<div class="section">
+		<div class="container fade">
+			<div class="row">
+				<div class="text-wrapper lefter">
+					<h6>Real time collaborative coding</h6>
+					<p>You need to access a document on another computer? No problem, we've got you covered. You want to share your work in real time? That's easy too!</p>
+					<p>Madpad takes away the hassle of sharing google docs and allows you to work collaboratively in a blink of an eye. </p>
+				</div>
+				<div class="image-wrapper righter">
+					<img src="/images/new/collab.png" class="image"/>
+				</div>
+			</div>
+		</div>
 	</div>
-	<div id="holder">
-		<div class="dot"></div>
-		<div class="pulse"></div>
+
+	<div class="section grey">
+		<div class="container fade">
+			<div class="row">
+				<div class="image-wrapper lefter">
+					<img src="/images/new/iphone.png" class="image iphone"/>
+				</div>
+				<div class="text-wrapper righter">
+					<h6>Chat about your code</h6>
+					<p>Communication is important. We've made it easy.</p>
+					<p>Madpad allows you to chat with your collaborators on any device. Even without having to log in, you can contribute to the conversation whereever you are.</p>
+				</div>
+			</div>
+		</div>
 	</div>
-<!-- 	<div class="pad-example" id="textpad-home">
-		<div id="textpad-home"></div>
-		<div id="editor" class="pad-area editor-active" placeholder="Start typing here!"></div>
-		<textarea class="main" id="pusherContentEditable"></textarea>
-	</div> -->
-	<div class="pad-example" id="codepad-home">
-		{{> code_modes_select}}
-		<div id="editor-code" class="pad-area editor-active"></div>
+
+	<div class="full-section">
+		<div class="row">
+			<div class="left-section">
+				<div class="text">
+					<h6>Customize your privacy</h6>
+					<p>Madpad gives you the flexibility of different privacy settings for all of your documents. Keeping your work private or sharing it with the world couldn't be easier.</p>
+					<div class="privacy">
+						<i class="fa fa-folder-o"></i><span>Open to the world</span>
+					</div>
+				</div>
+			</div>
+			<div class="right-section">				
+			</div>
+		</div>
 	</div>
-	<!-- <div class="toggle noselect">
-		<span id="code-btn" class="active" >code</span><span id="text-btn">text</span>
-	</div> -->
+
 </div>
-
-<section>
-
-<div class="section white minwidth codesection">
-	<div class="row">
-		<div class="col-50 text">
-			<h1>Real time collaborative coding</h1>
-			<p>You need to access a document on another computer? No problem, we've got you covered.  You want to share your work in real time? That's easy too!</p>
-			<p>Madpad takes away the hassle of sharing google docs and allows you to work collaboratively in a blink of an eye. </p>
-		</div>
-		<div class="col-50">
-			<img src="/images/global/code-example.png" class="code-example retina-image" />
-		</div>
-	</div>
-</div>
-
-<div class="section grey minwidth iphonesection">
-	<div class="row">
-		<div class="col-50">
-			<img src="/images/global/iphone.png" class="iphone retina-image" />
-		</div>
-		<div class="col-50 text">
-			<h1>Chat about your code</h1>
-			<p>Communication is important.  We've made it easy.</p>
-			<p>Madpad allows you to chat with your collaborators on any device.  Even without having to log in, you can contribute to the conversation whereever you are.</p>
-		</div>
-	</div>
-</div>
-
-<div class="section white minwidth privacy">
-	<div class="row">
-		<div class="col-50 text">
-			<h1>Customize your privacy.</h1>
-			<p>Privacy is important, we understand.</p>
-			<p>Madpad gives you the flexibility of different privacy settings for all of your documents.  Keeping your work private or sharing it with the world couldn't be easier.</p>
-		</div>
-		<div class="col-50">
-			<img src="/images/global/privacy.png" class="iphone retina-image" />
-		</div>
-	</div>
-</div>
-
-<div class="section minwidth signuparea">
-	<h1 class="noselect">Ready to get started?</h1>
-	<a href="#" class="login-button noselect home-signup">Sign Up</a>
-</div>
-
-</section>
 
 {{> footer}}
 </div>
