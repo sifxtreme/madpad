@@ -40,46 +40,21 @@ function(accessToken, refreshToken, profile, done) {
 		}
 		// user not found
 		else{
-
-			User.findOne({ email: email }, function(err, emailUser){
-				if(err) {
+			var newUser = new User({
+				facebookID: profileID,
+				facebookName: displayName,
+				facebookPicture: pictureURL,
+				facebookDate: Date.now(),
+				email: email
+			});
+			newUser.save(function(err){
+				if(err){
 					console.log(err);
 				}
-				// user found
-				if(!err && emailUser != null){
-					emailUser.facebookID = profileID;
-					emailUser.facebookName = displayName;
-					emailUser.facebookPicture = pictureURL;
-					emailUser.facebookDate = Date.now();
-					emailUser.save(function(err){
-						if(err){
-							console.log(err);
-						}
-						else{
-							done(null, emailUser);
-						}
-					});
-				}
-				// new user
 				else{
-					var newUser = new User({
-						facebookID: profileID,
-						facebookName: displayName,
-						facebookPicture: pictureURL,
-						facebookDate: Date.now(),
-						email: email
-					});
-					newUser.save(function(err){
-						if(err){
-							console.log(err);
-						}
-						else{
-							done(null, newUser);
-						}
-					})
+					done(null, newUser);
 				}
-			});
-
+			})
 		}
 
 	});
@@ -99,7 +74,7 @@ function(accessToken, refreshToken, profile, done) {
 	var pictureURL = 'https://avatars.githubusercontent.com/u/' + profileID + '?s=150'
 	var email = profile.emails[0].value
 
-	User.findOne({ facebookID: profileID }, function(err, user){
+	User.findOne({ githubID: profileID }, function(err, user){
 
 		if(err) {
 			console.log(err);
@@ -121,46 +96,21 @@ function(accessToken, refreshToken, profile, done) {
 		}
 		// user not found
 		else{
-
-			User.findOne({ email: email }, function(err, emailUser){
-				if(err) {
+			var newUser = new User({
+				githubID: profileID,
+				githubName: displayName,
+				githubPicture: pictureURL,
+				githubDate: Date.now(),
+				email: email
+			});
+			newUser.save(function(err){
+				if(err){
 					console.log(err);
 				}
-				// user found
-				if(!err && emailUser != null){
-					emailUser.githubID = profileID;
-					emailUser.githubName = displayName;
-					emailUser.githubPicture = pictureURL;
-					emailUser.githubDate = Date.now();
-					emailUser.save(function(err){
-						if(err){
-							console.log(err);
-						}
-						else{
-							done(null, emailUser);
-						}
-					});
-				}
-				// new user
 				else{
-					var newUser = new User({
-						githubID: profileID,
-						githubName: displayName,
-						githubPicture: pictureURL,
-						githubDate: Date.now(),
-						email: email
-					});
-					newUser.save(function(err){
-						if(err){
-							console.log(err);
-						}
-						else{
-							done(null, newUser);
-						}
-					})
+					done(null, newUser);
 				}
-			});
-
+			})
 		}
 
 	});
